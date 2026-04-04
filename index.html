@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI设计八大原则</title>
+    <title>微信小程序设计课</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -17,1529 +17,162 @@
             background: #f5f5f7;
             color: #1d1d1f;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        .home-page {
-            min-height: 100vh;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 60px 20px;
         }
 
-        .hero {
+        .header {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 24px;
             margin-bottom: 60px;
-            color: white;
         }
 
-        .hero h1 {
+        .header h1 {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero p {
+        .header p {
+            color: #666;
             font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
         }
 
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .course-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .principle-card {
+        .course-card {
             background: white;
             border-radius: 16px;
-            padding: 32px;
-            cursor: pointer;
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            color: inherit;
             transition: all 0.3s ease;
             box-shadow: 0 2px 12px rgba(0,0,0,0.05);
             border: 1px solid #e5e5e5;
         }
 
-        .principle-card:hover {
+        .course-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 32px rgba(0,0,0,0.1);
             border-color: #667eea;
         }
 
-        .principle-number {
-            width: 40px;
-            height: 40px;
+        .course-icon {
+            width: 56px;
+            height: 56px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 16px;
+            font-size: 1.8rem;
+            flex-shrink: 0;
         }
 
-        .principle-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: #1d1d1f;
-        }
-
-        .principle-card p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .detail-page {
-            display: none;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .detail-page.active {
-            display: block;
-        }
-
-        .home-page.hidden {
-            display: none;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 24px;
-            transition: all 0.2s;
-        }
-
-        .back-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
-        }
-
-        .back-btn svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .detail-header {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 24px;
-            border: 1px solid #e5e5e5;
-        }
-
-        .detail-header h1 {
-            font-size: 2rem;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .detail-header .badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .detail-content {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 24px;
-            border: 1px solid #e5e5e5;
-        }
-
-        .detail-content h2 {
-            font-size: 1.3rem;
-            color: #1d1d1f;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #667eea;
-            display: inline-block;
-        }
-
-        .detail-content p {
-            color: #444;
-            margin-bottom: 16px;
-            font-size: 1rem;
-        }
-
-        .examples-section {
-            margin-top: 32px;
-        }
-
-        .example-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
-            margin-top: 20px;
-        }
-
-        .example-box {
-            background: #f8f9fa;
-            border-radius: 16px;
-            padding: 24px;
-            border: 2px solid transparent;
-        }
-
-        .example-box.good {
-            border-color: #10b981;
-        }
-
-        .example-box.bad {
-            border-color: #ef4444;
-        }
-
-        .example-label {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .example-box.good .example-label {
-            background: #d1fae5;
-            color: #059669;
-        }
-
-        .example-box.bad .example-label {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .wechat-simulator {
-            background: #f0f0f0;
-            border-radius: 24px;
-            padding: 16px;
-            margin-top: 16px;
-        }
-
-        .simulator-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-            padding: 0 8px;
-        }
-
-        .simulator-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ccc;
-        }
-
-        .simulator-dot.green { background: #4cd964; }
-        .simulator-dot.yellow { background: #f5a623; }
-        .simulator-dot.red { background: #ff3b30; }
-
-        .simulator-screen {
-            background: white;
-            border-radius: 16px;
-            min-height: 400px;
-            padding: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .simulator-title {
-            text-align: center;
-            padding: 12px;
-            font-size: 0.9rem;
-            color: #333;
-            border-bottom: 1px solid #eee;
-            margin: -16px -16px 16px -16px;
-            border-radius: 16px 16px 0 0;
-            background: #fff;
-        }
-
-        .wx-navbar {
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 16px;
-        }
-
-        .wx-nav-item {
-            color: #666;
-            font-size: 0.9rem;
-            padding: 8px 16px;
-            border-radius: 8px;
-        }
-
-        .wx-nav-item.active {
-            background: #07c160;
-            color: white;
-        }
-
-        .wx-card {
-            background: #f8f8f8;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .wx-card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .wx-card-desc {
-            font-size: 0.85rem;
-            color: #888;
-        }
-
-        .wx-button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-            display: inline-block;
-        }
-
-        .wx-button-primary {
-            background: #07c160;
-            color: white;
-        }
-
-        .wx-button-outline {
-            background: transparent;
-            border: 1px solid #07c160;
-            color: #07c160;
-        }
-
-        .wx-button-disabled {
-            background: #e0e0e0;
-            color: #999;
-        }
-
-        .wx-input {
-            background: #f5f5f5;
-            border-radius: 8px;
-            padding: 12px;
-            font-size: 0.9rem;
-            width: 100%;
-            border: none;
-        }
-
-        .wx-input::placeholder {
-            color: #999;
-        }
-
-        .wx-icon-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            padding: 16px 0;
-        }
-
-        .wx-icon-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .wx-icon {
-            width: 40px;
-            height: 40px;
-            background: #07c160;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .wx-icon-label {
-            font-size: 0.75rem;
-            color: #666;
-        }
-
-        .wx-list-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .wx-list-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .wx-list-content {
+        .course-info {
             flex: 1;
         }
 
-        .wx-list-title {
-            font-size: 0.95rem;
+        .course-info h3 {
+            font-size: 1.2rem;
             margin-bottom: 4px;
+            color: #1d1d1f;
         }
 
-        .wx-list-desc {
-            font-size: 0.8rem;
-            color: #999;
+        .course-info p {
+            color: #888;
+            font-size: 0.9rem;
         }
 
-        .wx-loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .wx-spinner {
-            width: 32px;
-            height: 32px;
-            border: 3px solid #f0f0f0;
-            border-top-color: #07c160;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .wx-toast {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            z-index: 100;
-        }
-
-        .wx-small-text {
-            font-size: 0.75rem !important;
-        }
-
-        .wx-light-text {
-            color: #bbb !important;
-        }
-
-        .wx-low-contrast {
+        .course-arrow {
             color: #ccc;
-            background: #f0f0f0;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
         }
 
-        .wx-inconsistent-btn {
-            background: #ff6b6b;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 20px;
-            border: none;
+        .course-card:hover .course-arrow {
+            transform: translateX(4px);
+            color: #667eea;
         }
 
-        .wx-good-btn {
-            background: #07c160;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: none;
-        }
-
-        .wx-feedback-demo {
-            padding: 16px;
-        }
-
-        .wx-feedback-btn {
-            background: #07c160;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            border: none;
-            font-size: 0.9rem;
-            cursor: pointer;
-            margin-bottom: 16px;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .wx-feedback-btn:active {
-            transform: scale(0.95);
-            background: #059669;
-        }
-
-        .wx-feedback-toast {
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+        .footer {
             text-align: center;
-            font-size: 0.9rem;
-            animation: fadeIn 0.3s;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            color: #999;
+            font-size: 0.85rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .design-tips {
-            background: #f0f7ff;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .design-tips h4 {
-            color: #667eea;
-            margin-bottom: 12px;
-            font-size: 1rem;
-        }
-
-        .design-tips ul {
-            list-style: none;
-        }
-
-        .design-tips li {
-            padding: 8px 0;
-            padding-left: 24px;
-            position: relative;
-            color: #444;
-            font-size: 0.95rem;
-        }
-
-        .design-tips li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
+        @media (max-width: 600px) {
+            .header h1 {
                 font-size: 1.8rem;
             }
 
-            .detail-header, .detail-content {
-                padding: 24px;
+            .course-card {
+                padding: 20px;
             }
 
-            .example-grid {
-                grid-template-columns: 1fr;
+            .course-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.5rem;
+            }
+
+            .course-info h3 {
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="home-page" id="homePage">
-        <div class="hero">
-            <h1>UI设计八大原则</h1>
-            <p>打造优秀用户体验的设计指南，帮助你创建更好的微信小程序界面</p>
+    <div class="container">
+        <div class="header">
+            <h1>微信小程序设计课</h1>
+            <p>学习设计原则，打造优秀用户体验</p>
         </div>
 
-        <div class="principles-grid">
-            <div class="principle-card" onclick="showDetail(1)">
-                <div class="principle-number">1</div>
-                <h3>可见性原则</h3>
-                <p>确保界面元素清晰可见，重要信息突出展示，用户能够快速识别和理解界面内容。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(2)">
-                <div class="principle-number">2</div>
-                <h3>反馈原则</h3>
-                <p>及时响应用户操作，通过视觉或交互反馈让用户了解系统状态和操作结果。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(3)">
-                <div class="principle-number">3</div>
-                <h3>导航清晰原则</h3>
-                <p>提供清晰的导航结构，让用户随时了解当前位置，并能轻松到达目标页面。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(4)">
-                <div class="principle-number">4</div>
-                <h3>一致性原则</h3>
-                <p>保持界面元素和交互行为的一致性，降低用户学习成本，提升使用效率。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(5)">
-                <div class="principle-number">5</div>
-                <h3>简洁原则</h3>
-                <p>减少不必要的视觉元素和信息量，突出核心功能，让用户专注于主要任务。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(6)">
-                <div class="principle-number">6</div>
-                <h3>文字易懂原则</h3>
-                <p>使用清晰、准确、易于理解的语言，避免专业术语和模糊表述。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(7)">
-                <div class="principle-number">7</div>
-                <h3>包容性原则</h3>
-                <p>考虑不同用户群体的需求，包括视觉障碍、色盲、行动不便等特殊用户。</p>
-            </div>
-
-            <div class="principle-card" onclick="showDetail(8)">
-                <div class="principle-number">8</div>
-                <h3>美观原则</h3>
-                <p>注重视觉美感和审美体验，通过合理的布局、色彩和排版提升界面品质感。</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="detailPages"></div>
-
-    <script>
-        const principles = [
-            {
-                id: 1,
-                title: "可见性原则",
-                subtitle: "Visibility of System Status",
-                description: "界面上的所有元素都应被清晰地呈现给用户。用户不应该猜测或思考界面的含义，而应该能够立即识别出各个元素的功能和重要性。良好的可见性意味着重要信息醒目、次要信息辅助、不重要的信息则应被隐藏或淡化。",
-                keyPoints: [
-                    "文字大小需满足可读性要求，建议正文不小于28px",
-                    "颜色对比度应达到WCAG 2.1标准的AA级别（4.5:1）",
-                    "重要操作按钮使用醒目颜色，与背景形成明确区分",
-                    "避免使用与背景颜色过于接近的元素"
-                ],
-                goodExample: {
-                    title: "良好的可见性设计",
-                    desc: "按钮颜色鲜明、文字清晰、层次分明",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">商品详情</div><h4 style="margin-bottom: 12px;">小米手环 8 Pro</h4><p class="wx-card-desc wx-small-text" style="color: #999; margin-bottom: 16px;">限时特惠 · 已售出 2.3万件</p><p style="font-size: 1.4rem; color: #ff6b00; font-weight: bold; margin-bottom: 20px;">¥299 <span style="font-size: 0.8rem; color: #999; text-decoration: line-through;">¥399</span></p><button class="wx-button wx-button-primary" style="width: 100%; padding: 14px;">立即购买</button></div>'
-                },
-                badExample: {
-                    title: "可见性不足的设计",
-                    desc: "文字过小、颜色对比度低、层次不清",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">商品详情</div><h4 style="margin-bottom: 6px; font-size: 0.85rem;">小米手环 8 Pro</h4><p class="wx-card-desc wx-small-text" style="color: #ddd; margin-bottom: 12px;">限时特惠 · 已售出 2.3万件</p><p style="font-size: 1rem; color: #ccc; margin-bottom: 16px;">¥299</p><button class="wx-button wx-button-disabled" style="width: 100%; padding: 10px; font-size: 0.75rem;">立即购买</button></div>'
-                }
-            },
-            {
-                id: 2,
-                title: "反馈原则",
-                subtitle: "Feedback",
-                description: "系统应始终保持与用户的沟通畅通。每当用户进行任何操作时，系统都应及时给予反馈，让用户知道操作是否成功、下一步该做什么、以及当前系统状态如何。良好的反馈机制能够消除用户的不确定感，建立对系统的信任。",
-                keyPoints: [
-                    "点击操作后立即给予视觉反馈（颜色变化、缩放等）",
-                    "长时间操作显示加载状态（loading动画）",
-                    "操作成功后显示确认提示",
-                    "操作失败时明确告知原因和处理方式"
-                ],
-                goodExample: {
-                    title: "良好的反馈设计",
-                    desc: "操作即时反馈、状态清晰可见",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">收藏成功</div><div class="wx-feedback-demo" style="padding: 40px 16px;"><button class="wx-feedback-btn" onclick="this.innerHTML=\'✓ 已收藏\'; this.style.background=\'#999\'; this.style.color=\'white\';">收藏</button><div class="wx-feedback-toast" style="position: relative; transform: none; top: 0; left: 0; margin-top: 20px;">✓ 收藏成功</div></div></div>'
-                },
-                badExample: {
-                    title: "缺乏反馈的设计",
-                    desc: "操作后无任何提示，用户无法确认是否成功",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">收藏（无反馈）</div><div class="wx-feedback-demo" style="padding: 40px 16px;"><button class="wx-feedback-btn" style="background: #07c160;">收藏</button><p style="text-align: center; color: #999; margin-top: 40px; font-size: 0.9rem;">点击后没有任何变化...</p></div></div>'
-                }
-            },
-            {
-                id: 3,
-                title: "导航清晰原则",
-                subtitle: "Navigation Clarity",
-                description: "用户在使用产品时应该始终清楚自己在哪里，以及如何到达想去的地方。清晰的导航设计能够帮助用户快速找到所需功能，降低迷失感。导航应该符合用户的心智模型，遵循常见的设计模式。",
-                keyPoints: [
-                    "底部导航栏提供主要功能的快速切换",
-                    "每个页面都有清晰的返回路径",
-                    "当前位置应有明确标识",
-                    "导航层级不宜过深，建议不超过3级"
-                ],
-                goodExample: {
-                    title: "清晰的导航设计",
-                    desc: "导航结构扁平、返回路径明确",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">← 个人中心</div><div style="padding: 16px;"><div class="wx-list-item" style="border: none;"><div class="wx-list-icon" style="background: #ff9500;">👤</div><div class="wx-list-content"><div class="wx-list-title">张小明</div><div class="wx-list-desc">ID: 888888</div></div><span style="color: #999;">›</span></div><div style="margin-top: 20px; background: #f8f8f8; border-radius: 12px; padding: 12px;"><div class="wx-list-item"><span style="margin-right: 12px;">📦</span><span class="wx-list-title" style="flex: 1;">我的订单</span><span style="color: #999;">›</span></div><div class="wx-list-item" style="border: none;"><span style="margin-right: 12px;">❤️</span><span class="wx-list-title" style="flex: 1;">我的收藏</span><span style="color: #999;">›</span></div></div></div><div style="display: flex; justify-content: space-around; padding: 12px; border-top: 1px solid #eee; margin: 16px -16px -16px -16px;"><div style="text-align: center;"><div style="font-size: 1.2rem;">🏠</div><div style="font-size: 0.7rem; color: #999;">首页</div></div><div style="text-align: center;"><div style="font-size: 1.2rem;">📋</div><div style="font-size: 0.7rem; color: #999;">订单</div></div><div style="text-align: center;"><div style="font-size: 1.2rem;">👤</div><div style="font-size: 0.7rem; color: #07c160;">我的</div></div></div></div>'
-                },
-                badExample: {
-                    title: "导航混乱的设计",
-                    desc: "层级过深、返回路径不清晰",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title" style="color: #999;">···</div><div style="padding: 16px;"><p style="color: #999; font-size: 0.85rem; text-align: center; margin: 40px 0;">这是第5级页面</p><p style="color: #999; font-size: 0.8rem; text-align: center;">找不到怎么回去了...</p><p style="color: #999; font-size: 0.8rem; text-align: center; margin-top: 8px;">只能靠左上角的返回？</p></div></div>'
-                }
-            },
-            {
-                id: 4,
-                title: "一致性原则",
-                subtitle: "Consistency",
-                description: "一致性意味着相似的元素应该有相似的外观和行为。用户在产品中学会的操作方式应该能够复用到其他场景，而不需要重新学习。一致性包括视觉一致性（颜色、字体、图标风格）和交互一致性（操作方式、反馈形式）。",
-                keyPoints: [
-                    "相同功能的按钮使用统一的颜色和样式",
-                    "类似的操作采用相同的交互方式",
-                    "整个应用使用统一的配色方案和字体",
-                    "遵循平台的设计规范和习惯"
-                ],
-                goodExample: {
-                    title: "保持一致性的设计",
-                    desc: "按钮风格统一、布局规则一致",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">首页</div><div style="padding: 16px;"><div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;"><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #07c160; border-radius: 10px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">📦</div><div style="font-size: 0.75rem;">首页</div></div><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #07c160; border-radius: 10px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">🛒</div><div style="font-size: 0.75rem;">分类</div></div><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #07c160; border-radius: 10px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">⭐</div><div style="font-size: 0.75rem;">收藏</div></div><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #07c160; border-radius: 10px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">👤</div><div style="font-size: 0.75rem;">我的</div></div></div><button class="wx-good-btn" style="width: 100%;">确 定</button><button class="wx-good-btn" style="width: 100%; margin-top: 12px;">提 交</button></div></div>'
-                },
-                badExample: {
-                    title: "缺乏一致性的设计",
-                    desc: "按钮样式混乱、风格不统一",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">首页</div><div style="padding: 16px;"><div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;"><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #ff6b6b; border-radius: 22px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">📦</div><div style="font-size: 0.75rem;">首页</div></div><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #4ecdc4; border-radius: 8px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">🛒</div><div style="font-size: 0.75rem;">分类</div></div><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #ffe66d; border-radius: 50%; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center;">⭐</div><div style="font-size: 0.75rem;">收藏</div></div><div style="text-align: center;"><div style="width: 44px; height: 44px; background: #95e1d3; border-radius: 12px; margin: 0 auto 6px; display: flex; align-items: center; justify-content: center; color: white;">👤</div><div style="font-size: 0.75rem;">我的</div></div></div><button class="wx-inconsistent-btn" style="width: 100%;">确定</button><button style="width: 100%; margin-top: 12px; padding: 12px; background: #9b59b6; color: white; border: none; border-radius: 24px;">提交</button></div></div>'
-                }
-            },
-            {
-                id: 5,
-                title: "简洁原则",
-                subtitle: "Simplicity",
-                description: "好的设计是尽可能少的设计。每个界面应该只展示必要的信息和功能，避免视觉噪音和认知负担。通过优先级排序，将最重要的内容放在最显眼的位置，次要信息则可以通过展开、隐藏等方式处理。",
-                keyPoints: [
-                    "每个页面聚焦一个核心任务",
-                    "移除或隐藏次要信息",
-                    "使用渐进式披露原则：先展示关键信息",
-                    "避免不必要的装饰和视觉元素"
-                ],
-                goodExample: {
-                    title: "简洁清晰的设计",
-                    desc: "信息层次分明、重点突出",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">下单成功</div><div style="text-align: center; padding: 30px 16px;"><div style="width: 64px; height: 64px; background: #07c160; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;"><span style="color: white; font-size: 2rem;">✓</span></div><h3 style="margin-bottom: 8px;">下单成功</h3><p style="color: #999; font-size: 0.9rem; margin-bottom: 24px;">订单号：202401150001</p><button class="wx-button wx-button-primary" style="width: 100%;">查看订单</button><button class="wx-button wx-button-outline" style="width: 100%; margin-top: 12px;">返回首页</button></div></div>'
-                },
-                badExample: {
-                    title: "信息过载的设计",
-                    desc: "元素过多、层次混乱、重点不突出",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">下单成功</div><div style="padding: 12px;"><div style="background: #fff3cd; padding: 8px; border-radius: 8px; margin-bottom: 12px; font-size: 0.75rem;">🎉 恭喜获得优惠券！</div><div style="text-align: center; margin-bottom: 12px;"><span style="color: #07c160; font-size: 1.5rem;">✓</span></div><h4 style="margin-bottom: 4px;">下单成功</h4><p style="color: #999; font-size: 0.8rem; margin-bottom: 8px;">订单号：202401150001</p><p style="color: #999; font-size: 0.8rem; margin-bottom: 8px;">配送地址：北京市朝阳区xxx</p><p style="color: #999; font-size: 0.8rem; margin-bottom: 8px;">预计送达：1-3天</p><p style="color: #999; font-size: 0.8rem; margin-bottom: 12px;">支付方式：微信支付</p><button class="wx-button wx-button-primary" style="width: 100%; margin-bottom: 8px;">查看订单</button><button class="wx-button wx-button-outline" style="width: 100%; margin-bottom: 8px;">返回首页</button><button style="width: 100%; padding: 10px; background: #f0f0f0; border: none; border-radius: 8px; font-size: 0.85rem;">分享给好友</button><div style="margin-top: 12px; padding: 8px; background: #f8f8f8; border-radius: 8px; font-size: 0.7rem; color: #999;"><p>推荐商品：xxx | yyy | zzz</p></div></div></div>'
-                }
-            },
-            {
-                id: 6,
-                title: "文字易懂原则",
-                subtitle: "Readable Text",
-                description: "界面上的文字应该简洁明了，让用户能够快速理解。避免使用专业术语、行话或模糊的表述。按钮标签应该准确描述操作结果，让用户知道点击后会发什么。好的文案能够减少用户的思考时间，提升操作效率。",
-                keyPoints: [
-                    "使用描述性的按钮文案，如「保存」而非「提交」",
-                    "避免技术术语和缩写",
-                    "重要提示使用明确的语言",
-                    "文案风格保持与产品调性一致"
-                ],
-                goodExample: {
-                    title: "清晰易懂的文案",
-                    desc: "按钮文案明确、操作结果可预期",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">登录</div><div style="padding: 16px;"><input type="text" class="wx-input" placeholder="请输入手机号" style="margin-bottom: 12px;"><input type="password" class="wx-input" placeholder="请输入密码" style="margin-bottom: 16px;"><button class="wx-button wx-button-primary" style="width: 100%;">登录</button><div style="display: flex; justify-content: space-between; margin-top: 16px;"><a style="color: #07c160; font-size: 0.9rem;">注册新账号</a><a style="color: #999; font-size: 0.9rem;">忘记密码？</a></div></div></div>'
-                },
-                badExample: {
-                    title: "模糊难懂的文案",
-                    desc: "术语过多、操作结果不明确",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">Auth</div><div style="padding: 16px;"><input type="text" class="wx-input" placeholder="Phone / Email" style="margin-bottom: 12px;"><input type="password" class="wx-input" placeholder="Passcode" style="margin-bottom: 16px;"><button class="wx-button wx-button-primary" style="width: 100%;">Submit</button><div style="display: flex; justify-content: space-between; margin-top: 16px;"><a style="color: #07c160; font-size: 0.9rem;">New User?</a><a style="color: #999; font-size: 0.9rem;">Reset?</a></div></div></div>'
-                }
-            },
-            {
-                id: 7,
-                title: "包容性原则",
-                subtitle: "Accessibility",
-                description: "设计应该考虑到所有用户，包括有视觉障碍、色盲、运动障碍等特殊需求的用户。除了颜色之外，还应该提供其他识别方式（如图标、文字、形状）。交互元素应该足够大，方便不同手指尺寸的用户操作。",
-                keyPoints: [
-                    "按钮和可点击区域不小于44×44像素",
-                    "颜色不作为唯一的信息传达方式",
-                    "确保触控目标之间有足够间距",
-                    "考虑高对比度和暗色模式的支持"
-                ],
-                goodExample: {
-                    title: "包容性良好的设计",
-                    desc: "触控区域大、图文结合、间距合理",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">消息列表</div><div style="padding: 8px;"><div style="display: flex; align-items: center; padding: 14px; background: #f8f8f8; border-radius: 12px; margin-bottom: 8px;"><div style="width: 48px; height: 48px; background: #07c160; border-radius: 50%; margin-right: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">📢</div><div style="flex: 1;"><div style="display: flex; align-items: center; gap: 8px;"><span style="font-weight: 600;">系统通知</span><span style="background: #ef4444; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 10px;">NEW</span></div><div style="font-size: 0.85rem; color: #999;">您的订单已发货，请注意查收...</div></div></div><div style="display: flex; align-items: center; padding: 14px; background: #f8f8f8; border-radius: 12px;"><div style="width: 48px; height: 48px; background: #ff9500; border-radius: 50%; margin-right: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;">💬</div><div style="flex: 1;"><div style="font-weight: 600;">小助手</div><div style="font-size: 0.85rem; color: #999;">请问有什么可以帮您？</div></div></div></div></div>'
-                },
-                badExample: {
-                    title: "包容性不足的设计",
-                    desc: "触控区域小、仅用颜色区分",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">消息列表</div><div style="padding: 8px;"><div style="display: flex; align-items: center; padding: 8px; margin-bottom: 8px;"><div style="width: 28px; height: 28px; background: #07c160; border-radius: 50%; margin-right: 8px;"></div><div style="flex: 1;"><div style="font-size: 0.75rem;">系统通知</div><div style="font-size: 0.7rem; color: #bbb;">您的订单已发货...</div></div></div><div style="display: flex; align-items: center; padding: 8px;"><div style="width: 28px; height: 28px; background: #ff9500; border-radius: 50%; margin-right: 8px;"></div><div style="flex: 1;"><div style="font-size: 0.75rem;">小助手</div><div style="font-size: 0.7rem; color: #bbb;">请问有什么可以帮您？</div></div></div></div></div>'
-                }
-            },
-            {
-                id: 8,
-                title: "美观原则",
-                subtitle: "Aesthetics",
-                description: "美学设计不仅仅是让界面「好看」，更是通过视觉元素的合理组织，传达产品的品质感和品牌形象。美观的设计能够提升用户的信任感和使用愉悦度。好的美学设计包括合理的布局、舒适的配色、协调的比例和精致的细节。",
-                keyPoints: [
-                    "保持视觉层次清晰，主次分明",
-                    "合理运用留白，不要塞得太满",
-                    "色彩搭配和谐，遵循60-30-10法则",
-                    "元素对齐整洁，排版规范"
-                ],
-                goodExample: {
-                    title: "美观整洁的设计",
-                    desc: "留白适当、元素对齐、层次分明",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">发现好物</div><div style="padding: 16px;"><div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;"><div style="background: #f8f8f8; border-radius: 12px; overflow: hidden;"><div style="height: 140px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">🎧</div><div style="padding: 12px;"><div style="font-size: 0.9rem; margin-bottom: 4px;">蓝牙耳机</div><div style="color: #ff6b00; font-size: 0.95rem; font-weight: 600;">¥199</div></div></div><div style="background: #f8f8f8; border-radius: 12px; overflow: hidden;"><div style="height: 140px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem;">⌚</div><div style="padding: 12px;"><div style="font-size: 0.9rem; margin-bottom: 4px;">智能手表</div><div style="color: #ff6b00; font-size: 0.95rem; font-weight: 600;">¥899</div></div></div></div></div></div>'
-                },
-                badExample: {
-                    title: "杂乱不美的设计",
-                    desc: "元素堆砌、缺乏对齐、缺乏层次",
-                    simulator: '<div class="simulator-screen"><div class="simulator-title">发现好物</div><div style="padding: 8px;"><div style="background: #eee; padding: 8px; margin-bottom: 8px; border-radius: 4px;"><div style="font-size: 0.85rem; float: left;">🎧</div><div style="font-size: 0.8rem;">蓝牙耳机</div><div style="color: red; font-size: 0.9rem;">¥199</div></div><div style="background: #ddd; padding: 10px; margin-bottom: 6px; border-radius: 6px;"><span>⌚</span> 智能手表 <span style="color: red;">¥899</span></div><div style="background: #ccc; padding: 12px; border-radius: 8px;">🧢 棒球帽 ¥59</div><div style="padding: 6px; margin-top: 8px;"><span style="font-size: 0.7rem; color: #999;">还有更多...</span></div></div></div>'
-                }
-            }
-        ];
-
-        function generateDetailPages() {
-            const container = document.getElementById('detailPages');
-            container.innerHTML = principles.map(p => `
-                <div class="detail-page" id="detail${p.id}">
-                    <button class="back-btn" onclick="goBack()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 12H5M12 19l-7-7 7-7"/>
-                        </svg>
-                        返回
-                    </button>
-
-                    <div class="detail-header">
-                        <h1>
-                            <span class="badge">原则 ${p.id}</span>
-                            ${p.title}
-                        </h1>
-                        <p style="color: #666; font-size: 1rem; margin-top: 8px;">${p.subtitle}</p>
-                    </div>
-
-                    <div class="detail-content">
-                        <h2>原则说明</h2>
-                        <p>${p.description}</p>
-
-                        <div class="design-tips">
-                            <h4>设计要点</h4>
-                            <ul>
-                                ${p.keyPoints.map(tip => `<li>${tip}</li>`).join('')}
-                            </ul>
-                        </div>
-
-                        <div class="examples-section">
-                            <h2>案例对比</h2>
-                            <div class="example-grid">
-                                <div class="example-box good">
-                                    <span class="example-label">✓ 正确示例</span>
-                                    <div class="wechat-simulator">
-                                        <div class="simulator-header">
-                                            <span class="simulator-dot green"></span>
-                                            <span class="simulator-dot yellow"></span>
-                                            <span class="simulator-dot red"></span>
-                                        </div>
-                                        ${p.goodExample.simulator}
-                                    </div>
-                                    <p style="margin-top: 12px; color: #666; font-size: 0.9rem;">${p.goodExample.desc}</p>
-                                </div>
-                                <div class="example-box bad">
-                                    <span class="example-label">✗ 错误示例</span>
-                                    <div class="wechat-simulator">
-                                        <div class="simulator-header">
-                                            <span class="simulator-dot green"></span>
-                                            <span class="simulator-dot yellow"></span>
-                                            <span class="simulator-dot red"></span>
-                                        </div>
-                                        ${p.badExample.simulator}
-                                    </div>
-                                    <p style="margin-top: 12px; color: #666; font-size: 0.9rem;">${p.badExample.desc}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="course-list">
+            <a href="ui_design/" class="course-card">
+                <div class="course-icon">🎨</div>
+                <div class="course-info">
+                    <h3>UI设计八大原则</h3>
+                    <p>可见性、反馈、导航、一致性、简洁...</p>
                 </div>
-            `).join('');
-        }
+                <div class="course-arrow">›</div>
+            </a>
 
-        function showDetail(id) {
-            document.getElementById('homePage').classList.add('hidden');
-            document.getElementById('detail' + id).classList.add('active');
-            window.scrollTo(0, 0);
-        }
+            <!-- 可以继续添加更多课程 -->
+            <!--
+            <a href="other_course/" class="course-card">
+                <div class="course-icon">📱</div>
+                <div class="course-info">
+                    <h3>课程名称</h3>
+                    <p>课程简介...</p>
+                </div>
+                <div class="course-arrow">›</div>
+            </a>
+            -->
+        </div>
 
-        function goBack() {
-            document.getElementById('homePage').classList.remove('hidden');
-            document.querySelectorAll('.detail-page').forEach(function(p) { p.classList.remove('active'); });
-            window.scrollTo(0, 0);
-        }
-
-        generateDetailPages();
-    </script>
-
-<style>
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.inland-security-footer {
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  right: 0;
-  width: fit-content;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.tooltip-container {
-  position: relative;
-}
-
-.trigger-content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  background-color: transparent;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.minimax-link {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 300;
-  color: #adadad;
-  text-decoration: none;
-}
-
-.minimax-link:visited {
-  color: #adadad;
-}
-
-.minimax-link:hover {
-  color: #666666;
-}
-
-.tooltip-content {
-  position: absolute;
-  bottom: 100%;
-  right: 0;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 8px;
-  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
-  font-size: 12px;
-  line-height: 17px;
-  background-color: #fafafa;
-  border-radius: 12px;
-  white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  color: #171717;
-}
-
-/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
-.tooltip-content::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  right: 0;
-  height: 16px;
-}
-
-.tooltip-container:hover .tooltip-content {
-  display: flex;
-}
-
-.info-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.beian-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #171717;
-}
-
-.beian-icon {
-  width: 14px;
-  height: 14px;
-  margin-right: 2px;
-}
-
-.underline-text {
-  color: #171717;
-  text-decoration: underline;
-}
-
-.underline-text:hover {
-  color: #000000;
-}
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .trigger-content {
-    background-color: transparent;
-  }
-
-  .minimax-link,
-  .minimax-link:visited {
-    color: #666666;
-  }
-
-  .minimax-link:hover {
-    color: #adadad;
-  }
-
-  .tooltip-content {
-    background-color: #262626;
-    color: #ededed;
-  }
-
-  .beian-link,
-  .underline-text {
-    color: #ededed;
-  }
-
-  .underline-text:hover {
-    color: #ffffff;
-  }
-}
-
-</style>
-<div class="inland-security-footer">
-  <div class="tooltip-container">
-    <div class="trigger-content">
-      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
-        <span>© 2026 MiniMax</span>
-      </a>
+        <div class="footer">
+            <p>微信小程序设计课 · 2026</p>
+        </div>
     </div>
-    <div class="tooltip-content">
-      <section class="info-section">
-        <span>上海稀宇科技有限公司</span>
-      </section>
-
-      <section class="info-section">
-        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
-          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
-          <span class="underline-text">沪公网安备31010402010179号</span>
-        </a>
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
-          沪ICP备2023003282号-38
-        </a>
-      </section>
-
-      <section class="info-section">
-        <span>模型名称：MiniMax</span>
-        <span>备案号：Shanghai-MiniMax-202505230046</span>
-      </section>
-
-      <section class="info-section">
-        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
-          用户协议
-        </a>
-        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
-          隐私政策
-        </a>
-      </section>
-    </div>
-  </div>
-</div>
-
-
-<script>
-/**
- * Iframe 元素高亮注入脚本
- * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
- *
- * 使用方法：
- * 1. 将此脚本添加到目标网站的 HTML 中
- * 2. 或通过浏览器扩展、用户脚本等方式注入
- */
-
-(function () {
-  "use strict";
-
-  // 检查是否在 iframe 中
-  if (window.self === window.top) {
-    return; // 不在 iframe 中，不执行
-  }
-
-  // 检查是否已经初始化过
-  if (window.__iframeHighlightInitialized) {
-    return;
-  }
-  window.__iframeHighlightInitialized = true;
-  console.log("Iframe 高亮脚本已加载");
-
-  // 创建高亮覆盖层
-  var overlay = document.createElement("div");
-  overlay.id = "iframe-highlight-overlay";
-  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
-
-  // 创建悬停高亮框（虚线边框）
-  var highlightBox = document.createElement("div");
-  highlightBox.id = "iframe-highlight-box";
-  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
-
-  // 创建选中节点的常驻高亮框（实线边框）
-  var selectedBox = document.createElement("div");
-  selectedBox.id = "iframe-selected-box";
-  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
-
-  // 创建悬停标签显示
-  var tagLabel = document.createElement("div");
-  tagLabel.id = "iframe-tag-label";
-  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
-
-  // 创建选中节点标签
-  var selectedLabel = document.createElement("div");
-  selectedLabel.id = "iframe-selected-label";
-  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
-  overlay.appendChild(highlightBox);
-  overlay.appendChild(selectedBox);
-  overlay.appendChild(tagLabel);
-  overlay.appendChild(selectedLabel);
-  document.body.appendChild(overlay);
-
-  // 存储当前选中的元素
-  var selectedElement = null;
-  var highlightEnabled = false;
-
-  // 更新选中元素的高亮显示
-  function updateSelectedHighlight(element) {
-    console.log("updateSelectedHighlight called with:", element);
-    if (!element) {
-      selectedBox.style.display = "none";
-      selectedLabel.style.display = "none";
-      selectedElement = null;
-      console.log("Cleared selected highlight");
-      return;
-    }
-    selectedElement = element;
-    var rect = element.getBoundingClientRect();
-    console.log("Selected element rect:", rect);
-
-    // 更新选中高亮框位置
-    selectedBox.style.display = "block";
-    selectedBox.style.left = "".concat(rect.left - 2, "px");
-    selectedBox.style.top = "".concat(rect.top - 2, "px");
-    selectedBox.style.width = "".concat(rect.width + 4, "px");
-    selectedBox.style.height = "".concat(rect.height + 4, "px");
-
-    // 更新选中标签位置和内容
-    selectedLabel.style.display = "block";
-    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
-
-    // 计算标签位置，确保不超出视窗
-    var labelTop = rect.top - 28;
-    var labelLeft = rect.left;
-
-    // 如果标签会超出顶部，显示在元素下方
-    if (labelTop < 5) {
-      labelTop = rect.bottom + 5;
-    }
-
-    // 如果标签会超出右侧，向左调整
-    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
-    if (labelLeft + labelWidth > window.innerWidth - 10) {
-      labelLeft = window.innerWidth - labelWidth - 10;
-    }
-    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
-    selectedLabel.style.top = "".concat(labelTop, "px");
-    console.log("Selected highlight positioned at:", {
-      left: selectedBox.style.left,
-      top: selectedBox.style.top,
-      width: selectedBox.style.width,
-      height: selectedBox.style.height
-    });
-  }
-  function getElementSelector(element) {
-    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
-    var segments = [];
-    var current = element;
-    while (current !== document.documentElement) {
-      var selector = '';
-      // 优先检查唯一ID
-      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
-        segments.unshift("#".concat(current.id));
-        break; // ID唯一，无需继续向上
-      }
-
-      // 生成类名选择器（取第一个有效类名）
-      var classes = Array.from(current.classList).filter(function (c) {
-        return !c.startsWith('js-');
-      });
-      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
-
-      // 生成位置索引（nth-child）
-      var tag = current.tagName.toLowerCase();
-      if (!className) {
-        var siblings = Array.from(current.parentNode.children);
-        var index = siblings.findIndex(function (el) {
-          return el === current;
-        }) + 1;
-        selector = "".concat(tag, ":nth-child(").concat(index, ")");
-      } else {
-        selector = className;
-      }
-      segments.unshift(selector);
-      current = current.parentElement;
-    }
-
-    // 处理根元素
-    if (current === document.documentElement) {
-      segments.unshift('html');
-    }
-    return segments.join(' > ');
-  }
-
-  // 获取元素文本内容
-  function getElementText(element) {
-    var _element$textContent;
-    if (element.tagName === "INPUT") {
-      return element.value || element.placeholder || "";
-    }
-    if (element.tagName === "TEXTAREA") {
-      return element.value || element.placeholder || "";
-    }
-    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
-    return text.length > 50 ? text.substring(0, 50) + "..." : text;
-  }
-
-  // 获取元素属性信息
-  function getElementAttributes(element) {
-    var attrs = {};
-    for (var i = 0; i < element.attributes.length; i++) {
-      var attr = element.attributes[i];
-      attrs[attr.name] = attr.value;
-    }
-    return attrs;
-  }
-
-  // 鼠标悬停事件处理
-  function handleMouseOver(e) {
-    if (!highlightEnabled) return;
-    var target = e.target;
-    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
-      return;
-    }
-
-    // 避免高亮 html 和 body 元素
-    if (target === document.documentElement || target === document.body) {
-      return;
-    }
-
-    // 如果是已选中的元素，不显示悬停高亮
-    if (target === selectedElement) {
-      highlightBox.style.display = "none";
-      tagLabel.style.display = "none";
-      return;
-    }
-    var rect = target.getBoundingClientRect();
-    var selector = getElementSelector(target);
-    var text = getElementText(target);
-    var attributes = getElementAttributes(target);
-
-    // 更新悬停高亮框位置
-    highlightBox.style.display = "block";
-    highlightBox.style.left = "".concat(rect.left - 2, "px");
-    highlightBox.style.top = "".concat(rect.top - 2, "px");
-    highlightBox.style.width = "".concat(rect.width + 4, "px");
-    highlightBox.style.height = "".concat(rect.height + 4, "px");
-
-    // 更新标签位置和内容
-    tagLabel.style.display = "block";
-    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
-
-    // 计算标签位置，确保不超出视窗
-    var labelTop = rect.top - 22;
-    var labelLeft = rect.left;
-
-    // 如果标签会超出顶部，显示在元素下方
-    if (labelTop < 0) {
-      labelTop = rect.bottom + 5;
-    }
-
-    // 如果标签会超出右侧，向左调整
-    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
-      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
-    }
-    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
-    tagLabel.style.top = "".concat(labelTop, "px");
-
-    // 发送消息到父窗口
-    var elementInfo = {
-      tagName: target.tagName.toLowerCase(),
-      rect: {
-        left: rect.left,
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom,
-        width: rect.width,
-        height: rect.height,
-        x: rect.x,
-        y: rect.y
-      },
-      selector: selector,
-      text: text,
-      attributes: attributes,
-      url: window.location.href,
-      path: window.location.pathname,
-      timestamp: Date.now()
-    };
-    try {
-      window.parent.postMessage({
-        type: "iframe-element-hover",
-        data: elementInfo,
-        source: "iframe-highlight-injector"
-      }, "*");
-    } catch (error) {
-      console.warn("无法发送消息到父窗口:", error);
-    }
-  }
-
-  // 鼠标离开事件处理
-  function handleMouseOut(e) {
-    if (!highlightEnabled) return;
-    var relatedTarget = e.relatedTarget;
-
-    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
-    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
-      return;
-    }
-    highlightBox.style.display = "none";
-    tagLabel.style.display = "none";
-    try {
-      window.parent.postMessage({
-        type: "iframe-element-hover",
-        data: null,
-        source: "iframe-highlight-injector"
-      }, "*");
-    } catch (error) {
-      console.warn("无法发送消息到父窗口:", error);
-    }
-  }
-
-  // 点击事件处理
-  function handleClick(e) {
-    var target = e.target;
-    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
-      return;
-    }
-
-    // 避免处理 html 和 body 元素
-    if (target === document.documentElement || target === document.body) {
-      return;
-    }
-
-    // 检查是否是交互元素，这些元素需要保留默认行为
-    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
-
-    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
-    if (highlightEnabled) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    var rect = target.getBoundingClientRect();
-    var selector = getElementSelector(target);
-    var text = getElementText(target);
-    var attributes = getElementAttributes(target);
-    console.log("Element clicked:", {
-      tagName: target.tagName,
-      selector: selector,
-      rect: rect
-    });
-
-    // 立即更新选中高亮
-    updateSelectedHighlight(target);
-
-    // 隐藏悬停高亮，因为现在是选中状态
-    highlightBox.style.display = "none";
-    tagLabel.style.display = "none";
-    var elementInfo = {
-      tagName: target.tagName.toLowerCase(),
-      rect: {
-        left: rect.left,
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom,
-        width: rect.width,
-        height: rect.height,
-        x: rect.x,
-        y: rect.y
-      },
-      selector: selector,
-      text: text,
-      attributes: attributes,
-      url: window.location.href,
-      path: window.location.pathname,
-      timestamp: Date.now()
-    };
-    try {
-      window.parent.postMessage({
-        type: "iframe-element-click",
-        data: elementInfo,
-        source: "iframe-highlight-injector"
-      }, "*");
-    } catch (error) {
-      console.warn("无法发送消息到父窗口:", error);
-    }
-  }
-
-  // 监听来自父窗口的消息
-  function handleParentMessage(event) {
-    console.log("Received message from parent:", event.data);
-    if (event.data.type === "iframe-highlight-toggle") {
-      var enabled = event.data.enabled;
-      console.log("Highlight toggle:", enabled);
-      if (enabled) {
-        enableHighlight();
-      } else {
-        disableHighlight();
-      }
-    } else if (event.data.type === "enable-iframe-highlight") {
-      console.log("Enable iframe highlight");
-      enableHighlight();
-    } else if (event.data.type === "disable-iframe-highlight") {
-      console.log("Disable iframe highlight");
-      disableHighlight();
-    } else if (event.data.type === "toggle-iframe-highlight") {
-      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
-      console.log("Toggle iframe highlight to:", _enabled);
-      if (_enabled) {
-        enableHighlight();
-      } else {
-        disableHighlight();
-      }
-    } else if (event.data.type === "update-selected-element") {
-      var selector = event.data.selector;
-      console.log("Update selected element with selector:", selector);
-      if (selector) {
-        try {
-          var element = document.querySelector(selector);
-          console.log("Found element by selector:", element);
-          updateSelectedHighlight(element);
-        } catch (error) {
-          console.warn("Failed to select element:", error);
-          updateSelectedHighlight(null);
-        }
-      } else {
-        updateSelectedHighlight(null);
-      }
-    } else if (event.data.type === "clear-selected-element") {
-      console.log("Clear selected element");
-      updateSelectedHighlight(null);
-    }
-  }
-
-  // 启用高亮功能
-  function enableHighlight() {
-    console.log("Enabling highlight");
-    document.addEventListener("mouseover", handleMouseOver, true);
-    document.addEventListener("mouseout", handleMouseOut, true);
-    document.addEventListener("click", handleClick, true);
-    highlightEnabled = true;
-    overlay.style.display = "block";
-  }
-
-  // 禁用高亮功能
-  function disableHighlight() {
-    console.log("Disabling highlight");
-    highlightEnabled = false;
-    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
-    // 这样可以保留选中状态的显示
-    highlightBox.style.display = "none";
-    tagLabel.style.display = "none";
-    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
-  }
-
-  // 完全禁用高亮功能（移除所有监听器）
-  function fullyDisableHighlight() {
-    console.log("Fully disabling highlight");
-    highlightEnabled = false;
-    document.removeEventListener("mouseover", handleMouseOver, true);
-    document.removeEventListener("mouseout", handleMouseOut, true);
-    document.removeEventListener("click", handleClick, true);
-    overlay.style.display = "none";
-    highlightBox.style.display = "none";
-    tagLabel.style.display = "none";
-    selectedBox.style.display = "none";
-    selectedLabel.style.display = "none";
-  }
-
-  // 添加事件监听
-  enableHighlight();
-  window.addEventListener("message", handleParentMessage);
-
-  // 暴露全局函数供外部调用
-  window.__iframeHighlightControl = {
-    enable: enableHighlight,
-    disable: disableHighlight,
-    fullyDisable: fullyDisableHighlight,
-    isEnabled: function isEnabled() {
-      return highlightEnabled;
-    },
-    getSelectedElement: function getSelectedElement() {
-      return selectedElement;
-    },
-    updateSelected: updateSelectedHighlight,
-    // 通过消息发送开关控制
-    sendToggleMessage: function sendToggleMessage(enabled) {
-      window.parent.postMessage({
-        type: 'iframe-highlight-status',
-        enabled: enabled || highlightEnabled,
-        source: 'iframe-highlight-injector'
-      }, '*');
-    }
-  };
-
-  // 通知父窗口脚本已加载
-  try {
-    window.parent.postMessage({
-      type: "iframe-highlight-ready",
-      data: {
-        url: window.location.href,
-        userAgent: navigator.userAgent,
-        timestamp: Date.now()
-      },
-      source: "iframe-highlight-injector"
-    }, "*");
-  } catch (error) {
-    console.warn("无法发送就绪消息到父窗口:", error);
-  }
-
-  // 清理函数
-  window.__iframeHighlightCleanup = function () {
-    fullyDisableHighlight();
-    window.removeEventListener("message", handleParentMessage);
-    if (overlay.parentElement) {
-      overlay.parentElement.removeChild(overlay);
-    }
-    delete window.__iframeHighlightInitialized;
-    delete window.__iframeHighlightCleanup;
-  };
-})();
-
-</script>
 </body>
 </html>
