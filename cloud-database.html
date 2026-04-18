@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云数据库 - 小程序数据存储</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: #F8FAFC;
+            color: #1E293B;
+            min-height: 100vh;
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: none;
+            background: #F1F5F9;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #E2E8F0;
+            transform: scale(1.05);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            color: #475569;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-left: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .title-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #10B981, #34D399);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #10B981, #34D399);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .principle-text {
+            color: #475569;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .principle-diagram {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .diagram-box {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .diagram-box .emoji {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .diagram-box .label {
+            font-size: 0.85rem;
+            color: #64748B;
+        }
+
+        .diagram-box .sublabel {
+            font-size: 12px;
+            color: #10B981;
+            margin-top: 4px;
+        }
+
+        .diagram-arrow {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .pros, .cons {
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .pros {
+            background: #F0FDF4;
+            border: 2px solid #86EFAC;
+        }
+
+        .cons {
+            background: #FEF2F2;
+            border: 2px solid #FECACA;
+        }
+
+        .pros-title, .cons-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pros-title { color: #15803D; }
+        .cons-title { color: #DC2626; }
+
+        .pros-list, .cons-list {
+            list-style: none;
+        }
+
+        .pros-list li, .cons-list li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            color: #374151;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .pros-list li::before {
+            content: '✓';
+            color: #15803D;
+            font-weight: bold;
+        }
+
+        .cons-list li::before {
+            content: '✗';
+            color: #DC2626;
+            font-weight: bold;
+        }
+
+        .scenarios {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .scenario {
+            background: #D1FAE5;
+            border-radius: 12px;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            color: #065F46;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-block {
+            background: #1E293B;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .code-title {
+            color: #94A3B8;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            font-family: monospace;
+        }
+
+        .code-block pre {
+            color: #E2E8F0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .code-block .comment { color: #64748B; }
+        .code-block .keyword { color: #C084FC; }
+        .code-block .string { color: #86EFAC; }
+        .code-block .function { color: #60A5FA; }
+
+        .preview-section {
+            background: linear-gradient(135deg, #10B981, #34D399);
+            border-radius: 20px;
+            padding: 28px;
+            color: white;
+        }
+
+        .preview-section .section-title {
+            color: white;
+        }
+
+        .preview-section .section-title .icon {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .preview-demo {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .preview-phone {
+            width: 160px;
+            height: 260px;
+            background: #F3F4F6;
+            border-radius: 20px;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+
+        .phone-header {
+            height: 30px;
+            background: linear-gradient(135deg, #10B981, #34D399);
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .phone-content {
+            padding: 8px;
+        }
+
+        .vote-item {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .vote-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        .vote-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10B981;
+        }
+
+        .vote-text {
+            font-size: 10px;
+            color: #374151;
+        }
+
+        .vote-bar {
+            height: 8px;
+            background: #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .vote-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981, #34D399);
+            border-radius: 4px;
+        }
+
+        .preview-desc {
+            flex: 1;
+            color: #475569;
+        }
+
+        .preview-desc h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #1E293B;
+        }
+
+        .preview-desc p {
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .preview-desc .label {
+            font-weight: 600;
+            color: #10B981;
+        }
+
+        .comparison {
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .comparison-item {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 2px solid #E2E8F0;
+        }
+
+        .comparison-item.active {
+            border-color: #10B981;
+            background: #F0FDF4;
+        }
+
+        .comparison-item .icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .comparison-item .title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1E293B;
+            margin-bottom: 4px;
+        }
+
+        .comparison-item .desc {
+            font-size: 0.8rem;
+            color: #64748B;
+        }
+
+        @media (max-width: 640px) {
+            .pros-cons { grid-template-columns: 1fr; }
+            .principle-diagram { flex-direction: column; }
+            .diagram-arrow { transform: rotate(90deg); }
+            .preview-demo { flex-direction: column; }
+            .preview-phone { width: 100%; height: 200px; }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <a href="index.html" class="back-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </a>
+        <h1 class="page-title">
+            <span class="title-icon">☁️</span>
+            云数据库
+        </h1>
+    </div>
+
+    <div class="container">
+        <!-- 原理 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">💡</span>
+                什么是云数据库？
+            </div>
+            <div class="principle-text">
+                云数据库是将数据<strong>存储在远程服务器</strong>上，通过网络进行数据的增删改查。多个用户可以<strong>同时访问和操作同一份数据</strong>，实现数据的实时同步和共享。数据永远不会因设备更换而丢失。
+            </div>
+            <div class="principle-diagram">
+                <div class="diagram-box">
+                    <div class="emoji">📱</div>
+                    <div class="label">用户A手机</div>
+                </div>
+                <div class="diagram-box">
+                    <div class="emoji">📱</div>
+                    <div class="label">用户B手机</div>
+                </div>
+                <div class="diagram-arrow">⟷</div>
+                <div class="diagram-box">
+                    <div class="emoji">☁️</div>
+                    <div class="label">云服务器</div>
+                    <div class="sublabel">数据中心</div>
+                </div>
+                <div class="diagram-arrow">⟷</div>
+                <div class="diagram-box">
+                    <div class="emoji">💻</div>
+                    <div class="label">电脑网页</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 特点 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">⚖️</span>
+                优缺点分析
+            </div>
+            <div class="pros-cons">
+                <div class="pros">
+                    <div class="pros-title">
+                        <span>✅</span> 优点
+                    </div>
+                    <ul class="pros-list">
+                        <li>数据永不丢失，服务器备份</li>
+                        <li>多设备实时同步</li>
+                        <li>存储容量大</li>
+                        <li>支持多人协作</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <div class="cons-title">
+                        <span>❌</span> 缺点
+                    </div>
+                    <ul class="cons-list">
+                        <li>必须有网络连接</li>
+                        <li>需要后端服务支持</li>
+                        <li>响应速度依赖网络</li>
+                        <li>可能产生云服务费用</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 适用场景 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">🎯</span>
+                适用场景
+            </div>
+            <div class="scenarios">
+                <div class="scenario">💬 聊天消息记录</div>
+                <div class="scenario">🗳️ 班级投票结果</div>
+                <div class="scenario">🏆 在线排行榜</div>
+                <div class="scenario">📝 共享文档协作</div>
+                <div class="scenario">🛒 电商商品数据</div>
+                <div class="scenario">👥 社交动态发布</div>
+            </div>
+        </div>
+
+        <!-- 代码示例 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">💻</span>
+                代码示例（云开发）
+            </div>
+            <div class="code-block">
+                <div class="code-title">// 微信云开发数据库操作</div>
+                <pre><span class="comment">// 初始化云数据库</span>
+<span class="keyword">const</span> db = <span class="function">wx.cloud.database</span>();
+
+<span class="comment">// 添加投票数据</span>
+<span class="function">db.collection</span>(<span class="string">'votes'</span>).add({
+  data: {
+    title: <span class="string">'最喜欢的运动'</span>,
+    options: [<span class="string">'篮球'</span>, <span class="string">'足球'</span>, <span class="string">'游泳'</span>],
+    votes: { basketball: <span class="string">12</span>, football: <span class="string">8</span>, swim: <span class="string">5</span> },
+    createTime: db.serverDate()
+  }
+});
+
+<span class="comment">// 查询投票数据</span>
+<span class="function">db.collection</span>(<span class="string">'votes'</span>).get().then(res => {
+  <span class="function">console.log</span>(res.data);
+});
+
+<span class="comment">// 更新投票（增加票数）</span>
+<span class="function">db.collection</span>(<span class="string">'votes'</span>).doc(<span class="string">'voteId'</span>).update({
+  data: {
+    <span class="string">'votes.basketball'</span>: db.command.inc(<span class="string">1</span>)
+  }
+});</pre>
+            </div>
+        </div>
+
+        <!-- 三种方式对比 -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">📊</span>
+                三种方式对比
+            </div>
+            <div class="comparison">
+                <div class="comparison-item">
+                    <div class="icon">📦</div>
+                    <div class="title">静态数据</div>
+                    <div class="desc">固定数据<br/>代码内编写</div>
+                </div>
+                <div class="comparison-item">
+                    <div class="icon">💾</div>
+                    <div class="title">本地缓存</div>
+                    <div class="desc">用户数据<br/>手机存储</div>
+                </div>
+                <div class="comparison-item active">
+                    <div class="icon">☁️</div>
+                    <div class="title">云数据库</div>
+                    <div class="desc">共享数据<br/>服务器存储</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UI预览 -->
+        <div class="preview-section">
+            <div class="section-title">
+                <span class="icon">📱</span>
+                界面效果预览
+            </div>
+            <div class="preview-demo">
+                <div class="preview-phone">
+                    <div class="phone-header">班级投票</div>
+                    <div class="phone-content">
+                        <div class="vote-item">
+                            <div class="vote-label">
+                                <span class="vote-dot"></span>
+                                <span class="vote-text">篮球</span>
+                            </div>
+                            <div class="vote-bar">
+                                <div class="vote-bar-fill" style="width: 48%;"></div>
+                            </div>
+                        </div>
+                        <div class="vote-item">
+                            <div class="vote-label">
+                                <span class="vote-dot" style="background: #F59E0B;"></span>
+                                <span class="vote-text">足球</span>
+                            </div>
+                            <div class="vote-bar">
+                                <div class="vote-bar-fill" style="width: 32%; background: linear-gradient(90deg, #F59E0B, #FBBF24);"></div>
+                            </div>
+                        </div>
+                        <div class="vote-item">
+                            <div class="vote-label">
+                                <span class="vote-dot" style="background: #6366F1;"></span>
+                                <span class="vote-text">游泳</span>
+                            </div>
+                            <div class="vote-bar">
+                                <div class="vote-bar-fill" style="width: 20%; background: linear-gradient(90deg, #6366F1, #818CF8);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-desc">
+                    <h4>云数据库应用示例</h4>
+                    <p>班级投票、排行榜等需要多人参与、数据共享的场景，使用云数据库存储，支持实时更新和统计。</p>
+                    <p><span class="label">优势：</span>数据共享，多人协作</p>
+                    <p><span class="label">注意：</span>需要网络连接才能使用</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.inland-security-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.trigger-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.minimax-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  color: #adadad;
+  text-decoration: none;
+}
+
+.minimax-link:visited {
+  color: #adadad;
+}
+
+.minimax-link:hover {
+  color: #666666;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: flex;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #171717;
+}
+
+.beian-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.underline-text {
+  color: #171717;
+  text-decoration: underline;
+}
+
+.underline-text:hover {
+  color: #000000;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .trigger-content {
+    background-color: transparent;
+  }
+
+  .minimax-link,
+  .minimax-link:visited {
+    color: #666666;
+  }
+
+  .minimax-link:hover {
+    color: #adadad;
+  }
+
+  .tooltip-content {
+    background-color: #262626;
+    color: #ededed;
+  }
+
+  .beian-link,
+  .underline-text {
+    color: #ededed;
+  }
+
+  .underline-text:hover {
+    color: #ffffff;
+  }
+}
+
+</style>
+<div class="inland-security-footer">
+  <div class="tooltip-container">
+    <div class="trigger-content">
+      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+        <span>© 2026 MiniMax</span>
+      </a>
+    </div>
+    <div class="tooltip-content">
+      <section class="info-section">
+        <span>上海稀宇科技有限公司</span>
+      </section>
+
+      <section class="info-section">
+        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+          <span class="underline-text">沪公网安备31010402010179号</span>
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+          沪ICP备2023003282号-38
+        </a>
+      </section>
+
+      <section class="info-section">
+        <span>模型名称：MiniMax</span>
+        <span>备案号：Shanghai-MiniMax-202505230046</span>
+      </section>
+
+      <section class="info-section">
+        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+          用户协议
+        </a>
+        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+          隐私政策
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
