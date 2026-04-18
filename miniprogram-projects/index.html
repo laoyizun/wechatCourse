@@ -1036,9 +1036,45 @@
         .project-card:nth-child(4) { animation-delay: 0.25s; }
         .project-card:nth-child(5) { animation-delay: 0.3s; }
         .project-card:nth-child(6) { animation-delay: 0.35s; }
+
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            color: #667eea;
+        }
     </style>
 </head>
 <body>
+    <a href="../" class="back-btn" title="返回首页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+    </a>
     <!-- 首页 -->
     <div id="home" class="page home-page active">
         <div class="home-content">
