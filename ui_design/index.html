@@ -109,7 +109,7 @@
             display: none;
         }
 
-        .back-btn {
+        .back-to-list {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -122,16 +122,27 @@
             color: #666;
             margin-bottom: 24px;
             transition: all 0.2s;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
         }
 
-        .back-btn:hover {
+        .back-to-list:hover {
             border-color: #667eea;
             color: #667eea;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
-        .back-btn svg {
-            width: 20px;
-            height: 20px;
+        .back-to-list:active {
+            transform: scale(0.98);
+        }
+
+        .back-to-list svg {
+            width: 24px;
+            height: 24px;
         }
 
         .detail-header {
@@ -559,8 +570,8 @@
             }
         }
 
-        /* 返回按钮 */
-        .back-btn {
+        /* 首页返回按钮 */
+        .back-to-home {
             position: fixed;
             top: 20px;
             left: 20px;
@@ -577,26 +588,22 @@
             z-index: 1000;
             transition: all 0.2s ease;
         }
-        .back-btn:hover {
+        .back-to-home:hover {
             transform: scale(1.08);
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
-        .back-btn:active {
+        .back-to-home:active {
             transform: scale(0.95);
         }
-        .back-btn svg {
+        .back-to-home svg {
             width: 24px;
             height: 24px;
             color: #667eea;
         }
-        .back-btn span {
-            font-size: 1.5rem;
-            margin-right: 4px;
-        }
     </style>
 </head>
 <body>
-    <a href="../" class="back-btn" title="返回首页">
+    <a href="../" class="back-to-home" title="返回首页">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
@@ -844,12 +851,11 @@
             const container = document.getElementById('detailPages');
             container.innerHTML = principles.map(p => `
                 <div class="detail-page" id="detail${p.id}">
-                    <button class="back-btn" onclick="goBack()">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="javascript:goBack()" class="back-to-list">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M19 12H5M12 19l-7-7 7-7"/>
                         </svg>
-                        返回
-                    </button>
+                    </a>
 
                     <div class="detail-header">
                         <h1>
