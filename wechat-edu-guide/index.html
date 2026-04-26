@@ -73,19 +73,22 @@
 
         /* 首页样式 */
         .home-grid {
-            display: grid;
+            display: flex;
             gap: 20px;
+            justify-content: center;
         }
 
         .menu-card {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             border-radius: 15px;
-            padding: 30px;
+            padding: 25px 30px;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
+            flex: 1;
+            max-width: 280px;
         }
 
         .menu-card:hover {
@@ -378,6 +381,16 @@
                 max-width: 100%;
             }
 
+            .home-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-card {
+                max-width: 100%;
+                width: 100%;
+            }
+
             .menu-icon {
                 font-size: 2.5rem;
             }
@@ -469,7 +482,7 @@
             <div class="step">
                 <h3><span class="step-number">2</span> 登录账号</h3>
                 <p>在平台首页点击「去学习」按钮，然后输入您的账号和密码完成登录。</p>
-                <img src="0427登录平台.png" alt="登录平台截图" class="screenshot">
+                <img src="imgs/0427登录平台.png" alt="登录平台截图" class="screenshot">
             </div>
         </div>
     </div>
@@ -497,7 +510,7 @@
             <div class="step">
                 <h3><span class="step-number">2</span> 开始学习</h3>
                 <p>选择对应的课程后，点击「开始学习」按钮即可进入课程内容。</p>
-                <img src="0427课程学习.png" alt="课程学习截图" class="screenshot">
+                <img src="imgs/0427课程学习.png" alt="课程学习截图" class="screenshot">
             </div>
         </div>
     </div>
@@ -521,7 +534,7 @@
             <div class="step">
                 <h3><span class="step-number">2</span> 使用AI辅助创作</h3>
                 <p>在AI对话框中输入您的创作需求，AI会帮您生成代码和资源。等待AI表示完成后，点击「运行」按钮查看效果。</p>
-                <img src="0427创作指引.png" alt="创作指引截图" class="screenshot">
+                <img src="imgs/0427创作指引.png" alt="创作指引截图" class="screenshot">
             </div>
 
             <div class="step">
