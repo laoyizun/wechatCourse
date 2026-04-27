@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EEF2FF"/><stop offset="1" stop-color="#F0FDFA"/></linearGradient><marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#2563EB"/></marker></defs>
+<rect width="900" height="560" rx="36" fill="url(#bg)"/>
+<text x="450" y="70" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="34" font-weight="800" fill="#0F172A">单线程课堂 → 多线程课堂</text>
+<text x="150" y="140" font-family="Arial,'Microsoft YaHei'" font-size="28" font-weight="700" fill="#334155">传统课堂</text>
+<line x1="150" y1="220" x2="750" y2="220" stroke="#94A3B8" stroke-width="8" stroke-linecap="round"/>
+<circle cx="220" cy="220" r="24" fill="#CBD5E1"/><circle cx="370" cy="220" r="24" fill="#CBD5E1"/><circle cx="520" cy="220" r="24" fill="#CBD5E1"/><circle cx="670" cy="220" r="24" fill="#CBD5E1"/>
+<text x="450" y="275" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="24" fill="#64748B">一个节奏 / 一套讲解 / 一个反馈</text>
+<text x="150" y="350" font-family="Arial,'Microsoft YaHei'" font-size="28" font-weight="700" fill="#334155">AI课堂</text>
+<path d="M180 430 C320 355, 580 355, 720 430" stroke="#2563EB" stroke-width="7" fill="none" marker-end="url(#arrow)"/>
+<path d="M180 430 C330 430, 570 430, 720 430" stroke="#0D9488" stroke-width="7" fill="none" marker-end="url(#arrow)"/>
+<path d="M180 430 C320 505, 580 505, 720 430" stroke="#F97316" stroke-width="7" fill="none" marker-end="url(#arrow)"/>
+<circle cx="180" cy="430" r="26" fill="#fff" stroke="#0F172A" stroke-width="3"/><text x="180" y="438" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700">起</text>
+<circle cx="720" cy="430" r="26" fill="#fff" stroke="#0F172A" stroke-width="3"/><text x="720" y="438" text-anchor="middle" font-family="Arial" font-size="24" font-weight="700">达</text>
+<text x="450" y="520" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="24" fill="#475569">不同问题 / 不同练习 / 不同反馈 / 不同路径</text>
+</svg>

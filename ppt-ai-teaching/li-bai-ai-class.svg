@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#F8FAFC"/><stop offset="1" stop-color="#FEF3C7"/></linearGradient><filter id="s"><feDropShadow dx="0" dy="12" stdDeviation="16" flood-opacity=".16"/></filter></defs>
+<rect width="900" height="560" rx="36" fill="url(#bg)"/>
+<text x="450" y="72" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="34" font-weight="800" fill="#0F172A">从“介绍李白”到“遇见李白”</text>
+<g filter="url(#s)"><rect x="78" y="130" width="330" height="310" rx="28" fill="#fff"/></g>
+<text x="243" y="180" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="28" font-weight="700" fill="#475569">原课堂</text>
+<text x="135" y="240" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#64748B">介绍生平</text>
+<text x="135" y="295" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#64748B">阅读资料</text>
+<text x="135" y="350" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#64748B">记忆作品</text>
+<text x="135" y="405" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#64748B">被动输入</text>
+<path d="M430 285h70" stroke="#2563EB" stroke-width="10" stroke-linecap="round"/><path d="M495 260l38 25-38 25" fill="none" stroke="#2563EB" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g filter="url(#s)"><rect x="518" y="130" width="330" height="310" rx="28" fill="#fff"/></g>
+<text x="683" y="180" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="28" font-weight="700" fill="#2563EB">AI改造后</text>
+<text x="575" y="240" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#0F172A">AI扮演李白</text>
+<text x="575" y="295" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#0F172A">学生提问对话</text>
+<text x="575" y="350" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#0F172A">解锁人生经历</text>
+<text x="575" y="405" font-family="Arial,'Microsoft YaHei'" font-size="25" fill="#0F172A">完成任务卡</text>
+<text x="450" y="505" text-anchor="middle" font-family="Arial,'Microsoft YaHei'" font-size="28" font-weight="700" fill="#92400E">知识 → 体验　　讲解 → 对话　　输入 → 参与</text>
+</svg>
