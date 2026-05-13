@@ -675,7 +675,6 @@ button:hover {
 }
 
 .home-button::before {
-    content: "←";
     font-size: 16px;
 }
 
