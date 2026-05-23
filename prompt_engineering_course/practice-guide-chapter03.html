@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第三章实践指引｜百炼 Agent 实操</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="guide-body">
+<a href="index.html" class="home-button">返回首页</a>
+<header class="guide-hero">
+  <div class="slide-kicker">Practice Guide</div>
+  <h1>第三章实践指引</h1>
+  <p>前面 PPT 负责建立认知；这里负责真正搭建百炼 Agent。</p>
+</header>
+<main class="guide-layout">
+  <aside class="module-menu">
+    <button class="module-btn" data-i="0"><small>模块1</small><strong>百炼 Agent：招生咨询助手</strong><span>创建一个能回答客户问题并引导下一步沟通的招生 Agent。</span></button><button class="module-btn" data-i="1"><small>模块2</small><strong>百炼 Agent：海报设计提示词助手</strong><span>创建一个帮助设计师整理视觉需求并生成 AI 绘图 Prompt 的 Agent。</span></button>
+  </aside>
+  <section class="module-detail" id="moduleDetail"></section>
+</main>
+<script>
+const modules = [{'cat': '模块1', 'title': '百炼 Agent：招生咨询助手', 'desc': '创建一个能回答客户问题并引导下一步沟通的招生 Agent。', 'goal': '让学生做出一个真正可运行的教育机构招生助手。', 'steps': ['创建 Agent 应用', '编写招生顾问角色 Prompt', '接入 FAQ / 班型 / 学费 / 考试时间等知识库', '测试真实客户问题', '优化输出结构和业务边界'], 'prompt': '你是教育培训行业的招生咨询助手，服务对象是课程顾问和运营销售人员。\n\n你的任务是根据客户发来的咨询问题，生成专业、自然、适合微信沟通的回复话术。\n\n工作流程：\n1. 判断客户问题类型：报考条件、课程内容、考试难度、价格优惠、入户政策、学习时间、售后保障。\n2. 分析客户背后的真实焦虑。\n3. 生成一段适合直接发给客户的回复。\n4. 给出一个后续追问问题，帮助销售继续沟通。\n5. 如果信息不确定，提醒以官方政策或课程实际说明为准。\n\n输出格式：\n【问题类型】\n【用户焦虑】\n【建议回复】\n【后续追问】\n【注意事项】\n\n限制要求：\n不要夸大承诺。\n不要保证一定通过。\n不要编造不存在的优惠或政策。\n语气自然、专业、有耐心，不要太像机器人。', 'test': ['我零基础可以学系统集成项目管理工程师吗？', '这个证书能入户吗？', '学习时间大概要多久？', '考不过怎么办？', '现在报名来得及吗？']}, {'cat': '模块2', 'title': '百炼 Agent：海报设计提示词助手', 'desc': '创建一个帮助设计师整理视觉需求并生成 AI 绘图 Prompt 的 Agent。', 'goal': '让学生理解设计 Agent 不是直接画图，而是组织视觉需求。', 'steps': ['创建设计类 Agent', '配置商业视觉设计角色', '设计固定输出结构', '测试软考宣传海报需求', '优化风格稳定性与负面提示词'], 'prompt': '你是一个广告视觉设计提示词助手，服务对象是广告设计师和运营人员。\n\n你的任务是把用户的海报需求整理成适合 AI 绘图工具使用的提示词。\n\n工作流程：\n1. 分析海报主题、目标用户和使用平台。\n2. 提炼画面主视觉方向。\n3. 给出配色、构图、光影、风格建议。\n4. 生成一条完整的 AI 绘图提示词。\n5. 生成负面提示词，避免画面混乱、文字错误、低质感。\n\n输出格式：\n【需求理解】\n【视觉风格】\n【画面结构】\n【主文案建议】\n【AI绘图提示词】\n【负面提示词】\n\n限制要求：\n不要生成过多复杂元素。\n不要让画面出现大量不可控文字。\n如果涉及中文文字，提醒用户后期用设计软件手动排版。\n风格要适合商业宣传图。', 'test': ['做一张蓝色科技风软考海报。', '做一张小红书封面图。', '做一张突出“考前冲刺”的招生图。', '做一张不要太营销的朋友圈宣传图。']}];
+const detail = document.getElementById('moduleDetail');
+const btns = document.querySelectorAll('.module-btn');
+function render(i){
+  const m = modules[i];
+  btns.forEach(b=>b.classList.remove('active'));
+  btns[i].classList.add('active');
+  detail.innerHTML = `
+    <div class="detail-header">
+      <small>${m.cat}</small>
+      <h2>${m.title}</h2>
+      <p>${m.desc}</p>
+    </div>
+    <div class="detail-grid">
+      <div class="detail-card"><h3>模块目标</h3><p>${m.goal}</p></div>
+      <div class="detail-card"><h3>操作步骤</h3><ol>${m.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+      <div class="detail-card full"><h3>系统提示词样例</h3><pre>${m.prompt}</pre></div>
+      <div class="detail-card"><h3>测试问题</h3><ul>${m.test.map(s=>`<li>${s}</li>`).join('')}</ul></div>
+      <div class="detail-card warn"><h3>课堂提醒</h3><p>PPT 讲“为什么”，这里练“怎么做”。不要只看按钮，要理解 Agent 背后的岗位设计、知识库和输出结构。</p></div>
+    </div>
+  `;
+}
+btns.forEach((b,i)=>b.addEventListener('click',()=>render(i)));
+render(0);
+</script>
+</body>
+</html>
