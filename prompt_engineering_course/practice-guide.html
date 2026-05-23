@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 实践指引｜模块化操作手册</title>
-<link rel="stylesheet" href="assets/style.css">
-</head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI 实践指引</title><link rel="stylesheet" href="assets/style.css"></head>
 <body class="guide-body">
 <a href="index.html" class="home-button">返回首页</a>
-<header class="guide-hero">
-  <div class="slide-kicker">Practice Guide</div>
-  <h1>AI 实践指引</h1>
-  <p>左侧切换不同实践模块，右侧查看操作步骤、提示词样例、测试题和提交要求。</p>
-</header>
+<header class="guide-hero"><div class="slide-kicker">Practice Guide</div><h1>AI 实践指引</h1><p>左侧切换不同实践模块，右侧查看操作步骤、提示词样例、测试题和提交要求。</p></header>
 <main class="guide-layout">
-  <aside class="module-menu">
-    <button class="module-btn" data-i="0"><small>Prompt 实践</small><strong>BROKE 提示词优化</strong><span>把一句模糊需求改成结构化 Prompt。</span></button><button class="module-btn" data-i="1"><small>Agent 实践</small><strong>百炼 Agent：招生咨询助手</strong><span>创建回答客户问题并引导下一步沟通的招生 Agent。</span></button><button class="module-btn" data-i="2"><small>Agent 实践</small><strong>百炼 Agent：海报设计提示词助手</strong><span>创建帮助设计师整理视觉需求并生成 AI 绘图 Prompt 的 Agent。</span></button><button class="module-btn" data-i="3"><small>Memory 实践</small><strong>长期记忆需求诊断</strong><span>判断哪些信息应该进入 skill.md、memory.md、reflection.md。</span></button><button class="module-btn" data-i="4"><small>Claw 实践</small><strong>Claw 长期记忆架构</strong><span>用文件型 Memory 设计一个长期成长 Agent。</span></button><button class="module-btn" data-i="5"><small>Workflow 实践</small><strong>自动化报告工作流</strong><span>把复杂任务拆成多个节点。</span></button><button class="module-btn" data-i="6"><small>Multi-Agent 实践</small><strong>AI 团队分工</strong><span>设计多个 Agent 协作完成一个任务。</span></button><button class="module-btn" data-i="7"><small>RAG 实践</small><strong>教育知识库设计</strong><span>设计教材、题库、FAQ 的知识库结构。</span></button><button class="module-btn" data-i="8"><small>系统设计</small><strong>AI 教育系统 MVP</strong><span>整合 RAG + Memory + Workflow。</span></button>
-  </aside>
-  <section class="module-detail" id="moduleDetail"></section>
+<aside class="module-menu">
+<button class="module-btn" data-i="0"><small>Prompt 实践</small><strong>BROKE 提示词优化</strong><span>把一句模糊需求改成结构化 Prompt。</span></button><button class="module-btn" data-i="1"><small>Agent 实践</small><strong>百炼 Agent：招生咨询助手</strong><span>创建回答客户问题并引导下一步沟通的招生 Agent。</span></button><button class="module-btn" data-i="2"><small>Agent 实践</small><strong>百炼 Agent：海报设计提示词助手</strong><span>创建帮助设计师整理视觉需求并生成 AI 绘图 Prompt 的 Agent。</span></button><button class="module-btn" data-i="3"><small>Memory 实践</small><strong>长期记忆需求诊断</strong><span>判断哪些信息应该进入 skill.md、memory.md、reflection.md。</span></button><button class="module-btn" data-i="4"><small>Claw 实践</small><strong>Claw 长期记忆架构</strong><span>用文件型 Memory 设计一个长期成长 Agent。</span></button><button class="module-btn" data-i="5"><small>Workflow 实践</small><strong>自动化报告工作流</strong><span>把复杂任务拆成多个节点。</span></button><button class="module-btn" data-i="6"><small>Multi-Agent 实践</small><strong>AI 团队分工</strong><span>设计多个 Agent 协作完成一个任务。</span></button><button class="module-btn" data-i="7"><small>RAG 实践</small><strong>教育知识库设计</strong><span>设计教材、题库、FAQ 的知识库结构。</span></button><button class="module-btn" data-i="8"><small>系统设计</small><strong>AI 教育系统 MVP</strong><span>整合 RAG + Memory + Workflow。</span></button>
+</aside>
+<section class="module-detail" id="moduleDetail"></section>
 </main>
 <script>
-const modules = [{"cat": "Prompt 实践", "title": "BROKE 提示词优化", "desc": "把一句模糊需求改成结构化 Prompt。", "goal": "掌握 Background、Role、Objective、Key Result、Example 的基础组合。", "steps": ["写出原始需求", "补充背景", "指定角色", "明确目标", "加入关键要求与示例"], "prompt": "请使用 BROKE 框架优化：帮我写一个招生文案。", "test": ["帮我写招生文案", "帮我写小红书标题", "帮我写海报文案"]}, {"cat": "Agent 实践", "title": "百炼 Agent：招生咨询助手", "desc": "创建回答客户问题并引导下一步沟通的招生 Agent。", "goal": "做出一个可运行的教育机构招生助手。", "steps": ["创建 Agent 应用", "编写招生顾问角色 Prompt", "接入 FAQ / 班型 / 学费 / 考试时间等知识库", "测试真实客户问题", "优化输出结构和业务边界"], "prompt": "你是教育培训行业的招生咨询助手，服务对象是课程顾问和运营销售人员。\n\n你的任务是根据客户发来的咨询问题，生成专业、自然、适合微信沟通的回复话术。\n\n输出格式：\n【问题类型】\n【用户焦虑】\n【建议回复】\n【后续追问】\n【注意事项】\n\n限制要求：\n不要夸大承诺。\n不要保证一定通过。\n不要编造不存在的优惠或政策。", "test": ["我零基础可以学吗？", "这个证书能入户吗？", "学习时间大概要多久？", "考不过怎么办？"]}, {"cat": "Agent 实践", "title": "百炼 Agent：海报设计提示词助手", "desc": "创建帮助设计师整理视觉需求并生成 AI 绘图 Prompt 的 Agent。", "goal": "理解设计 Agent 不是直接画图，而是组织视觉需求。", "steps": ["创建设计类 Agent", "配置商业视觉设计角色", "设计固定输出结构", "测试软考宣传海报需求", "优化风格稳定性与负面提示词"], "prompt": "你是一个广告视觉设计提示词助手，服务对象是广告设计师和运营人员。\n\n输出格式：\n【需求理解】\n【视觉风格】\n【画面结构】\n【主文案建议】\n【AI绘图提示词】\n【负面提示词】\n\n限制要求：\n不要生成过多复杂元素。\n如果涉及中文文字，提醒用户后期用设计软件手动排版。", "test": ["做一张蓝色科技风软考海报。", "做一张小红书封面图。", "做一张考前冲刺招生图。"]}, {"cat": "Memory 实践", "title": "长期记忆需求诊断", "desc": "判断哪些信息应该进入 skill.md、memory.md、reflection.md。", "goal": "让学员知道哪些信息值得长期保存。", "steps": ["列出重复输入的信息", "区分规则、记忆、反思", "写出 skill.md", "写出 memory.md", "写出 reflection.md"], "prompt": "请诊断这个 AI 使用场景是否需要长期记忆，并输出 skill.md、memory.md、reflection.md 应记录什么。", "test": ["招生咨询助手", "海报设计助手", "AI教学助手"]}, {"cat": "Claw 实践", "title": "Claw 长期记忆架构", "desc": "用文件型 Memory 设计一个长期成长 Agent。", "goal": "理解长期记忆架构如何落地。", "steps": ["确定 AI 角色", "编写 skill.md", "编写 memory.md", "编写 reflection.md", "设计读取顺序"], "prompt": "请为一个 AI 岗位设计 skill.md、memory.md、reflection.md 和运行流程。", "test": ["AI运营助手", "AI设计助手", "AI销售助手"]}, {"cat": "Workflow 实践", "title": "自动化报告工作流", "desc": "把复杂任务拆成多个节点。", "goal": "掌握输入、分析、生成、审核、输出的流程拆分。", "steps": ["选择复杂任务", "拆分节点", "设计输入输出", "加入条件分支", "定义最终交付物"], "prompt": "请把学习报告任务拆成输入、分析、生成、审核、输出节点。", "test": ["学习报告", "运营复盘", "招生跟进"]}, {"cat": "Multi-Agent 实践", "title": "AI 团队分工", "desc": "设计多个 Agent 协作完成一个任务。", "goal": "理解多 Agent 是任务分工，不是多个 AI 聊天。", "steps": ["定义 Leader Agent", "拆分子 Agent", "设计共享上下文", "设计信息传递", "加入 Reflection Agent"], "prompt": "请设计 Leader Agent、分析 Agent、内容 Agent、记忆 Agent、Reflection Agent 的分工。", "test": ["AI课程生产团队", "AI运营内容团队", "AI销售复盘团队"]}, {"cat": "RAG 实践", "title": "教育知识库设计", "desc": "设计教材、题库、FAQ 的知识库结构。", "goal": "让 AI 先查资料，再回答。", "steps": ["确定知识库用途", "整理资料类型", "设计目录结构", "设置切分规则", "准备测试问题"], "prompt": "请为一个课程设计知识库目录、切分规则和测试问题。", "test": ["教材原文", "题库解析", "课程FAQ"]}, {"cat": "系统设计", "title": "AI 教育系统 MVP", "desc": "整合 RAG + Memory + Workflow。", "goal": "设计一个最小可行 AI 系统。", "steps": ["确定服务对象", "设计知识库", "设计长期记忆", "设计工作流", "形成 MVP"], "prompt": "请设计一个 AI 教育系统 MVP，包括系统目标、模块、数据闭环和最小功能。", "test": ["软考学习助手", "教育学考研助手", "AI运营训练系统"]}];
+const modules = [{"cat": "Prompt 实践", "title": "BROKE 提示词优化", "desc": "把一句模糊需求改成结构化 Prompt。", "goal": "掌握 Background、Role、Objective、Key Result、Example 的基础组合。", "steps": ["写出原始需求", "补充背景", "指定角色", "明确目标", "加入关键要求与示例"], "prompt": "请使用 BROKE 框架优化：帮我写一个招生文案。", "test": ["帮我写招生文案", "帮我写小红书标题", "帮我写海报文案"]}, {"cat": "Agent 实践", "title": "百炼 Agent：招生咨询助手", "desc": "创建回答客户问题并引导下一步沟通的招生 Agent。", "goal": "做出一个可运行的教育机构招生助手。", "steps": ["创建 Agent 应用", "编写招生顾问角色 Prompt", "接入 FAQ / 班型 / 学费 / 考试时间等知识库", "测试真实客户问题", "优化输出结构和业务边界"], "prompt": "你是教育培训行业的招生咨询助手，服务对象是课程顾问和运营销售人员。\\n\\n输出格式：\\n【问题类型】\\n【用户焦虑】\\n【建议回复】\\n【后续追问】\\n【注意事项】\\n\\n限制要求：不要夸大承诺，不要保证一定通过，不要编造不存在的优惠或政策。", "test": ["我零基础可以学吗？", "这个证书能入户吗？", "学习时间大概要多久？", "考不过怎么办？"]}, {"cat": "Agent 实践", "title": "百炼 Agent：海报设计提示词助手", "desc": "创建帮助设计师整理视觉需求并生成 AI 绘图 Prompt 的 Agent。", "goal": "理解设计 Agent 不是直接画图，而是组织视觉需求。", "steps": ["创建设计类 Agent", "配置商业视觉设计角色", "设计固定输出结构", "测试软考宣传海报需求", "优化风格稳定性与负面提示词"], "prompt": "你是一个广告视觉设计提示词助手，服务对象是广告设计师和运营人员。\\n\\n输出格式：\\n【需求理解】\\n【视觉风格】\\n【画面结构】\\n【主文案建议】\\n【AI绘图提示词】\\n【负面提示词】", "test": ["做一张蓝色科技风软考海报。", "做一张小红书封面图。", "做一张考前冲刺招生图。"]}, {"cat": "Memory 实践", "title": "长期记忆需求诊断", "desc": "判断哪些信息应该进入 skill.md、memory.md、reflection.md。", "goal": "让学员知道哪些信息值得长期保存。", "steps": ["列出重复输入的信息", "区分规则、记忆、反思", "写出 skill.md", "写出 memory.md", "写出 reflection.md"], "prompt": "请诊断这个 AI 使用场景是否需要长期记忆，并输出 skill.md、memory.md、reflection.md 应记录什么。", "test": ["招生咨询助手", "海报设计助手", "AI教学助手"]}, {"cat": "Claw 实践", "title": "Claw 长期记忆架构", "desc": "用文件型 Memory 设计一个长期成长 Agent。", "goal": "理解长期记忆架构如何落地。", "steps": ["确定 AI 角色", "编写 skill.md", "编写 memory.md", "编写 reflection.md", "设计读取顺序"], "prompt": "请为一个 AI 岗位设计 skill.md、memory.md、reflection.md 和运行流程。", "test": ["AI运营助手", "AI设计助手", "AI销售助手"]}, {"cat": "Workflow 实践", "title": "自动化报告工作流", "desc": "把复杂任务拆成多个节点。", "goal": "掌握输入、分析、生成、审核、输出的流程拆分。", "steps": ["选择复杂任务", "拆分节点", "设计输入输出", "加入条件分支", "定义最终交付物"], "prompt": "请把学习报告任务拆成输入、分析、生成、审核、输出节点。", "test": ["学习报告", "运营复盘", "招生跟进"]}, {"cat": "Multi-Agent 实践", "title": "AI 团队分工", "desc": "设计多个 Agent 协作完成一个任务。", "goal": "理解多 Agent 是任务分工，不是多个 AI 聊天。", "steps": ["定义 Leader Agent", "拆分子 Agent", "设计共享上下文", "设计信息传递", "加入 Reflection Agent"], "prompt": "请设计 Leader Agent、分析 Agent、内容 Agent、记忆 Agent、Reflection Agent 的分工。", "test": ["AI课程生产团队", "AI运营内容团队", "AI销售复盘团队"]}, {"cat": "RAG 实践", "title": "教育知识库设计", "desc": "设计教材、题库、FAQ 的知识库结构。", "goal": "让 AI 先查资料，再回答。", "steps": ["确定知识库用途", "整理资料类型", "设计目录结构", "设置切分规则", "准备测试问题"], "prompt": "请为一个课程设计知识库目录、切分规则和测试问题。", "test": ["教材原文", "题库解析", "课程FAQ"]}, {"cat": "系统设计", "title": "AI 教育系统 MVP", "desc": "整合 RAG + Memory + Workflow。", "goal": "设计一个最小可行 AI 系统。", "steps": ["确定服务对象", "设计知识库", "设计长期记忆", "设计工作流", "形成 MVP"], "prompt": "请设计一个 AI 教育系统 MVP，包括系统目标、模块、数据闭环和最小功能。", "test": ["软考学习助手", "教育学考研助手", "AI运营训练系统"]}];
 const detail = document.getElementById('moduleDetail');
 const btns = document.querySelectorAll('.module-btn');
 function render(i){
@@ -28,22 +19,16 @@ function render(i){
   btns.forEach(b=>b.classList.remove('active'));
   btns[i].classList.add('active');
   detail.innerHTML = `
-    <div class="detail-header">
-      <small>${m.cat}</small>
-      <h2>${m.title}</h2>
-      <p>${m.desc}</p>
-    </div>
+    <div class="detail-header"><small>${m.cat}</small><h2>${m.title}</h2><p>${m.desc}</p></div>
     <div class="detail-grid">
       <div class="detail-card"><h3>模块目标</h3><p>${m.goal}</p></div>
       <div class="detail-card"><h3>操作步骤</h3><ol>${m.steps.map(s=>`<li>${s}</li>`).join('')}</ol></div>
       <div class="detail-card full"><h3>提示词样例</h3><pre>${m.prompt}</pre></div>
       <div class="detail-card"><h3>测试问题</h3><ul>${m.test.map(s=>`<li>${s}</li>`).join('')}</ul></div>
       <div class="detail-card warn"><h3>课堂提醒</h3><p>PPT 负责“为什么”，Practice Guide 负责“怎么做”。实操时不要只看按钮，要理解背后的岗位设计、知识库、输出结构与测试优化。</p></div>
-    </div>
-  `;
+    </div>`;
 }
 btns.forEach((b,i)=>b.addEventListener('click',()=>render(i)));
 render(0);
 </script>
-</body>
-</html>
+</body></html>
