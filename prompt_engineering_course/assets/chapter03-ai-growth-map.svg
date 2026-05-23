@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.16"/>
+    </filter>
+    <style>
+      .title{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:54px;font-weight:900;fill:#0f172a}
+      .sub{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:24px;fill:#64748b}
+      .nodeTitle{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:30px;font-weight:800;fill:#0f172a}
+      .nodeText{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:21px;fill:#475569}
+      .white{fill:#fff;stroke:#dbe7ff;stroke-width:2;filter:url(#shadow)}
+      .blueText{fill:#1d4ed8}
+      .small{font-size:19px}
+      .arrow{stroke:#2563eb;stroke-width:5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="14" markerHeight="14" refX="10" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#f5f7fb"/>
+  <text x="800" y="82" text-anchor="middle" class="title">第三章知识总图：AI为什么不会成长</text>
+  <text x="800" y="124" text-anchor="middle" class="sub">ChatBot 最大的问题，不是不聪明，而是不会积累经验</text>
+
+  <rect x="80" y="210" rx="28" ry="28" width="260" height="140" class="white"/>
+  <text x="210" y="260" text-anchor="middle" class="nodeTitle">Prompt</text>
+  <text x="210" y="300" text-anchor="middle" class="nodeText">让 AI 听懂你</text>
+
+  <rect x="430" y="210" rx="28" ry="28" width="260" height="140" class="white"/>
+  <text x="560" y="260" text-anchor="middle" class="nodeTitle">Agent</text>
+  <text x="560" y="300" text-anchor="middle" class="nodeText">让 AI 像员工</text>
+
+  <rect x="780" y="190" rx="34" ry="34" width="360" height="180" fill="#fff7ed" stroke="#fed7aa" stroke-width="3" filter="url(#shadow)"/>
+  <text x="960" y="248" text-anchor="middle" class="nodeTitle">问题出现</text>
+  <text x="960" y="290" text-anchor="middle" class="nodeText">AI 仍然不会成长</text>
+  <text x="960" y="326" text-anchor="middle" class="nodeText small">像临时工，不像老员工</text>
+
+  <rect x="1260" y="210" rx="28" ry="28" width="260" height="140" class="white"/>
+  <text x="1390" y="260" text-anchor="middle" class="nodeTitle">长期成长</text>
+  <text x="1390" y="300" text-anchor="middle" class="nodeText">进入第四章</text>
+
+  <path d="M340 280 H430" class="arrow"/>
+  <path d="M690 280 H780" class="arrow"/>
+  <path d="M1140 280 H1260" class="arrow"/>
+
+  <rect x="200" y="500" rx="26" ry="26" width="230" height="130" class="white"/>
+  <text x="315" y="548" text-anchor="middle" class="nodeTitle blueText">会遗忘</text>
+  <text x="315" y="588" text-anchor="middle" class="nodeText">聊天结束</text>
+  <text x="315" y="616" text-anchor="middle" class="nodeText">经验消失</text>
+
+  <rect x="500" y="500" rx="26" ry="26" width="230" height="130" class="white"/>
+  <text x="615" y="548" text-anchor="middle" class="nodeTitle blueText">风格漂移</text>
+  <text x="615" y="588" text-anchor="middle" class="nodeText">今天一种风格</text>
+  <text x="615" y="616" text-anchor="middle" class="nodeText">明天又变了</text>
+
+  <rect x="800" y="500" rx="26" ry="26" width="230" height="130" class="white"/>
+  <text x="915" y="548" text-anchor="middle" class="nodeTitle blueText">重复犯错</text>
+  <text x="915" y="588" text-anchor="middle" class="nodeText">同样问题</text>
+  <text x="915" y="616" text-anchor="middle" class="nodeText">反复纠正</text>
+
+  <rect x="1100" y="500" rx="26" ry="26" width="230" height="130" class="white"/>
+  <text x="1215" y="548" text-anchor="middle" class="nodeTitle blueText">不积累</text>
+  <text x="1215" y="588" text-anchor="middle" class="nodeText">成功经验</text>
+  <text x="1215" y="616" text-anchor="middle" class="nodeText">下次用不上</text>
+
+  <path d="M960 370 C960 425 315 430 315 500" stroke="#94a3b8" stroke-width="3" fill="none"/>
+  <path d="M960 370 C960 425 615 430 615 500" stroke="#94a3b8" stroke-width="3" fill="none"/>
+  <path d="M960 370 C960 425 915 430 915 500" stroke="#94a3b8" stroke-width="3" fill="none"/>
+  <path d="M960 370 C960 425 1215 430 1215 500" stroke="#94a3b8" stroke-width="3" fill="none"/>
+
+  <rect x="430" y="730" rx="30" ry="30" width="740" height="92" fill="url(#g1)" filter="url(#shadow)"/>
+  <text x="800" y="775" text-anchor="middle" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="30" font-weight="900" fill="#fff">产生长期成长需求</text>
+  <text x="800" y="808" text-anchor="middle" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="20" fill="#e0f2fe">工作规则 · 长期经验 · 任务复盘 · 长期上下文</text>
+</svg>
