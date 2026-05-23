@@ -3,36 +3,128 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>第三章｜ChatBot 的局限 与 Agent 升级</title>
+<title>AI Agent 工程化应用课程</title>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="home-page">
 <main class="home-container">
-<section class="home-hero simple">
-  <div class="hero-badge">Chapter 03</div>
-  <h1>ChatBot 的局限 与 Agent 升级</h1>
-  <p>PPT 负责认知讲解，Practice Guide 负责百炼 Agent 实操。</p>
-</section>
-<section class="course-section">
-  <div class="section-title-row">
-    <h2>文件入口</h2>
-    <p>可直接打开预览。</p>
-  </div>
-  <div class="course-grid">
-    <a class="course-card" href="chapter03-chatbot-agent-upgrade.html">
-      <div class="card-head"><span class="card-num">PPT</span><span class="card-type">网页版PPT</span></div>
-      <h3>第三章 PPT</h3>
-      <p>ChatBot 的局限 与 Agent 升级</p>
-      <div class="card-tags">认知讲解 / 内容讲解 / 知识讲解</div>
+  <section class="home-hero simple">
+    <div class="hero-badge">AI Agent Engineering Course</div>
+    <h1>AI Agent 工程化应用课程</h1>
+    <p>Prompt → Agent → 长期记忆 → Workflow → Multi-Agent → AI系统设计</p>
+  </section>
+
+  <section class="quick-entry">
+    <a href="practice-guide.html" class="practice-card">
+      <div>
+        <span class="practice-label">Practice Guide</span>
+        <h2>实践指引</h2>
+        <p>进入模块化实践页面：左侧侧边栏切换不同实践模块，右侧显示操作步骤、提示词样例、测试题和提交要求。</p>
+      </div>
+      <strong>进入实践指引 →</strong>
     </a>
-    <a class="course-card" href="practice-guide-chapter03.html">
-      <div class="card-head"><span class="card-num">实操</span><span class="card-type">Practice Guide</span></div>
-      <h3>第三章实践指引</h3>
-      <p>百炼 Agent：招生咨询助手 + 海报设计提示词助手</p>
-      <div class="card-tags">百炼平台 / Agent搭建 / 测试优化</div>
-    </a>
+  </section>
+
+  <section class="course-section">
+    <div class="section-title-row">
+      <h2>完整章节目录</h2>
+      <p>点击任意卡片进入对应网页版 PPT。</p>
+    </div>
+    <div class="course-grid">
+      <a class="course-card" href="prompt-engineering.html">
+  <div class="card-head">
+    <span class="card-num">01</span>
+    <span class="card-type">章节 PPT</span>
   </div>
-</section>
+  <h3>Prompt 与 AI沟通</h3>
+  <p>让用户快速获得 AI 效率提升体验</p>
+  <div class="card-tags">Token / 上下文 / BROKE / Few-shot / 输出稳定控制</div>
+</a>
+<a class="course-card" href="agent.html">
+  <div class="card-head">
+    <span class="card-num">02</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>AI Agent 与角色化设计</h3>
+  <p>理解 ChatBot ≠ Agent，让 AI 开始像员工</p>
+  <div class="card-tags">Agent组成 / 百炼Agent / 插件 / 知识库</div>
+</a>
+<a class="course-card" href="chapter03-chatbot-agent-upgrade.html">
+  <div class="card-head">
+    <span class="card-num">03</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>ChatBot 的局限 与 Agent 升级</h3>
+  <p>为什么 Prompt 最终一定会进入 Agent 系统</p>
+  <div class="card-tags">ChatBot局限 / Agent结构 / 百炼认知 / 第四章伏笔</div>
+</a>
+<a class="course-card" href="chapter04-context-architecture.html">
+  <div class="card-head">
+    <span class="card-num">04</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>Context Architecture：长期记忆与 Reflection</h3>
+  <p>理解 AI 在推理前读取了什么，决定最终能力</p>
+  <div class="card-tags">skill.md / memory.md / reflection.md / 伪学习</div>
+</a>
+<a class="course-card" href="chapter05-long-term-agent-architecture.html">
+  <div class="card-head">
+    <span class="card-num">05</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>Long-Term Agent Architecture：以 Claw 为例</h3>
+  <p>理解长期记忆架构，而不是只学某个工具</p>
+  <div class="card-tags">Claw Memory OS / 文件型Memory / Reflection闭环</div>
+</a>
+<a class="course-card" href="chapter06-workflow.html">
+  <div class="card-head">
+    <span class="card-num">06</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>Workflow：AI 工作流设计</h3>
+  <p>理解复杂任务必须拆分，让 AI 开始自动工作</p>
+  <div class="card-tags">百炼工作流 / 节点 / 数据流 / 条件分支</div>
+</a>
+<a class="course-card" href="chapter07-multi-agent.html">
+  <div class="card-head">
+    <span class="card-num">07</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>Multi-Agent：多智能体协同</h3>
+  <p>理解 AI 团队分工，不是多个 AI 聊天</p>
+  <div class="card-tags">Leader Agent / 分析Agent / 报告Agent / 记忆Agent</div>
+</a>
+<a class="course-card" href="chapter08-rag.html">
+  <div class="card-head">
+    <span class="card-num">08</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>知识库与 RAG 系统</h3>
+  <p>让 AI 拥有可靠外部知识来源</p>
+  <div class="card-tags">RAG / Embedding / Rerank / 教育知识库</div>
+</a>
+<a class="course-card" href="chapter09-ai-native-system.html">
+  <div class="card-head">
+    <span class="card-num">09</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>AI Native System：垂类系统设计</h3>
+  <p>从接入 AI 升级到 AI 成为系统核心</p>
+  <div class="card-tags">Agent + Workflow + Memory / 数据闭环</div>
+</a>
+<a class="course-card" href="chapter10-industry-practice.html">
+  <div class="card-head">
+    <span class="card-num">10</span>
+    <span class="card-type">章节 PPT</span>
+  </div>
+  <h3>行业实践：岗位 AI 系统</h3>
+  <p>结合真实岗位案例，让能力体系落地</p>
+  <div class="card-tags">AI运营 / AI教学 / AI设计 / AI销售</div>
+</a>
+    </div>
+  </section>
+
+  <footer class="home-footer">大尊老师 · AI Agent 工程化应用课程</footer>
 </main>
 </body>
 </html>
