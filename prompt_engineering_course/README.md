@@ -1,22 +1,30 @@
-# AI工作流培训网页演示文稿
+# AI Agent 工程化应用课程更新包
 
-## 使用方法
+参考原目录：prompt_engineering_course
 
-1. 解压 zip 文件。
-2. 打开 `index.html` 预览课程入口页。
-3. 点击章节进入演示文稿。
-4. 演示页支持键盘 ← → 翻页。
+## 包含文件
 
-## 当前章节
+- index.html：扩充后的课程目录，包含 10 个章节 + 实践指引按钮
+- chapter03-ai-growth-problem.html
+- chapter04-context-architecture.html
+- chapter05-long-term-agent-architecture.html
+- chapter06-workflow.html
+- chapter07-multi-agent.html
+- chapter08-rag.html
+- chapter09-ai-native-system.html
+- chapter10-industry-practice.html
+- practice-guide.html：模块式实践指引页
+- assets/style.css
+- assets/deck.js
 
-- `prompt-engineering.html`：提示词工程 BROKE
-- `agent.html`：Agent 智能体应用
+## 使用方式
 
-## 部署到 GitHub Pages
+将这些文件合并到 GitHub 仓库的：
 
-将整个文件夹内容上传到 GitHub 仓库，开启 GitHub Pages 即可。
+prompt_engineering_course/
 
-## 备注
+注意：本包不覆盖 prompt-engineering.html 和 agent.html，只在 index 中继续链接它们。
 
-- 大图页面已设置为页面宽度约 90%。
-- 封面页已预留“大尊老师”署名，位置在翻页提示上方，避免重叠。
+## 总图
+
+第三章之后的 PPT 中已预留“总图 URL 留空”的占位区域，你可以手动替换为图片。
