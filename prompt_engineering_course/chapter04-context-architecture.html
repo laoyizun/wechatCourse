@@ -1,1 +1,394 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Context Architecture：长期记忆与 Reflection</title><link rel="stylesheet" href="assets/style.css"></head><body class="deck-body light-mode"><a href="index.html" class="home-button">返回首页</a><div class="deck"><section class="slide cover-slide"><div class="content"><div class="big-center"><div><div class="section-tag">Chapter 04</div><h1>Context Architecture：长期记忆与 Reflection</h1><p class="lead">理解 AI 在推理前读取了什么，决定最终能力</p></div></div><div class="hero-signature">大尊老师</div></div></section><section class="slide"><div class="content"><div class="topline"><div class="section-tag">待扩展</div><div class="page-num"></div></div><h2>本章内容后续按第三章标准扩展</h2><ul class='slide-list'><li>skill.md</li><li>memory.md</li><li>reflection.md</li><li>伪学习</li></ul><p class="slide-note">PPT 负责认知层讲解，实操内容统一放入 Practice Guide。</p></div></section></div><div class="deck-controls controls"><button id="prevBtn">上一页</button><span id="pageInfo"></span><button id="nextBtn">下一页</button></div><div class="deck-tip note">键盘 ← → 可翻页</div><script src="assets/deck.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第四章｜AI长期成长系统</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+body.deck-body{overflow:hidden;}
+.slide{overflow-y:auto!important;overflow-x:hidden!important;padding-bottom:240px!important;}
+.slide .content{min-height:100%;height:auto!important;padding-bottom:220px!important;}
+.slide .content::after{content:"";display:block;height:160px;flex:0 0 160px;}
+.map-slide{padding-bottom:260px!important;}
+.map-slide .content{display:block!important;min-height:auto!important;padding-bottom:260px!important;}
+.map-scroll-safe{width:100%;padding-bottom:260px;}
+.map-scroll-safe .map-img{display:block;width:90%;max-width:1500px;height:auto;max-height:none!important;object-fit:contain;margin:0 auto;border-radius:28px;}
+.deck-controls,.controls{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:999;}
+.deck-tip,.note{z-index:998;}
+</style>
+</head>
+
+<body class="deck-body light-mode">
+<a href="index.html" class="home-button">返回首页</a>
+
+<div class="deck">
+
+<section class="slide cover-slide">
+  <div class="content">
+    <div class="big-center">
+      <div>
+        <div class="slide-kicker">Chapter 04</div>
+        <h1>AI长期成长系统</h1>
+        <p class="lead">真正高级的 AI，不是更会聊天，而是更会积累经验。</p>
+      </div>
+    </div>
+    <div class="teacher-sign">大尊老师</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">承接第三章</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>第三章我们发现了什么？</h2>
+    <ul class="slide-list">
+      <li>AI 会完成任务，但不一定会长期变好。</li>
+      <li>AI 会回答问题，但容易忘记过去经验。</li>
+      <li>AI 像“临时工”，每次都要重新培训。</li>
+      <li>真正的问题不是模型不聪明，而是没有长期成长系统。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide map-slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">知识总图</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>第四章知识总图：AI长期成长系统</h2>
+    <div class="map-scroll-safe">
+      <img class="map-img" src="assets/chapter04_ai_growth_system.png" alt="第四章 AI长期成长系统知识总图">
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">核心问题</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>为什么有些 AI 越来越懂你？</h2>
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <h3>普通 AI</h3>
+        <ul class="slide-list">
+          <li>只看当前问题</li>
+          <li>不记得历史偏好</li>
+          <li>不总结过去错误</li>
+          <li>每次像第一次见面</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <h3>成长型 AI</h3>
+        <ul class="slide-list">
+          <li>读取长期规则</li>
+          <li>读取历史经验</li>
+          <li>读取用户偏好</li>
+          <li>越来越像老员工</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">核心认知</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>真正的差距，不只是模型大小</h2>
+    <ul class="slide-list">
+      <li>同一个模型，读取的信息不同，表现会完全不同。</li>
+      <li>普通 AI 只读取当前问题。</li>
+      <li>高级 AI 会读取长期规则、历史经验、用户偏好和复盘结果。</li>
+      <li>AI 在回答前读取了什么，决定了它最终能做到什么。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">上下文架构</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>Context Architecture：上下文架构</h2>
+    <div class="flow-row">
+      <div class="flow-node"><b>1</b><span>用户输入</span></div>
+      <div class="flow-node"><b>2</b><span>读取工作规则</span></div>
+      <div class="flow-node"><b>3</b><span>读取长期经验</span></div>
+      <div class="flow-node"><b>4</b><span>读取历史问题</span></div>
+      <div class="flow-node"><b>5</b><span>整合后回答</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">第一部分</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>AI 也需要“员工手册”</h2>
+    <ul class="slide-list">
+      <li>新员工为什么不稳定？因为没有统一工作规则。</li>
+      <li>AI 也是一样，如果没有长期规则，每次回答都会漂移。</li>
+      <li>工作规则系统，决定 AI 应该怎么工作。</li>
+      <li>它不是技术文件，而是 AI 的长期行为标准。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">工作规则系统</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>AI 的工作规则系统包括什么？</h2>
+    <div class="card-grid">
+      <div class="info-card"><h3>品牌风格</h3><p>统一语气、表达方式和视觉偏好。</p></div>
+      <div class="info-card"><h3>禁止事项</h3><p>明确什么不能说、什么不能做。</p></div>
+      <div class="info-card"><h3>输出结构</h3><p>固定回答格式，让结果稳定可复用。</p></div>
+      <div class="info-card"><h3>角色定位</h3><p>明确 AI 是运营、设计、招生还是教学助手。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">百炼映射</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>在百炼平台中，它对应什么？</h2>
+    <ul class="slide-list">
+      <li>系统提示词：定义 AI 的岗位、规则、语气和边界。</li>
+      <li>应用说明：让 AI 明确长期服务对象和任务目标。</li>
+      <li>输出格式要求：让 AI 每次结果保持一致。</li>
+      <li>禁止事项：防止 AI 乱承诺、乱编造、乱发挥。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">第二部分</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>AI 需要“长期经验本”</h2>
+    <ul class="slide-list">
+      <li>老员工厉害，不只是因为聪明，而是见过很多情况。</li>
+      <li>AI 如果想变稳定，也需要保存长期有价值的经验。</li>
+      <li>长期经验不是聊天记录，而是以后还能反复使用的信息。</li>
+      <li>经验越清晰，AI 越容易变得稳定。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">长期经验</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>哪些信息值得长期保存？</h2>
+    <div class="card-grid">
+      <div class="info-card"><h3>用户偏好</h3><p>喜欢什么风格，不喜欢什么表达。</p></div>
+      <div class="info-card"><h3>历史修改意见</h3><p>过去反复改过的问题，下次默认避免。</p></div>
+      <div class="info-card"><h3>高频错误</h3><p>经常出错的地方，要变成长期提醒。</p></div>
+      <div class="info-card"><h3>成功案例</h3><p>效果好的结构、话术、标题和方案。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">知识库区别</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>知识库不等于长期经验</h2>
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <h3>知识库</h3>
+        <ul class="slide-list">
+          <li>课程资料</li>
+          <li>产品说明</li>
+          <li>教材内容</li>
+          <li>FAQ 问答</li>
+        </ul>
+      </div>
+      <div class="compare-card good">
+        <h3>长期经验</h3>
+        <ul class="slide-list">
+          <li>用户偏好</li>
+          <li>品牌风格</li>
+          <li>历史反馈</li>
+          <li>有效方法</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">第三部分</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>AI 需要“工作复盘”</h2>
+    <ul class="slide-list">
+      <li>优秀员工不是只会做事，还会做完后复盘。</li>
+      <li>复盘不是哲学思考，而是工作改进机制。</li>
+      <li>AI 的复盘系统，帮助它发现哪里做得好、哪里做得差。</li>
+      <li>复盘的最终价值，是避免重复犯错。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">复盘系统</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>AI 的复盘系统会检查什么？</h2>
+    <div class="card-grid">
+      <div class="info-card"><h3>哪里做错了</h3><p>分析错误原因，而不是只输出结果。</p></div>
+      <div class="info-card"><h3>哪里用户不满意</h3><p>根据反馈判断问题出在哪里。</p></div>
+      <div class="info-card"><h3>哪些方法有效</h3><p>把有效策略沉淀为长期经验。</p></div>
+      <div class="info-card"><h3>下次如何优化</h3><p>形成下一次任务的改进方向。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">成长闭环</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>AI 长期成长闭环</h2>
+    <div class="flow-row">
+      <div class="flow-node"><b>1</b><span>执行任务</span></div>
+      <div class="flow-node"><b>2</b><span>产生经验</span></div>
+      <div class="flow-node"><b>3</b><span>复盘总结</span></div>
+      <div class="flow-node"><b>4</b><span>更新规则</span></div>
+      <div class="flow-node"><b>5</b><span>下次更稳定</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">运营案例</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>运营助手如何长期成长？</h2>
+    <div class="card-grid">
+      <div class="info-card"><h3>记住爆款标题</h3><p>沉淀高点击标题结构。</p></div>
+      <div class="info-card"><h3>记住用户情绪</h3><p>识别焦虑、犹豫、兴趣点。</p></div>
+      <div class="info-card"><h3>记住平台风格</h3><p>区分小红书、朋友圈、公众号表达。</p></div>
+      <div class="info-card"><h3>记住转化规律</h3><p>沉淀更容易带来咨询的内容策略。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">设计案例</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>设计助手如何长期成长？</h2>
+    <div class="card-grid">
+      <div class="info-card"><h3>记住品牌色</h3><p>保持视觉风格统一。</p></div>
+      <div class="info-card"><h3>记住审美偏好</h3><p>知道用户喜欢简约还是强营销。</p></div>
+      <div class="info-card"><h3>记住修改意见</h3><p>避免重复出现旧问题。</p></div>
+      <div class="info-card"><h3>记住禁忌风格</h3><p>知道哪些元素不要再使用。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">教育案例</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>教学助手如何长期成长？</h2>
+    <div class="card-grid">
+      <div class="info-card"><h3>记住薄弱点</h3><p>长期跟踪学生容易错的知识点。</p></div>
+      <div class="info-card"><h3>记住学习习惯</h3><p>知道学生适合什么讲解方式。</p></div>
+      <div class="info-card"><h3>记住学习目标</h3><p>围绕考试、升学、证书等目标调整策略。</p></div>
+      <div class="info-card"><h3>记住学习节奏</h3><p>根据进度调整下一阶段建议。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">百炼实操</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>第四章实操放在百炼平台完成</h2>
+    <ul class="slide-list">
+      <li>实操一：给 AI 增加长期工作规则。</li>
+      <li>实操二：让 AI 总结长期有价值的经验。</li>
+      <li>实操三：让 AI 在输出后自动做工作复盘。</li>
+      <li>实操四：组合规则、经验、复盘，形成长期成长闭环。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="slide summary-slide">
+  <div class="content">
+    <div class="big-center">
+      <div>
+        <div class="slide-kicker">总结</div>
+        <h2>本章核心结论</h2>
+        <p class="big-summary">真正高级的 AI，不是更会聊天，而是更会积累经验。工作规则让它稳定，长期经验让它懂你，复盘系统让它持续改进。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="content">
+    <div class="topline">
+      <div class="slide-kicker">下一章预告</div>
+      <div class="page-num"></div>
+    </div>
+    <h2>下一章：Workflow 工作流</h2>
+    <ul class="slide-list">
+      <li>AI 有了长期经验之后，下一步就是拆解复杂任务。</li>
+      <li>复杂任务不是一句 Prompt 完成的，而是由多个步骤组成。</li>
+      <li>Workflow 让 AI 从“会回答”升级为“会按流程工作”。</li>
+      <li>第五章将进入百炼工作流设计。</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<div class="deck-controls controls">
+  <button id="prevBtn">上一页</button>
+  <span id="pageInfo"></span>
+  <button id="nextBtn">下一页</button>
+</div>
+
+<div class="deck-tip note">键盘 ← → 可翻页</div>
+<script src="assets/deck.js"></script>
+</body>
+</html>
