@@ -4,199 +4,219 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI时代下的教育变革与教学实践 - 教师培训</title>
-<style>
-:root{--blue:#2563eb;--deep:#0f172a;--muted:#64748b;--soft:#f8fafc;--card:#ffffff;--orange:#f97316;--green:#0d9488;--purple:#7c3aed;}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;background:#e5e7eb;color:var(--deep);overflow:hidden}.deck{width:100vw;height:100vh;position:relative}.slide{position:absolute;inset:0;padding:56px 72px 82px;background:linear-gradient(135deg,#f8fafc 0%,#eef2ff 100%);display:none}.slide.active{display:block}.slide.two-col{grid-template-columns:1.04fr .96fr;gap:46px;align-items:center}.slide.two-col.active{display:grid}.slide.cover{display:none;place-items:center;text-align:center}.slide.cover.active{display:grid}.eyebrow{display:inline-block;font-size:18px;letter-spacing:.12em;color:var(--blue);font-weight:800;margin-bottom:20px}.chapter{font-size:34px;color:var(--blue);font-weight:900;margin-bottom:14px}.title{font-size:52px;line-height:1.12;font-weight:900;margin:0 0 22px}.subtitle{font-size:28px;line-height:1.45;color:#334155;margin:0 0 24px}.big-title{font-size:72px;line-height:1.08;font-weight:900;margin:0}.note{font-size:23px;line-height:1.72;color:#475569}.left h1{font-size:52px;line-height:1.12;margin:0 0 20px;font-weight:900}.left h2{font-size:42px;margin:0 0 20px;font-weight:900}.left p{font-size:24px;line-height:1.72;color:#475569;margin:10px 0}.strong{color:var(--blue);font-weight:900}.orange{color:var(--orange);font-weight:900}.green{color:var(--green);font-weight:900}.quote{background:#fff;border-left:8px solid var(--blue);border-radius:18px;padding:24px 28px;font-size:28px;line-height:1.55;font-weight:800;box-shadow:0 16px 35px rgba(15,23,42,.08)}.card{background:#fff;border-radius:28px;padding:30px;box-shadow:0 18px 45px rgba(15,23,42,.1)}.card h3{font-size:32px;margin:0 0 16px}.card p,.card li{font-size:23px;line-height:1.65;color:#475569}.card ul{padding-left:26px;margin:8px 0}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.grid1{display:grid;grid-template-columns:1fr;gap:18px}.grid221{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid221 .wide{grid-column:1 / -1}.broke5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.broke5 .mini{padding:20px 12px}.broke5 .num{font-size:38px}.broke5 .txt{font-size:18px}.breakdown{background:#fff;border-radius:24px;padding:22px;box-shadow:0 12px 30px rgba(15,23,42,.08)}.breakdown h3{font-size:26px;margin:0 0 12px}.breakdown p{font-size:19px;line-height:1.55;color:#475569;margin:8px 0}.prompt.small{font-size:17px;line-height:1.55;max-height:520px;overflow:auto}.mini{background:#fff;border-radius:24px;padding:24px;text-align:center;box-shadow:0 12px 28px rgba(15,23,42,.08)}.mini .num{font-size:42px;font-weight:900;color:var(--blue)}.mini .txt{font-size:23px;font-weight:800;margin-top:8px}.board{background:#0f172a;color:#e2e8f0;border-radius:30px;padding:34px;box-shadow:0 18px 45px rgba(15,23,42,.22)}.board h3{font-size:32px;color:white;margin:0 0 20px}.board .line{font-size:30px;line-height:1.6;font-weight:800}.board .muted{color:#94a3b8}.board .highlight{color:#93c5fd}.image-card{background:white;border-radius:30px;padding:18px;box-shadow:0 18px 45px rgba(15,23,42,.12);text-align:center}.image-card img{max-width:100%;max-height:470px;border-radius:20px;object-fit:contain}.slide.chapter-one-img .image-card{min-height:560px;display:flex;flex-direction:column;justify-content:center}.slide.chapter-one-img .image-card img{max-height:500px}.slide.chapter-one-img .caption{flex-shrink:0}.caption{font-size:18px;color:#64748b;margin-top:12px}.flow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.pill{background:#dbeafe;color:#1e40af;padding:14px 20px;border-radius:999px;font-size:22px;font-weight:800}.arrow{font-size:28px;color:#64748b}.compare{display:grid;grid-template-columns:1fr 1fr;gap:24px}.bad{border-top:8px solid #ef4444}.good{border-top:8px solid #22c55e}.footer{position:absolute;left:72px;right:72px;bottom:28px;display:flex;justify-content:space-between;align-items:center;color:#64748b;font-size:16px}.nav{position:absolute;right:36px;bottom:24px;display:flex;align-items:center;gap:10px;z-index:5}.btn{border:0;border-radius:999px;background:#0f172a;color:#fff;padding:12px 18px;font-size:16px;cursor:pointer}.counter{background:#fff;color:#334155;border-radius:999px;padding:11px 18px;box-shadow:0 6px 18px rgba(15,23,42,.12)}.home{position:absolute;top:22px;left:28px;z-index:6;color:#475569;text-decoration:none;font-weight:700}.qr{width:230px!important;height:230px!important}.section-bg{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);color:white}.section-bg .subtitle,.section-bg .note{color:#dbeafe}.section-bg .chapter{color:#bfdbfe}.table{width:100%;border-collapse:collapse;background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 12px 30px rgba(15,23,42,.08)}.table th{background:#1e40af;color:#fff;font-size:21px;padding:16px}.table td{font-size:20px;padding:16px;border-bottom:1px solid #e2e8f0;color:#334155}.tag{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:8px 14px;font-weight:800;margin:6px;font-size:18px}.prompt{background:#0b1220;color:#e2e8f0;border-radius:24px;padding:24px;font-size:20px;line-height:1.7;white-space:pre-wrap}.large-img{width:100%;height:auto}.small-list li{font-size:21px!important}.center{text-align:center}.end-title{font-size:86px;font-weight:900;margin:0}.logo-dot{width:16px;height:16px;border-radius:50%;display:inline-block;background:var(--blue);margin:0 6px}@media(max-width:900px){.slide{padding:46px 32px 86px;overflow:auto}.slide.two-col{display:block}.right{margin-top:26px}.title,.left h1{font-size:40px}.big-title{font-size:54px}.subtitle{font-size:24px}.nav{right:18px}.footer{left:32px;right:32px}.grid3,.grid2,.grid221,.broke5,.compare{grid-template-columns:1fr}}
-</style>
+<link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 <a class="home" href="../">返回首页</a>
+
 <div class="deck">
 
 <section class="slide cover active">
-  <div>
-    <div class="eyebrow">教师培训 · AI教学实践</div>
-    <h1 class="big-title">聊一聊AI<br>对教学的帮助</h1>
-    <p class="subtitle">以及一些实践经验</p>
-    <p class="note">制作人：老宜尊</p>
-  </div>
+ <div>
+ <div class="eyebrow">教师培训 · AI教学实践</div>
+ <h1 class="big-title">聊一聊AI<br>对教学的帮助</h1>
+ <p class="subtitle">以及一些实践经验</p>
+ <p class="note">制作人：老宜尊</p>
+ </div>
 </section>
 
 <section class="slide two-col">
-  <div class="left">
-    <div class="eyebrow">目录</div>
-    <h1>内容概览</h1>
-    <p>本次分享按照“工具 → 课堂重构 → 提示工程 → 教育变化”的顺序展开。</p>
-  </div>
-  <div class="right grid2">
-    <div class="mini"><div class="num">01</div><div class="txt">AI在教学设计中的运用方式</div></div>
-    <div class="mini"><div class="num">02</div><div class="txt">AI小程序驱动的课堂重构</div></div>
-    <div class="mini"><div class="num">03</div><div class="txt">提示工程介绍与实践</div></div>
-    <div class="mini"><div class="num">04</div><div class="txt">AI正在改变的三件事</div></div>
-  </div>
+ <div class="left">
+ <div class="eyebrow">目录</div>
+ <h1>内容概览</h1>
+ <p>本次分享按照“工具 → 课堂重构 → 提示工程 → 教育变化”的顺序展开。</p>
+ </div>
+ <div class="right grid2">
+ <div class="mini"><div class="num">01</div><div class="txt">AI在教学设计中的运用方式</div></div>
+ <div class="mini"><div class="num">02</div><div class="txt">AI小程序驱动的课堂重构</div></div>
+ <div class="mini"><div class="num">03</div><div class="txt">提示工程介绍与实践</div></div>
+ <div class="mini"><div class="num">04</div><div class="txt">AI正在改变的三件事</div></div>
+ </div>
 </section>
 
 <section class="slide cover section-bg">
-  <div>
-    <div class="chapter">第一章</div>
-    <h1 class="big-title">AI在教学设计中的<br>运用方式</h1>
-  </div>
+ <div>
+ <div class="chapter">第一章</div>
+ <h1 class="big-title">AI在教学设计中的<br>运用方式</h1>
+ </div>
 </section>
 
 <section class="slide two-col chapter-one-img">
-  <div class="left">
-    <div class="eyebrow">课前</div><h1>AI辅助备课</h1>
-    <div class="flow"><span class="pill">课程构思</span><span class="arrow">→</span><span class="pill">教学材料</span><span class="arrow">→</span><span class="pill">教学设计</span></div>
-    <p>利用AI辅助进行课程构思、生成教学材料、制作教学设计文档，提升备课效率与质量。</p>
-    <ul class="note"><li>快速生成教学设计方案</li><li>智能推荐相关教学资源</li><li>自动制作配套练习题目</li><li>帮助教师高效完成备课</li></ul>
-  </div>
-  <div class="right image-card"><img src="0423课前课程设计截图.png" alt="课前课程设计截图"><div class="caption">AI辅助生成《静夜思》教学设计方案</div></div>
+ <div class="left">
+ <div class="eyebrow">课前</div><h1>AI辅助备课</h1>
+ <div class="flow"><span class="pill">课程构思</span><span class="arrow">→</span><span class="pill">教学材料</span><span class="arrow">→</span><span class="pill">教学设计</span></div>
+ <p>利用AI辅助进行课程构思、生成教学材料、制作教学设计文档，提升备课效率与质量。</p>
+ <ul class="note"><li>快速生成教学设计方案</li><li>智能推荐相关教学资源</li><li>自动制作配套练习题目</li><li>帮助教师高效完成备课</li></ul>
+ </div>
+ <div class="right image-card"><img src="0423课前课程设计截图.png" alt="课前课程设计截图"><div class="caption">AI辅助生成《静夜思》教学设计方案</div></div>
 </section>
 
 <section class="slide two-col chapter-one-img">
-  <div class="left"><div class="eyebrow">课中</div><h1>AI赋能课堂教学<br>小程序教具</h1><p>利用微信小程序等平台，为课堂提供丰富的互动式教学工具。</p><div class="card"><h3>核心优势</h3><ul><li>互动式古诗词展示，营造沉浸式学习氛围</li><li>水墨画风格设计，弘扬传统文化之美</li><li>滑动交互体验，增强学生参与感</li><li>随时随地可用，无需额外安装软件</li></ul></div></div>
-  <div class="right image-card"><img src="0423小程序教具截图.png" alt="小程序教具截图"><div class="caption">互动式古诗词小程序展示</div></div>
+ <div class="left"><div class="eyebrow">课中</div><h1>AI赋能课堂教学<br>小程序教具</h1><p>利用微信小程序等平台，为课堂提供丰富的互动式教学工具。</p><div class="card"><h3>核心优势</h3><ul><li>互动式古诗词展示，营造沉浸式学习氛围</li><li>水墨画风格设计，弘扬传统文化之美</li><li>滑动交互体验，增强学生参与感</li><li>随时随地可用，无需额外安装软件</li></ul></div></div>
+ <div class="right image-card"><img src="0423小程序教具截图.png" alt="小程序教具截图"><div class="caption">互动式古诗词小程序展示</div></div>
 </section>
 
 <section class="slide two-col chapter-one-img">
-  <div class="left"><div class="eyebrow">课中</div><h1>AI赋能课堂教学<br>教学PPT</h1><p>利用AI快速生成专业的教学课件，让课堂更加生动精彩。</p><div class="card"><h3>应用场景</h3><ul><li>新授课讲解</li><li>复习课梳理</li><li>公开课展示</li><li>个性化定制服务</li></ul></div></div>
-  <div class="right image-card"><img src="0423课中教学ppt截图.png" alt="教学PPT截图"><div class="caption">AI辅助生成的教学PPT</div></div>
+ <div class="left"><div class="eyebrow">课中</div><h1>AI赋能课堂教学<br>教学PPT</h1><p>利用AI快速生成专业的教学课件，让课堂更加生动精彩。</p><div class="card"><h3>应用场景</h3><ul><li>新授课讲解</li><li>复习课梳理</li><li>公开课展示</li><li>个性化定制服务</li></ul></div></div>
+ <div class="right image-card"><img src="0423课中教学ppt截图.png" alt="教学PPT截图"><div class="caption">AI辅助生成的教学PPT</div></div>
 </section>
 
 <section class="slide two-col chapter-one-img">
-  <div class="left"><div class="eyebrow">课中 / 课后</div><h1>AI导师助手</h1><p>作为教师的得力助手，AI导师可以为学生提供个性化的学习辅导。</p><div class="card"><h3>核心优势</h3><ul><li>实时答疑解惑，随时回应学生问题</li><li>个性化学习辅导，满足不同学生需求</li><li>智能分析学情，帮助教师精准把握学态</li><li>全天候在线服务，不受时间和空间限制</li></ul></div></div>
-  <div class="right image-card"><img src="0423AI导师助手截图.png" alt="AI导师助手截图"><div class="caption">AI导师智能分析学生学习情况</div></div>
+ <div class="left"><div class="eyebrow">课中 / 课后</div><h1>AI导师助手</h1><p>作为教师的得力助手，AI导师可以为学生提供个性化的学习辅导。</p><div class="card"><h3>核心优势</h3><ul><li>实时答疑解惑，随时回应学生问题</li><li>个性化学习辅导，满足不同学生需求</li><li>智能分析学情，帮助教师精准把握学态</li><li>全天候在线服务，不受时间和空间限制</li></ul></div></div>
+ <div class="right image-card"><img src="0423AI导师助手截图.png" alt="AI导师助手截图"><div class="caption">AI导师智能分析学生学习情况</div></div>
 </section>
 
 <section class="slide two-col chapter-one-img">
-  <div class="left"><div class="eyebrow">课后</div><h1>AI智能反馈</h1><p>AI可以在课后持续收集学习表现，形成阶段性学习报告。</p><ul class="note"><li>AI自动分析学生课堂表现数据</li><li>生成个性化学习报告</li><li>智能推荐巩固练习</li><li>帮助教师精准把握学情</li></ul><div class="quote">减轻教师工作负担，实现全天候个性化反馈，促进学生持续进步。</div></div>
-  <div class="right image-card"><img src="0423学习报告生成.png" alt="学习报告生成截图"><div class="caption">AI生成学生阶段性学习报告</div></div>
+ <div class="left"><div class="eyebrow">课后</div><h1>AI智能反馈</h1><p>AI可以在课后持续收集学习表现，形成阶段性学习报告。</p><ul class="note"><li>AI自动分析学生课堂表现数据</li><li>生成个性化学习报告</li><li>智能推荐巩固练习</li><li>帮助教师精准把握学情</li></ul><div class="quote">减轻教师工作负担，实现全天候个性化反馈，促进学生持续进步。</div></div>
+ <div class="right image-card"><img src="0423学习报告生成.png" alt="学习报告生成截图"><div class="caption">AI生成学生阶段性学习报告</div></div>
 </section>
 
 <section class="slide cover section-bg">
-  <div><div class="chapter">第二章</div><h1 class="big-title">AI小程序驱动的<br>课堂重构</h1><p class="subtitle">从“工具使用”走向“学习体验设计”</p></div>
+ <div><div class="chapter">第二章</div><h1 class="big-title">AI小程序驱动的<br>课堂重构</h1><p class="subtitle">从“工具使用”走向“学习体验设计”</p></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">认知转向</div><h1>不要只问：<br>AI能做什么？</h1><p>很多问题表面上是在问：AI小程序能不能提高效率？能不能个性化辅导？能不能提升内驱力？</p><p>真正更关键的问题是：<span class="strong">老师如何用AI重新设计学习过程？</span></p></div>
-  <div class="right image-card"><img src="ai-question-shift.svg" alt="AI问题转向图"></div>
+ <div class="left"><div class="eyebrow">认知转向</div><h1>不要只问：<br>AI能做什么？</h1><p>很多问题表面上是在问：AI小程序能不能提高效率？能不能个性化辅导？能不能提升内驱力？</p><p>真正更关键的问题是：<span class="strong">老师如何用AI重新设计学习过程？</span></p></div>
+ <div class="right image-card"><img src="ai-question-shift.svg" alt="AI问题转向图"></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">Part 1</div><h1>驱动力与心流</h1><p>让学生愿意学、学得下去、持续投入。</p><div class="card"><h3>学生不投入，常常不是“不想学”</h3><ul><li>不知道自己在干什么</li><li>不知道自己做得对不对</li><li>不知道下一步做什么</li><li>感受不到自己的进步</li></ul></div></div>
-  <div class="right board"><h3>板书</h3><div class="line">驱动力不是讲出来的<br><span class="highlight">而是被设计出来的</span></div><br><div class="line muted">目标 + 反馈 + 连续任务</div></div>
+ <div class="left"><div class="eyebrow">Part 1</div><h1>驱动力与心流</h1><p>让学生愿意学、学得下去、持续投入。</p><div class="card"><h3>学生不投入，常常不是“不想学”</h3><ul><li>不知道自己在干什么</li><li>不知道自己做得对不对</li><li>不知道下一步做什么</li><li>感受不到自己的进步</li></ul></div></div>
+ <div class="right board"><h3>板书</h3><div class="line">驱动力不是讲出来的<br><span class="highlight">而是被设计出来的</span></div><br><div class="line muted">目标 + 反馈 + 连续任务</div></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">学习体验</div><h1>从断点学习<br>到流动学习</h1><p>AI小程序的价值，不是讲得更多，而是让学习过程更连续。</p><ul class="note"><li>学生刚做完，AI立刻反馈</li><li>学生卡住，AI立刻提示</li><li>学生完成，AI给出下一步</li><li>老师负责关键点拨和节奏控制</li></ul></div>
-  <div class="right image-card"><img src="flow-learning.svg" alt="流动学习流程图"></div>
+ <div class="left"><div class="eyebrow">学习体验</div><h1>从断点学习<br>到流动学习</h1><p>AI小程序的价值，不是讲得更多，而是让学习过程更连续。</p><ul class="note"><li>学生刚做完，AI立刻反馈</li><li>学生卡住，AI立刻提示</li><li>学生完成，AI给出下一步</li><li>老师负责关键点拨和节奏控制</li></ul></div>
+ <div class="right image-card"><img src="flow-learning.svg" alt="流动学习流程图"></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">Part 2</div><h1>学习方式改变<br>与个性化学习</h1><p>AI改变的不是内容本身，而是学习的组织方式。</p><div class="compare"><div class="card bad"><h3>传统课堂</h3><p>一个节奏<br>一套讲解<br>一份作业<br>一个反馈</p></div><div class="card good"><h3>AI课堂</h3><p>不同问题<br>不同练习<br>不同反馈<br>不同路径</p></div></div></div>
-  <div class="right image-card"><img src="multithread-classroom.svg" alt="多线程课堂结构图"></div>
+ <div class="left"><div class="eyebrow">Part 2</div><h1>学习方式改变<br>与个性化学习</h1><p>AI改变的不是内容本身，而是学习的组织方式。</p><div class="compare"><div class="card bad"><h3>传统课堂</h3><p>一个节奏<br>一套讲解<br>一份作业<br>一个反馈</p></div><div class="card good"><h3>AI课堂</h3><p>不同问题<br>不同练习<br>不同反馈<br>不同路径</p></div></div></div>
+ <div class="right image-card"><img src="multithread-classroom.svg" alt="多线程课堂结构图"></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">个性化辅导</div><h1>AI辅导不是<br>简单聊天</h1><p>更好的设计是：错题诊断 → 知识点定位 → 分层讲解 → 类题练习 → 学习反馈。</p><div class="quote">学习从“排队发生”，变成“并行发生”。</div></div>
-  <div class="right board"><h3>AI课后辅导结构</h3><div class="line">学生<br>├ 即时答疑<br>├ 错因分析<br>├ 针对练习<br>└ 学习反馈</div></div>
+ <div class="left"><div class="eyebrow">个性化辅导</div><h1>AI辅导不是<br>简单聊天</h1><p>更好的设计是：错题诊断 → 知识点定位 → 分层讲解 → 类题练习 → 学习反馈。</p><div class="quote">学习从“排队发生”，变成“并行发生”。</div></div>
+ <div class="right board"><h3>AI课后辅导结构</h3><div class="line">学生<br>├ 即时答疑<br>├ 错因分析<br>├ 针对练习<br>└ 学习反馈</div></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">案例</div><h1>李白课如何改造？</h1><p>原来是“介绍李白”，AI改造后可以变成“遇见李白”。</p><ul class="note"><li>AI扮演李白</li><li>学生与李白对话</li><li>通过提问解锁少年、漫游、入仕、晚年</li><li>完成任务卡，最后由老师总结人物形象</li></ul></div>
-  <div class="right image-card"><img src="li-bai-ai-class.svg" alt="李白AI课堂改造图"></div>
+ <div class="left"><div class="eyebrow">案例</div><h1>李白课如何改造？</h1><p>原来是“介绍李白”，AI改造后可以变成“遇见李白”。</p><ul class="note"><li>AI扮演李白</li><li>学生与李白对话</li><li>通过提问解锁少年、漫游、入仕、晚年</li><li>完成任务卡，最后由老师总结人物形象</li></ul></div>
+ <div class="right image-card"><img src="li-bai-ai-class.svg" alt="李白AI课堂改造图"></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">章节总结</div><h1>课堂角色转换</h1><p>如果把这一章压缩成一张图，其实就是三个角色的变化。</p><ul class="note"><li>老师：讲授者 → 设计者</li><li>学生：接收者 → 参与者</li><li>AI：工具 → 助教 / 角色 / 陪练</li></ul></div>
-  <div class="right image-card"><img src="role-transform.svg" alt="课堂角色转换图"></div>
+ <div class="left"><div class="eyebrow">章节总结</div><h1>课堂角色转换</h1><p>如果把这一章压缩成一张图，其实就是三个角色的变化。</p><ul class="note"><li>老师：讲授者 → 设计者</li><li>学生：接收者 → 参与者</li><li>AI：工具 → 助教 / 角色 / 陪练</li></ul></div>
+ <div class="right image-card"><img src="role-transform.svg" alt="课堂角色转换图"></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">落地路径</div><h1>教师三步走</h1><p>不用一开始就做“大而全”的AI智慧课堂，先从自己可控的环节开始。</p><p>顺序很重要：先减负，再试点，最后沉淀成资产。</p></div>
-  <div class="right grid1"><div class="mini"><div class="num">1</div><div class="txt">先减负，不要先炫技</div></div><div class="mini"><div class="num">2</div><div class="txt">小场景试点，不要整门课重做</div></div><div class="mini"><div class="num">3</div><div class="txt">沉淀资产，不要每次从零开始</div></div></div>
+ <div class="left"><div class="eyebrow">落地路径</div><h1>教师三步走</h1><p>不用一开始就做“大而全”的AI智慧课堂，先从自己可控的环节开始。</p><p>顺序很重要：先减负，再试点，最后沉淀成资产。</p></div>
+ <div class="right grid1"><div class="mini"><div class="num">1</div><div class="txt">先减负，不要先炫技</div></div><div class="mini"><div class="num">2</div><div class="txt">小场景试点，不要整门课重做</div></div><div class="mini"><div class="num">3</div><div class="txt">沉淀资产，不要每次从零开始</div></div></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">第一步</div><h1>先减负，<br>不要先炫技</h1><div class="board"><h3>目标</h3><div class="line">让AI帮老师省时间<br><span class="highlight">把时间还给教学研究和课程创作</span></div></div></div>
-  <div class="right grid221"><div class="mini"><div class="txt">备课提纲</div><p>从课程主题快速生成教学框架</p></div><div class="mini"><div class="txt">习题生成</div><p>按知识点、难度、题型出练习</p></div><div class="mini"><div class="txt">作业批改</div><p>辅助发现共性错误与典型问题</p></div><div class="mini"><div class="txt">课堂总结</div><p>整理课堂重点、板书和复习材料</p></div><div class="mini wide"><div class="txt">家校沟通文案</div><p>把专业反馈转化为家长能听懂的表达</p></div></div>
+ <div class="left"><div class="eyebrow">第一步</div><h1>先减负，<br>不要先炫技</h1><div class="board"><h3>目标</h3><div class="line">让AI帮老师省时间<br><span class="highlight">把时间还给教学研究和课程创作</span></div></div></div>
+ <div class="right grid221"><div class="mini"><div class="txt">备课提纲</div><p>从课程主题快速生成教学框架</p></div><div class="mini"><div class="txt">习题生成</div><p>按知识点、难度、题型出练习</p></div><div class="mini"><div class="txt">作业批改</div><p>辅助发现共性错误与典型问题</p></div><div class="mini"><div class="txt">课堂总结</div><p>整理课堂重点、板书和复习材料</p></div><div class="mini wide"><div class="txt">家校沟通文案</div><p>把专业反馈转化为家长能听懂的表达</p></div></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">第二步</div><h1>小场景试点，<br>不要整门课重做</h1><div class="board"><h3>关键原则</h3><div class="line">先跑通一个小案例<br><span class="highlight">再逐步扩展到整门课程</span></div></div></div>
-  <div class="right grid2"><div class="mini"><div class="txt">古诗课</div><p>AI角色对话</p></div><div class="mini"><div class="txt">作文点评</div><p>AI辅助反馈</p></div><div class="mini"><div class="txt">错题讲解</div><p>AI诊断错因</p></div><div class="mini"><div class="txt">课后答疑</div><p>AI陪练复习</p></div></div>
+ <div class="left"><div class="eyebrow">第二步</div><h1>小场景试点，<br>不要整门课重做</h1><div class="board"><h3>关键原则</h3><div class="line">先跑通一个小案例<br><span class="highlight">再逐步扩展到整门课程</span></div></div></div>
+ <div class="right grid2"><div class="mini"><div class="txt">古诗课</div><p>AI角色对话</p></div><div class="mini"><div class="txt">作文点评</div><p>AI辅助反馈</p></div><div class="mini"><div class="txt">错题讲解</div><p>AI诊断错因</p></div><div class="mini"><div class="txt">课后答疑</div><p>AI陪练复习</p></div></div>
 </section>
 
 <section class="slide two-col">
-  <div class="left"><div class="eyebrow">第三步</div><h1>沉淀资产，<br>不要每次从零开始</h1><p>逐步建立自己的AI工具库，包括Agent和知识库。</p><div class="grid2"><div class="card"><h3>Agent</h3><p>一个被设定好角色、任务和规则的AI助手。</p></div><div class="card"><h3>知识库</h3><p>老师自己的教材、教案、题库、学生常见问题库。</p></div></div></div>
-  <div class="right board"><h3>举例</h3><div class="line">李白角色Agent<br>作文点评Agent<br>错题诊断Agent<br>课堂提问Agent</div></div>
+ <div class="left"><div class="eyebrow">第三步</div><h1>沉淀资产，<br>不要每次从零开始</h1><p>逐步建立自己的AI工具库，包括Agent和知识库。</p><div class="grid2"><div class="card"><h3>Agent</h3><p>一个被设定好角色、任务和规则的AI助手。</p></div><div class="card"><h3>知识库</h3><p>老师自己的教材、教案、题库、学生常见问题库。</p></div></div></div>
+ <div class="right board"><h3>举例</h3><div class="line">李白角色Agent<br>作文点评Agent<br>错题诊断Agent<br>课堂提问Agent</div></div>
 </section>
 
 <section class="slide cover section-bg">
-  <div><div class="chapter">第三章</div><h1 class="big-title">提示工程与<br>BROKE法则</h1><p class="subtitle">Prompt Engineering</p></div>
+ <div><div class="chapter">第三章</div><h1 class="big-title">提示工程与<br>BROKE法则</h1><p class="subtitle">Prompt Engineering</p></div>
 </section>
 
 <section class="slide two-col"><div class="left"><div class="eyebrow">Prompt Engineering</div><h1>什么是提示工程？</h1><p>提示工程是指与大型语言模型进行有效交互的技术和方法体系。</p><div class="quote">教师与AI工具的交互质量，直接决定AI辅助效果的好坏。</div></div><div class="right card"><h3>应用领域</h3><ul><li>教学设计辅助</li><li>作业批改辅助</li><li>学情分析辅助</li><li>教学反思辅助</li></ul></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">重要性</div><h1>提示质量决定输出质量</h1><p>大语言模型会根据用户输入，预测最可能出现的后续内容。问题越清楚，上下文越完整，输出越稳定。</p></div><div class="right grid2"><div class="mini"><div class="txt">明确性</div><p>清晰表达需求</p></div><div class="mini"><div class="txt">上下文</div><p>提供背景信息</p></div><div class="mini"><div class="txt">结构化</div><p>分解复杂任务</p></div><div class="mini"><div class="txt">迭代优化</div><p>持续改进完善</p></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">原则一</div><h1>明确性</h1><p>提示应当清晰表达用户的具体需求，避免使用模糊或多义表达。</p></div><div class="right compare"><div class="card bad"><h3>效果较差</h3><p>帮我设计一些教学活动。</p></div><div class="card good"><h3>效果较好</h3><p>请帮我设计三个针对初中二年级学生的二元一次方程教学活动，要求包括导入、讲授和练习，每个环节约10分钟。</p></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">原则二</div><h1>上下文</h1><p>提示中应包含足够背景信息，帮助AI理解问题的来龙去脉和具体语境。</p></div><div class="right card"><h3>可补充的背景信息</h3><ul><li>班级学生的整体水平</li><li>学校的教学资源条件</li><li>教学时间安排</li><li>已有学习基础</li><li>课堂目标和评价要求</li></ul></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">原则三</div><h1>结构化</h1><p>对于复杂任务，应当将任务分解为多个明确的子任务或步骤，引导AI逐步完成。</p></div><div class="right board"><h3>示例流程</h3><div class="line">分析教学重点<br>↓<br>设计教学活动<br>↓<br>生成配套练习<br>↓<br>提供评估标准</div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">原则四</div><h1>迭代优化</h1><p>不要期望AI一次就给出完美答案。应把AI生成内容作为起点，通过反复对话逐步完善。</p></div><div class="right board"><h3>关键态度</h3><div class="line">教师保持批判性思维<br>审视、评价、反馈<br><span class="highlight">再提出修改要求</span></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">示例一</div><h1>教学设计辅助</h1><p>基础版提示：帮我设计一节关于阅读理解的课。</p><p>优化版要补充年级、学科、时长、学生基础、教学目标和输出结构。</p></div><div class="right prompt">我需要设计一节初中三年级英语阅读理解课，教学时长45分钟，学生基础中等，已经学习过本单元词汇。请帮我设计完整教学方案，包括：教学目标、教学重难点、教学过程各环节、板书设计、作业布置。要求体现任务型教学法。</div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">示例二</div><h1>作业设计辅助</h1><p>明确知识点范围、难度层次、题型数量和内容要求，AI才能稳定输出可用作业。</p></div><div class="right prompt">请为我生成一份高中一年级数学作业，内容涉及指数函数的图像与性质。作业对象是普通班学生，基础较为扎实。要求包括：8道选择题、2道填空题、2道解答题，并体现实际应用情境。</div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">示例三</div><h1>学情分析辅助</h1><p>给AI具体数据，才能得到具体诊断；只说“学生不会”，AI只能泛泛而谈。</p></div><div class="right prompt">我班学生在最近一次函数单元测验中，以下题目错误率较高：第5题45%，第8题52%，第12题68%。请分析：1. 反映出的知识盲点；2. 常见困难；3. 后续补救措施。</div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">示例四</div><h1>教学反思辅助</h1><p>把课堂时间分配、学生反馈和困难表现告诉AI，它才能帮老师做更具体的复盘。</p></div><div class="right prompt">我在今天讲授议论文写作结构的课堂上，采用讲授法的时间约占25分钟，学生练习时间约15分钟。课后反馈显示：大部分学生能够理解讲授内容，但约三分之一学生在练习环节表现出困难。请帮我分析：1. 课堂时间分配是否合理；2. 学生练习困难的可能原因；3. 下次课可以做出哪些调整。</div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">BROKE</div><h1>BROKE法则使用要点</h1><p>BROKE可以作为老师写提示词时的检查清单。它不是模板的束缚，而是帮助我们把需求说完整。</p></div><div class="right broke5"><div class="mini"><div class="num">B</div><div class="txt">Background<br>讲背景</div></div><div class="mini"><div class="num">R</div><div class="txt">Role<br>定角色</div></div><div class="mini"><div class="num">O</div><div class="txt">Output<br>输出格式</div></div><div class="mini"><div class="num">K</div><div class="txt">Key Info<br>关键信息</div></div><div class="mini"><div class="num">E</div><div class="txt">Evolve<br>迭代修正</div></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">BROKE · B</div><h1>Background<br>讲述背景</h1><p>先告诉AI这件事发生在什么教学场景里。背景越清楚，AI越不容易泛泛而谈。</p></div><div class="right card"><h3>可以补充什么？</h3><ul><li>年级、学科、课文/知识点</li><li>学生已有基础和常见困难</li><li>课时长度、课堂条件</li><li>本节课要解决的核心问题</li></ul></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">BROKE · R</div><h1>Role<br>设定角色</h1><p>角色不是为了“演戏”，而是为了让AI采用更合适的专业视角和表达方式。</p></div><div class="right card"><h3>角色示例</h3><ul><li>优秀小学语文教师</li><li>小学数学骨干教师</li><li>作文点评老师</li><li>错题诊断助教</li><li>课堂互动设计师</li></ul></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">BROKE · O</div><h1>Output<br>明确输出格式</h1><p>如果不规定输出格式，AI很容易输出一大段看似完整但不好直接使用的文字。</p></div><div class="right board"><h3>常用输出格式</h3><div class="line">表格<br>分步骤流程<br>逐字稿<br>任务卡<br>评分标准<br>板书设计</div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">BROKE · K</div><h1>Key Information<br>提供关键信息</h1><p>把不能变的条件提前说清楚，AI才能围绕你的真实课堂来设计。</p></div><div class="right card"><h3>关键信息包括</h3><ul><li>课时：40分钟 / 2课时</li><li>重点：必须讲透什么</li><li>难点：学生最容易卡在哪里</li><li>资源：是否有学具、小程序、投屏</li><li>要求：分层、互动、评价方式</li></ul></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">BROKE · E</div><h1>Edit<br>迭代修正</h1><p>第一次输出只是草稿。老师要继续追问、补充、删改，让AI逐步贴近自己的课堂。</p></div><div class="right board"><h3>常见修正指令</h3><div class="line">再简洁一点<br>更适合基础薄弱学生<br>增加互动提问<br>补充板书设计<br>把活动改成5分钟内完成</div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">完整Prompt示例</div><h1>小学五年级语文<br>《四季之美》</h1><div class="prompt small">我需要设计一节小学五年级语文课，课文是清少纳言的《四季之美》，学生此前已学过写景类文章。请以优秀小学语文教师的角色，设计完整的教学方案，包括：教学目标、教学过程详案（导入、精读、品析、拓展）、朗读指导方案（标注重音和停连建议）、2-3处优美词句的语言品味点。课时2课时，第一课时初读感知、扫清字词，第二课时品味语言、感悟四季之美。作业为仿写片段（任选一个季节，100字左右）。</div></div><div class="right breakdown"><h3>BROKE拆解</h3><p><b>B 背景：</b>小学五年级语文，《四季之美》，学生学过写景类文章。</p><p><b>R 角色：</b>优秀小学语文教师。</p><p><b>O 输出：</b>教学目标、教学过程详案、朗读指导、语言品味点。</p><p><b>K 关键信息：</b>2课时安排、第一课时扫清字词、第二课时品味语言、仿写100字。</p><p><b>E 修正方向：</b>可继续要求补充作者背景，或调整问题设计贴合生活。</p></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">完整Prompt示例</div><h1>小学六年级数学<br>《圆的面积》</h1><div class="prompt small">请以小学数学骨干教师的角色，设计一节“圆的面积”教学方案。班级为六年级，学生已掌握长方形、正方形面积计算，理解“化未知为已知”的数学思想，具备小组合作探究经验。课时1节（40分钟），教学重点是圆面积公式推导过程，难点是理解πr²的意义。需要小组合作（4人一组），学具准备圆片、剪刀、备用纸。请输出：教学目标、表格形式的时间分配、探究活动设计（如何将圆转化为已学图形）、核心问题串、含图示的公式推导过程、分层练习题设计。</div></div><div class="right breakdown"><h3>BROKE拆解</h3><p><b>B 背景：</b>六年级数学，已掌握长方形、正方形面积计算，具备小组合作经验。</p><p><b>R 角色：</b>小学数学骨干教师。</p><p><b>O 输出：</b>教学目标、时间分配、探究活动、问题串、公式推导、分层练习。</p><p><b>K 关键信息：</b>40分钟、重点公式推导、难点πr²、4人小组、圆片剪刀等学具。</p><p><b>E 修正方向：</b>可继续要求精简探究步骤，补充错题预设和应对策略。</p></div></section>
 
 <section class="slide cover section-bg">
-  <div><div class="chapter">第四章</div><h1 class="big-title">AI正在改变的<br>三件事</h1><p class="subtitle">从理念回到课堂变化</p></div>
+ <div><div class="chapter">第四章</div><h1 class="big-title">AI正在改变的<br>三件事</h1><p class="subtitle">从理念回到课堂变化</p></div>
 </section>
 
 <section class="slide two-col"><div class="left"><div class="eyebrow">去掉空泛表达</div><h1>少讲“大理念”<br>多看“真变化”</h1><p>AI时代，我们常听到很多教育观点：以学生为中心、个性化学习、人机协同。</p><p>这些都对，但如果不能落到课堂，就容易大而空。</p></div><div class="right board"><h3>核心问题</h3><div class="line">问题不在理念<br><span class="highlight">而在课堂到底发生了什么变化？</span></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">变化一</div><h1>学习方式变了</h1><p>过去是统一讲解、统一练习、统一反馈。现在学习开始分叉，每个学生的路径和节奏不再完全一致。</p></div><div class="right board"><h3>板书</h3><div class="line">学习方式从<br><span class="muted">“统一推进”</span><br>变成<br><span class="highlight">“并行推进”</span></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">变化二</div><h1>教师角色变了</h1><p>过去老师的核心价值是讲清楚、讲完整、讲到位。AI可以解释知识、回答问题、生成例子，教师的核心价值开始转向设计学习过程。</p></div><div class="right board"><h3>板书</h3><div class="line">老师：讲授者 → 设计者<br><br><span class="highlight">设计任务 / 控制节奏 / 抓关键点</span></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">变化三</div><h1>学习支持方式变了</h1><p>过去学生遇到问题，要等老师。现在学生遇到问题，可以立刻得到AI反馈。</p><p>学习支持变得随时、可重复、低成本。</p></div><div class="right board"><h3>板书</h3><div class="line">学习支持从<br><span class="muted">“稀缺资源”</span><br>变成<br><span class="highlight">“随时可得”</span></div></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">总结</div><h1>AI没有改变<br>学习的本质</h1><p>但它改变了三件关键事情：学习如何发生，老师如何参与，支持如何提供。</p></div><div class="right image-card"><img src="three-changes.svg" alt="AI改变的三件事"></div></section>
-
 <section class="slide two-col"><div class="left"><div class="eyebrow">最终收束</div><h1>回到课堂角色</h1><p>未来优秀的老师，不是最会使用AI的人，而是最会用AI设计学习体验的人。</p></div><div class="right image-card"><img src="role-transform.svg" alt="课堂角色转换图"></div></section>
 
 <section class="slide cover">
-  <div><h1 class="end-title">谢谢大家</h1><p class="subtitle">培训评价问卷</p><div class="image-card" style="display:inline-block"><img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fdoc.weixin.qq.com%2Fforms%2FAJEAIQdfAAoAfMAFQbRAEAyJa6KGMnQ2f%3Fpage%3D1" alt="评价问卷二维码"><div class="caption">扫码填写培训评价</div></div></div>
+ <div class="end-slide-inner">
+  <h1 class="end-title">谢谢大家</h1>
+  <p class="subtitle">扫码反馈与加入社群</p>
+
+  <div class="qrcode-container">
+    <div class="qrcode-card">
+      <h3>培训评价问卷</h3>
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=230x230&data=https%3A%2F%2Fdoc.weixin.qq.com%2Fforms%2FAJEAIQdfAAoAfMAFQbRAEAyJa6KGMnQ2f%3Fpage%3D1"
+        alt="培训评价问卷二维码"
+      />
+      <div class="caption"><strong>扫码填写培训评价</strong><br>帮助我们优化后续培训内容</div>
+    </div>
+
+    <div class="qrcode-card">
+      <h3>加入沟通社群</h3>
+      <img
+        src="扫码加入社群二维码.png"
+        alt="加入沟通社群二维码"
+      />
+      <div class="caption"><strong>扫码加入教师交流社群</strong><br>后续资料、案例更新将在社群内同步</div>
+    </div>
+  </div>
+
+  <div class="end-footer-text">AI时代下的教育变革与教学实践 · 老宜尊</div>
+ </div>
 </section>
 
 </div>
+
 <div class="footer"><span>AI时代下的教育变革与教学实践</span><span>老宜尊</span></div>
 <div class="nav"><button class="btn" id="prev">上一页</button><span class="counter" id="counter">1 / 1</span><button class="btn" id="next">下一页</button></div>
+
 <script>
-const slides=[...document.querySelectorAll('.slide')];let i=0;const counter=document.getElementById('counter');function show(n){slides[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');counter.textContent=(i+1)+' / '+slides.length;}document.getElementById('prev').onclick=()=>show(i-1);document.getElementById('next').onclick=()=>show(i+1);document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}});show(0);
+const slides=[...document.querySelectorAll('.slide')];
+let i=0;
+const counter=document.getElementById('counter');
+function show(n){
+  slides[i].classList.remove('active');
+  i=(n+slides.length)%slides.length;
+  slides[i].classList.add('active');
+  counter.textContent=(i+1)+' / '+slides.length;
+}
+document.getElementById('prev').onclick=()=>show(i-1);
+document.getElementById('next').onclick=()=>show(i+1);
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+});
+show(0);
 </script>
+
 </body>
 </html>
