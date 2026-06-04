@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L5 Build Guide</title><link rel="stylesheet" href="assets/style.css"></head>
+<body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回 Build Guide 目录</a><div style="height:18px"></div><div class="kicker">L5 Build Guide · v5</div><h1>AI 知识库系统<br><span class="highlight">知识库与资料调用</span></h1><p class="subtitle">你将把 IB Study Coach v4 升级到 v5，连接资料库，并加入基于资料回答的规则。</p><div class="demo-note">课堂主线 Agent：<b>IB Study Coach</b>。你会先完成这个样板版本，再把同样结构迁移到自己的个人 Agent。</div><div class="chips"><span class="chip">Goal</span><span class="chip">Build</span><span class="chip">Test</span><span class="chip">Personal Agent</span></div></section><section class="section-panel"><div class="kicker">Build Flow</div><h2>操作步骤</h2><div class="course-grid"><a class="course-card" href="#step01"><small>Step 01</small><h3>复制上一版</h3><p>保留 v4，创建 v5。</p></a>
+<a class="course-card" href="#step02"><small>Step 02</small><h3>创建知识库</h3><p>准备资料容器。</p></a>
+<a class="course-card" href="#step03"><small>Step 03</small><h3>上传资料</h3><p>让 AI 有依据。</p></a>
+<a class="course-card" href="#step04"><small>Step 04</small><h3>连接 Agent</h3><p>让 v5 能调用资料。</p></a>
+<a class="course-card" href="#step05"><small>Step 05</small><h3>加入调用规则</h3><p>避免 AI 假装引用。</p></a>
+<a class="course-card" href="#step06"><small>Step 06</small><h3>Pressure Test</h3><p>用真实输入完成最终压力测试，并保存 v5。</p></a></div></section><section id="step01" class="step-block"><div class="step-head"><div><div class="kicker">Step 01</div><h2>复制上一版</h2></div><span class="status open">v5</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>保留 v4，创建 v5。</p></div><div class="card"><h3>Build</h3><p>复制 IB Study Coach v4，命名为 IB Study Coach v5。</p></div><div class="card"><h3>Test</h3><p>旧版本不被覆盖。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l5-step01.png" alt="L5 Step 01 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l5-step01.png</strong></div></div></section>
+<section id="step02" class="step-block"><div class="step-head"><div><div class="kicker">Step 02</div><h2>创建知识库</h2></div><span class="status open">v5</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>准备资料容器。</p></div><div class="card"><h3>Build</h3><p>创建一个课程资料库。</p></div><div class="card"><h3>Test</h3><p>资料库名称清晰。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l5-step02.png" alt="L5 Step 02 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l5-step02.png</strong></div></div></section>
+<section id="step03" class="step-block"><div class="step-head"><div><div class="kicker">Step 03</div><h2>上传资料</h2></div><span class="status open">v5</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 有依据。</p></div><div class="card"><h3>Build</h3><p>上传 rubric、课堂笔记或示例文档。</p></div><div class="card"><h3>Test</h3><p>资料能在知识库中看到。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l5-step03.png" alt="L5 Step 03 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l5-step03.png</strong></div></div></section>
+<section id="step04" class="step-block"><div class="step-head"><div><div class="kicker">Step 04</div><h2>连接 Agent</h2></div><span class="status open">v5</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 v5 能调用资料。</p></div><div class="card"><h3>Build</h3><p>把知识库连接到 IB Study Coach v5。</p></div><div class="card"><h3>Test</h3><p>Agent 设置中能看到已连接资料库。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l5-step04.png" alt="L5 Step 04 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l5-step04.png</strong></div></div></section>
+<section id="step05" class="step-block"><div class="step-head"><div><div class="kicker">Step 05</div><h2>加入调用规则</h2></div><span class="status open">v5</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>避免 AI 假装引用。</p></div><div class="card"><h3>Build</h3><p>加入资料调用规则。</p><div class="mini-template">如果资料中有依据：先说明【填写：依据来源】，再【填写：回答方式】。
+如果资料中没有依据：必须说明【填写：资料不足提示】。</div></div><div class="card"><h3>Test</h3><p>资料不足时 AI 会明确说明。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l5-step05.png" alt="L5 Step 05 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l5-step05.png</strong></div></div></section>
+<section id="step06" class="step-block"><div class="step-head"><div><div class="kicker">Step 06</div><h2>Pressure Test｜最终压力测试</h2></div><span class="status open">v5</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>用真实输入检查 v5 是否能基于资料回答，并承认资料不足。</p></div><div class="card"><h3>Build</h3><p>选择下面至少 3 条输入测试 IB Study Coach。测试时直接像真实学习时那样提问。</p><div class="mini-template">根据我上传的 rubric，帮我检查这段 IA。
+
+这份资料里对 conclusion 有什么要求？
+
+如果资料库没有答案，你会怎么处理？
+
+请引用资料中的要求来回答。</div></div><div class="card"><h3>Test</h3><p>通过测试后保存为 IB Study Coach v5。</p><div class="mini-template">合格结果应该像这样:
+
+• 先检索知识库，再回答。
+• 有依据时说明依据来自哪类资料。
+• 资料不足时明确说当前资料库没有找到直接依据。
+• 不假装引用不存在的资料。
+
+不合格：不查资料直接泛泛建议，或编造资料依据。</div></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l5-step06.png" alt="L5 Step 06 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l5-step06.png</strong></div></div></section><section class="step-block"><div class="step-head"><div><div class="kicker">Final Prompt</div><h2>完整 Prompt 检查</h2></div><span class="status open">Click</span></div><p class="subtitle">先完成上面的分步设计和压力测试，再展开这里核对完整 Prompt。不要一开始直接复制。</p><details class="prompt-details"><summary>点击展开完整 Prompt</summary><pre class="prompt-box">【新增：知识库调用规则】
+回答学科问题时，优先检索已连接的知识库资料。
+
+如果资料中有依据：
+先说明依据来自哪类资料，再给出解释。
+
+如果知识库没有相关内容：
+必须明确说“当前资料库中没有找到直接依据”，再给出一般性建议。
+不要假装引用不存在的资料。</pre></details></section></main></body></html>

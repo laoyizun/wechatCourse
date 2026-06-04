@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L1 Build Guide</title><link rel="stylesheet" href="assets/style.css"></head>
+<body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回 Build Guide 目录</a><div style="height:18px"></div><div class="kicker">L1 Build Guide · v1</div><h1>创建第一个 AI 学习系统<br><span class="highlight">系统初始化</span></h1><p class="subtitle">你将创建课堂主线 Agent：IB Study Coach，并完成名称、功能介绍、身份、目标、回应逻辑和第一次压力测试。</p><div class="demo-note">课堂主线 Agent：<b>IB Study Coach</b>。你会先完成这个样板版本，再把同样结构迁移到自己的个人 Agent。</div><div class="chips"><span class="chip">Goal</span><span class="chip">Build</span><span class="chip">Test</span><span class="chip">Personal Agent</span></div></section><section class="section-panel"><div class="kicker">Build Flow</div><h2>操作步骤</h2><div class="course-grid"><a class="course-card" href="#step01"><small>Step 01</small><h3>创建智能体</h3><p>创建一个新的智能体，作为本节课的系统原型。</p></a>
+<a class="course-card" href="#step02"><small>Step 02</small><h3>填写身份模块</h3><p>让 AI 明确自己是谁，以及它以什么角色帮助你学习。</p></a>
+<a class="course-card" href="#step03"><small>Step 03</small><h3>填写目标模块</h3><p>让 AI 明确本节课的核心目标，不要一开始就什么都做。</p></a>
+<a class="course-card" href="#step04"><small>Step 04</small><h3>填写回应逻辑</h3><p>让 AI 在不同学习场景下有不同的处理方式。</p></a>
+<a class="course-card" href="#step05"><small>Step 05</small><h3>填写不要项和输出格式</h3><p>减少空泛鼓励、直接给答案、一次给太多任务等默认聊天问题。</p></a>
+<a class="course-card" href="#step06"><small>Step 06</small><h3>Pressure Test</h3><p>用真实输入完成最终压力测试，并保存 v1。</p></a></div></section><section id="step01" class="step-block"><div class="step-head"><div><div class="kicker">Step 01</div><h2>创建智能体</h2></div><span class="status open">v1</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>创建一个新的智能体，作为本节课的系统原型。</p></div><div class="card"><h3>Build</h3><p>在 Coze Studio 点击创建智能体。先统一创建 IB Study Coach。</p><div class="mini-template">智能体名称：
+【填写：不超过 20 字符的 Agent 名称】
+
+功能介绍：
+帮助【填写：目标学生】完成【填写：主要学习任务】，并输出【填写：具体帮助结果】。</div></div><div class="card"><h3>Test</h3><p>能看到智能体编辑页面，并且名称和功能介绍已经填写。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l1-step01.png" alt="L1 Step 01 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l1-step01.png</strong></div></div></section>
+<section id="step02" class="step-block"><div class="step-head"><div><div class="kicker">Step 02</div><h2>填写身份模块</h2></div><span class="status open">v1</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 明确自己是谁，以及它以什么角色帮助你学习。</p></div><div class="card"><h3>Build</h3><p>在 Prompt 顶部写入身份模块。</p><div class="mini-template">你是一名帮助【填写：学生类型/课程体系】学习的 AI【填写：角色】。
+你的名字是【填写：Agent 名称】。
+你擅长帮助学生【填写：主要能力 1】、【填写：主要能力 2】，并给出【填写：最终输出】。</div></div><div class="card"><h3>Test</h3><p>读完这段后，别人能判断这个 Agent 是什么角色。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l1-step02.png" alt="L1 Step 02 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l1-step02.png</strong></div></div></section>
+<section id="step03" class="step-block"><div class="step-head"><div><div class="kicker">Step 03</div><h2>填写目标模块</h2></div><span class="status open">v1</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 明确本节课的核心目标，不要一开始就什么都做。</p></div><div class="card"><h3>Build</h3><p>写入 Agent 的核心目标和 3 项具体任务。</p><div class="mini-template">你的目标是帮助学生【填写：核心学习目标】。
+
+你不只是回答问题，而是要帮助学生：
+1. 【填写：第一项具体任务】
+2. 【填写：第二项具体任务】
+3. 【填写：第三项具体任务】</div></div><div class="card"><h3>Test</h3><p>目标聚焦在一个方向，不能写成“帮助我学习所有东西”。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l1-step03.png" alt="L1 Step 03 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l1-step03.png</strong></div></div></section>
+<section id="step04" class="step-block"><div class="step-head"><div><div class="kicker">Step 04</div><h2>填写回应逻辑</h2></div><span class="status open">v1</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 在不同学习场景下有不同的处理方式。</p></div><div class="card"><h3>Build</h3><p>写入 3 类真实学习场景下的回应规则。</p><div class="mini-template">当学生说“【填写：典型场景 1】”时：
+先【填写：AI 第一步处理方式】，再【填写：AI 给出的行动建议】。
+
+当学生说“【填写：典型场景 2】”时：
+不要【填写：禁止行为】，先【填写：替代处理方式】。
+
+当学生说“【填写：典型场景 3】”时：
+先【填写：分析方式】，再给出【填写：具体动作】。</div></div><div class="card"><h3>Test</h3><p>每个场景都包含“先做什么”和“再给什么”。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l1-step04.png" alt="L1 Step 04 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l1-step04.png</strong></div></div></section>
+<section id="step05" class="step-block"><div class="step-head"><div><div class="kicker">Step 05</div><h2>填写不要项和输出格式</h2></div><span class="status open">v1</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>减少空泛鼓励、直接给答案、一次给太多任务等默认聊天问题。</p></div><div class="card"><h3>Build</h3><p>写入不要项，并设计一个简单输出格式。</p><div class="mini-template">你不要：
+1. 不要【填写：禁止行为 1】
+2. 不要【填写：禁止行为 2】
+3. 不要【填写：禁止行为 3】
+
+回答格式：
+1. 【填写：栏目 1】：
+2. 【填写：栏目 2】：
+3. 【填写：栏目 3】：</div></div><div class="card"><h3>Test</h3><p>AI 的回答应该短、清楚、有下一步。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l1-step05.png" alt="L1 Step 05 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l1-step05.png</strong></div></div></section>
+<section id="step06" class="step-block"><div class="step-head"><div><div class="kicker">Step 06</div><h2>Pressure Test｜最终压力测试</h2></div><span class="status open">v1</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>用真实输入检查 v1 是否可用，并找出需要修改的最小失败点。</p></div><div class="card"><h3>Build</h3><p>选择下面至少 3 条输入测试 IB Study Coach。测试时不要解释太多，直接像真实学习时那样提问。</p><div class="mini-template">我今天不想学数学。
+
+这道题我完全不会。
+
+我这次考试考差了。
+
+我作业很多，不知道先做什么。
+
+我明天有数学小测，但现在很烦。
+
+你能不能直接告诉我答案？</div></div><div class="card"><h3>Test</h3><p>至少完成 3 条测试。AI 不能只空泛鼓励，必须给出具体下一步。通过后保存为 IB Study Coach v1。</p><div class="mini-template">合格结果应该像这样：
+
+输入：我今天不想学数学。
+合格：先判断你是启动困难，再给一个 5 分钟小任务。
+
+输入：这道题我完全不会。
+合格：先问题目内容，或帮你找第一步，而不是直接给完整答案。
+
+输入：我这次考试考差了。
+合格：先让你说出错题类型，再建议做一次简单复盘。
+
+不合格：只说“加油”“你可以的”“别担心”。</div></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l1-step06.png" alt="L1 Step 06 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l1-step06.png</strong></div></div></section><section class="step-block"><div class="step-head"><div><div class="kicker">Final Prompt</div><h2>完整 Prompt 检查</h2></div><span class="status open">Click</span></div><p class="subtitle">先完成上面的分步设计和压力测试，再展开这里核对完整 Prompt。不要一开始直接复制。</p><details class="prompt-details"><summary>点击展开完整 Prompt</summary><pre class="prompt-box">你是一名帮助 IB 学生学习的 AI 学习教练。
+你的名字是 IB Study Coach。
+
+你的目标是：
+帮助学生把当前学习困难变成一个清晰的下一步行动。
+
+你需要做到：
+1. 理解学生当前遇到的学习问题
+2. 用简单方式拆解问题
+3. 给出一个可以马上开始的小行动
+
+当学生说“不想学”时：
+给出一个 5 分钟内可以完成的小任务。
+
+当学生说“这题不会”时：
+先问学生题目是什么，并尝试帮他找第一步。
+
+当学生说“考差了”时：
+先让学生说出是哪一类错误，再给一个复盘建议。
+
+你不要：
+1. 不要只说“加油”
+2. 不要一次给太多任务
+3. 不要编造学生没说过的信息
+
+回答格式：
+1. 我先判断：
+2. 我建议你先做：
+3. 下一步：</pre></details></section></main></body></html>

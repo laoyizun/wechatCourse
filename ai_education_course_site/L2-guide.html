@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L2 Build Guide</title><link rel="stylesheet" href="assets/style.css"></head>
+<body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回 Build Guide 目录</a><div style="height:18px"></div><div class="kicker">L2 Build Guide · v2</div><h1>为什么你的 AI 像机器人？<br><span class="highlight">人格与响应风格</span></h1><p class="subtitle">你将把 IB Study Coach v1 升级到 v2，让它拥有更稳定的语气、情绪识别和追问规则。</p><div class="demo-note">课堂主线 Agent：<b>IB Study Coach</b>。你会先完成这个样板版本，再把同样结构迁移到自己的个人 Agent。</div><div class="chips"><span class="chip">Goal</span><span class="chip">Build</span><span class="chip">Test</span><span class="chip">Personal Agent</span></div></section><section class="section-panel"><div class="kicker">Build Flow</div><h2>操作步骤</h2><div class="course-grid"><a class="course-card" href="#step01"><small>Step 01</small><h3>复制上一版</h3><p>保留 v1，创建 v2 版本。</p></a>
+<a class="course-card" href="#step02"><small>Step 02</small><h3>测试机器人感</h3><p>先暴露问题，再修改 Prompt。</p></a>
+<a class="course-card" href="#step03"><small>Step 03</small><h3>加入回应风格</h3><p>让 AI 有稳定语气。</p></a>
+<a class="course-card" href="#step04"><small>Step 04</small><h3>加入追问规则</h3><p>避免 AI 连续说教。</p></a>
+<a class="course-card" href="#step05"><small>Step 05</small><h3>加入不要项</h3><p>减少客服感和重复感。</p></a>
+<a class="course-card" href="#step06"><small>Step 06</small><h3>Pressure Test</h3><p>用真实输入完成最终压力测试，并保存 v2。</p></a></div></section><section id="step01" class="step-block"><div class="step-head"><div><div class="kicker">Step 01</div><h2>复制上一版</h2></div><span class="status open">v2</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>保留 v1，创建 v2 版本。</p></div><div class="card"><h3>Build</h3><p>复制 IB Study Coach v1，命名为 IB Study Coach v2。</p></div><div class="card"><h3>Test</h3><p>能同时看到 v1 和 v2，避免覆盖旧版本。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l2-step01.png" alt="L2 Step 01 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l2-step01.png</strong></div></div></section>
+<section id="step02" class="step-block"><div class="step-head"><div><div class="kicker">Step 02</div><h2>测试机器人感</h2></div><span class="status open">v2</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>先暴露问题，再修改 Prompt。</p></div><div class="card"><h3>Build</h3><p>输入“我今天完全不想学”，标记空泛、重复、机械的回答。</p></div><div class="card"><h3>Test</h3><p>能说出至少 1 个像机器人的问题。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l2-step02.png" alt="L2 Step 02 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l2-step02.png</strong></div></div></section>
+<section id="step03" class="step-block"><div class="step-head"><div><div class="kicker">Step 03</div><h2>加入回应风格</h2></div><span class="status open">v2</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 有稳定语气。</p></div><div class="card"><h3>Build</h3><p>加入回应风格模块。</p><div class="mini-template">你的回应风格应该是【填写：3 个风格关键词】。
+当学生表达【填写：情绪/状态】时，先【填写：第一步】，再【填写：下一步行动】。</div></div><div class="card"><h3>Test</h3><p>回答不再主要依赖“加油”等空话。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l2-step03.png" alt="L2 Step 03 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l2-step03.png</strong></div></div></section>
+<section id="step04" class="step-block"><div class="step-head"><div><div class="kicker">Step 04</div><h2>加入追问规则</h2></div><span class="status open">v2</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>避免 AI 连续说教。</p></div><div class="card"><h3>Build</h3><p>规定每次最多追问一个问题。</p></div><div class="card"><h3>Test</h3><p>回答末尾最多出现一个问题。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l2-step04.png" alt="L2 Step 04 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l2-step04.png</strong></div></div></section>
+<section id="step05" class="step-block"><div class="step-head"><div><div class="kicker">Step 05</div><h2>加入不要项</h2></div><span class="status open">v2</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>减少客服感和重复感。</p></div><div class="card"><h3>Build</h3><p>写入不要机械重复、不要空泛鼓励。</p></div><div class="card"><h3>Test</h3><p>复测时不再出现同一句模板话。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l2-step05.png" alt="L2 Step 05 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l2-step05.png</strong></div></div></section>
+<section id="step06" class="step-block"><div class="step-head"><div><div class="kicker">Step 06</div><h2>Pressure Test｜最终压力测试</h2></div><span class="status open">v2</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>用真实输入检查 v2 是否已经摆脱机器人感。</p></div><div class="card"><h3>Build</h3><p>选择下面至少 3 条输入测试 IB Study Coach。测试时直接像真实学习时那样提问。</p><div class="mini-template">我今天完全不想学。
+
+你怎么每次都说差不多的话？
+
+我觉得我就是学不好数学。
+
+你能不能别像客服一样回答？
+
+我现在很烦，不想听大道理。</div></div><div class="card"><h3>Test</h3><p>通过测试后保存为 IB Study Coach v2。</p><div class="mini-template">合格结果应该像这样:
+
+• 输入低落或烦躁时，先识别状态，再给一个小行动。
+• 回答不再反复使用“加油”“你一定可以”。
+• 每次最多追问一个问题，不连续说教。
+• 语气稳定：理性、清晰、支持，但不过度热血。
+
+不合格：仍然像客服、重复模板话、只做空泛鼓励。</div></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l2-step06.png" alt="L2 Step 06 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l2-step06.png</strong></div></div></section><section class="step-block"><div class="step-head"><div><div class="kicker">Final Prompt</div><h2>完整 Prompt 检查</h2></div><span class="status open">Click</span></div><p class="subtitle">先完成上面的分步设计和压力测试，再展开这里核对完整 Prompt。不要一开始直接复制。</p><details class="prompt-details"><summary>点击展开完整 Prompt</summary><pre class="prompt-box">【新增：回应风格模块】
+你的回应风格应该是：理性、清晰、支持，但不夸张。
+
+当学生表达低落、逃避、烦躁时：
+1. 先用一句话识别他的状态
+2. 不要急着说教
+3. 给出一个很小的下一步
+4. 最多追问一个问题
+
+你不要像客服一样机械重复。
+你不要把“加油”“你一定可以”作为主要回应。</pre></details></section></main></body></html>

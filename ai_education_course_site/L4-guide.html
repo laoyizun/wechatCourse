@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L4 Build Guide</title><link rel="stylesheet" href="assets/style.css"></head>
+<body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回 Build Guide 目录</a><div style="height:18px"></div><div class="kicker">L4 Build Guide · v4</div><h1>AI 为什么不会真正讲题？<br><span class="highlight">拆题与引导讲解</span></h1><p class="subtitle">你将把 IB Study Coach v3 升级到 v4，让它先拆题、给提示、追问，而不是直接给完整答案。</p><div class="demo-note">课堂主线 Agent：<b>IB Study Coach</b>。你会先完成这个样板版本，再把同样结构迁移到自己的个人 Agent。</div><div class="chips"><span class="chip">Goal</span><span class="chip">Build</span><span class="chip">Test</span><span class="chip">Personal Agent</span></div></section><section class="section-panel"><div class="kicker">Build Flow</div><h2>操作步骤</h2><div class="course-grid"><a class="course-card" href="#step01"><small>Step 01</small><h3>复制上一版</h3><p>保留 v3，创建 v4。</p></a>
+<a class="course-card" href="#step02"><small>Step 02</small><h3>测试直接给答案</h3><p>先观察当前缺陷。</p></a>
+<a class="course-card" href="#step03"><small>Step 03</small><h3>加入拆题结构</h3><p>让 AI 先拆题。</p></a>
+<a class="course-card" href="#step04"><small>Step 04</small><h3>加入提示层级</h3><p>让 AI 逐步提示。</p></a>
+<a class="course-card" href="#step05"><small>Step 05</small><h3>测试拒绝直接答案</h3><p>确认规则稳定。</p></a>
+<a class="course-card" href="#step06"><small>Step 06</small><h3>Pressure Test</h3><p>用真实输入完成最终压力测试，并保存 v4。</p></a></div></section><section id="step01" class="step-block"><div class="step-head"><div><div class="kicker">Step 01</div><h2>复制上一版</h2></div><span class="status open">v4</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>保留 v3，创建 v4。</p></div><div class="card"><h3>Build</h3><p>复制 IB Study Coach v3，命名为 IB Study Coach v4。</p></div><div class="card"><h3>Test</h3><p>旧版本不被覆盖。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l4-step01.png" alt="L4 Step 01 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l4-step01.png</strong></div></div></section>
+<section id="step02" class="step-block"><div class="step-head"><div><div class="kicker">Step 02</div><h2>测试直接给答案</h2></div><span class="status open">v4</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>先观察当前缺陷。</p></div><div class="card"><h3>Build</h3><p>输入“这题我不会”，看 AI 是否直接给完整解法。</p></div><div class="card"><h3>Test</h3><p>能判断直接给答案的问题。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l4-step02.png" alt="L4 Step 02 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l4-step02.png</strong></div></div></section>
+<section id="step03" class="step-block"><div class="step-head"><div><div class="kicker">Step 03</div><h2>加入拆题结构</h2></div><span class="status open">v4</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 先拆题。</p></div><div class="card"><h3>Build</h3><p>写入已知条件、目标、知识点、第一步。</p><div class="mini-template">当学生说【填写：不会的表达】时，不要【填写：禁止行为】。
+先输出：
+1. 【填写：拆题项 1】
+2. 【填写：拆题项 2】
+3. 【填写：拆题项 3】</div></div><div class="card"><h3>Test</h3><p>回答能按结构拆题。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l4-step03.png" alt="L4 Step 03 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l4-step03.png</strong></div></div></section>
+<section id="step04" class="step-block"><div class="step-head"><div><div class="kicker">Step 04</div><h2>加入提示层级</h2></div><span class="status open">v4</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>让 AI 逐步提示。</p></div><div class="card"><h3>Build</h3><p>规定每次只给一个提示。</p></div><div class="card"><h3>Test</h3><p>AI 不一次性讲完整解法。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l4-step04.png" alt="L4 Step 04 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l4-step04.png</strong></div></div></section>
+<section id="step05" class="step-block"><div class="step-head"><div><div class="kicker">Step 05</div><h2>测试拒绝直接答案</h2></div><span class="status open">v4</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>确认规则稳定。</p></div><div class="card"><h3>Build</h3><p>输入“直接告诉我答案”。</p></div><div class="card"><h3>Test</h3><p>AI 仍然先引导。</p></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l4-step05.png" alt="L4 Step 05 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l4-step05.png</strong></div></div></section>
+<section id="step06" class="step-block"><div class="step-head"><div><div class="kicker">Step 06</div><h2>Pressure Test｜最终压力测试</h2></div><span class="status open">v4</span></div><div class="step-grid"><div class="card"><h3>Goal</h3><p>用真实输入检查 v4 是否会拆题和引导，而不是直接给答案。</p></div><div class="card"><h3>Build</h3><p>选择下面至少 3 条输入测试 IB Study Coach。测试时直接像真实学习时那样提问。</p><div class="mini-template">这道函数题我完全不会。
+
+你能不能直接告诉我答案？
+
+我第一步应该看什么？
+
+我看不懂题目条件。</div></div><div class="card"><h3>Test</h3><p>通过测试后保存为 IB Study Coach v4。</p><div class="mini-template">合格结果应该像这样:
+
+• 先拆已知条件、目标、可能知识点和第一步。
+• 不会直接给完整答案。
+• 每次只给一个提示，并追问下一步思路。
+• 学生连续卡住时才给更明确提示。
+
+不合格：一上来给完整解法，或者只说“你先想想”。</div></div></div><div class="visual-card screenshot-frame"><img src="images/guide-l4-step06.png" alt="L4 Step 06 截图" onerror="this.classList.add('broken')"><div class="image-placeholder"><span>截图位置</span><strong>images/guide-l4-step06.png</strong></div></div></section><section class="step-block"><div class="step-head"><div><div class="kicker">Final Prompt</div><h2>完整 Prompt 检查</h2></div><span class="status open">Click</span></div><p class="subtitle">先完成上面的分步设计和压力测试，再展开这里核对完整 Prompt。不要一开始直接复制。</p><details class="prompt-details"><summary>点击展开完整 Prompt</summary><pre class="prompt-box">【新增：苏格拉底式解题模块】
+当学生说“不会”“看不懂”“没思路”时，你不要直接给完整答案。
+
+你必须先输出：
+1. 已知条件
+2. 要求目标
+3. 可能用到的知识点
+4. 第一小步尝试
+
+每次只给一个提示，并追问学生下一步怎么想。
+只有当学生连续两次卡住时，才给更明确的提示。</pre></details></section></main></body></html>
