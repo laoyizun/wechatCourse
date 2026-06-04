@@ -503,6 +503,146 @@ h3 {
   border-bottom: 2px dashed rgba(37, 99, 235, .34);
 }
 
+.term-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.term {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .78);
+  border: 1px solid var(--line);
+}
+
+.term b {
+  color: #1d4ed8;
+  font-size: 16px;
+}
+
+.term span {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.mechanism-card {
+  padding: 18px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .86);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.flow-step {
+  min-height: 68px;
+  display: grid;
+  align-content: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #f8fbff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 19px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.flow-step span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.flow-step.strong {
+  background: #eaf1ff;
+  border-color: rgba(37, 99, 235, .28);
+  color: #1d4ed8;
+}
+
+.flow-step.highlight-step {
+  background: rgba(15, 159, 154, .09);
+  border-color: rgba(15, 159, 154, .24);
+  color: #0f766e;
+}
+
+.flow-arrow {
+  height: 24px;
+  display: grid;
+  place-items: center;
+  color: #1d4ed8;
+  font-weight: 900;
+}
+
+.takeaway {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border-radius: 8px;
+  background: #0f243f;
+  color: #edf6ff;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.mechanism-slide h2 {
+  font-size: clamp(30px, 3.6vw, 44px);
+}
+
+.mechanism-slide .subtitle {
+  font-size: 18px;
+  line-height: 1.58;
+  margin-bottom: 12px;
+}
+
+.mechanism-slide .term-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mechanism-slide .term {
+  grid-template-columns: 1fr;
+  gap: 5px;
+  min-height: 108px;
+  padding: 12px;
+}
+
+.mechanism-slide .term span {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.mechanism-slide .mechanism-card {
+  padding: 14px;
+}
+
+.mechanism-slide .flow-step {
+  min-height: 54px;
+  padding: 9px 14px;
+  font-size: 18px;
+}
+
+.mechanism-slide .flow-step span {
+  font-size: 13px;
+}
+
+.mechanism-slide .flow-arrow {
+  height: 17px;
+}
+
+.mechanism-slide .takeaway {
+  margin-top: 10px;
+  padding: 13px 15px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
 .nav {
   position: fixed;
   z-index: 10;
