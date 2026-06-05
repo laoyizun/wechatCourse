@@ -1146,6 +1146,18 @@ h3 {
   border-bottom: 0;
 }
 
+.no-break-table th,
+.no-break-table td {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.no-break-table th:first-child,
+.no-break-table td:first-child {
+  min-width: 180px;
+  white-space: nowrap;
+}
+
 .slide .concept-map,
 .slide .wireframe,
 .slide .config-table {

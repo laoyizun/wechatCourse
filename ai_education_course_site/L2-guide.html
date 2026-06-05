@@ -1,4 +1,44 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L2 实践指引</title><link rel="stylesheet" href="assets/style.css"></head><body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回实操目录</a><div style="height:18px"></div><div class="kicker">L2 Practice</div><h1>行为升级、讲题规则与模型参数<br><span class="highlight">实践指引</span></h1><p class="subtitle">把 Prompt 相关能力集中讲完，让 Agent 稳定、会追问、有边界</p><div class="chips"><span class="chip">行为规则</span><span class="chip">分层提示</span><span class="chip">模型参数</span><span class="chip">A/B 测试</span></div></section><section class="section-panel"><div class="kicker">Practice Map</div><h2>本节实践路径</h2><div class="big-list"><div class="list-item"><span class="num">01</span>v1 Prompt 诊断表</div><div class="list-item"><span class="num">02</span>行为规则升级模板</div><div class="list-item"><span class="num">03</span>讲题分层提示表</div><div class="list-item"><span class="num">04</span>参数设置与预测结果</div></div></section><div class="phase-list"><section class="phase-block" id="phase1"><div class="kicker">Phase 01</div><h2>v1 Prompt 诊断表</h2><p class="subtitle">先圈出问题，再修改。</p><table class="config-table"><thead><tr><th>检查项</th><th>问题表现</th><th>修改方向</th></tr></thead><tbody><tr><td>目标范围</td><td>什么都想做</td><td>收窄到一个主要学习场景</td></tr><tr><td>规则冲突</td><td>又直接讲又不直接给答案</td><td>改成分层提示顺序</td></tr><tr><td>追问</td><td>一口气问很多</td><td>每次最多一个关键问题</td></tr><tr><td>边界</td><td>代写完整答案</td><td>只给提示和结构</td></tr></tbody></table></section><section class="phase-block" id="phase2"><div class="kicker">Phase 02</div><h2>行为规则升级模板</h2><p class="subtitle">把“语气好”改成“行为稳定”。</p><pre class="prompt-box">当学生说“不会”时：先判断卡点属于概念、审题、步骤还是表达。
-当学生要求直接答案时：不直接代写，先给 Level 1-2 提示。
-当学生情绪低落时：先用一句话识别状态，再给一个 5 分钟内能完成的小任务。
-每次最多追问一个关键问题。</pre></section><section class="phase-block" id="phase3"><div class="kicker">Phase 03</div><h2>讲题分层提示表</h2><p class="subtitle">学生可以根据题目难度选择提示层级。</p><table class="config-table"><thead><tr><th>层级</th><th>输出要求</th><th>适合场景</th></tr></thead><tbody><tr><td>Level 1</td><td>只给方向</td><td>学生还想自己想</td></tr><tr><td>Level 2</td><td>给关键条件/公式</td><td>学生卡在入口</td></tr><tr><td>Level 3</td><td>示范第一步</td><td>学生完全不会开始</td></tr><tr><td>Level 4</td><td>完整讲解+错因</td><td>学生已经尝试后复盘</td></tr></tbody></table></section><section class="phase-block" id="phase4"><div class="kicker">Phase 04</div><h2>参数设置与预测结果</h2><p class="subtitle">先预测，再测试，避免盲调。</p><table class="config-table"><thead><tr><th>参数</th><th>推荐值</th><th>预测结果</th></tr></thead><tbody><tr><td>生成随机性</td><td>0.3-0.5</td><td>回答更稳定，少跑偏</td></tr><tr><td>携带上下文轮数</td><td>5-8</td><td>能连续追问并记住前文</td></tr><tr><td>最大回复长度</td><td>1200-2000</td><td>足够讲解但不啰嗦</td></tr></tbody></table></section></div></main></body></html>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L2 实践指引</title><link rel="stylesheet" href="assets/style.css"></head><body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回实操目录</a><div style="height:18px"></div><div class="kicker">L2 Practice</div><h1>行为升级、讲题规则与模型参数<br><span class="highlight">实践指引</span></h1><p class="subtitle">本节把 v1 Agent 升级为 v2：更稳定、更会追问、有边界，并用控制变量法测试模型参数。</p><div class="chips"><span class="chip">行为规则</span><span class="chip">分层提示</span><span class="chip">控制变量法</span><span class="chip">压力测试</span></div></section><section class="section-panel"><div class="kicker">Practice Map</div><h2>本节实践路径</h2><div class="big-list"><div class="list-item"><span class="num">01</span>准备：复制 v1，建立 v2 版本</div><div class="list-item"><span class="num">02</span>诊断 v1 Prompt 的具体问题</div><div class="list-item"><span class="num">03</span>写入 v2 行为规则</div><div class="list-item"><span class="num">04</span>加入讲题分层提示规则</div><div class="list-item"><span class="num">05</span>用控制变量法测试模型参数</div><div class="list-item"><span class="num">06</span>L2 专属压力测试</div><div class="list-item"><span class="num">07</span>保存 v2 版本记录</div></div></section><div class="phase-list"><section class="phase-block" id="phase0"><div class="kicker">Phase 00</div><h2>准备：复制 v1，建立 v2 版本</h2><p class="subtitle">不要直接覆盖旧 Agent。先复制 v1 或另存为 v2，方便对比。</p><table class="config-table"><thead><tr><th>操作</th><th>要求</th><th>完成标志</th></tr></thead><tbody><tr><td>复制 v1 Agent</td><td>命名为“原名称 v2”</td><td>能同时找到 v1 和 v2</td></tr><tr><td>保留 v1 Prompt</td><td>不要删除旧版本</td><td>后面可以对照输出差异</td></tr><tr><td>选择一个主学科测试</td><td>数学/英语/语文/物理任选一个</td><td>测试输入不要频繁换学科</td></tr></tbody></table></section><section class="phase-block" id="phase1"><div class="kicker">Phase 01</div><h2>诊断 v1 Prompt 的具体问题</h2><p class="subtitle">先判断问题属于哪一类，不要一上来就加长 Prompt。</p><table class="config-table"><thead><tr><th>检查项</th><th>如果出现这种情况</th><th>修改方向</th></tr></thead><tbody><tr><td>目标范围</td><td>“所有学科都帮我学”</td><td>收窄到当前主场景，例如数学错题复盘</td></tr><tr><td>规则冲突</td><td>既说“直接讲清答案”，又说“不直接给答案”</td><td>改成“先分层提示，再完整讲解”</td></tr><tr><td>追问方式</td><td>一次问 2-3 个问题</td><td>每次最多追问一个关键问题</td></tr><tr><td>边界规则</td><td>学生要答案就直接给完整答案</td><td>给提示、结构或第一步，不代写</td></tr><tr><td>输出格式</td><td>每次回答结构都不一样</td><td>固定为状态/卡点/提示/下一步</td></tr></tbody></table></section><section class="phase-block" id="phase2"><div class="kicker">Phase 02</div><h2>写入 v2 行为规则</h2><p class="subtitle">把“语气好”改成可执行的行为规则。复制下面模板后，把【】里的内容换成自己的学科。</p><pre class="prompt-box">当学生提出【学科】学习问题时，你先判断学生卡点属于：概念不清、审题困难、步骤不会、表达不完整。
+
+当学生说“不会”时，不要直接给完整答案。先给 Level 1 或 Level 2 提示。
+
+每次最多追问一个关键问题。追问必须用于判断卡点。
+
+当学生要求直接给答案时，提醒学习边界，并给出解题结构或第一步。
+
+回答最后必须给出一个 5 分钟内能完成的下一步任务。</pre></section><section class="phase-block" id="phase3"><div class="kicker">Phase 03</div><h2>加入讲题分层提示规则</h2><p class="subtitle">让 Agent 根据学生状态选择提示层级，而不是每次都完整讲解。</p><table class="config-table"><thead><tr><th>层级</th><th>Agent 输出什么</th><th>测试输入样例</th><th>合格结果</th></tr></thead><tbody><tr><td>Level 1</td><td>只给方向</td><td>这道函数题我想自己试试，给我一点方向</td><td>只提示“先看定义域/单调区间”，不展开完整解</td></tr><tr><td>Level 2</td><td>给关键条件或公式</td><td>我卡在第一步，不知道用什么公式</td><td>指出相关公式或条件，但不解完整题</td></tr><tr><td>Level 3</td><td>示范第一步</td><td>我完全不知道怎么开始</td><td>示范第一步，并让学生继续做第二步</td></tr><tr><td>Level 4</td><td>完整讲解+错因</td><td>我已经做完了，但答案错了</td><td>完整讲解，并指出错因和下次识别方法</td></tr></tbody></table></section><section class="phase-block" id="phase4"><div class="kicker">Phase 04</div><h2>用控制变量法测试模型参数</h2><p class="subtitle">一次只改一个参数，其他参数保持不变。否则你不知道到底是谁影响了结果。</p><table class="config-table no-break-table"><thead><tr><th>实验组</th><th>随机性</th><th>上下文</th><th>长度</th><th>固定测试输入</th><th>预测结果</th></tr></thead><tbody><tr><td>A：基准组</td><td>0.35</td><td>6</td><td>1500</td><td>这道函数题我完全没思路，别直接给答案</td><td>稳定、能按规则追问和分层提示</td></tr><tr><td>B：改随机性</td><td>0.95</td><td>6</td><td>1500</td><td>同上</td><td>可能更发散，语气和结构更容易漂移</td></tr><tr><td>C：改上下文</td><td>0.35</td><td>3</td><td>1500</td><td>同上</td><td>可能忘记前文规则或连续性变弱</td></tr><tr><td>D：短回复</td><td>0.35</td><td>6</td><td>600</td><td>同上</td><td>可能过短，讲不清下一步</td></tr><tr><td>E：长回复</td><td>0.35</td><td>6</td><td>2500</td><td>同上</td><td>可能更完整，但容易啰嗦</td></tr></tbody></table><table class="config-table"><thead><tr><th>记录项</th><th>填写</th></tr></thead><tbody><tr><td>实际输出是否按格式</td><td></td></tr><tr><td>是否最多追问一个问题</td><td></td></tr><tr><td>是否直接给完整答案</td><td></td></tr><tr><td>是否有下一步任务</td><td></td></tr><tr><td>你选择保留哪组参数</td><td></td></tr></tbody></table></section><section class="phase-block" id="phase5"><div class="kicker">Phase 05</div><h2>L2 专属压力测试</h2><p class="subtitle">用真实学习场景复测 v2。每条输入都要看“是否稳定体现行为规则”。</p><table class="config-table"><thead><tr><th>测试输入</th><th>合格标准</th><th>不合格表现</th></tr></thead><tbody><tr><td>我今天完全不想学</td><td>先识别状态，再给一个小任务</td><td>只说加油或讲大道理</td></tr><tr><td>这道函数题我完全没思路</td><td>判断卡点，给 Level 1-3 提示</td><td>直接给完整答案</td></tr><tr><td>你直接把答案给我吧</td><td>守住边界，给结构或第一步</td><td>代写完整答案</td></tr><tr><td>别跟我讲大道理</td><td>减少说教，给具体行动</td><td>继续长篇教育</td></tr><tr><td>那我下一步该做什么</td><td>给 5 分钟内可执行任务</td><td>只说继续努力</td></tr></tbody></table></section><section class="phase-block" id="phase6"><div class="kicker">Phase 06</div><h2>保存 v2 版本记录</h2><p class="subtitle">保存时不要只写“优化了 Prompt”，要写清楚改了什么、测了什么、还有什么失败。</p><pre class="prompt-box">版本：v2 行为升级与模型参数
+
+新增规则：
+1. 卡点分类：概念 / 审题 / 步骤 / 表达
+2. 分层提示：Level 1-4
+3. 边界：不代写、不编造、不说教
+4. 追问：每次最多一个关键问题
+
+参数设置：
+生成随机性：
+上下文轮数：
+最大回复长度：
+
+测试结果：
+通过的输入：
+仍然失败的输入：
+下一节需要升级：长期记忆与学生画像</pre><details class="prompt-details"><summary>点击展开：v2 完整 Prompt 示例</summary><pre class="prompt-box">你是一名面向国内中学生的 AI 学习教练，主要帮助学生完成【填写学科/任务】。
+
+你需要先判断学生卡点：概念不清、审题困难、步骤不会、表达不完整。
+
+讲题时使用分层提示：
+Level 1：只给方向；
+Level 2：给关键条件或公式；
+Level 3：示范第一步；
+Level 4：完整讲解并总结错因。
+
+不要直接代写完整答案。学生要求答案时，先给解题结构或第一步。
+
+每次最多追问一个关键问题。回答最后必须给出一个 5 分钟内能完成的下一步任务。
+
+输出格式：
+状态判断：
+卡点判断：
+提示层级：
+提示内容：
+下一步任务：</pre></details></section></div></main></body></html>
