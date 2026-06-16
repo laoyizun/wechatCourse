@@ -866,6 +866,35 @@ h3 {
   margin-top: 18px;
 }
 
+.guide-shot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.guide-shot {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.guide-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.guide-shot figcaption {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
 .rubric-table {
   width: 100%;
   border-collapse: collapse;
@@ -893,7 +922,8 @@ h3 {
   .course-grid,
   .three,
   .card-grid,
-  .step-grid {
+  .step-grid,
+  .guide-shot-grid {
     grid-template-columns: 1fr;
   }
 

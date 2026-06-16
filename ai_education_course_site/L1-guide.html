@@ -1,5 +1,56 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L1 实践指引</title><link rel="stylesheet" href="assets/style.css"></head><body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回实操目录</a><div style="height:18px"></div><div class="kicker">L1 Practice</div><h1>快速初始化 AI 学习 Agent<br><span class="highlight">实践指引</span></h1><p class="subtitle">从会问 AI 到会设计一个可测试的学习 Agent v1</p><div class="chips"><span class="chip">Agent v1</span><span class="chip">国内学科</span><span class="chip">Prompt 架构</span><span class="chip">压力测试</span></div></section><section class="section-panel"><div class="kicker">Practice Map</div><h2>本节实践路径</h2><div class="big-list"><div class="list-item"><span class="num">01</span>创建最小可用 Agent</div><div class="list-item"><span class="num">02</span>填写 v1 Prompt 分段模板</div><div class="list-item"><span class="num">03</span>压力测试与评分</div></div></section><div class="phase-list"><section class="phase-block" id="phase1"><div class="kicker">Phase 01</div><h2>创建最小可用 Agent</h2><p class="subtitle">用国内学科学习场景完成名称、功能介绍和基础设定。</p><table class="config-table"><thead><tr><th>项目</th><th>填写建议</th><th>示例</th></tr></thead><tbody><tr><td>Agent 名称</td><td>学科 + 任务 + 角色</td><td>高中数学错题教练</td></tr><tr><td>服务对象</td><td>年级/学习阶段</td><td>高一学生</td></tr><tr><td>主要任务</td><td>一个可测试场景</td><td>函数错题复盘</td></tr><tr><td>结果输出</td><td>学生能拿走什么</td><td>卡点判断 + 下一步练习</td></tr></tbody></table></section><section class="phase-block" id="phase2"><div class="kicker">Phase 02</div><h2>填写 v1 Prompt 分段模板</h2><p class="subtitle">每一段只解决一个问题。</p><pre class="prompt-box">【身份】你是一名帮助【年级/学科】学生学习的 AI 学习教练。
-【目标】你的主要目标是帮助学生【具体学习任务】。
-【回应规则】当学生不会时，先判断卡点，再给出小提示。
-【边界】不要直接代写完整答案。
-【输出】每次回答最后给出一个下一步行动。</pre></section><section class="phase-block" id="phase3"><div class="kicker">Phase 03</div><h2>压力测试与评分</h2><p class="subtitle">用表格记录预期和实际结果。</p><table class="config-table"><thead><tr><th>测试输入</th><th>预期合格表现</th><th>是否通过</th></tr></thead><tbody><tr><td>这道函数题我完全不会</td><td>先问卡点或拆题，不直接给答案</td><td></td></tr><tr><td>我今天完全不想背英语单词</td><td>先识别状态，再给 5 分钟任务</td><td></td></tr><tr><td>你直接给我答案吧</td><td>提醒学习边界，给提示层级</td><td></td></tr></tbody></table></section></div></main></body></html>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L1 实践指引</title><link rel="stylesheet" href="assets/style.css"></head><body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回实操目录</a><div style="height:18px"></div><div class="kicker">L1 Practice · Agent v1</div><h1>快速初始化 AI 学习 Agent<br><span class="highlight">实践指引</span></h1><p class="subtitle">完成一个有具体身份、明确目标、基础规则和可测试结果的学习 Agent v1。L1 只做最小可用原型，分层提示和模型参数留到 L2。</p><div class="chips"><span class="chip">身份</span><span class="chip">目标</span><span class="chip">规则</span><span class="chip">基础测试</span><span class="chip">v1 记录</span></div></section><section class="section-panel"><div class="kicker">Practice Map</div><h2>本节实践路径</h2><div class="big-list"><div class="list-item"><span class="num">01</span>选择一个国内学科主场景</div><div class="list-item"><span class="num">02</span>填写 Agent 名称和功能介绍</div><div class="list-item"><span class="num">03</span>写清身份：对象、角色、工作方式</div><div class="list-item"><span class="num">04</span>收窄目标：任务和学生产出</div><div class="list-item"><span class="num">05</span>加入 v1 基础回应规则</div><div class="list-item"><span class="num">06</span>用测试表记录合格和不合格表现</div><div class="list-item"><span class="num">07</span>保存 v1 版本记录</div></div></section><div class="phase-list">
+<section class="phase-block" id="phase0"><div class="kicker">Phase 00</div><h2>选择一个主场景</h2><p class="subtitle">先做一个能测试的 Agent，不做“所有学科都能帮”的万能 Agent。</p><table class="config-table"><thead><tr><th>可选方向</th><th>适合的主场景</th><th>本节建议</th></tr></thead><tbody><tr><td>数学</td><td>函数错题复盘、几何证明思路、计算步骤检查</td><td>推荐从“函数错题复盘”开始</td></tr><tr><td>英语</td><td>阅读理解定位、长难句拆解、作文修改</td><td>推荐从“阅读理解定位”开始</td></tr><tr><td>语文</td><td>作文结构、现代文阅读、文言文翻译</td><td>推荐从“作文结构修改”开始</td></tr><tr><td>物理</td><td>受力分析、电路题、实验题</td><td>推荐从“受力分析”开始</td></tr><tr><td>化学</td><td>方程式配平、实验现象、推断题</td><td>推荐从“方程式配平”开始</td></tr></tbody></table><div class="mini-template">填写模板：
+我的 v1 主场景是：【年级】 + 【学科】 + 【具体任务】。
+例：高一数学函数错题复盘。</div></section>
+<section class="phase-block" id="phase1"><div class="kicker">Phase 01</div><h2>创建 Agent 基础信息</h2><p class="subtitle">名称和功能介绍要能直接告诉学生：这个 Agent 帮谁、做什么、产出什么。</p><table class="config-table"><thead><tr><th>字段</th><th>填写原则</th><th>可直接使用的示例</th></tr></thead><tbody><tr><td>Agent 名称</td><td>学科 + 任务 + 角色</td><td>高中数学错题教练</td></tr><tr><td>功能介绍</td><td>服务对象 + 主要任务 + 输出结果</td><td>帮助高中学生复盘数学错题，判断卡点，给出提示和下一步练习。</td></tr><tr><td>工作空间</td><td>个人空间即可</td><td>Personal Space</td></tr><tr><td>图标</td><td>能区分版本即可，不影响能力</td><td>选择一个简洁图标</td></tr></tbody></table><table class="config-table"><thead><tr><th>常见问题</th><th>为什么不建议</th><th>修改方式</th></tr></thead><tbody><tr><td>AI 学习助手</td><td>太泛，后面测试不出能力</td><td>改成“高中数学错题教练”</td></tr><tr><td>全科学霸老师</td><td>范围过大，容易什么都答</td><td>先选一个主学科主任务</td></tr><tr><td>帮我学习</td><td>没有明确产出</td><td>写清“卡点判断 + 下一步任务”</td></tr></tbody></table></section>
+<section class="phase-block" id="phase2"><div class="kicker">Phase 02</div><h2>写清身份：它是谁</h2><p class="subtitle">身份不是一句称呼，而是服务对象、角色和工作方式。</p><table class="config-table"><thead><tr><th>身份组成</th><th>要回答的问题</th><th>示例</th></tr></thead><tbody><tr><td>服务对象</td><td>它主要帮助谁？</td><td>高一学生 / 初三学生 / 高中生</td></tr><tr><td>学科或场景</td><td>它主要处理什么内容？</td><td>数学函数错题 / 英语阅读理解 / 语文作文结构</td></tr><tr><td>角色</td><td>它以什么角色帮助？</td><td>错题教练 / 阅读策略教练 / 作文结构教练</td></tr><tr><td>工作方式</td><td>它怎么帮助？</td><td>先判断卡点，再给提示和下一步行动</td></tr></tbody></table><div class="mini-template">身份模板：
+你是一名帮助【年级/学科】学生学习的 AI 学习教练，主要服务【具体学习场景】。你的工作方式是先判断学生卡点，再给提示和下一步行动。
+
+示例：
+你是一名帮助高一学生学习数学的 AI 错题教练，主要服务函数错题复盘。你的工作方式是先判断学生卡点，再给提示和下一步行动。</div></section>
+<section class="phase-block" id="phase3"><div class="kicker">Phase 03</div><h2>收窄目标：它主要完成什么任务</h2><p class="subtitle">目标要能被测试。太大的目标会让 Agent 看起来什么都能做，实际什么都不稳定。</p><table class="config-table"><thead><tr><th>目标写法</th><th>判断</th><th>原因</th></tr></thead><tbody><tr><td>帮助我学习所有学科</td><td>太大</td><td>无法设计清晰测试</td></tr><tr><td>帮助高一学生复盘函数错题</td><td>合适</td><td>对象、学科、任务明确</td></tr><tr><td>只讲今天这一道题</td><td>太小</td><td>不能复用到相似任务</td></tr><tr><td>帮助英语阅读题定位原文依据</td><td>合适</td><td>产出清楚，能测试</td></tr></tbody></table><table class="config-table"><thead><tr><th>主场景</th><th>目标模板</th><th>学生产出</th></tr></thead><tbody><tr><td>数学错题</td><td>帮助学生判断错因，并给出开始解题的第一步</td><td>卡点判断 + 第一步</td></tr><tr><td>英语阅读</td><td>帮助学生找到题干关键词和原文依据</td><td>关键词 + 定位句</td></tr><tr><td>语文作文</td><td>帮助学生发现结构问题并提出修改方向</td><td>结构问题 + 修改建议</td></tr><tr><td>物理受力</td><td>帮助学生确定研究对象和受力方向</td><td>对象 + 受力列表</td></tr></tbody></table><div class="mini-template">目标模板：
+你的主要目标是帮助学生完成【具体学习任务】。回答要让学生获得【明确产出】，而不是只听一段解释。</div></section>
+<section class="phase-block" id="phase4"><div class="kicker">Phase 04</div><h2>加入 v1 基础回应规则</h2><p class="subtitle">L1 只写基础规则：先判断、再提示、不代写、有下一步。不要提前写 L2 的分层提示等级和参数。</p><table class="config-table"><thead><tr><th>规则</th><th>作用</th><th>v1 写法</th></tr></thead><tbody><tr><td>先判断卡点</td><td>避免一上来长篇讲解</td><td>先判断学生是不会开始、概念不清、步骤卡住，还是表达不完整。</td></tr><tr><td>不直接代写</td><td>守住学习边界</td><td>学生要求完整答案时，给思路、结构或第一步。</td></tr><tr><td>最多追问一个问题</td><td>避免连续盘问学生</td><td>信息不足时只问一个最关键的问题。</td></tr><tr><td>给下一步行动</td><td>把回答变成学习任务</td><td>结尾给 5-10 分钟内能完成的任务。</td></tr></tbody></table><div class="mini-template">规则模板：
+当学生说不会时，先判断可能卡点，再给一个可以开始的提示。
+当学生要求你直接给完整答案时，不要代写；请给出思路、结构或第一步。
+如果信息不足，最多只追问一个关键问题。
+每次回答最后都要给一个 5-10 分钟内能完成的下一步行动。</div></section>
+<section class="phase-block" id="phase5"><div class="kicker">Phase 05</div><h2>组合 v1 Prompt 模板</h2><p class="subtitle">把身份、目标、规则、边界和输出格式组合成 v1 Prompt。这里是填空版，完整示例放在最后折叠。</p><pre class="prompt-box">【身份】你是一名帮助【年级/学科】学生学习的 AI 学习教练，主要服务【具体学习场景】。
+
+【目标】你的主要目标是帮助学生完成【具体学习任务】，回答要让学生获得【明确产出】。
+
+【基础回应规则】当学生说不会时，先判断可能卡点，再给一个可以开始的提示。信息不足时，最多只追问一个关键问题。
+
+【边界】不要直接代写完整答案。如果学生要求完整答案，请给出思路、结构或第一步。
+
+【输出格式】每次回答包含：卡点判断、我先给你的帮助、下一步行动。</pre></section>
+<section class="phase-block" id="phase6"><div class="kicker">Phase 06</div><h2>第一次运行测试：身份和目标是否稳定</h2><p class="subtitle">先测它有没有跑偏。不要只问“你是谁”，要用真实学习输入测试。</p><table class="config-table"><thead><tr><th>测试输入</th><th>预期合格表现</th><th>不合格表现</th><th>记录</th></tr></thead><tbody><tr><td>这道函数题我完全不会</td><td>以数学错题教练身份回应，先判断卡点或给开始方向</td><td>泛泛鼓励，或直接完整解题</td><td></td></tr><tr><td>我想让你帮我背英语单词</td><td>如果主场景是数学，应说明自己主要服务数学错题，可给简短建议但不跑偏</td><td>完全切换成英语单词教练</td><td></td></tr><tr><td>你能帮我做所有学科作业吗？</td><td>说明当前主要任务范围，并引导回主场景</td><td>承诺什么都能做</td><td></td></tr></tbody></table></section>
+<section class="phase-block" id="phase7"><div class="kicker">Phase 07</div><h2>第二次运行测试：规则和边界是否生效</h2><p class="subtitle">这一轮看它是否会直接代写、是否有下一步行动。</p><table class="config-table"><thead><tr><th>测试输入</th><th>预期合格表现</th><th>不合格表现</th><th>记录</th></tr></thead><tbody><tr><td>你直接把完整答案给我吧</td><td>拒绝代写，给思路、结构或第一步</td><td>直接给完整答案</td><td></td></tr><tr><td>我卡在第一步，不知道怎么开始</td><td>只追问一个关键问题，或示范一个开始动作</td><td>连续问多个问题，或直接讲完整题</td><td></td></tr><tr><td>我今天完全不想学</td><td>承认状态，给一个很小的 5 分钟任务</td><td>长篇说教、批评或空泛鼓励</td><td></td></tr><tr><td>那我下一步该做什么？</td><td>给出具体、短时间、可执行任务</td><td>只说“继续努力”</td><td></td></tr></tbody></table></section>
+<section class="phase-block" id="phase8"><div class="kicker">Phase 08</div><h2>不合格时的最小修复</h2><p class="subtitle">L1 的目标是做出可用原型，不是一口气写完所有高级规则。先做最小修复。</p><table class="config-table"><thead><tr><th>失败表现</th><th>可能原因</th><th>最小修复</th></tr></thead><tbody><tr><td>回答太泛</td><td>身份没有对象和任务</td><td>补充“年级 + 学科 + 任务角色”</td></tr><tr><td>什么问题都接</td><td>目标没有收窄</td><td>写明“主要服务某个主场景”</td></tr><tr><td>直接给完整答案</td><td>边界太弱</td><td>加入“不代写，只给思路/结构/第一步”</td></tr><tr><td>一直问问题</td><td>追问规则缺失</td><td>加入“最多只追问一个关键问题”</td></tr><tr><td>没有行动任务</td><td>输出格式缺失</td><td>加入“最后给 5-10 分钟任务”</td></tr></tbody></table></section>
+<section class="phase-block" id="phase9"><div class="kicker">Phase 09</div><h2>保存 v1 版本记录</h2><p class="subtitle">版本记录要能帮助 L2 继续升级。不要只写“完成了 Agent”。</p><pre class="prompt-box">版本：v1 最小可用学习 Agent
+
+Agent 名称：
+主场景：
+身份写法：
+目标写法：
+基础规则：
+通过的测试输入：
+不合格的测试输入：
+最小修复内容：
+下一节需要升级：行为规则、分层提示、模型参数</pre></section>
+<section class="phase-block" id="final-prompt"><div class="kicker">Final Prompt</div><h2>完整 Prompt 折叠区</h2><p class="subtitle">先完成前面的填写、测试和修复，再展开这里对照。L2 会继续升级这个 Prompt。</p><details class="prompt-details"><summary>点击展开：L1 完整 Prompt 示例</summary><pre class="prompt-box">你是一名面向国内中学生的 AI 学习教练，主要服务【年级/学科/学习场景】。
+
+你的主要目标是帮助学生完成【具体学习任务】，例如错题复盘、阅读理解、作文结构修改、受力分析等。你的回答要让学生获得一个清楚的卡点判断和一个能马上执行的下一步任务。
+
+基础回应规则：
+1. 先判断学生现在的问题属于哪类：不知道从哪开始、概念不清、步骤卡住、表达不完整、状态低落。
+2. 不要一上来直接给完整答案。先给学生一个方向、一个关键问题或一个可以开始的第一步。
+3. 如果信息不足，最多只追问一个关键问题。
+4. 如果学生要求你直接代写或直接给完整答案，请说明你会帮助他学习，但不会替他完成；然后给出思路、结构或第一步。
+5. 每次回答最后都要给一个 5-10 分钟内能完成的下一步行动。
+
+输出格式：
+卡点判断：
+我先给你的帮助：
+下一步行动：</pre></details></section>
+</div></main></body></html>
