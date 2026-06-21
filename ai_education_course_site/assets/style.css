@@ -316,6 +316,59 @@ h3 {
   display: none;
 }
 
+.slide.title-slide.active,
+.slide.part-slide.active {
+  grid-template-columns: 1fr;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.slide.title-slide .left,
+.slide.part-slide .left {
+  align-items: center;
+  width: min(980px, 100%);
+  min-height: calc(100vh - 180px);
+  justify-content: center;
+}
+
+.slide.title-slide .right {
+  display: none;
+}
+
+.slide.part-slide .left {
+  min-height: auto;
+}
+
+.slide.part-slide .right {
+  width: min(920px, 100%);
+  justify-content: center;
+}
+
+.slide.part-slide .big-list {
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.slide.part-slide .list-item {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.slide.title-slide h1,
+.slide.part-slide h2 {
+  max-width: 980px;
+}
+
+.slide.title-slide .subtitle,
+.slide.part-slide .subtitle {
+  max-width: 820px;
+}
+
+.slide.title-slide .chips {
+  justify-content: center;
+}
+
 .left,
 .right {
   min-width: 0;
