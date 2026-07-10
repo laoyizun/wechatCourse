@@ -1,23 +1,316 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L7 多 Agent 工作流</title><link rel="stylesheet" href="assets/style.css"></head><body class="deck-page"><main class="deck"><section class="slide title-slide"><div class="left"><div class="kicker">L7 · Multi Agent</div><h1>多 Agent<br><span class="highlight">工作流</span></h1><p class="subtitle">不是再做几个学科 Agent，而是让多个角色分工协作完成复杂学习任务。</p><div class="chips"><span class="chip">Planner</span><span class="chip">Tutor</span><span class="chip">Critic</span><span class="chip">Reviewer</span><span class="chip">交接字段</span></div></div><div class="right"></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 1 · 复杂度判断</div><h2>什么时候需要多 Agent？</h2><p class="subtitle">多 Agent 不是越多越好。只有当单个 Agent 过载、职责混乱时，才需要拆分协作。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>识别单 Agent 过度复杂</div><div class="list-item"><span class="num">02</span>理解多 Agent 的适用场景</div><div class="list-item"><span class="num">03</span>避免为了复杂而复杂</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Problem</div><h2>一个 Agent 为什么越写越乱？</h2><p class="subtitle">当规划、讲解、检查、复盘都塞进一个 Prompt，角色就容易冲突。</p></div><div class="right"><div class="card-stack"><div class="card warning"><h3>症状</h3><p>Prompt 很长，回答却不稳定。</p></div><div class="card"><h3>原因</h3><p>职责太多，优先级互相打架。</p></div><div class="card success"><h3>解决</h3><p>把明显不同的职责拆开。</p></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Overload</div><h2>单 Agent 过度复杂的表现</h2><p class="subtitle">不是所有复杂都要拆，但出现这些信号就该考虑多角色。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>Prompt 太长，学生看不懂</div><div class="list-item"><span class="num">02</span>既要温柔鼓励，又要严格批改</div><div class="list-item"><span class="num">03</span>既规划又讲题又复盘，输出混乱</div><div class="list-item"><span class="num">04</span>一个失败点牵动整段 Prompt</div><div class="list-item"><span class="num">05</span>测试时很难定位问题</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Not More Better</div><h2>多 Agent 不是越多越好</h2><p class="subtitle">只有职责真的不同，拆分才有意义。</p></div><div class="right"><table class="config-table"><thead><tr><th>不该拆</th><th>可以拆</th></tr></thead><tbody><tr><td>只是不同学科</td><td>同一套结构换资料即可</td></tr><tr><td>只是语气不同</td><td>一个 Agent 内部规则即可</td></tr><tr><td>规划/讲解/批改/复盘职责不同</td><td>适合拆角色</td></tr><tr><td>需要互相检查</td><td>适合多 Agent 协作</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">When</div><h2>什么时候需要多 Agent</h2><p class="subtitle">任务需要不同角色连续处理时，多 Agent 才有价值。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">规划<span>决定做什么</span></div><div class="concept-arrow">↓</div><div class="concept-node">讲解<span>帮助理解</span></div><div class="concept-arrow">↓</div><div class="concept-node">检查<span>发现错误</span></div><div class="concept-arrow">↓</div><div class="concept-node">复盘<span>总结和记录</span></div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 2 · 角色分工</div><h2>不同 Agent 分别负责什么？</h2><p class="subtitle">先区分多角色和多 Agent，再设计 Planner、Tutor、Critic、Reviewer、Memory 的职责。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>多角色 vs 多 Agent</div><div class="list-item"><span class="num">02</span>规划 Agent</div><div class="list-item"><span class="num">03</span>讲解和检查 Agent</div><div class="list-item"><span class="num">04</span>复盘和记录 Agent</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Roles vs Agents</div><h2>多角色 vs 多 Agent</h2><p class="subtitle">可以先在一个 Agent 内模拟多角色，复杂时再拆成多个 Agent。</p></div><div class="right"><table class="config-table"><thead><tr><th>方式</th><th>适合情况</th></tr></thead><tbody><tr><td>一个 Agent 多角色</td><td>课堂原型、低复杂度</td></tr><tr><td>多个 Agent</td><td>角色职责清楚、需要交接和检查</td></tr><tr><td>工作流节点模拟角色</td><td>更稳定，便于测试</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Planner</div><h2>Planner：负责规划</h2><p class="subtitle">Planner 不讲题，只负责拆目标和安排任务。</p><pre class="prompt-box">你是 Planner。请根据学生目标、可用时间、薄弱点生成任务计划。不要讲解知识点。输出：任务、时间、完成标准。</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Tutor</div><h2>Tutor：负责讲解</h2><p class="subtitle">Tutor 不安排长期计划，只负责讲题和分层提示。</p><pre class="prompt-box">你是 Tutor。请根据学生问题和资料进行分层提示。不要代写完整答案。输出：卡点、提示层级、下一步。</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Critic</div><h2>Critic：负责检查答案</h2><p class="subtitle">Critic 的任务是指出问题，不负责安慰或规划。</p><pre class="prompt-box">你是 Critic。请检查学生答案是否符合题目要求或资料标准。输出：正确点、问题、修改建议。</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Reviewer</div><h2>Reviewer：负责复盘</h2><p class="subtitle">Reviewer 读取学习记录，总结模式和下一步建议。</p><pre class="prompt-box">你是 Reviewer。请根据学习记录总结高频卡点、进步点和下周最小行动。不要重新讲题。</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Memory</div><h2>Memory：负责整理记录</h2><p class="subtitle">Memory 不和学生长篇对话，只把学习事件整理为结构化记录。</p><pre class="prompt-box">你是 Memory。请把本次学习事件整理为字段：date、subject、question、stuck_point、next_task、status。</pre></div><div class="right"></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 3 · 协作规则</div><h2>多个 Agent 如何交接和统一输出？</h2><p class="subtitle">多 Agent 的关键不是各说各话，而是交接字段、处理顺序、最终输出和冲突规则。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>交接信息字段</div><div class="list-item"><span class="num">02</span>处理顺序</div><div class="list-item"><span class="num">03</span>最终输出负责人</div><div class="list-item"><span class="num">04</span>冲突时听谁</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Handoff</div><h2>交接信息是什么</h2><p class="subtitle">Agent 之间不能只传一大段自然语言，交接字段要固定。</p></div><div class="right"><table class="config-table"><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody><tr><td>task_type</td><td>任务类型</td></tr><tr><td>subject</td><td>学科</td></tr><tr><td>question</td><td>问题摘要</td></tr><tr><td>stuck_point</td><td>卡点</td></tr><tr><td>evidence</td><td>资料依据</td></tr><tr><td>next_task</td><td>下一步任务</td></tr><tr><td>confidence</td><td>是否需要人工确认</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Order</div><h2>谁先处理</h2><p class="subtitle">一般由 Planner 或 Router 先判断任务类型，再分配给对应角色。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">Router/Planner<span>判断任务类型</span></div><div class="concept-arrow">↓</div><div class="concept-node">Tutor/Critic<span>处理学习内容</span></div><div class="concept-arrow">↓</div><div class="concept-node">Reviewer<span>总结学习模式</span></div><div class="concept-arrow">↓</div><div class="concept-node">Memory<span>保存结构化记录</span></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Final Output</div><h2>谁最终输出</h2><p class="subtitle">多个 Agent 可以协作，但给学生的最终回答要统一口径。</p></div><div class="right"><div class="card-stack"><div class="card warning"><h3>问题</h3><p>多个 Agent 同时说话，学生会混乱。</p></div><div class="card success"><h3>做法</h3><p>由一个 Final Response 节点整合输出。</p></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Conflict</div><h2>冲突时听谁</h2><p class="subtitle">角色冲突时，优先级要提前写清。</p></div><div class="right"><table class="config-table"><thead><tr><th>冲突</th><th>优先级</th></tr></thead><tbody><tr><td>Tutor 想直接讲答案，Boundary 不允许</td><td>边界规则优先</td></tr><tr><td>Planner 安排太多任务，学生时间不足</td><td>学生时间约束优先</td></tr><tr><td>Critic 很严格，Reviewer 要鼓励</td><td>先指出问题，再给可执行改进</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Flow</div><h2>多 Agent 工作流图</h2><p class="subtitle">规划、讲解、检查、复盘、记录可以组成一条学习链路。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">Planner<span>生成任务</span></div><div class="concept-arrow">↓</div><div class="concept-node">Tutor<span>讲解和提示</span></div><div class="concept-arrow">↓</div><div class="concept-node">Critic<span>检查答案</span></div><div class="concept-arrow">↓</div><div class="concept-node">Reviewer<span>复盘总结</span></div><div class="concept-arrow">↓</div><div class="concept-node">Memory<span>保存记录</span></div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 4 · 风险验收</div><h2>如何降低多 Agent 风险？</h2><p class="subtitle">多 Agent 会带来重复、冲突和成本。v7 要用清晰标准判断是否真的值得拆分。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>阅读多 Agent 工作流图</div><div class="list-item"><span class="num">02</span>识别多 Agent 风险</div><div class="list-item"><span class="num">03</span>保存 v7 完成标准</div><div class="list-item"><span class="num">04</span>进入最终整合</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Risk</div><h2>多 Agent 风险</h2><p class="subtitle">多 Agent 不是免费午餐，复杂度会增加。</p></div><div class="right"><table class="config-table"><thead><tr><th>风险</th><th>控制方式</th></tr></thead><tbody><tr><td>延迟更高</td><td>只在复杂任务使用</td></tr><tr><td>成本更高</td><td>减少无用角色</td></tr><tr><td>输出重复</td><td>设置最终整合节点</td></tr><tr><td>交接不清</td><td>固定交接字段</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">v7 Standard</div><h2>v7 完成标准</h2><p class="subtitle">能说明为什么拆、拆成谁、怎么交接、怎么输出。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>角色职责清楚</div><div class="list-item"><span class="num">02</span>交接字段固定</div><div class="list-item"><span class="num">03</span>冲突规则明确</div><div class="list-item"><span class="num">04</span>流程图完整</div><div class="list-item"><span class="num">05</span>至少一个复杂场景跑通</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Next</div><h2>下一节：最终 Agent 整合</h2><p class="subtitle">多 Agent 是能力之一，最后还要把前面所有模块整合成可用工具。</p></div><div class="right"></div></section></main><nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 23</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav><script src="assets/script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI教育赋能｜L7 多 Agent 工作流</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="deck-page">
+<main class="deck">
+  <section class="slide title-slide">
+    <div class="left">
+      <div class="kicker">L7 · Multi Agent</div>
+      <h1>多 Agent 工作流<br><span class="highlight">把复杂流程拆成角色协作</span></h1>
+      <p class="subtitle">在 L6 单 Agent 工作流基础上，拆分规划、资料、讲解、检查、复盘和记录。</p>
+      <div class="chips"><span class="chip">Planner</span><span class="chip">Resource</span><span class="chip">Tutor</span><span class="chip">Critic</span><span class="chip">Memory</span></div>
+    </div>
+    <div class="right"></div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 1 · 从 L6 出发</div>
+      <h2>先看 L6 的单 Agent 工作流</h2>
+      <p class="subtitle">L7 不是重新做一套系统，而是把 L6 中过重的节点拆成协作角色。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">Start</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Router</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Resource</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Generate / Check / Save / Output</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Overload</div>
+      <h2>单 Agent 什么时候过载？</h2>
+      <p class="subtitle">当一个 Agent 同时承担太多标准，Prompt 会越来越长，失败也更难定位。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>Prompt 越写越长</div>
+        <div class="list-item"><span class="num">02</span>讲解和检查互相冲突</div>
+        <div class="list-item"><span class="num">03</span>资料调用越来越复杂</div>
+        <div class="list-item"><span class="num">04</span>保存字段越来越多</div>
+        <div class="list-item"><span class="num">05</span>失败时不知道是哪一步错</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Decision</div>
+      <h2>不是复杂就拆，是职责不同才拆</h2>
+      <p class="subtitle">多 Agent 不是越多越好。只有职责、标准和输出明显不同，拆分才有价值。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>不需要拆</th><th>可以拆</th></tr></thead>
+        <tbody>
+          <tr><td>只是换学科</td><td>规划、讲解、检查职责不同</td></tr>
+          <tr><td>只是换语气</td><td>需要互相质检</td></tr>
+          <tr><td>只是输出格式不同</td><td>资料调用和最终回答要分开</td></tr>
+          <tr><td>简单问答</td><td>记录字段复杂</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 2 · 从节点到角色</div>
+      <h2>L6 节点如何升级成 L7 角色？</h2>
+      <p class="subtitle">这页是 L6 到 L7 的核心映射：不是凭空增加 Agent，而是把过重节点角色化。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>L6 节点</th><th>L7 角色</th></tr></thead>
+        <tbody>
+          <tr><td>Router / Planner</td><td>Planner Agent</td></tr>
+          <tr><td>Resource</td><td>Resource Agent</td></tr>
+          <tr><td>Generate</td><td>Tutor Agent</td></tr>
+          <tr><td>Check</td><td>Critic Agent</td></tr>
+          <tr><td>复盘总结 / Save</td><td>Reviewer / Memory Agent</td></tr>
+          <tr><td>Output</td><td>Final Response</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Team</div>
+      <h2>每个 Agent 是一个岗位</h2>
+      <p class="subtitle">多 Agent 的价值不是“人多”，而是职责清楚。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>Planner：安排任务</div>
+        <div class="list-item"><span class="num">02</span>Resource：找资料</div>
+        <div class="list-item"><span class="num">03</span>Tutor：讲解</div>
+        <div class="list-item"><span class="num">04</span>Critic：质检</div>
+        <div class="list-item"><span class="num">05</span>Reviewer / Memory：复盘和记录</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Planner / Resource</div>
+      <h2>先决定做什么，再找依据</h2>
+      <p class="subtitle">Planner 不讲题，只判断任务和安排顺序。Resource 不生成最终回答，只负责找到依据。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>角色</th><th>输出字段</th></tr></thead>
+        <tbody>
+          <tr><td>Planner</td><td>task_type、subject、input_type</td></tr>
+          <tr><td>Resource</td><td>evidence、source_status</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Tutor / Critic</div>
+      <h2>一个讲解，一个质检</h2>
+      <p class="subtitle">Tutor 负责分层提示和讲解；Critic 负责检查代写、编造、越界和依据不足。</p>
+    </div>
+    <div class="right">
+      <div class="card-stack">
+        <div class="card"><h3>Tutor</h3><p>输出 draft_answer、stuck_point、next_task。</p></div>
+        <div class="card success"><h3>Critic</h3><p>检查风险，必要时打回修改。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Reviewer / Memory</div>
+      <h2>一个复盘，一个记录</h2>
+      <p class="subtitle">Reviewer 总结错因、进步点和下一步建议；Memory 整理结构化学习记录。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>角色</th><th>字段</th></tr></thead>
+        <tbody>
+          <tr><td>Reviewer</td><td>review_summary、next_task</td></tr>
+          <tr><td>Memory</td><td>memory_update、save_status</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Final Response</div>
+      <h2>最终只能有一个声音</h2>
+      <p class="subtitle">多个 Agent 可以协作，但不能让学生看到一堆角色各说各话。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>任务判断</div>
+        <div class="list-item"><span class="num">02</span>关键帮助</div>
+        <div class="list-item"><span class="num">03</span>下一步行动</div>
+        <div class="list-item"><span class="num">04</span>记录说明</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 3 · 交接与连线</div>
+      <h2>交接字段就是团队工单</h2>
+      <p class="subtitle">多 Agent 之间不要只传一大段自然语言，要用固定字段交接。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>question_summary</div>
+        <div class="list-item"><span class="num">02</span>evidence</div>
+        <div class="list-item"><span class="num">03</span>draft_answer</div>
+        <div class="list-item"><span class="num">04</span>critic_notes</div>
+        <div class="list-item"><span class="num">05</span>memory_update</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Main Chain</div>
+      <h2>先做主链路，再加分支</h2>
+      <p class="subtitle">第一版多 Agent 不要做成复杂网状结构，先让一条主链路跑通。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">Planner</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Resource</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Tutor</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Critic</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Reviewer / Memory / Final</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Branch</div>
+      <h2>不同任务可以少走一些角色</h2>
+      <p class="subtitle">多 Agent 不是每次全员上场，简单任务要走短路径。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>任务</th><th>建议路径</th></tr></thead>
+        <tbody>
+          <tr><td>题目讲解</td><td>Planner → Resource → Tutor → Critic → Memory → Final</td></tr>
+          <tr><td>今日计划</td><td>Planner → Memory → Final</td></tr>
+          <tr><td>作文修改</td><td>Planner → Resource → Tutor → Critic → Reviewer → Final</td></tr>
+          <tr><td>资料不足</td><td>Resource → Final 提示补充资料</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Priority</div>
+      <h2>多 Agent 冲突时听谁的？</h2>
+      <p class="subtitle">冲突优先级要提前写清，否则多个角色会互相拉扯。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">边界规则</div>
+        <div class="concept-arrow">></div>
+        <div class="concept-node">学生输入限制</div>
+        <div class="concept-arrow">></div>
+        <div class="concept-node">资料依据</div>
+        <div class="concept-arrow">></div>
+        <div class="concept-node">学习目标 / 表达美观</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 4 · 测试与风险</div>
+      <h2>多 Agent 要用复杂任务测试</h2>
+      <p class="subtitle">简单问答不需要多 Agent。测试要覆盖规划、资料、讲解、检查、记录多个环节。</p>
+    </div>
+    <div class="right">
+      <div class="card-stack">
+        <div class="card"><h3>测试输入</h3><p>我下周要函数小测，定义域和单调性都不稳，帮我安排复习，并讲一题。</p></div>
+        <div class="card success"><h3>理想流程</h3><p>Planner → Resource → Tutor → Critic → Reviewer → Memory → Final</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Risk</div>
+      <h2>多 Agent 也会带来成本</h2>
+      <p class="subtitle">拆分是为了稳定和可维护，不是为了显得复杂。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>风险</th><th>控制方式</th></tr></thead>
+        <tbody>
+          <tr><td>更慢</td><td>只在复杂任务使用</td></tr>
+          <tr><td>重复输出</td><td>设置 Final Response</td></tr>
+          <tr><td>交接不清</td><td>固定字段</td></tr>
+          <tr><td>角色冲突</td><td>写清优先级</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">v7 Standard</div>
+      <h2>v7 完成标准</h2>
+      <p class="subtitle">能说明为什么从 L6 拆到 L7，并让复杂任务跑通。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>角色职责清楚</div>
+        <div class="list-item"><span class="num">02</span>交接字段固定</div>
+        <div class="list-item"><span class="num">03</span>主链路跑通</div>
+        <div class="list-item"><span class="num">04</span>冲突规则明确</div>
+        <div class="list-item"><span class="num">05</span>最终输出统一</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Next</div>
+      <h2>下一节：最终 Agent 整合与测试</h2>
+      <p class="subtitle">L7 完成的是复杂流程协作。下一节把 Prompt、参数、记忆、资料、插件、工作流和多 Agent 做最终整合。</p>
+    </div>
+    <div class="right"></div>
+  <div class="link-row"><a class="button-link" href="L8.Multi Agent System.html">进入 L8</a></div></section>
+</main>
+<nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 18</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav>
+<script src="assets/script.js"></script>
+</body>
+</html>

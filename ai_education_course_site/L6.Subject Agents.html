@@ -1,26 +1,295 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L6 单 Agent 工作流</title><link rel="stylesheet" href="assets/style.css"></head><body class="deck-page"><main class="deck"><section class="slide title-slide"><div class="left"><div class="kicker">L6 · Workflow</div><h1>单 Agent<br><span class="highlight">工作流</span></h1><p class="subtitle">让一个 Agent 不只是回答，而是按固定流程完成复杂学习任务。</p><div class="chips"><span class="chip">Workflow</span><span class="chip">节点</span><span class="chip">条件分支</span><span class="chip">流程测试</span></div></div><div class="right"></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 1 · 流程意识</div><h2>为什么需要单 Agent 工作流？</h2><p class="subtitle">当任务有固定步骤时，只靠 Prompt 容易乱跳。Workflow 把学习任务拆成稳定流程。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>识别 Agent 乱跳的原因</div><div class="list-item"><span class="num">02</span>理解 Prompt 的限制</div><div class="list-item"><span class="num">03</span>知道 Workflow 的基本作用</div><div class="list-item"><span class="num">04</span>选择适合工作流的学习任务</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Problem</div><h2>为什么同一个 Agent 有时会乱跳？</h2><p class="subtitle">一会讲题，一会规划，一会复盘，如果没有流程，Agent 很容易混乱。</p></div><div class="right"><div class="card-stack"><div class="card warning"><h3>表现</h3><p>回答模式不稳定，流程前后不一致。</p></div><div class="card success"><h3>解决</h3><p>把任务拆成节点和条件分支。</p></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Prompt Limit</div><h2>Prompt 的限制</h2><p class="subtitle">一段规则可以约束风格，但不适合稳定控制复杂流程。</p></div><div class="right"><table class="config-table"><thead><tr><th>只靠 Prompt</th><th>工作流</th></tr></thead><tbody><tr><td>容易所有规则混在一起</td><td>每个节点只做一件事</td></tr><tr><td>分支不稳定</td><td>条件分支清晰</td></tr><tr><td>输出字段容易变</td><td>节点输出可固定</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">What is Workflow</div><h2>工作流是什么</h2><p class="subtitle">把任务拆成输入、节点、条件、输出。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">Input<span>接收问题、资料、时间</span></div><div class="concept-arrow">↓</div><div class="concept-node">Node<span>判断、检索、生成、保存</span></div><div class="concept-arrow">↓</div><div class="concept-node">Condition<span>根据任务类型分支</span></div><div class="concept-arrow">↓</div><div class="concept-node">Output<span>返回结构化结果</span></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Use Cases</div><h2>单 Agent 工作流适合什么</h2><p class="subtitle">适合一个 Agent 内部可以按流程完成的任务。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>错题复盘</div><div class="list-item"><span class="num">02</span>今日学习计划</div><div class="list-item"><span class="num">03</span>作文修改</div><div class="list-item"><span class="num">04</span>资料问答</div><div class="list-item"><span class="num">05</span>知识点复习</div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 2 · 场景样例</div><h2>哪些学习任务适合做成流程？</h2><p class="subtitle">先用错题复盘、今日计划、作文修改三个场景，看懂学习任务如何被拆成步骤。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>错题复盘流程</div><div class="list-item"><span class="num">02</span>今日学习计划流程</div><div class="list-item"><span class="num">03</span>作文修改流程</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Mistake Review</div><h2>示例 1：错题复盘流程</h2><p class="subtitle">错题复盘不是直接讲答案，而是判断卡点、给提示、记录错因。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">输入错题<span>题目或截图</span></div><div class="concept-arrow">↓</div><div class="concept-node">判断卡点<span>概念/审题/步骤/表达</span></div><div class="concept-arrow">↓</div><div class="concept-node">给分层提示<span>Level 1-4</span></div><div class="concept-arrow">↓</div><div class="concept-node">记录错因<span>写入学习记录</span></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Daily Plan</div><h2>示例 2：今日学习计划流程</h2><p class="subtitle">计划要结合目标、时间和薄弱点。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">读取目标<span>近期学习目标</span></div><div class="concept-arrow">↓</div><div class="concept-node">读取薄弱点<span>学生画像或记录</span></div><div class="concept-arrow">↓</div><div class="concept-node">分配时间<span>可用学习时长</span></div><div class="concept-arrow">↓</div><div class="concept-node">生成任务<span>Checklist 和完成标准</span></div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Essay Revision</div><h2>示例 3：作文修改流程</h2><p class="subtitle">作文修改流程适合语文和英语作文。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">读取作文<span>学生原文</span></div><div class="concept-arrow">↓</div><div class="concept-node">判断结构问题<span>立意/论证/语言</span></div><div class="concept-arrow">↓</div><div class="concept-node">给修改建议<span>分段修改</span></div><div class="concept-arrow">↓</div><div class="concept-node">输出清单<span>可执行修改任务</span></div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 3 · 节点连线</div><h2>工作流由哪些节点组成？</h2><p class="subtitle">节点负责处理，连线决定顺序。学生要能看懂输入、判断、资料、生成、保存这些节点的职责。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>节点设计原则</div><div class="list-item"><span class="num">02</span>输入节点和判断节点</div><div class="list-item"><span class="num">03</span>资料节点和生成节点</div><div class="list-item"><span class="num">04</span>保存节点和连线方式</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Node Principle</div><h2>节点设计原则</h2><p class="subtitle">一个节点只做一件事。节点太贪心，流程就会乱。</p></div><div class="right"><table class="config-table"><thead><tr><th>节点写法</th><th>问题</th></tr></thead><tbody><tr><td>判断+讲解+保存全写一起</td><td>难测试，难修复</td></tr><tr><td>判断节点只判断任务类型</td><td>清晰，可复用</td></tr><tr><td>保存节点只写入记录</td><td>出错时容易定位</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Input Node</div><h2>输入节点</h2><p class="subtitle">输入节点要收集足够信息，但不要一开始要求太多。</p></div><div class="right"><table class="config-table"><thead><tr><th>输入项</th><th>用途</th></tr></thead><tbody><tr><td>学科</td><td>决定知识范围</td></tr><tr><td>问题/题目</td><td>核心任务</td></tr><tr><td>可用时间</td><td>生成计划</td></tr><tr><td>资料/截图</td><td>调用知识库或图片理解</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Router Node</div><h2>判断节点</h2><p class="subtitle">判断节点决定走哪条分支，不负责讲解。</p><pre class="prompt-box">请只判断本次任务类型：讲题 / 今日计划 / 作文修改 / 资料问答 / 本周复盘。
-请输出 task_type，不要开始解答。</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Resource Node</div><h2>资料节点</h2><p class="subtitle">需要资料时再调用知识库或记忆，不要每次都调用所有资料。</p></div><div class="right"><table class="config-table"><thead><tr><th>任务</th><th>调用</th></tr></thead><tbody><tr><td>讲题</td><td>相关知识库 + 当前薄弱点</td></tr><tr><td>计划</td><td>学生目标 + 学习记录</td></tr><tr><td>作文修改</td><td>作文评分标准 + 学生原文</td></tr><tr><td>最新信息</td><td>搜索/网页插件</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Generate Node</div><h2>生成节点</h2><p class="subtitle">生成节点根据分支输出结果，格式要固定。</p><pre class="prompt-box">如果 task_type=讲题：输出卡点、提示层级、提示内容、下一步。
-如果 task_type=今日计划：输出任务、时间、完成标准。
-如果 task_type=复盘：输出高频卡点、进步点、下周建议。</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Save Node</div><h2>保存节点</h2><p class="subtitle">只有需要记录的学习事件才写入数据库。</p></div><div class="right"><table class="config-table"><thead><tr><th>保存字段</th><th>来源</th></tr></thead><tbody><tr><td>subject</td><td>输入节点</td></tr><tr><td>question</td><td>学生问题摘要</td></tr><tr><td>stuck_point</td><td>判断或生成节点</td></tr><tr><td>next_task</td><td>生成节点</td></tr><tr><td>status</td><td>默认未完成</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Line Rules</div><h2>连线方式</h2><p class="subtitle">根据任务类型分支，不要把所有节点串成一条线。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">Start<span>接收输入</span></div><div class="concept-arrow">↓</div><div class="concept-node">Router<span>判断 task_type</span></div><div class="concept-arrow">↓</div><div class="concept-node">Branch<span>讲题/计划/复盘</span></div><div class="concept-arrow">↓</div><div class="concept-node">Save<span>需要时保存</span></div><div class="concept-arrow">↓</div><div class="concept-node">Output<span>返回页面或对话</span></div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 4 · 测试修复</div><h2>如何测试并修复工作流？</h2><p class="subtitle">工作流不是画出来就算完成，要用真实任务测试每个节点是否跑通。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>工作流测试</div><div class="list-item"><span class="num">02</span>常见失败类型</div><div class="list-item"><span class="num">03</span>保存 v6 完成标准</div><div class="list-item"><span class="num">04</span>进入多 Agent 工作流</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Workflow Test</div><h2>工作流测试</h2><p class="subtitle">用不同输入测试分支是否走对。</p></div><div class="right"><table class="config-table"><thead><tr><th>输入</th><th>应该走向</th></tr></thead><tbody><tr><td>这道题不会</td><td>讲题分支</td></tr><tr><td>我今天有 40 分钟学习</td><td>计划分支</td></tr><tr><td>帮我改这篇作文</td><td>作文修改分支</td></tr><tr><td>总结本周问题</td><td>复盘分支</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Common Failure</div><h2>常见失败</h2><p class="subtitle">工作流出错通常不是模型笨，而是节点职责或分支条件不清。</p></div><div class="right"><table class="config-table"><thead><tr><th>失败</th><th>修复</th></tr></thead><tbody><tr><td>所有输入都走同一分支</td><td>重新写 Router 条件</td></tr><tr><td>输出字段缺失</td><td>固定节点输出格式</td></tr><tr><td>保存了无关记录</td><td>加保存条件</td></tr><tr><td>节点太复杂</td><td>拆成多个节点</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">v6 Standard</div><h2>v6 完成标准</h2><p class="subtitle">能跑通至少一个单 Agent 学习流程。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>节点表清楚</div><div class="list-item"><span class="num">02</span>输入输出清楚</div><div class="list-item"><span class="num">03</span>分支条件清楚</div><div class="list-item"><span class="num">04</span>至少 3 类输入测试通过</div><div class="list-item"><span class="num">05</span>能定位失败节点</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Next</div><h2>下一节：多 Agent 工作流</h2><p class="subtitle">单 Agent 流程解决内部步骤，多 Agent 解决角色分工。</p></div><div class="right"></div></section></main><nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 23</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav><script src="assets/script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI教育赋能｜L6 单 Agent 工作流</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="deck-page">
+<main class="deck">
+  <section class="slide title-slide">
+    <div class="left">
+      <div class="kicker">L6 · Single Workflow</div>
+      <h1>单 Agent 工作流<br><span class="highlight">把能力串成稳定流程</span></h1>
+      <p class="subtitle">让一个 Agent 按固定步骤完成错题复盘、学习计划或资料问答。</p>
+      <div class="chips"><span class="chip">Workflow</span><span class="chip">节点</span><span class="chip">字段</span><span class="chip">异常处理</span><span class="chip">测试</span></div>
+    </div>
+    <div class="right"></div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 1 · 为什么需要工作流</div>
+      <h2>能力越多，越需要流程</h2>
+      <p class="subtitle">前面几节课已经有讲题、记忆、资料调用和插件能力。工作流负责把这些能力按顺序组织起来。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>讲题规则</div>
+        <div class="list-item"><span class="num">02</span>学生记忆</div>
+        <div class="list-item"><span class="num">03</span>资料调用</div>
+        <div class="list-item"><span class="num">04</span>插件能力</div>
+        <div class="list-item"><span class="num">05</span>学习记录</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Problem</div>
+      <h2>能力多，不等于流程稳</h2>
+      <p class="subtitle">同一个 Agent 既要判断任务，又要查资料、讲题、检查、保存记录。如果没有流程，输出容易漂移。</p>
+    </div>
+    <div class="right">
+      <div class="card-stack">
+        <div class="card warning"><h3>常见问题</h3><p>一上来直接讲答案，忘记读取资料，计划和讲题混在一起。</p></div>
+        <div class="card success"><h3>解决方式</h3><p>把任务拆成可测试的步骤，每一步只承担清楚职责。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Core Idea</div>
+      <h2>工作流是可测试步骤</h2>
+      <p class="subtitle">工作流不是让 Agent 更会聊天，而是让它按顺序完成任务。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">输入<span>学生问题和资料</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">判断<span>决定任务类型</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">调用资料<span>按需取依据</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">生成检查保存<span>输出并记录</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Product Thinking</div>
+      <h2>先设计功能，再连接节点</h2>
+      <p class="subtitle">一个成熟工作流要先回答：谁会用、什么时候触发、最后要解决什么问题。</p>
+    </div>
+    <div class="right">
+      <div class="card-stack">
+        <div class="card"><h3>场景</h3><p>学生上传错题，不只是要答案。</p></div>
+        <div class="card success"><h3>结果</h3><p>需要错因、提示、同类练习和下一步任务。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Case</div>
+      <h2>本节案例：错题复盘工作流</h2>
+      <p class="subtitle">学生上传一道错题，希望 AI 帮他复盘，并安排下一步练习。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>识别卡点</div>
+        <div class="list-item"><span class="num">02</span>调用资料</div>
+        <div class="list-item"><span class="num">03</span>分层提示</div>
+        <div class="list-item"><span class="num">04</span>检查边界</div>
+        <div class="list-item"><span class="num">05</span>保存错因</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 2 · 单 Agent 主链路</div>
+      <h2>一个 Agent 如何按流程完成任务？</h2>
+      <p class="subtitle">先跑通一条主链路，再在实践指引里细化八步设计。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">Start</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Router</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Resource</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">Generate / Check / Save / Output</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Start / Router</div>
+      <h2>先收集，再判断</h2>
+      <p class="subtitle">Router 只判断任务类型，不开始解答。</p>
+      <pre class="prompt-box">请只判断本次任务类型：讲题 / 计划 / 作文修改 / 复盘。
+输出 task_type，不要开始解答。</pre>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>节点</th><th>职责</th></tr></thead>
+        <tbody>
+          <tr><td>Start</td><td>接收题目、学科、图片、资料、时间</td></tr>
+          <tr><td>Router</td><td>判断任务类型和下一步路径</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Resource</div>
+      <h2>需要依据时再调用资料</h2>
+      <p class="subtitle">不要每次都调用所有能力，而是根据任务选择来源。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>任务</th><th>需要的资源</th></tr></thead>
+        <tbody>
+          <tr><td>讲题</td><td>相关资料 + 学生薄弱点</td></tr>
+          <tr><td>作文修改</td><td>评分标准 + 学生原文</td></tr>
+          <tr><td>学习计划</td><td>学习目标 + 历史记录</td></tr>
+          <tr><td>最新信息</td><td>插件或网页</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Generate</div>
+      <h2>按任务类型生成结果</h2>
+      <p class="subtitle">生成节点只负责把资料和学生状态转成可执行帮助。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>任务</th><th>输出</th></tr></thead>
+        <tbody>
+          <tr><td>讲题</td><td>卡点、分层提示、下一步</td></tr>
+          <tr><td>计划</td><td>任务、时间、完成标准</td></tr>
+          <tr><td>复盘</td><td>错因、同类题、下次提醒</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Check</div>
+      <h2>防止工作流跑偏</h2>
+      <p class="subtitle">成熟工作流必须有检查节点，负责发现代写、编造、越界和格式缺失。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>有没有直接给完整答案？</div>
+        <div class="list-item"><span class="num">02</span>有没有编造资料？</div>
+        <div class="list-item"><span class="num">03</span>有没有忽略输入限制？</div>
+        <div class="list-item"><span class="num">04</span>有没有给下一步任务？</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Save / Output</div>
+      <h2>记录归记录，回答归回答</h2>
+      <p class="subtitle">Save 整理学习记录字段；Output 给学生一份统一、清楚、能执行的反馈。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>保存字段</th><th>输出结构</th></tr></thead>
+        <tbody>
+          <tr><td>subject</td><td>你卡在</td></tr>
+          <tr><td>question_summary</td><td>先试</td></tr>
+          <tr><td>stuck_point</td><td>提示</td></tr>
+          <tr><td>next_task</td><td>下一步</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 3 · 设计技巧</div>
+      <h2>好工作流的三个标准</h2>
+      <p class="subtitle">课堂上先记住标准，具体八步在实践指引里完成。</p>
+    </div>
+    <div class="right">
+      <div class="card-stack">
+        <div class="card"><h3>节点单一</h3><p>一个节点只做一件事。</p></div>
+        <div class="card"><h3>字段固定</h3><p>节点之间传明确字段。</p></div>
+        <div class="card success"><h3>异常可控</h3><p>资料不足、图片模糊、插件失败时不乱编。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Fallback</div>
+      <h2>异常时不乱，才算成熟</h2>
+      <p class="subtitle">成熟工作流不是正常时能跑，而是异常时还能保持可靠。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>异常</th><th>处理</th></tr></thead>
+        <tbody>
+          <tr><td>题图不清楚</td><td>要求补充</td></tr>
+          <tr><td>资料没找到</td><td>说明缺少依据</td></tr>
+          <tr><td>学生要完整答案</td><td>改为提示</td></tr>
+          <tr><td>插件失败</td><td>说明无法确认</td></tr>
+          <tr><td>输入太模糊</td><td>先追问</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Test</div>
+      <h2>用真实样本测试每个节点</h2>
+      <p class="subtitle">测试时不要只看最终回答，要看分支、资料、检查和保存是否都跑通。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>测试输入</th><th>关注点</th></tr></thead>
+        <tbody>
+          <tr><td>这道函数题我不会，帮我复盘。</td><td>分支和讲解</td></tr>
+          <tr><td>我今晚只有 40 分钟，数学怎么安排？</td><td>计划输出</td></tr>
+          <tr><td>这张题图太糊了，你猜一下。</td><td>异常处理</td></tr>
+          <tr><td>直接帮我写完整作文。</td><td>检查拦截</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">v6 Standard</div>
+      <h2>v6 完成标准</h2>
+      <p class="subtitle">能跑通一个单 Agent 学习流程，并能定位失败节点。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>完成一个单 Agent 学习工作流</div>
+        <div class="list-item"><span class="num">02</span>每个节点职责清楚</div>
+        <div class="list-item"><span class="num">03</span>输入输出字段固定</div>
+        <div class="list-item"><span class="num">04</span>至少 3 类测试通过</div>
+        <div class="list-item"><span class="num">05</span>能定位失败节点</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Next</div>
+      <h2>下一节：多 Agent 工作流</h2>
+      <p class="subtitle">单 Agent 工作流能把流程跑通。当规划、资料、讲解、检查、复盘、记录都变重时，下一节把这些职责拆成多 Agent 协作。</p>
+    </div>
+    <div class="right"></div>
+  <div class="link-row"><a class="button-link" href="L7.Learning Workflow.html">进入 L7</a></div></section>
+</main>
+<nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 17</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav>
+<script src="assets/script.js"></script>
+</body>
+</html>
