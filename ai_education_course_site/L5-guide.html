@@ -1,22 +1,146 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L5 实践指引</title><link rel="stylesheet" href="assets/style.css"></head><body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回实操目录</a><div style="height:18px"></div><div class="kicker">L5 Practice · Boundary</div><h1>Agent 能力边界与信息更新<br><span class="highlight">实践指引</span></h1><p class="subtitle">把 v4 Agent 升级为 v5：学会判断默认模型、知识库、插件和直接问 ChatGPT 的使用边界。</p><div class="chips"><span class="chip">信息来源</span><span class="chip">插件</span><span class="chip">搜索</span><span class="chip">边界声明</span><span class="chip">来源测试</span></div></section><section class="section-panel"><div class="kicker">Practice Map</div><h2>本节实践路径</h2><div class="big-list"><div class="list-item"><span class="num">01</span>建立信息来源判断表</div><div class="list-item"><span class="num">02</span>写入边界声明</div><div class="list-item"><span class="num">03</span>配置可用插件或替代方案</div><div class="list-item"><span class="num">04</span>设计最新信息测试</div><div class="list-item"><span class="num">05</span>保存 v5 决策规则</div></div></section><div class="phase-list"><section class="phase-block" id="phase1"><div class="kicker">Phase 01</div><h2>信息来源判断表</h2><p class="subtitle">先判断问题依赖什么信息，再决定让 Agent 怎么回答。</p><table class="config-table"><thead><tr><th>问题类型</th><th>优先方式</th><th>示例</th><th>合格表现</th></tr></thead><tbody><tr><td>通用概念</td><td>默认模型</td><td>函数单调性是什么意思？</td><td>直接解释并给例子</td></tr><tr><td>课堂资料</td><td>知识库</td><td>根据我上传的讲义解释这个公式</td><td>调用资料，不凭印象</td></tr><tr><td>最新信息</td><td>搜索/网页插件</td><td>今年某考试报名政策有什么变化？</td><td>搜索或说明需要最新来源</td></tr><tr><td>题目截图</td><td>图片理解</td><td>这张物理题怎么做？</td><td>识别清楚再讲，模糊就要求补充</td></tr><tr><td>开放探索</td><td>直接问 ChatGPT 或普通聊天</td><td>帮我想几个作文素材方向</td><td>不必强行进入学习工作流</td></tr></tbody></table></section><section class="phase-block" id="phase2"><div class="kicker">Phase 02</div><h2>写入边界声明</h2><p class="subtitle">边界声明不是降低能力，而是让 Agent 更可靠。</p><pre class="prompt-box">如果问题依赖最新信息，我需要调用搜索或网页资料；如果当前无法调用，我会说明无法保证最新。
-如果问题依赖上传资料，我会优先调用知识库。
-如果资料不足，我会说明缺少什么，而不是编造。
-如果问题只是开放式探索，学生可以直接问通用 ChatGPT，不一定需要使用本 Agent。</pre></section><section class="phase-block" id="phase3"><div class="kicker">Phase 03</div><h2>插件配置或替代方案</h2><p class="subtitle">如果账号没有插件权限，也要让学生知道“问题应该交给什么信息源”。</p><table class="config-table"><thead><tr><th>能力</th><th>有插件时</th><th>无插件时</th><th>测试方式</th></tr></thead><tbody><tr><td>搜索最新信息</td><td>配置搜索插件</td><td>提示学生复制最新网页或使用 ChatGPT 搜索版</td><td>问最新政策</td></tr><tr><td>网页读取</td><td>配置网页读取插件</td><td>让学生粘贴网页正文或摘要</td><td>给一个网页链接</td></tr><tr><td>图片识别</td><td>开启图片理解能力</td><td>让学生手动输入题干</td><td>上传模糊题图</td></tr><tr><td>外部 API</td><td>调用特定学习数据或工具</td><td>暂时不做，只保留概念</td><td>说明 API 适合什么任务</td></tr></tbody></table></section><section class="phase-block" id="phase4"><div class="kicker">Phase 04</div><h2>来源选择压力测试</h2><p class="subtitle">同一个 Agent 必须能根据问题切换信息来源。</p><table class="config-table"><thead><tr><th>测试输入</th><th>应该选择</th><th>合格结果</th></tr></thead><tbody><tr><td>函数奇偶性怎么判断？</td><td>默认模型</td><td>直接解释方法，并给小例子</td></tr><tr><td>按我上传的错题资料总结我的错因</td><td>知识库 + 记忆</td><td>基于资料和记录总结，不编造</td></tr><tr><td>最新高考志愿政策有什么变化？</td><td>搜索/网页插件</td><td>调用最新来源或说明需要最新来源</td></tr><tr><td>这张题太糊了，你猜一下题目</td><td>图片理解边界</td><td>要求重新上传或手动输入，不乱猜</td></tr><tr><td>我只是想随便聊聊怎么提高专注力</td><td>普通聊天/ChatGPT 均可</td><td>不强行走错题流程</td></tr></tbody></table></section><section class="phase-block" id="phase5"><div class="kicker">Phase 05</div><h2>过时信息修复规则</h2><p class="subtitle">学生觉得 Agent 不如 ChatGPT，通常不是 Prompt 太短，而是信息源不对。</p><div class="concept-map compact-map"><div class="concept-node">过时回答<span>识别是否依赖最新信息</span></div><div class="concept-arrow">↓</div><div class="concept-node">切换信息源<span>搜索、网页、上传资料或人工补充</span></div><div class="concept-arrow">↓</div><div class="concept-node">说明依据<span>告诉学生依据来自哪里</span></div><div class="concept-arrow">↓</div><div class="concept-node">保留边界<span>没有来源时不装作确定</span></div></div><div class="mini-template">模板 Prompt：
-当学生指出“你的回答过时/不准确”时，请先道歉并判断原因：默认模型知识过时、资料库缺失、插件未调用、题目输入不完整。然后给出修复方式，而不是继续重复原答案。</div></section><section class="phase-block" id="phase6"><div class="kicker">Phase 06</div><h2>保存 v5 版本记录</h2><pre class="prompt-box">版本：v5 能力边界与信息更新
-默认模型适用场景：
-知识库适用场景：
-插件适用场景：
-直接问 ChatGPT 更合适的场景：
-已配置插件：
-无法配置时的替代方案：
-通过的来源选择测试：
-仍然容易失败的场景：</pre></section><section class="phase-block" id="final-prompt"><div class="kicker">Final Prompt</div><h2>完整 Prompt 折叠区</h2><p class="subtitle">先完成前面的字段、规则和测试，再展开这里对照。不要把完整 Prompt 当作第一步。</p><details class="prompt-details"><summary>点击展开：L5 完整 Prompt 示例</summary><pre class="prompt-box">你是一名面向国内中学生的 AI 学习教练。回答前必须先判断信息来源。
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI教育赋能｜L5 实践指引</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="home">
+<main class="wrap">
+  <section class="hero">
+    <a class="home-link secondary" href="guide-index.html">返回实操目录</a>
+    <div style="height:18px"></div>
+    <div class="kicker">L5 Practice · Plugins</div>
+    <h1>Agent 插件能力与信息更新<br><span class="highlight">实践指引</span></h1>
+    <p class="subtitle">把 v4 Agent 升级为 v5：让 Agent 知道什么时候需要搜索、读网页、看图片或调用外部工具。</p>
+    <div class="chips"><span class="chip">插件</span><span class="chip">搜索</span><span class="chip">网页读取</span><span class="chip">图片理解</span><span class="chip">边界测试</span></div>
+  </section>
 
-信息来源规则：
-1. 通用概念、学习方法、非实时解释：可以使用默认模型。
-2. 课堂笔记、上传资料、错题、评分标准：优先调用知识库。
-3. 最新政策、新闻、网页内容：需要搜索或网页插件；无法调用时要说明不能保证最新。
-4. 题目截图：先识别题目，图片不清楚就要求补充。
-5. 开放式探索：可以建议学生直接使用通用 ChatGPT，不必强行使用本 Agent。
+  <section class="section-panel">
+    <div class="kicker">Practice Map</div>
+    <h2>本节实践路径</h2>
+    <div class="big-list">
+      <div class="list-item"><span class="num">01</span>列出无插件时的能力限制</div>
+      <div class="list-item"><span class="num">02</span>选择本节要接入或模拟的插件能力</div>
+      <div class="list-item"><span class="num">03</span>写入插件调用规则</div>
+      <div class="list-item"><span class="num">04</span>设计插件使用例子和失败测试</div>
+      <div class="list-item"><span class="num">05</span>保存 v5 插件能力版本记录</div>
+    </div>
+  </section>
 
-禁止编造资料来源、网页内容、政策变化、题目条件和引用。</pre></details></section><section class="phase-block"><div class="kicker">Next</div><h2>下一节：单 Agent 工作流</h2><p class="subtitle">信息来源解决“从哪里知道”，工作流解决“按什么步骤做”。</p></section></div></main></body></html>
+  <div class="phase-list">
+    <section class="phase-block" id="phase1">
+      <div class="kicker">Phase 01</div>
+      <h2>无插件 vs 有插件</h2>
+      <p class="subtitle">先让学生看清插件补上的不是“话术”，而是外部能力。</p>
+      <table class="config-table">
+        <thead><tr><th>任务</th><th>无插件时</th><th>有插件时</th><th>测试方式</th></tr></thead>
+        <tbody>
+          <tr><td>最新政策</td><td>只能凭已有知识回答</td><td>搜索并整理新来源</td><td>问近期政策变化</td></tr>
+          <tr><td>指定网页</td><td>需要复制网页正文</td><td>读取链接后总结</td><td>给一个网页链接</td></tr>
+          <tr><td>题目截图</td><td>需要手动输入题干</td><td>先识别图片再讲解</td><td>上传清晰和模糊题图</td></tr>
+          <tr><td>学习平台数据</td><td>无法访问外部系统</td><td>通过 API 查询或写入</td><td>说明要调用的系统字段</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="phase-block" id="phase2">
+      <div class="kicker">Phase 02</div>
+      <h2>选择插件能力</h2>
+      <p class="subtitle">课堂不必一次做全，优先选择最容易演示、最贴近学习场景的插件。</p>
+      <table class="config-table">
+        <thead><tr><th>插件能力</th><th>优先级</th><th>适合课堂演示</th></tr></thead>
+        <tbody>
+          <tr><td>搜索最新信息</td><td>高</td><td>查询考试政策、赛事规则、近期新闻</td></tr>
+          <tr><td>网页读取</td><td>高</td><td>总结学校通知、课程网页、文章资料</td></tr>
+          <tr><td>图片理解</td><td>中</td><td>处理题目截图，训练“不清楚就补充”</td></tr>
+          <tr><td>外部 API</td><td>拓展</td><td>连接题库、学习记录、学校平台</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="phase-block" id="phase3">
+      <div class="kicker">Phase 03</div>
+      <h2>写入插件调用规则</h2>
+      <p class="subtitle">规则要简单：什么情况调用插件，拿不到结果时怎么说。</p>
+      <pre class="prompt-box">当学生的问题依赖最新信息时，优先调用搜索或网页资料。
+当学生给出网页链接时，先读取网页内容，再总结或解释。
+当学生上传题目截图时，先识别题干；如果图片不清楚，要求补充。
+当插件没有返回可靠结果时，说明无法确认，不编造来源或依据。</pre>
+    </section>
+
+    <section class="phase-block" id="phase4">
+      <div class="kicker">Phase 04</div>
+      <h2>插件使用例子</h2>
+      <p class="subtitle">用具体例子训练学生看懂插件在流程中的位置。</p>
+      <table class="config-table">
+        <thead><tr><th>学生输入</th><th>应该调用</th><th>合格结果</th></tr></thead>
+        <tbody>
+          <tr><td>今年某考试报名政策有什么变化？</td><td>搜索插件</td><td>给出来源、时间和不确定性提示</td></tr>
+          <tr><td>请根据这个网页总结三条重点</td><td>网页读取</td><td>先读取网页，再按条目总结</td></tr>
+          <tr><td>这张物理题怎么做？</td><td>图片理解</td><td>识别题干后讲解，模糊就要求补图</td></tr>
+          <tr><td>根据我的错题记录推荐练习</td><td>API 或数据库节点</td><td>读取记录后推荐，不凭空生成历史数据</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="phase-block" id="phase5">
+      <div class="kicker">Phase 05</div>
+      <h2>插件失败处理规则</h2>
+      <p class="subtitle">插件不是万能按钮，失败处理也是 Agent 可靠性的一部分。</p>
+      <div class="concept-map compact-map">
+        <div class="concept-node">需要外部信息<span>判断是否调用插件</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">插件返回结果<span>检查是否可用</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">说明依据<span>告诉学生信息来自哪里</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">失败时声明边界<span>不编造、要求补充或换来源</span></div>
+      </div>
+      <div class="mini-template">模板 Prompt：
+当插件无法搜索、网页打不开、图片识别不清或 API 返回失败时，请明确说明失败原因，并告诉学生下一步可以补充什么信息。</div>
+    </section>
+
+    <section class="phase-block" id="phase6">
+      <div class="kicker">Phase 06</div>
+      <h2>保存 v5 版本记录</h2>
+      <pre class="prompt-box">版本：v5 插件能力与信息更新
+本节接入或模拟的插件能力：
+搜索插件适用场景：
+网页读取适用场景：
+图片理解适用场景：
+外部 API 适用场景：
+插件失败时的回应规则：
+通过的插件压力测试：
+仍然容易失败的场景：</pre>
+    </section>
+
+    <section class="phase-block" id="final-prompt">
+      <div class="kicker">Final Prompt</div>
+      <h2>完整 Prompt 折叠区</h2>
+      <p class="subtitle">先完成前面的插件规则和测试，再展开这里对照。</p>
+      <details class="prompt-details">
+        <summary>点击展开：L5 完整 Prompt 示例</summary>
+        <pre class="prompt-box">你是一名面向国内中学生的 AI 学习教练。回答前要判断是否需要插件能力。
+
+插件调用规则：
+1. 最新政策、新闻、比赛信息：需要搜索或网页资料；无法调用时要说明不能保证最新。
+2. 学生提供网页链接：先读取网页内容，再总结、解释或对比。
+3. 学生上传题目截图：先识别题目；图片不清楚就要求重新上传或手动输入题干。
+4. 学习记录、题库、学校平台数据：需要通过外部 API 或工作流节点调用，不能凭空编造。
+5. 插件没有返回可靠结果时：说明失败原因，并提出补充信息或更换来源的建议。
+
+禁止编造资料来源、网页内容、政策变化、题目条件、引用和学习记录。</pre>
+      </details>
+    </section>
+
+    <section class="phase-block">
+      <div class="kicker">Next</div>
+      <h2>下一节：单 Agent 工作流</h2>
+      <p class="subtitle">插件解决“能连接什么”，工作流解决“按什么步骤完成任务”。</p>
+    </section>
+  </div>
+</main>
+</body>
+</html>
