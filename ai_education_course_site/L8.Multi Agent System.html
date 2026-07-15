@@ -1,26 +1,305 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L8 最终 Agent 整合与测试</title><link rel="stylesheet" href="assets/style.css"></head><body class="deck-page"><main class="deck"><section class="slide title-slide"><div class="left"><div class="kicker">L8 · Final Agent</div><h1>最终 Agent<br><span class="highlight">整合与测试</span></h1><p class="subtitle">把 Prompt、参数、记忆、知识库、插件和工作流整合成一个自己能用的学习 Agent。</p><div class="chips"><span class="chip">Final Agent</span><span class="chip">系统检查</span><span class="chip">最终测试集</span><span class="chip">最小修复</span></div></div><div class="right"></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 1 · 系统回顾</div><h2>最终 Agent 由哪些能力组成？</h2><p class="subtitle">先回顾 v1-v7 的升级路径，再看最终 Agent 的完整模块。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>回顾版本升级路径</div><div class="list-item"><span class="num">02</span>看懂最终模块总览</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Roadmap</div><h2>回顾 v1-v7 升级路径</h2><p class="subtitle">每个版本都解决一个真实问题。</p></div><div class="right"><table class="config-table"><thead><tr><th>版本</th><th>新增能力</th></tr></thead><tbody><tr><td>v1</td><td>Prompt 原型</td></tr><tr><td>v2</td><td>行为规则、讲题层级、参数</td></tr><tr><td>v3</td><td>记忆与学生画像</td></tr><tr><td>v4</td><td>知识库与资料依据</td></tr><tr><td>v5</td><td>插件、边界与信息来源</td></tr><tr><td>v6</td><td>单 Agent 工作流</td></tr><tr><td>v7</td><td>多 Agent 协作</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Modules</div><h2>最终 Agent 模块总览</h2><p class="subtitle">最终不是一个超长 Prompt，而是一套模块组合。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">Prompt<span>身份、目标、边界</span></div><div class="concept-arrow">↓</div><div class="concept-node">Parameters<span>稳定输出</span></div><div class="concept-arrow">↓</div><div class="concept-node">Memory<span>学生画像和记录</span></div><div class="concept-arrow">↓</div><div class="concept-node">Knowledge/Plugins<span>资料和实时信息</span></div><div class="concept-arrow">↓</div><div class="concept-node">Workflow<span>流程和协作</span></div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 2 · 模块检查</div><h2>逐项确认每个模块是否还可用</h2><p class="subtitle">最终整合不是堆功能，而是检查 Prompt、参数、记忆、知识库、信息来源和工作流是否互相配合。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>Prompt 和参数检查</div><div class="list-item"><span class="num">02</span>记忆和知识库检查</div><div class="list-item"><span class="num">03</span>插件/信息来源检查</div><div class="list-item"><span class="num">04</span>单 Agent 和多 Agent 检查</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Prompt Check</div><h2>Prompt 检查</h2><p class="subtitle">检查身份、目标、行为规则和边界是否还清晰。</p></div><div class="right"><table class="config-table"><thead><tr><th>检查项</th><th>问题信号</th></tr></thead><tbody><tr><td>身份</td><td>看不出服务什么学生</td></tr><tr><td>目标</td><td>什么任务都想做</td></tr><tr><td>行为规则</td><td>遇到输入不知道先做什么</td></tr><tr><td>边界</td><td>会代写或编造</td></tr><tr><td>输出格式</td><td>每次结构不一样</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Parameter Check</div><h2>参数检查</h2><p class="subtitle">参数要服务学习稳定性，而不是追求炫。</p></div><div class="right"><table class="config-table"><thead><tr><th>参数</th><th>建议检查</th></tr></thead><tbody><tr><td>生成随机性</td><td>是否过高导致漂移</td></tr><tr><td>上下文轮数</td><td>是否支持连续辅导</td></tr><tr><td>最大回复长度</td><td>是否过短或过啰嗦</td></tr><tr><td>模型选择</td><td>是否适合当前任务</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Memory Check</div><h2>记忆检查</h2><p class="subtitle">记忆要能读、能写、能改。</p></div><div class="right"><table class="config-table"><thead><tr><th>检查</th><th>测试方式</th></tr></thead><tbody><tr><td>读取</td><td>问“今天复习什么”，看是否调用薄弱点</td></tr><tr><td>写入</td><td>新薄弱点是否被保存</td></tr><tr><td>更新</td><td>已解决的弱点能否修改</td></tr><tr><td>边界</td><td>临时情绪是否不会乱记</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Knowledge Check</div><h2>知识库检查</h2><p class="subtitle">资料调用要有依据，也要能承认找不到。</p></div><div class="right"><table class="config-table"><thead><tr><th>测试</th><th>合格表现</th></tr></thead><tbody><tr><td>资料内问题</td><td>基于资料回答</td></tr><tr><td>资料外问题</td><td>说明资料不足</td></tr><tr><td>诱导引用</td><td>拒绝编造</td></tr><tr><td>资料冲突</td><td>要求确认版本或说明冲突</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Plugin Check</div><h2>插件/信息来源检查</h2><p class="subtitle">最新信息和指定资料必须选择正确来源。</p></div><div class="right"><table class="config-table"><thead><tr><th>问题</th><th>应使用</th></tr></thead><tbody><tr><td>最新政策</td><td>搜索/网页插件</td></tr><tr><td>课堂讲义</td><td>知识库</td></tr><tr><td>题目截图</td><td>图片理解</td></tr><tr><td>通用概念</td><td>模型默认知识</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Workflow Check</div><h2>单 Agent 工作流检查</h2><p class="subtitle">工作流重点看节点职责和分支是否正确。</p></div><div class="right"><table class="config-table"><thead><tr><th>检查项</th><th>标准</th></tr></thead><tbody><tr><td>Router</td><td>能正确判断任务类型</td></tr><tr><td>节点</td><td>一个节点只做一件事</td></tr><tr><td>分支</td><td>不同输入走不同路径</td></tr><tr><td>输出</td><td>字段一致</td></tr><tr><td>保存</td><td>只保存该保存的记录</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Multi Agent Check</div><h2>多 Agent 工作流检查</h2><p class="subtitle">多 Agent 重点看分工、交接和最终输出。</p></div><div class="right"><table class="config-table"><thead><tr><th>检查项</th><th>标准</th></tr></thead><tbody><tr><td>角色分工</td><td>Planner/Tutor/Critic 等职责不重叠</td></tr><tr><td>交接字段</td><td>task_type、stuck_point 等固定</td></tr><tr><td>冲突处理</td><td>边界和学习目标优先</td></tr><tr><td>最终输出</td><td>统一给学生一个回答</td></tr></tbody></table></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 3 · 测试修复</div><h2>如何设计最终测试集？</h2><p class="subtitle">最终测试要覆盖真实场景，并用失败类型定位问题，再做最小修复。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>设计最终测试集</div><div class="list-item"><span class="num">02</span>分类失败原因</div><div class="list-item"><span class="num">03</span>只做最小必要修复</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Test Set</div><h2>最终测试集设计</h2><p class="subtitle">最终测试集要覆盖真实学习场景，而不是只问简单问题。</p></div><div class="right"><table class="config-table"><thead><tr><th>类别</th><th>测试输入</th></tr></thead><tbody><tr><td>不会题</td><td>这道解析几何题我完全没思路</td></tr><tr><td>要答案</td><td>直接给我完整答案</td></tr><tr><td>情绪低落</td><td>我今天完全不想学</td></tr><tr><td>资料引用</td><td>根据我上传的笔记回答</td></tr><tr><td>最新信息</td><td>查最新考试安排</td></tr><tr><td>多轮对话</td><td>延续刚才的错题继续复盘</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Failure Type</div><h2>失败原因分类</h2><p class="subtitle">失败后先分类，再修最小点。</p></div><div class="right"><table class="config-table"><thead><tr><th>原因</th><th>表现</th></tr></thead><tbody><tr><td>Prompt</td><td>规则冲突或边界缺失</td></tr><tr><td>参数</td><td>输出漂移或过短</td></tr><tr><td>资料</td><td>知识库没有依据</td></tr><tr><td>插件</td><td>没有调用最新来源</td></tr><tr><td>工作流</td><td>走错分支</td></tr><tr><td>权限</td><td>平台不允许某些配置</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Minimal Fix</div><h2>最小修复原则</h2><p class="subtitle">不要一失败就重写整个 Agent。只修导致失败的最小规则或节点。</p></div><div class="right"><div class="concept-map compact-map"><div class="concept-node">定位失败输入<span>哪条测试没过</span></div><div class="concept-arrow">↓</div><div class="concept-node">判断原因<span>Prompt/参数/资料/流程</span></div><div class="concept-arrow">↓</div><div class="concept-node">只改一处<span>方便验证</span></div><div class="concept-arrow">↓</div><div class="concept-node">同题复测<span>确认修复有效</span></div></div></div></section>
-<section class="slide part-slide"><div class="left"><div class="kicker">Part 4 · 交付演示</div><h2>如何交付 Final Agent？</h2><p class="subtitle">最后要让学生能使用、能演示、能保存，而不是只停留在配置页面。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>写清使用说明</div><div class="list-item"><span class="num">02</span>用三个真实场景演示</div><div class="list-item"><span class="num">03</span>保存 Final Agent</div><div class="list-item"><span class="num">04</span>进入仪表盘项目</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">User Guide</div><h2>Final Agent 使用说明</h2><p class="subtitle">一个好工具要说明适合做什么，也要说明不适合做什么。</p></div><div class="right"><table class="config-table"><thead><tr><th>项目</th><th>说明</th></tr></thead><tbody><tr><td>适合</td><td>错题复盘、计划、资料问答、学习记录</td></tr><tr><td>不适合</td><td>代写作业、无依据最新信息、替代老师判断</td></tr><tr><td>需要资料</td><td>课堂讲义、题目截图、错题记录</td></tr><tr><td>已知边界</td><td>模型可能出错，重要内容要人工确认</td></tr></tbody></table></div></section>
-<section class="slide"><div class="left"><div class="kicker">Demo</div><h2>最终演示：3 个真实场景</h2><p class="subtitle">用场景证明它能用，而不是展示设置页面。</p></div><div class="right"><div class="big-list"><div class="list-item"><span class="num">01</span>一道不会的题：判断卡点并给分层提示</div><div class="list-item"><span class="num">02</span>一段课堂资料：基于知识库回答</div><div class="list-item"><span class="num">03</span>一周学习记录：生成复盘和下周任务</div></div></div></section>
-<section class="slide"><div class="left"><div class="kicker">Save Final</div><h2>保存 Final Agent</h2><p class="subtitle">保存最终版本，并写清模块、测试结果和已知边界。</p><pre class="prompt-box">Final Agent 说明：
-核心用途：
-已配置模块：Prompt / 参数 / 记忆 / 知识库 / 插件 / 工作流 / 多 Agent
-通过的测试：
-仍然存在的边界：
-下一阶段：接入个人学习仪表盘</pre></div><div class="right"></div></section>
-<section class="slide"><div class="left"><div class="kicker">Next</div><h2>下一阶段：个人学习仪表盘项目</h2><p class="subtitle">Agent 已经具备能力，接下来把它接入一个能记录、展示、复盘的学习工具界面。</p></div><div class="right"></div><div class="link-row"><a class="button-link" href="L9.Long Term Growth.html">进入 L9</a></div></section></main><nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 21</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav><script src="assets/script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI教育赋能｜L8 成熟学习工作流设计</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="deck-page">
+<main class="deck">
+  <section class="slide title-slide">
+    <div class="left">
+      <div class="kicker">L8 · Workflow Design</div>
+      <h1>成熟学习工作流设计<br><span class="highlight">从 Demo 到可用功能</span></h1>
+      <p class="subtitle">把已经掌握的节点能力，组合成一个能复盘数学错题的完整流程。</p>
+      <div class="chips"><span class="chip">场景</span><span class="chip">节点职责</span><span class="chip">字段</span><span class="chip">兜底</span><span class="chip">测试迭代</span></div>
+    </div>
+    <div class="right"></div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 1 · 从 Demo 到功能</div>
+      <h2>能跑通，不等于成熟</h2>
+      <p class="subtitle">你已经会搭基础节点，也练过字段、分支和循环。现在要把它们变成一个能真正帮你学习的工作流。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>场景清楚</div>
+        <div class="list-item"><span class="num">02</span>入口明确</div>
+        <div class="list-item"><span class="num">03</span>节点职责单一</div>
+        <div class="list-item"><span class="num">04</span>异常情况可控</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Eight Steps</div>
+      <h2>工作流设计八步走</h2>
+      <p class="subtitle">照着这 8 步，把一个想法拆成可以配置、可以测试的流程。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>找场景</div>
+        <div class="list-item"><span class="num">02</span>定入口</div>
+        <div class="list-item"><span class="num">03</span>拆步骤</div>
+        <div class="list-item"><span class="num">04</span>分节点</div>
+        <div class="list-item"><span class="num">05</span>定字段</div>
+        <div class="list-item"><span class="num">06</span>设分支</div>
+        <div class="list-item"><span class="num">07</span>做兜底</div>
+        <div class="list-item"><span class="num">08</span>测迭代</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Case</div>
+      <h2>主案例：数学错题复盘工作流</h2>
+      <p class="subtitle">你输入一道数学错题和自己的解题过程，让工作流帮你找错因、给提示、安排下一步练习。</p>
+    </div>
+    <div class="right">
+      <div class="card-stack">
+        <div class="card"><h3>不是</h3><p>直接给完整答案。</p></div>
+        <div class="card success"><h3>而是</h3><p>判断卡点、给分层提示、整理错因和下一步任务。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 2 · 设计主流程</div>
+      <h2>错题复盘要经过哪些步骤？</h2>
+      <p class="subtitle">先把错题复盘拆成动作，再决定每一步用哪个节点。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">接收数学错题</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">读取学习记录</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">检索数学资料</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">诊断错因并提示</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">保存记录并输出</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Entry Fields</div>
+      <h2>入口字段不要太多，但要够用</h2>
+      <p class="subtitle">入口字段越清楚，后面的判断、检索和复盘越稳定。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>字段</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>question_text</td><td>数学题目文字</td></tr>
+          <tr><td>student_solution</td><td>你的解题过程</td></tr>
+          <tr><td>wrong_answer</td><td>你的错误答案</td></tr>
+          <tr><td>hint_level</td><td>只给提示 / 给思路 / 给讲解</td></tr>
+          <tr><td>student_id</td><td>用于读取和保存学习记录</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Node Duty</div>
+      <h2>每个节点只负责一件事</h2>
+      <p class="subtitle">每个节点只做一件事，出错时才能快速定位是哪一步的问题。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>节点</th><th>职责</th></tr></thead>
+        <tbody>
+          <tr><td>输入</td><td>接收数学题目、解题过程和提示深度</td></tr>
+          <tr><td>数据库查询</td><td>读取学生画像、历史薄弱点和相似错题</td></tr>
+          <tr><td>大模型解析</td><td>整理题目、条件、目标和疑似错误步骤</td></tr>
+          <tr><td>知识库检索</td><td>查找数学概念、公式和典型例题</td></tr>
+          <tr><td>插件/API</td><td>可选检索同类题或做计算校验</td></tr>
+          <tr><td>大模型复盘</td><td>诊断错因，生成分层提示和 next_task</td></tr>
+          <tr><td>数据库写入</td><td>保存错题记录和复习日志</td></tr>
+          <tr><td>输出</td><td>返回最终复盘结果</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Core Fields</div>
+      <h2>成熟流程需要字段表</h2>
+      <p class="subtitle">字段表就是工作流里的“传递清单”：每一步都按字段读写数据。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>math_topic</div>
+        <div class="list-item"><span class="num">02</span>question_summary</div>
+        <div class="list-item"><span class="num">03</span>student_error_step</div>
+        <div class="list-item"><span class="num">04</span>evidence</div>
+        <div class="list-item"><span class="num">05</span>error_type</div>
+        <div class="list-item"><span class="num">06</span>diagnosis</div>
+        <div class="list-item"><span class="num">07</span>next_task</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 3 · 分支与兜底</div>
+      <h2>成熟工作流要处理失败情况</h2>
+      <p class="subtitle">一个好用的学习工作流，要能处理题干不完整、资料不足和直接要答案等情况。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>题干完整</div>
+        <div class="list-item"><span class="num">02</span>题干不完整</div>
+        <div class="list-item"><span class="num">03</span>没有解题过程</div>
+        <div class="list-item"><span class="num">04</span>直接要答案</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Branch Rules</div>
+      <h2>分支规则写清楚</h2>
+      <p class="subtitle">把常见情况写成分支，工作流才不会所有问题都用同一种回答。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>情况</th><th>路径</th></tr></thead>
+        <tbody>
+          <tr><td>题干和过程完整</td><td>进入错因诊断</td></tr>
+          <tr><td>题干不完整</td><td>要求补充完整题目</td></tr>
+          <tr><td>没有解题过程</td><td>要求补充自己的步骤</td></tr>
+          <tr><td>直接要求完整答案</td><td>改为提示和检查标准</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Check</div>
+      <h2>检查节点保护学习边界</h2>
+      <p class="subtitle">最终回复要检查学习边界：不代写、不编造资料，也要给出下一步任务。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>是否直接给完整答案</div>
+        <div class="list-item"><span class="num">02</span>是否编造资料依据</div>
+        <div class="list-item"><span class="num">03</span>是否忽略你的解题过程</div>
+        <div class="list-item"><span class="num">04</span>是否缺少 next_task</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Final Output</div>
+      <h2>最终输出不要暴露后台节点</h2>
+      <p class="subtitle">你最终需要看到的是能继续学习的反馈，不是后台节点和调试字段。</p>
+    </div>
+    <div class="right">
+      <pre class="prompt-box">推荐输出结构：
+1. 我判断你卡在：
+2. 先试这一步：
+3. 提示：
+4. 下一步练习：
+5. 本次错因记录：</pre>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 4 · 测试迭代</div>
+      <h2>用测试样本修流程</h2>
+      <p class="subtitle">用真实错题测试流程，找到不稳定的节点，再逐步修正。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>正常输入</div>
+        <div class="list-item"><span class="num">02</span>资料不足</div>
+        <div class="list-item"><span class="num">03</span>诱导代写</div>
+        <div class="list-item"><span class="num">04</span>输入不清</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Test Set</div>
+      <h2>错题复盘测试集</h2>
+      <p class="subtitle">每条测试都要记录失败节点。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>测试</th><th>合格表现</th></tr></thead>
+        <tbody>
+          <tr><td>这道函数定义域题我错了，帮我复盘。</td><td>判断卡点并给分层提示</td></tr>
+          <tr><td>根据课堂讲义里的方法解释。</td><td>资料不足时不编造</td></tr>
+          <tr><td>直接把完整答案给我。</td><td>拒绝代写，改为提示</td></tr>
+          <tr><td>这题不会。</td><td>要求补充题目文字</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Debug</div>
+      <h2>节点级调试</h2>
+      <p class="subtitle">失败时不要只说“模型不行”，要定位是哪一步错了。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>失败</th><th>可能节点</th></tr></thead>
+        <tbody>
+          <tr><td>任务判断错</td><td>意图识别 / 大模型</td></tr>
+          <tr><td>分支没走对</td><td>选择器</td></tr>
+          <tr><td>没有资料依据</td><td>知识库检索</td></tr>
+          <tr><td>输出越界</td><td>检查节点或 Prompt</td></tr>
+          <tr><td>字段没接上</td><td>变量赋值 / 聚合 / 输出</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">v8 Standard</div>
+      <h2>v8 完成标准</h2>
+      <p class="subtitle">能把 Demo 变成真实可用、可测试、可迭代的学习工作流。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>场景和入口清楚</div>
+        <div class="list-item"><span class="num">02</span>节点职责单一</div>
+        <div class="list-item"><span class="num">03</span>字段表完整</div>
+        <div class="list-item"><span class="num">04</span>有兜底分支</div>
+        <div class="list-item"><span class="num">05</span>测试后能定位失败节点</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Next</div>
+      <h2>下一阶段：个人学习仪表盘</h2>
+      <p class="subtitle">成熟工作流跑通后，把计划、记录和复盘结果放进更可观察的学习工具。</p>
+    </div>
+    <div class="right"></div>
+  <div class="link-row"><a class="button-link" href="L9.Long Term Growth.html">进入 L9</a><a class="button-link secondary" href="L8-guide.html">L8实操</a></div></section>
+</main>
+<nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 17</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav>
+<script src="assets/script.js"></script>
+</body>
+</html>

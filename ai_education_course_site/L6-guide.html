@@ -11,197 +11,274 @@
   <section class="hero">
     <a class="home-link secondary" href="guide-index.html">返回实操目录</a>
     <div style="height:18px"></div>
-    <div class="kicker">L6 Practice · Single Workflow</div>
-    <h1>单 Agent 工作流<br><span class="highlight">实践指引</span></h1>
-    <p class="subtitle">把 v5 Agent 升级为 v6：用八步法设计一个可测试、可迭代的学习工作流。</p>
-    <div class="chips"><span class="chip">场景</span><span class="chip">入口</span><span class="chip">节点</span><span class="chip">字段</span><span class="chip">测试</span></div>
+    <div class="kicker">L6 Practice · Workflow Demo</div>
+    <h1>工作流节点 Demo<br><span class="highlight">实践指引</span></h1>
+    <p class="subtitle">把 v5 Agent 升级为 v6：跑通输入、JSON 判断、选择器分支、大模型生成和输出。</p>
+    <div class="chips"><span class="chip">输入</span><span class="chip">大模型</span><span class="chip">JSON</span><span class="chip">选择器</span><span class="chip">测试</span></div>
   </section>
 
   <section class="section-panel">
-    <div class="kicker">Workflow Design</div>
-    <h2>工作流设计八步走</h2>
+    <div class="kicker">Practice Map</div>
+    <h2>本节实践路径</h2>
     <div class="big-list">
-      <div class="list-item"><span class="num">01</span>找场景：谁在什么情况下需要它</div>
-      <div class="list-item"><span class="num">02</span>定入口：用户输入什么启动流程</div>
-      <div class="list-item"><span class="num">03</span>拆步骤：任务要经过哪些环节</div>
-      <div class="list-item"><span class="num">04</span>分节点：每个节点只做一件事</div>
-      <div class="list-item"><span class="num">05</span>定字段：节点之间传什么信息</div>
-      <div class="list-item"><span class="num">06</span>设分支：不同情况走不同路径</div>
-      <div class="list-item"><span class="num">07</span>做兜底：失败、不清楚、资料不足怎么办</div>
-      <div class="list-item"><span class="num">08</span>测迭代：用真实样本不断修流程</div>
+      <div class="list-item"><span class="num">01</span>认识基础节点</div>
+      <div class="list-item"><span class="num">02</span>配置输入节点</div>
+      <div class="list-item"><span class="num">03</span>添加大模型任务判断节点</div>
+      <div class="list-item"><span class="num">04</span>强化 JSON 输出格式</div>
+      <div class="list-item"><span class="num">05</span>添加选择器分支</div>
+      <div class="list-item"><span class="num">06</span>添加分支大模型节点</div>
+      <div class="list-item"><span class="num">07</span>聚合结果并输出</div>
+      <div class="list-item"><span class="num">08</span>单节点和全流程测试</div>
     </div>
   </section>
 
   <div class="phase-list">
     <section class="phase-block" id="phase1">
-      <div class="kicker">Step 01</div>
-      <h2>找场景</h2>
-      <p class="subtitle">不要从“我要做一个工作流”开始，要从一个真实学习场景开始。</p>
+      <div class="kicker">Phase 01</div>
+      <h2>认识基础节点</h2>
+      <p class="subtitle">先只使用最小 Demo 需要的节点，不急着把所有节点都加进来。</p>
       <table class="config-table">
-        <thead><tr><th>问题</th><th>填写示例</th></tr></thead>
+        <thead><tr><th>节点</th><th>本节用途</th></tr></thead>
         <tbody>
-          <tr><td>谁在用？</td><td>初高中学生</td></tr>
-          <tr><td>什么情况下启动？</td><td>上传错题，希望复盘错因</td></tr>
-          <tr><td>真正想得到什么？</td><td>不是答案，而是卡点、提示、同类练习和下一步</td></tr>
-          <tr><td>成功标准是什么？</td><td>学生知道自己错在哪里，并获得可执行任务</td></tr>
+          <tr><td>输入</td><td>接收学生问题和学科</td></tr>
+          <tr><td>大模型</td><td>判断任务类型、生成分支回答</td></tr>
+          <tr><td>选择器</td><td>根据 task_type 走不同分支</td></tr>
+          <tr><td>变量赋值</td><td>保存某个中间字段</td></tr>
+          <tr><td>变量聚合</td><td>把不同分支结果统一成 final_answer</td></tr>
+          <tr><td>文本处理</td><td>整理最终输出格式</td></tr>
+          <tr><td>输出</td><td>返回 final_answer</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase2">
-      <div class="kicker">Step 02</div>
-      <h2>定入口</h2>
-      <p class="subtitle">入口越清楚，后面的判断越稳定。</p>
+      <div class="kicker">Phase 02</div>
+      <h2>配置输入节点</h2>
+      <p class="subtitle">输入字段要少而清楚，便于后续节点引用。</p>
       <table class="config-table">
-        <thead><tr><th>入口类型</th><th>需要收集</th><th>示例</th></tr></thead>
+        <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
         <tbody>
-          <tr><td>错题文字</td><td>学科、题目、学生答案</td><td>这道函数题我错了</td></tr>
-          <tr><td>题目图片</td><td>图片清晰度、题号、学科</td><td>上传题图</td></tr>
-          <tr><td>学习计划</td><td>目标、可用时间、薄弱点</td><td>今晚 40 分钟怎么安排</td></tr>
-          <tr><td>作文修改</td><td>原文、评分标准、修改范围</td><td>帮我看这段开头</td></tr>
+          <tr><td>user_question</td><td>文本</td><td>这道函数题我不会</td></tr>
+          <tr><td>subject</td><td>文本</td><td>数学</td></tr>
         </tbody>
       </table>
+      <div class="mini-template">测试输入：函数单调性怎么复习？</div>
     </section>
 
     <section class="phase-block" id="phase3">
-      <div class="kicker">Step 03</div>
-      <h2>拆步骤</h2>
-      <p class="subtitle">把“帮我学习”拆成可以执行和测试的步骤。</p>
-      <div class="concept-map compact-map">
-        <div class="concept-node">识别输入<span>题目、计划、作文</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">判断任务<span>讲题/计划/复盘</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">调用资源<span>资料、记忆、插件</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">生成帮助<span>提示、任务、复盘</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">检查保存<span>边界和记录</span></div>
-      </div>
+      <div class="kicker">Phase 03</div>
+      <h2>添加大模型任务判断节点</h2>
+      <p class="subtitle">第一个大模型节点只做任务判断，不负责正式回答。</p>
+      <pre class="prompt-box">你需要判断学生输入的学习任务类型。
+
+学生输入：
+{{user_question}}
+
+请判断它属于：讲题、学习计划、知识点复习、其他。</pre>
     </section>
 
     <section class="phase-block" id="phase4">
-      <div class="kicker">Step 04</div>
-      <h2>分节点</h2>
-      <p class="subtitle">如果一个节点名字里出现“和、并且、同时”，通常该拆。</p>
-      <table class="config-table">
-        <thead><tr><th>节点</th><th>只负责</th><th>不负责</th></tr></thead>
-        <tbody>
-          <tr><td>Start</td><td>接收输入</td><td>不判断任务</td></tr>
-          <tr><td>Router</td><td>判断任务类型</td><td>不开始解答</td></tr>
-          <tr><td>Resource</td><td>寻找资料和依据</td><td>不生成最终回答</td></tr>
-          <tr><td>Generate</td><td>生成讲解、计划或复盘</td><td>不保存记录</td></tr>
-          <tr><td>Check</td><td>检查边界和格式</td><td>不重新发挥</td></tr>
-          <tr><td>Save</td><td>整理学习记录字段</td><td>不和学生长篇对话</td></tr>
-        </tbody>
-      </table>
+      <div class="kicker">Phase 04</div>
+      <h2>强化 JSON 输出格式</h2>
+      <p class="subtitle">如果大模型输出不能被解析，后面的选择器和变量节点就会失败。</p>
+      <pre class="prompt-box">你需要判断学生输入的学习任务类型。
+
+学生输入：
+{{user_question}}
+
+请严格输出 JSON，不要输出任何解释、Markdown、代码块或多余文字。
+
+输出格式必须是：
+{
+  "task_type": "讲题",
+  "reason": "判断原因",
+  "need_resource": true
+}
+
+字段说明：
+- task_type 只能填写：讲题、学习计划、知识点复习、其他。
+- reason 用一句话说明判断依据。
+- need_resource 表示是否需要调用资料。
+
+要求：
+1. 只能输出一个合法 JSON 对象。
+2. 所有 key 必须使用英文双引号。
+3. 字符串值必须使用英文双引号。
+4. 布尔值只能使用 true 或 false。
+5. 不要使用 Markdown 代码块。
+6. 不要在 JSON 前后添加任何说明文字。
+7. 如果无法判断，task_type 填写 "其他"。</pre>
     </section>
 
     <section class="phase-block" id="phase5">
-      <div class="kicker">Step 05</div>
-      <h2>定字段</h2>
-      <p class="subtitle">不要只传一大段自然语言。字段固定，后面才好测试。</p>
+      <div class="kicker">Phase 05</div>
+      <h2>测试 JSON 输出</h2>
+      <p class="subtitle">先确认 JSON 稳定，再继续接选择器。</p>
       <table class="config-table">
-        <thead><tr><th>字段</th><th>用途</th></tr></thead>
+        <thead><tr><th>输入</th><th>期望 task_type</th><th>need_resource</th></tr></thead>
         <tbody>
-          <tr><td>task_type</td><td>决定走哪条分支</td></tr>
-          <tr><td>subject</td><td>筛选资料和记录</td></tr>
-          <tr><td>question_summary</td><td>给后续节点理解任务</td></tr>
-          <tr><td>evidence</td><td>保存资料依据</td></tr>
-          <tr><td>stuck_point</td><td>记录学生卡点</td></tr>
-          <tr><td>next_task</td><td>形成下一步行动</td></tr>
-          <tr><td>confidence</td><td>判断是否需要补充信息</td></tr>
+          <tr><td>这道函数题我不会。</td><td>讲题</td><td>true</td></tr>
+          <tr><td>帮我安排今晚 30 分钟数学复习。</td><td>学习计划</td><td>false</td></tr>
+          <tr><td>函数单调性怎么复习？</td><td>知识点复习</td><td>true</td></tr>
+          <tr><td>我不知道怎么学。</td><td>其他</td><td>false</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase6">
-      <div class="kicker">Step 06</div>
-      <h2>设分支</h2>
-      <p class="subtitle">不同任务不应该走同一条路线。</p>
+      <div class="kicker">Phase 06</div>
+      <h2>添加选择器节点</h2>
+      <p class="subtitle">选择器读取 task_type，然后走不同分支。</p>
       <table class="config-table">
-        <thead><tr><th>条件</th><th>路径</th></tr></thead>
+        <thead><tr><th>条件</th><th>分支目标</th></tr></thead>
         <tbody>
-          <tr><td>task_type = 讲题</td><td>Resource → Generate → Check → Save</td></tr>
-          <tr><td>task_type = 今日计划</td><td>Generate → Check → Save</td></tr>
-          <tr><td>task_type = 作文修改</td><td>Resource → Generate → Check</td></tr>
-          <tr><td>input_type = 图片且不清晰</td><td>Output 提示补充，不进入讲解</td></tr>
+          <tr><td>task_type = 讲题</td><td>讲题大模型节点</td></tr>
+          <tr><td>task_type = 学习计划</td><td>计划大模型节点</td></tr>
+          <tr><td>task_type = 知识点复习</td><td>复习大模型节点</td></tr>
+          <tr><td>其他</td><td>补充提示节点</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase7">
-      <div class="kicker">Step 07</div>
-      <h2>做兜底</h2>
-      <p class="subtitle">成熟工作流不是“正常时能跑”，而是“异常时不乱”。</p>
+      <div class="kicker">Phase 07</div>
+      <h2>添加分支大模型节点</h2>
+      <p class="subtitle">每个分支的大模型只处理自己的任务，不要写成一个万能 Prompt。</p>
       <table class="config-table">
-        <thead><tr><th>异常</th><th>兜底回应</th></tr></thead>
+        <thead><tr><th>分支</th><th>Prompt 要点</th></tr></thead>
         <tbody>
-          <tr><td>输入太模糊</td><td>先追问关键字段</td></tr>
-          <tr><td>题图不清楚</td><td>要求重新上传或手动输入</td></tr>
-          <tr><td>资料不足</td><td>说明缺少依据，不编造</td></tr>
-          <tr><td>学生要求代写</td><td>改为提纲、提示或修改建议</td></tr>
-          <tr><td>插件失败</td><td>说明无法确认，并给替代方式</td></tr>
+          <tr><td>讲题</td><td>判断卡点，给分层提示，不直接给完整答案</td></tr>
+          <tr><td>学习计划</td><td>根据时间生成任务、时长、完成标准</td></tr>
+          <tr><td>知识点复习</td><td>给复习步骤、例题方向、检测方式</td></tr>
+          <tr><td>其他</td><td>请学生补充学科、题目或目标</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase8">
-      <div class="kicker">Step 08</div>
-      <h2>测迭代</h2>
-      <p class="subtitle">每次测试都要记录哪个节点失败，而不是只说“Agent 不好用”。</p>
+      <div class="kicker">Phase 08</div>
+      <h2>变量聚合与文本处理</h2>
+      <p class="subtitle">不同分支会产生不同回答，用变量聚合统一成 final_answer，再用文本处理整理格式。</p>
+      <div class="concept-map compact-map">
+        <div class="concept-node">讲题 answer</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">计划 answer</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">复习 answer</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">变量聚合 final_answer</div>
+      </div>
+    </section>
+
+    <section class="phase-block" id="phase9">
+      <div class="kicker">Phase 09</div>
+      <h2>配置输出节点</h2>
+      <p class="subtitle">输出节点只返回最终字段，不要把中间调试字段全部暴露给学生。</p>
+      <pre class="prompt-box">输出字段：
+final_answer
+
+建议输出结构：
+任务判断：
+关键帮助：
+下一步：</pre>
+    </section>
+
+    <section class="phase-block" id="phase10">
+      <div class="kicker">Phase 10</div>
+      <h2>JSON 失败修复清单</h2>
+      <p class="subtitle">解析失败时，优先修大模型节点提示词。</p>
       <table class="config-table">
-        <thead><tr><th>测试输入</th><th>要观察</th></tr></thead>
+        <thead><tr><th>检查项</th><th>修复方式</th></tr></thead>
         <tbody>
-          <tr><td>这道函数题我不会，帮我复盘</td><td>Router 是否识别为讲题/复盘</td></tr>
-          <tr><td>今晚只有 40 分钟</td><td>是否走计划分支</td></tr>
-          <tr><td>题图很糊，让它猜</td><td>是否要求补充</td></tr>
-          <tr><td>直接帮我写完整作文</td><td>Check 是否拦截</td></tr>
+          <tr><td>是否输出 Markdown 代码块</td><td>要求不要使用代码块</td></tr>
+          <tr><td>JSON 前后是否有解释</td><td>要求只能输出一个 JSON 对象</td></tr>
+          <tr><td>key 是否用了英文双引号</td><td>明确所有 key 必须双引号</td></tr>
+          <tr><td>字段名是否一致</td><td>固定 task_type、reason、need_resource</td></tr>
+          <tr><td>布尔值是否写成字符串</td><td>true/false 不加引号</td></tr>
+          <tr><td>是否输出多个 JSON</td><td>要求只输出一个对象</td></tr>
         </tbody>
       </table>
+    </section>
+
+    <section class="phase-block" id="phase11">
+      <div class="kicker">Phase 11</div>
+      <h2>完整 Demo 测试</h2>
+      <p class="subtitle">测试时记录 task_type、选择器分支、final_answer 三个结果。</p>
+      <table class="config-table">
+        <thead><tr><th>测试输入</th><th>应走分支</th><th>合格表现</th></tr></thead>
+        <tbody>
+          <tr><td>这道函数题我不会。</td><td>讲题</td><td>给分层提示，不直接给完整答案</td></tr>
+          <tr><td>帮我安排今晚 30 分钟数学复习。</td><td>学习计划</td><td>输出任务和时间安排</td></tr>
+          <tr><td>函数单调性怎么复习？</td><td>知识点复习</td><td>输出复习步骤和检测方式</td></tr>
+          <tr><td>我不知道怎么学。</td><td>其他</td><td>要求补充目标或学科</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="phase-block" id="phase12">
+      <div class="kicker">Phase 12</div>
+      <h2>循环节点轻量拓展</h2>
+      <p class="subtitle">本节只认识循环的用途：对多个对象重复执行同一种处理。</p>
+      <pre class="prompt-box">拓展示例：
+输入 weak_points = ["函数定义域", "函数单调性", "二次函数图像"]
+循环：依次为每个知识点生成一个 10 分钟复习任务
+变量聚合：合并成今日复习清单</pre>
     </section>
 
     <section class="phase-block" id="version">
       <div class="kicker">Version</div>
       <h2>保存 v6 版本记录</h2>
-      <pre class="prompt-box">版本：v6 单 Agent 工作流
-用户场景：
-触发入口：
-主流程：
-节点列表：
-交接字段：
-分支规则：
-异常兜底：
+      <pre class="prompt-box">版本：v6 工作流节点 Demo
+已使用节点：
+输入字段：
+大模型 JSON 输出字段：
+选择器分支：
+聚合字段：
 通过的测试：
-失败节点和下一步修复：</pre>
+JSON 解析失败情况：
+下一步要学习：字段、分支与循环 Demo</pre>
     </section>
 
     <section class="phase-block" id="final-prompt">
       <div class="kicker">Final Prompt</div>
       <h2>完整 Prompt 折叠区</h2>
-      <p class="subtitle">先完成八步设计，再展开这里对照。</p>
+      <p class="subtitle">先完成节点配置和测试，再展开这里对照。</p>
       <details class="prompt-details">
-        <summary>点击展开：L6 完整 Prompt 示例</summary>
-        <pre class="prompt-box">当前 Agent 使用单 Agent 工作流处理学习任务。
+        <summary>点击展开：L6 任务判断节点 Prompt 示例</summary>
+        <pre class="prompt-box">你需要判断学生输入的学习任务类型。
 
-流程：
-Start 接收学生输入。
-Router 只判断 task_type、subject、input_type，不开始解答。
-Resource 根据任务调用资料、学生记录或插件，输出 evidence。
-Generate 基于 question_summary 和 evidence 生成讲解、计划或复盘。
-Check 检查代写、编造、越界、格式缺失。
-Save 整理 subject、question_summary、stuck_point、next_task、status。
-Output 给学生统一回答。
+学生输入：
+{{user_question}}
 
-异常处理：
-输入不清楚先追问；资料不足不编造；图片不清楚要求补充；代写请求改为提示。</pre>
+请严格输出 JSON，不要输出任何解释、Markdown、代码块或多余文字。
+
+输出格式必须是：
+{
+  "task_type": "讲题",
+  "reason": "判断原因",
+  "need_resource": true
+}
+
+字段说明：
+- task_type 只能填写：讲题、学习计划、知识点复习、其他。
+- reason 用一句话说明判断依据。
+- need_resource 表示是否需要调用资料。
+
+要求：
+1. 只能输出一个合法 JSON 对象。
+2. 所有 key 必须使用英文双引号。
+3. 字符串值必须使用英文双引号。
+4. 布尔值只能使用 true 或 false。
+5. 不要使用 Markdown 代码块。
+6. 不要在 JSON 前后添加任何说明文字。
+7. 如果无法判断，task_type 填写 "其他"。</pre>
       </details>
     </section>
 
     <section class="phase-block">
       <div class="kicker">Next</div>
-      <h2>下一节：多 Agent 工作流</h2>
-      <p class="subtitle">当这个单 Agent 工作流里的节点变重，就把它们升级为多个角色协作。</p>
+      <h2>下一节：字段、分支与循环 Demo</h2>
+      <p class="subtitle">下一节继续把字段、选择器和循环做得更稳定。</p>
     </section>
   </div>
 </main>

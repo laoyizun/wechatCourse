@@ -3,242 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI教育赋能｜L6 单 Agent 工作流</title>
+  <title>AI教育赋能｜L6 工作流节点 Demo</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="deck-page">
 <main class="deck">
   <section class="slide title-slide">
     <div class="left">
-      <div class="kicker">L6 · Single Workflow</div>
-      <h1>单 Agent 工作流<br><span class="highlight">把能力串成稳定流程</span></h1>
-      <p class="subtitle">让一个 Agent 按固定步骤完成错题复盘、学习计划或资料问答。</p>
-      <div class="chips"><span class="chip">Workflow</span><span class="chip">节点</span><span class="chip">字段</span><span class="chip">异常处理</span><span class="chip">测试</span></div>
+      <div class="kicker">L6 · Workflow Demo</div>
+      <h1>工作流节点 Demo<br><span class="highlight">字段传递与测试</span></h1>
+      <p class="subtitle">先熟悉输入、选择器、大模型、变量和输出这些基础节点。</p>
+      <div class="chips"><span class="chip">输入</span><span class="chip">选择器</span><span class="chip">大模型</span><span class="chip">JSON</span><span class="chip">输出</span></div>
     </div>
     <div class="right"></div>
   </section>
 
   <section class="slide part-slide">
     <div class="left">
-      <div class="kicker">Part 1 · 为什么需要工作流</div>
-      <h2>能力越多，越需要流程</h2>
-      <p class="subtitle">前面几节课已经有讲题、记忆、资料调用和插件能力。工作流负责把这些能力按顺序组织起来。</p>
-    </div>
-    <div class="right">
-      <div class="big-list">
-        <div class="list-item"><span class="num">01</span>讲题规则</div>
-        <div class="list-item"><span class="num">02</span>学生记忆</div>
-        <div class="list-item"><span class="num">03</span>资料调用</div>
-        <div class="list-item"><span class="num">04</span>插件能力</div>
-        <div class="list-item"><span class="num">05</span>学习记录</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Problem</div>
-      <h2>能力多，不等于流程稳</h2>
-      <p class="subtitle">同一个 Agent 既要判断任务，又要查资料、讲题、检查、保存记录。如果没有流程，输出容易漂移。</p>
-    </div>
-    <div class="right">
-      <div class="card-stack">
-        <div class="card warning"><h3>常见问题</h3><p>一上来直接讲答案，忘记读取资料，计划和讲题混在一起。</p></div>
-        <div class="card success"><h3>解决方式</h3><p>把任务拆成可测试的步骤，每一步只承担清楚职责。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Core Idea</div>
-      <h2>工作流是可测试步骤</h2>
-      <p class="subtitle">工作流不是让 Agent 更会聊天，而是让它按顺序完成任务。</p>
+      <div class="kicker">Part 1 · 节点入门</div>
+      <h2>工作流先从最小 Demo 开始</h2>
+      <p class="subtitle">本节不追求复杂功能，只先跑通节点、字段传递、分支和测试。</p>
     </div>
     <div class="right">
       <div class="concept-map compact-map">
-        <div class="concept-node">输入<span>学生问题和资料</span></div>
+        <div class="concept-node">输入<span>接收学生问题</span></div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">判断<span>决定任务类型</span></div>
+        <div class="concept-node">大模型<span>判断任务类型</span></div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">调用资料<span>按需取依据</span></div>
+        <div class="concept-node">选择器<span>走不同分支</span></div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">生成检查保存<span>输出并记录</span></div>
+        <div class="concept-node">输出<span>返回结果</span></div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Product Thinking</div>
-      <h2>先设计功能，再连接节点</h2>
-      <p class="subtitle">一个成熟工作流要先回答：谁会用、什么时候触发、最后要解决什么问题。</p>
+      <div class="kicker">Node Panel</div>
+      <h2>先认识常用节点</h2>
+      <p class="subtitle">L6 只讲入门 Demo 需要的节点，其他节点先知道有这个能力。</p>
     </div>
     <div class="right">
-      <div class="card-stack">
-        <div class="card"><h3>场景</h3><p>学生上传错题，不只是要答案。</p></div>
-        <div class="card success"><h3>结果</h3><p>需要错因、提示、同类练习和下一步任务。</p></div>
-      </div>
+      <table class="config-table">
+        <thead><tr><th>类型</th><th>节点</th></tr></thead>
+        <tbody>
+          <tr><td>输入输出</td><td>输入、输出</td></tr>
+          <tr><td>判断生成</td><td>大模型、选择器、意图识别</td></tr>
+          <tr><td>变量处理</td><td>变量赋值、变量聚合、文本处理、JSON 序列化</td></tr>
+          <tr><td>进阶能力</td><td>循环、知识库检索、查询数据、插件</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Case</div>
-      <h2>本节案例：错题复盘工作流</h2>
-      <p class="subtitle">学生上传一道错题，希望 AI 帮他复盘，并安排下一步练习。</p>
+      <div class="kicker">Input / Output</div>
+      <h2>输入和输出：流程的入口和出口</h2>
+      <p class="subtitle">输入节点收集字段；输出节点把最终结果返回给用户或 Agent。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>节点</th><th>课堂 Demo 字段</th></tr></thead>
+        <tbody>
+          <tr><td>输入</td><td>user_question、subject</td></tr>
+          <tr><td>输出</td><td>final_answer</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">LLM Node</div>
+      <h2>大模型节点：判断或生成</h2>
+      <p class="subtitle">在工作流里，大模型节点不只是聊天，也可以输出后续节点要读取的字段。</p>
     </div>
     <div class="right">
       <div class="big-list">
-        <div class="list-item"><span class="num">01</span>识别卡点</div>
-        <div class="list-item"><span class="num">02</span>调用资料</div>
-        <div class="list-item"><span class="num">03</span>分层提示</div>
-        <div class="list-item"><span class="num">04</span>检查边界</div>
-        <div class="list-item"><span class="num">05</span>保存错因</div>
+        <div class="list-item"><span class="num">01</span>判断任务类型</div>
+        <div class="list-item"><span class="num">02</span>生成分支回答</div>
+        <div class="list-item"><span class="num">03</span>总结字段内容</div>
+        <div class="list-item"><span class="num">04</span>把自然语言变成结构化结果</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">JSON Problem</div>
+      <h2>大模型输出不能只“看起来像 JSON”</h2>
+      <p class="subtitle">选择器和后续节点要读取字段。只要多一句解释、少一个引号、字段名不一致，就可能解析失败。</p>
+    </div>
+    <div class="right">
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>前后加了说明文字</div>
+        <div class="list-item"><span class="num">02</span>输出 Markdown 代码块</div>
+        <div class="list-item"><span class="num">03</span>字段名不固定</div>
+        <div class="list-item"><span class="num">04</span>漏双引号、逗号或括号</div>
+        <div class="list-item"><span class="num">05</span>一次输出多个 JSON</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">JSON Prompt</div>
+      <h2>用提示词锁定 JSON 格式</h2>
+      <p class="subtitle">工作流中的大模型输出，要优先保证后续节点能解析。</p>
+    </div>
+    <div class="right">
+      <pre class="prompt-box">请严格输出 JSON，不要输出任何解释、Markdown、代码块或多余文字。
+
+输出格式必须是：
+{
+  "task_type": "讲题",
+  "reason": "判断原因",
+  "need_resource": true
+}</pre>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Selector</div>
+      <h2>选择器：根据字段走分支</h2>
+      <p class="subtitle">选择器不是理解全部问题，而是读取前面节点的字段，再决定走哪条线。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>task_type</th><th>分支</th></tr></thead>
+        <tbody>
+          <tr><td>讲题</td><td>生成分层提示</td></tr>
+          <tr><td>学习计划</td><td>生成 30 分钟计划</td></tr>
+          <tr><td>知识点复习</td><td>生成复习清单</td></tr>
+          <tr><td>其他</td><td>提示学生补充问题</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Variables</div>
+      <h2>变量赋值与变量聚合</h2>
+      <p class="subtitle">变量赋值用于保存中间结果；变量聚合用于把多个结果整理成后续节点要用的输入。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>节点</th><th>适合做什么</th></tr></thead>
+        <tbody>
+          <tr><td>变量赋值</td><td>保存 task_type、reason、answer</td></tr>
+          <tr><td>变量聚合</td><td>把不同分支结果统一成 final_answer</td></tr>
+          <tr><td>文本处理</td><td>整理换行、标题、固定模板</td></tr>
+          <tr><td>JSON 序列化</td><td>把结构化字段整理成稳定格式</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Loop</div>
+      <h2>循环：对多个对象重复处理</h2>
+      <p class="subtitle">当同一种处理要对多个知识点重复执行时，可以使用循环。</p>
+    </div>
+    <div class="right">
+      <div class="concept-map compact-map">
+        <div class="concept-node">输入列表<span>定义域、单调性、二次函数</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">循环<span>逐个生成复习任务</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">变量聚合<span>合并任务清单</span></div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">输出<span>今日复习计划</span></div>
       </div>
     </div>
   </section>
 
   <section class="slide part-slide">
     <div class="left">
-      <div class="kicker">Part 2 · 单 Agent 主链路</div>
-      <h2>一个 Agent 如何按流程完成任务？</h2>
-      <p class="subtitle">先跑通一条主链路，再在实践指引里细化八步设计。</p>
+      <div class="kicker">Part 2 · Demo 主线</div>
+      <h2>课堂 Demo：学习问题分流器</h2>
+      <p class="subtitle">用一个最小工作流处理讲题、计划、复习三类输入。</p>
     </div>
     <div class="right">
       <div class="concept-map compact-map">
-        <div class="concept-node">Start</div>
+        <div class="concept-node">输入</div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">Router</div>
+        <div class="concept-node">大模型输出 JSON</div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">Resource</div>
+        <div class="concept-node">选择器分支</div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">Generate / Check / Save / Output</div>
+        <div class="concept-node">分支大模型</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">变量聚合 / 输出</div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Start / Router</div>
-      <h2>先收集，再判断</h2>
-      <p class="subtitle">Router 只判断任务类型，不开始解答。</p>
-      <pre class="prompt-box">请只判断本次任务类型：讲题 / 计划 / 作文修改 / 复盘。
-输出 task_type，不要开始解答。</pre>
+      <div class="kicker">Fields</div>
+      <h2>字段传递要看得见</h2>
+      <p class="subtitle">测试时要确认每个字段真的从前一个节点传到了后一个节点。</p>
     </div>
     <div class="right">
-      <table class="config-table">
-        <thead><tr><th>节点</th><th>职责</th></tr></thead>
-        <tbody>
-          <tr><td>Start</td><td>接收题目、学科、图片、资料、时间</td></tr>
-          <tr><td>Router</td><td>判断任务类型和下一步路径</td></tr>
-        </tbody>
-      </table>
+      <pre class="prompt-box">输入.user_question
+→ 大模型.task_type
+→ 大模型.need_resource
+→ 选择器.分支
+→ 分支大模型.answer
+→ 变量聚合.final_answer
+→ 输出.final_answer</pre>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Resource</div>
-      <h2>需要依据时再调用资料</h2>
-      <p class="subtitle">不要每次都调用所有能力，而是根据任务选择来源。</p>
-    </div>
-    <div class="right">
-      <table class="config-table">
-        <thead><tr><th>任务</th><th>需要的资源</th></tr></thead>
-        <tbody>
-          <tr><td>讲题</td><td>相关资料 + 学生薄弱点</td></tr>
-          <tr><td>作文修改</td><td>评分标准 + 学生原文</td></tr>
-          <tr><td>学习计划</td><td>学习目标 + 历史记录</td></tr>
-          <tr><td>最新信息</td><td>插件或网页</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Generate</div>
-      <h2>按任务类型生成结果</h2>
-      <p class="subtitle">生成节点只负责把资料和学生状态转成可执行帮助。</p>
-    </div>
-    <div class="right">
-      <table class="config-table">
-        <thead><tr><th>任务</th><th>输出</th></tr></thead>
-        <tbody>
-          <tr><td>讲题</td><td>卡点、分层提示、下一步</td></tr>
-          <tr><td>计划</td><td>任务、时间、完成标准</td></tr>
-          <tr><td>复盘</td><td>错因、同类题、下次提醒</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Check</div>
-      <h2>防止工作流跑偏</h2>
-      <p class="subtitle">成熟工作流必须有检查节点，负责发现代写、编造、越界和格式缺失。</p>
+      <div class="kicker">Single Node Test</div>
+      <h2>先单节点测试，再跑全流程</h2>
+      <p class="subtitle">工作流出错时，不要只盯最终回答。先看哪个节点的输入或输出不对。</p>
     </div>
     <div class="right">
       <div class="big-list">
-        <div class="list-item"><span class="num">01</span>有没有直接给完整答案？</div>
-        <div class="list-item"><span class="num">02</span>有没有编造资料？</div>
-        <div class="list-item"><span class="num">03</span>有没有忽略输入限制？</div>
-        <div class="list-item"><span class="num">04</span>有没有给下一步任务？</div>
+        <div class="list-item"><span class="num">01</span>输入字段是否拿到？</div>
+        <div class="list-item"><span class="num">02</span>大模型 JSON 是否合法？</div>
+        <div class="list-item"><span class="num">03</span>选择器是否走对？</div>
+        <div class="list-item"><span class="num">04</span>输出是否接到了 final_answer？</div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Save / Output</div>
-      <h2>记录归记录，回答归回答</h2>
-      <p class="subtitle">Save 整理学习记录字段；Output 给学生一份统一、清楚、能执行的反馈。</p>
+      <div class="kicker">JSON Fix</div>
+      <h2>JSON 解析失败先修提示词</h2>
+      <p class="subtitle">选择器读不到字段时，先检查大模型节点输出，而不是急着改后面节点。</p>
     </div>
     <div class="right">
       <table class="config-table">
-        <thead><tr><th>保存字段</th><th>输出结构</th></tr></thead>
+        <thead><tr><th>问题</th><th>修复</th></tr></thead>
         <tbody>
-          <tr><td>subject</td><td>你卡在</td></tr>
-          <tr><td>question_summary</td><td>先试</td></tr>
-          <tr><td>stuck_point</td><td>提示</td></tr>
-          <tr><td>next_task</td><td>下一步</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="slide part-slide">
-    <div class="left">
-      <div class="kicker">Part 3 · 设计技巧</div>
-      <h2>好工作流的三个标准</h2>
-      <p class="subtitle">课堂上先记住标准，具体八步在实践指引里完成。</p>
-    </div>
-    <div class="right">
-      <div class="card-stack">
-        <div class="card"><h3>节点单一</h3><p>一个节点只做一件事。</p></div>
-        <div class="card"><h3>字段固定</h3><p>节点之间传明确字段。</p></div>
-        <div class="card success"><h3>异常可控</h3><p>资料不足、图片模糊、插件失败时不乱编。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Fallback</div>
-      <h2>异常时不乱，才算成熟</h2>
-      <p class="subtitle">成熟工作流不是正常时能跑，而是异常时还能保持可靠。</p>
-    </div>
-    <div class="right">
-      <table class="config-table">
-        <thead><tr><th>异常</th><th>处理</th></tr></thead>
-        <tbody>
-          <tr><td>题图不清楚</td><td>要求补充</td></tr>
-          <tr><td>资料没找到</td><td>说明缺少依据</td></tr>
-          <tr><td>学生要完整答案</td><td>改为提示</td></tr>
-          <tr><td>插件失败</td><td>说明无法确认</td></tr>
-          <tr><td>输入太模糊</td><td>先追问</td></tr>
+          <tr><td>有代码块</td><td>要求不要输出 Markdown</td></tr>
+          <tr><td>字段名漂移</td><td>锁定字段名和枚举值</td></tr>
+          <tr><td>true 写成字符串</td><td>说明布尔值只能是 true/false</td></tr>
+          <tr><td>前后有解释</td><td>要求只能输出一个 JSON 对象</td></tr>
         </tbody>
       </table>
     </div>
@@ -246,18 +256,18 @@
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Test</div>
-      <h2>用真实样本测试每个节点</h2>
-      <p class="subtitle">测试时不要只看最终回答，要看分支、资料、检查和保存是否都跑通。</p>
+      <div class="kicker">Test Cases</div>
+      <h2>用四类输入测试 Demo</h2>
+      <p class="subtitle">每个输入都要观察 task_type、选择器分支和最终输出。</p>
     </div>
     <div class="right">
       <table class="config-table">
-        <thead><tr><th>测试输入</th><th>关注点</th></tr></thead>
+        <thead><tr><th>输入</th><th>应走分支</th></tr></thead>
         <tbody>
-          <tr><td>这道函数题我不会，帮我复盘。</td><td>分支和讲解</td></tr>
-          <tr><td>我今晚只有 40 分钟，数学怎么安排？</td><td>计划输出</td></tr>
-          <tr><td>这张题图太糊了，你猜一下。</td><td>异常处理</td></tr>
-          <tr><td>直接帮我写完整作文。</td><td>检查拦截</td></tr>
+          <tr><td>这道函数题我不会。</td><td>讲题</td></tr>
+          <tr><td>帮我安排今晚 30 分钟数学复习。</td><td>学习计划</td></tr>
+          <tr><td>函数单调性怎么复习？</td><td>知识点复习</td></tr>
+          <tr><td>我不知道怎么学。</td><td>其他</td></tr>
         </tbody>
       </table>
     </div>
@@ -267,15 +277,15 @@
     <div class="left">
       <div class="kicker">v6 Standard</div>
       <h2>v6 完成标准</h2>
-      <p class="subtitle">能跑通一个单 Agent 学习流程，并能定位失败节点。</p>
+      <p class="subtitle">能跑通一个基础工作流，并能解释字段从哪里来、传到哪里去。</p>
     </div>
     <div class="right">
       <div class="big-list">
-        <div class="list-item"><span class="num">01</span>完成一个单 Agent 学习工作流</div>
-        <div class="list-item"><span class="num">02</span>每个节点职责清楚</div>
-        <div class="list-item"><span class="num">03</span>输入输出字段固定</div>
-        <div class="list-item"><span class="num">04</span>至少 3 类测试通过</div>
-        <div class="list-item"><span class="num">05</span>能定位失败节点</div>
+        <div class="list-item"><span class="num">01</span>知道基础节点作用</div>
+        <div class="list-item"><span class="num">02</span>能配置输入和输出字段</div>
+        <div class="list-item"><span class="num">03</span>能让大模型稳定输出 JSON</div>
+        <div class="list-item"><span class="num">04</span>能用选择器走分支</div>
+        <div class="list-item"><span class="num">05</span>能做单节点和全流程测试</div>
       </div>
     </div>
   </section>
@@ -283,13 +293,13 @@
   <section class="slide">
     <div class="left">
       <div class="kicker">Next</div>
-      <h2>下一节：多 Agent 工作流</h2>
-      <p class="subtitle">单 Agent 工作流能把流程跑通。当规划、资料、讲解、检查、复盘、记录都变重时，下一节把这些职责拆成多 Agent 协作。</p>
+      <h2>下一节：字段、分支与循环 Demo</h2>
+      <p class="subtitle">L6 先跑通最小节点 Demo；L7 继续处理更稳定的字段传递、分支规则和循环任务。</p>
     </div>
     <div class="right"></div>
-  <div class="link-row"><a class="button-link" href="L7.Learning Workflow.html">进入 L7</a></div></section>
+  <div class="link-row"><a class="button-link" href="L7.Learning Workflow.html">进入 L7</a><a class="button-link secondary" href="L6-guide.html">L6实操</a></div></section>
 </main>
-<nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 17</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav>
+<nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 18</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav>
 <script src="assets/script.js"></script>
 </body>
 </html>

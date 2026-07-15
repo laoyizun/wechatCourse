@@ -1,24 +1,444 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>AI教育赋能｜L8 实践指引</title><link rel="stylesheet" href="assets/style.css"></head><body class="home"><main class="wrap"><section class="hero"><a class="home-link secondary" href="guide-index.html">返回实操目录</a><div style="height:18px"></div><div class="kicker">L8 Practice · Final System</div><h1>最终 Agent 整合与测试<br><span class="highlight">实践指引</span></h1><p class="subtitle">把 v1-v7 的能力整合为一个可用学习工具，并用测试集定位问题、做最小修复。</p><div class="chips"><span class="chip">系统检查</span><span class="chip">最终测试集</span><span class="chip">修复记录</span><span class="chip">使用说明</span><span class="chip">vFinal</span></div></section><section class="section-panel"><div class="kicker">Practice Map</div><h2>本节实践路径</h2><div class="big-list"><div class="list-item"><span class="num">01</span>整理 v1-v7 能力清单</div><div class="list-item"><span class="num">02</span>完成模块检查表</div><div class="list-item"><span class="num">03</span>设计最终测试集</div><div class="list-item"><span class="num">04</span>记录失败类型并最小修复</div><div class="list-item"><span class="num">05</span>保存最终版和使用说明</div></div></section><div class="phase-list"><section class="phase-block" id="phase1"><div class="kicker">Phase 01</div><h2>能力整合清单</h2><p class="subtitle">先确认每个版本留下来的能力是否还在，不要新功能覆盖旧功能。</p><table class="config-table"><thead><tr><th>版本</th><th>能力</th><th>检查问题</th></tr></thead><tbody><tr><td>v1</td><td>基础身份和学习目标</td><td>它还知道自己服务什么学习场景吗？</td></tr><tr><td>v2</td><td>行为规则、分层提示、参数</td><td>它还会追问、分层提示、不代写吗？</td></tr><tr><td>v3</td><td>记忆和学生画像</td><td>它能读取和更新薄弱点吗？</td></tr><tr><td>v4</td><td>知识库资料调用</td><td>它能基于上传资料回答吗？</td></tr><tr><td>v5</td><td>信息来源和边界</td><td>它知道什么时候需要搜索、资料或 ChatGPT 吗？</td></tr><tr><td>v6</td><td>单 Agent 工作流</td><td>固定任务能跑完整流程吗？</td></tr><tr><td>v7</td><td>多 Agent 协作</td><td>复杂任务能分工、交接、统一输出吗？</td></tr></tbody></table></section><section class="phase-block" id="phase2"><div class="kicker">Phase 02</div><h2>模块检查表</h2><p class="subtitle">每项只看“是否可用”，不要在同一轮大改全部模块。</p><table class="config-table"><thead><tr><th>模块</th><th>通过标准</th><th>当前结果</th></tr></thead><tbody><tr><td>Prompt</td><td>角色、边界、输出格式清楚</td><td></td></tr><tr><td>参数</td><td>稳定性和长度适合学习任务</td><td></td></tr><tr><td>记忆</td><td>能读取、更新、纠错</td><td></td></tr><tr><td>知识库</td><td>能检索资料，不编造</td><td></td></tr><tr><td>插件/信息源</td><td>能判断最新信息需求</td><td></td></tr><tr><td>工作流</td><td>节点职责清楚，连线能跑通</td><td></td></tr><tr><td>多 Agent</td><td>角色分工和交接字段清楚</td><td></td></tr><tr><td>最终输出</td><td>学生看得懂，有下一步任务</td><td></td></tr></tbody></table></section><section class="phase-block" id="phase3"><div class="kicker">Phase 03</div><h2>最终测试集</h2><p class="subtitle">最终测试集要覆盖真实学习场景，不只问“你好”。</p><table class="config-table"><thead><tr><th>类别</th><th>测试输入</th><th>合格标准</th></tr></thead><tbody><tr><td>分层提示</td><td>这道函数题我完全没思路，但别直接给答案</td><td>判断卡点，给 Level 1-3 提示</td></tr><tr><td>记忆调用</td><td>我最近的数学薄弱点是什么？今天做什么？</td><td>读取画像和记录，不编造</td></tr><tr><td>知识库</td><td>根据我上传的讲义解释这个知识点</td><td>调用资料并说明依据</td></tr><tr><td>信息更新</td><td>最新考试政策有什么变化？</td><td>要求搜索或说明需要最新来源</td></tr><tr><td>图片边界</td><td>这张题图有点糊，你猜一下</td><td>要求补充清晰信息</td></tr><tr><td>工作流</td><td>帮我复盘这道错题并记录下一步</td><td>完成错因、同类题、记录</td></tr><tr><td>多 Agent</td><td>下周小测，帮我规划、讲一题、检查我的答案</td><td>分角色处理并统一输出</td></tr><tr><td>越界请求</td><td>直接帮我写完整作文交上去</td><td>拒绝代写，改为提纲和修改建议</td></tr></tbody></table></section><section class="phase-block" id="phase4"><div class="kicker">Phase 04</div><h2>失败类型与最小修复</h2><p class="subtitle">最终调试不要整段重写 Prompt。先定位失败类型，再做最小改动。</p><table class="config-table"><thead><tr><th>失败类型</th><th>表现</th><th>最小修复</th></tr></thead><tbody><tr><td>身份漂移</td><td>回答不像学习教练</td><td>补强角色和任务边界</td></tr><tr><td>直接给答案</td><td>学生一要求就代写</td><td>补强不代写和分层提示规则</td></tr><tr><td>忘记学生状态</td><td>不使用薄弱点和目标</td><td>检查记忆读取规则</td></tr><tr><td>编造资料</td><td>说资料里有但其实没有</td><td>补强知识库边界</td></tr><tr><td>过时信息</td><td>凭默认知识答最新问题</td><td>补强插件/搜索判断</td></tr><tr><td>流程断裂</td><td>只回答一半，不保存记录</td><td>检查工作流连线和 Save 节点</td></tr><tr><td>多 Agent 混乱</td><td>多个角色重复说话</td><td>增加 Final Response 整合节点</td></tr></tbody></table></section><section class="phase-block" id="phase5"><div class="kicker">Phase 05</div><h2>最终输出格式</h2><p class="subtitle">学生最终看到的回答要简洁，不需要暴露全部后台节点。</p><pre class="prompt-box">推荐最终回答结构：
-1. 我判断你现在的问题属于：
-2. 你的主要卡点是：
-3. 我先给你一个提示/解释：
-4. 你现在要做的下一步是：
-5. 我是否需要更新学习记录：</pre></section><section class="phase-block" id="phase6"><div class="kicker">Phase 06</div><h2>学生自用说明</h2><p class="subtitle">最终 Agent 要让学生知道怎么用，而不是只会技术配置。</p><table class="config-table"><thead><tr><th>场景</th><th>学生可以这样问</th></tr></thead><tbody><tr><td>讲题</td><td>这道数学题我卡在第一步，先别直接给答案</td></tr><tr><td>计划</td><td>我今晚有 45 分钟，数学和英语怎么安排？</td></tr><tr><td>复盘</td><td>根据最近记录，总结我本周最高频的错因</td></tr><tr><td>资料问答</td><td>根据我上传的讲义解释这个概念</td></tr><tr><td>边界提醒</td><td>这个问题需要最新信息吗？你能保证吗？</td></tr><tr><td>更新记忆</td><td>我现在的薄弱点从定义域改成单调性</td></tr></tbody></table></section><section class="phase-block" id="phase7"><div class="kicker">Phase 07</div><h2>保存最终版本</h2><pre class="prompt-box">版本：vFinal 学习 Agent
-适用学生/学科：
-核心能力：
-已配置模块：Prompt / 参数 / 记忆 / 数据库 / 知识库 / 插件 / 工作流 / 多 Agent
-最终测试通过项：
-仍需人工判断的场景：
-学生使用说明：
-下一阶段项目：个人学习仪表盘</pre></section><section class="phase-block" id="final-prompt"><div class="kicker">Final Prompt</div><h2>完整 Prompt 折叠区</h2><p class="subtitle">先完成前面的字段、规则和测试，再展开这里对照。不要把完整 Prompt 当作第一步。</p><details class="prompt-details"><summary>点击展开：L8 完整 Prompt 示例</summary><pre class="prompt-box">你是一名面向国内中学生的 AI 学习系统。你需要整合以下能力：
-1. 明确学习教练身份和学科场景；
-2. 使用分层提示，不直接代写完整答案；
-3. 读取并更新学生画像、薄弱点和学习记录；
-4. 当问题依赖上传资料时优先调用知识库；
-5. 当问题依赖最新信息时调用搜索或说明无法保证最新；
-6. 对固定任务使用工作流完成判断、资料、生成、检查、记录；
-7. 对复杂任务使用 Planner、Tutor、Critic、Reviewer、Memory 多角色协作；
-8. 最终输出由 Final Response 统一整理，必须简洁、可执行。
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI教育赋能｜L8 实践指引</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="home">
+  <main class="wrap">
+    <section class="hero">
+      <a class="home-link secondary" href="guide-index.html">返回实操目录</a>
+      <div style="height:18px"></div>
+      <div class="kicker">L8 Practice · Mature Workflow</div>
+      <h1>成熟学习工作流设计<br><span class="highlight">实践指引</span></h1>
+      <p class="subtitle">把已经练过的节点能力，组合成一个能复盘数学错题的完整工作流。</p>
+      <div class="chips">
+        <span class="chip">场景定义</span>
+        <span class="chip">字段表</span>
+        <span class="chip">节点职责</span>
+        <span class="chip">分支兜底</span>
+        <span class="chip">测试样本</span>
+      </div>
+    </section>
 
-最终回答结构：问题类型、主要卡点、提示或解释、下一步任务、是否更新记录。
-禁止代写、编造资料、假装拥有最新信息、保存未经确认的长期记忆。</pre></details></section><section class="phase-block"><div class="kicker">Next</div><h2>下一阶段：个人学习仪表盘项目</h2><p class="subtitle">后两节课会把 Agent 能力接入一个更可视化的学习工具。</p></section></div></main></body></html>
+    <section class="section-panel">
+      <div class="kicker">Practice Map</div>
+      <h2>你的实践路径</h2>
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>确认已经会用的节点能力</div>
+        <div class="list-item"><span class="num">02</span>进入数学错题复盘场景</div>
+        <div class="list-item"><span class="num">03</span>定义入口字段和输出字段</div>
+        <div class="list-item"><span class="num">04</span>拆解主流程和节点职责</div>
+        <div class="list-item"><span class="num">05</span>配置分支、兜底和测试样本</div>
+        <div class="list-item"><span class="num">06</span>保存 v8 成熟学习工作流</div>
+      </div>
+    </section>
+
+    <section class="section-panel">
+      <div class="kicker">Workflow Wireframe</div>
+      <h2>数学错题复盘工作流</h2>
+      <p class="subtitle">这个工作流固定处理数学错题：数据库关联长期状态，知识库提供数学依据，插件/API 可选检索同类题或做计算校验。</p>
+      <div class="workflow-board">
+        <div class="workflow-track">
+          <div class="workflow-node">
+            <div class="workflow-label">Input</div>
+            <strong>输入节点</strong>
+            <span>question_text 数学题目<br>student_solution 解题过程<br>wrong_answer 错误答案<br>hint_level 提示深度</span>
+          </div>
+          <div class="workflow-node database">
+            <div class="workflow-label">Database</div>
+            <strong>数据库查询</strong>
+            <span>读取学生画像、历史薄弱点、相似错题记录</span>
+          </div>
+          <div class="workflow-node model">
+            <div class="workflow-label">LLM JSON</div>
+            <strong>题目信息解析</strong>
+            <span>math_topic、known_conditions、target、student_error_step</span>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-label">Selector</div>
+            <strong>判断输入是否足够</strong>
+            <span>题干完整 / 题干不完整 / 没有学生过程 / 直接要求答案</span>
+          </div>
+        </div>
+
+        <div class="workflow-divider">题干完整路径</div>
+
+        <div class="workflow-mini-track">
+          <div class="workflow-node knowledge">
+            <div class="workflow-label">Knowledge</div>
+            <strong>知识库检索</strong>
+            <span>数学概念、公式、课堂讲义、典型例题</span>
+          </div>
+          <div class="workflow-node plugin">
+            <div class="workflow-label">Plugin/API</div>
+            <strong>同类题与校验</strong>
+            <span>检索同类练习题，或调用计算/校验工具</span>
+          </div>
+          <div class="workflow-node model">
+            <div class="workflow-label">LLM</div>
+            <strong>错因诊断</strong>
+            <span>概念错误、计算错误、条件遗漏、方法不当</span>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-label">Selector</div>
+            <strong>根据 hint_level 分层</strong>
+            <span>只给提示 / 给思路 / 给讲解</span>
+          </div>
+        </div>
+
+        <div class="workflow-branches">
+          <div class="workflow-branch">
+            <div class="workflow-branch-title">分层输出</div>
+            <div class="workflow-mini-track three">
+              <div class="workflow-node model">
+                <div class="workflow-label">Hint</div>
+                <strong>只给提示</strong>
+                <span>提示下一步检查条件</span>
+              </div>
+              <div class="workflow-node model">
+                <div class="workflow-label">Reasoning</div>
+                <strong>给解题思路</strong>
+                <span>说明关键步骤，但不直接代写</span>
+              </div>
+              <div class="workflow-node model">
+                <div class="workflow-label">Explain</div>
+                <strong>给讲解</strong>
+                <span>讲清错因，并给同类题建议</span>
+              </div>
+            </div>
+          </div>
+          <div class="workflow-branch">
+            <div class="workflow-branch-title">题干不完整</div>
+            <div class="workflow-node guard">
+              <div class="workflow-label">Fallback</div>
+              <strong>补充题干</strong>
+              <span>请补充完整题目和关键条件</span>
+            </div>
+          </div>
+          <div class="workflow-branch">
+            <div class="workflow-branch-title">没有学生过程 / 直接要答案</div>
+            <div class="workflow-node guard">
+              <div class="workflow-label">Boundary</div>
+              <strong>学习边界</strong>
+              <span>要求补充解题过程，或改为提示和检查标准</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="workflow-divider">检查、保存与输出</div>
+
+        <div class="workflow-output">
+          <div class="workflow-node guard">
+            <div class="workflow-label">Check</div>
+            <strong>边界检查</strong>
+            <span>不编造资料、不直接代写、必须给下一步任务</span>
+          </div>
+          <div class="workflow-node">
+            <div class="workflow-label">Aggregate</div>
+            <strong>变量聚合</strong>
+            <span>错因 + 依据 + 提示 + 下一步练习</span>
+          </div>
+          <div class="workflow-node database">
+            <div class="workflow-label">Database</div>
+            <strong>数据库写入</strong>
+            <span>保存错题记录、更新薄弱点、记录 next_task</span>
+          </div>
+        </div>
+
+        <div class="workflow-node">
+          <div class="workflow-label">Output</div>
+          <strong>输出节点：数学错题复盘结果</strong>
+          <span>最终看到的是错因、提示、依据和下一步练习，不需要暴露后台节点。</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-panel">
+      <div class="kicker">Database Schema</div>
+      <h2>L8 用到的数据库表结构</h2>
+      <p class="subtitle">这组表用来读取历史状态、保存错题记录、更新薄弱点，并记录每次复习。</p>
+      <table class="config-table">
+        <thead><tr><th>表名</th><th>作用</th><th>L8 中怎么用</th></tr></thead>
+        <tbody>
+          <tr><td>student_profile</td><td>学生画像</td><td>读取年级、目标、讲解偏好</td></tr>
+          <tr><td>math_weak_points</td><td>数学薄弱点</td><td>读取历史薄弱点；复盘后更新优先级</td></tr>
+          <tr><td>math_wrong_questions</td><td>数学错题记录</td><td>写入本次错题、错因、下一步任务</td></tr>
+          <tr><td>math_review_plans</td><td>数学复习计划</td><td>可选写入由错题触发的复习任务</td></tr>
+        </tbody>
+      </table>
+
+      <h3>student_profile</h3>
+      <table class="config-table">
+        <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+          <tr><td>grade</td><td>文本</td><td>高一</td></tr>
+          <tr><td>math_goal</td><td>文本</td><td>函数周测达到 80 分</td></tr>
+          <tr><td>explain_preference</td><td>文本</td><td>先提示，再讲思路</td></tr>
+          <tr><td>updated_at</td><td>时间</td><td>2026-07-13</td></tr>
+        </tbody>
+      </table>
+
+      <h3>math_wrong_questions</h3>
+      <table class="config-table">
+        <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td>wrong_question_id</td><td>文本</td><td>wq001</td></tr>
+          <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+          <tr><td>question_text</td><td>长文本</td><td>已知 f(x)=√(x-1)/(x-3)，求定义域</td></tr>
+          <tr><td>student_solution</td><td>长文本</td><td>根号内 x-1 ≥ 0，所以 x ≥ 1</td></tr>
+          <tr><td>wrong_answer</td><td>文本</td><td>x ≥ 1</td></tr>
+          <tr><td>math_topic</td><td>文本</td><td>函数定义域</td></tr>
+          <tr><td>error_type</td><td>文本</td><td>条件遗漏</td></tr>
+          <tr><td>diagnosis</td><td>长文本</td><td>只考虑根号非负，漏掉分母不能为 0</td></tr>
+          <tr><td>evidence</td><td>长文本</td><td>定义域需要同时满足所有限制条件</td></tr>
+          <tr><td>next_task</td><td>文本</td><td>做 2 道根号 + 分母定义域题</td></tr>
+          <tr><td>created_at</td><td>时间</td><td>2026-07-13</td></tr>
+        </tbody>
+      </table>
+
+      <h3>math_weak_points</h3>
+      <table class="config-table">
+        <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td>weak_point_id</td><td>文本</td><td>wp001</td></tr>
+          <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+          <tr><td>topic</td><td>文本</td><td>函数定义域</td></tr>
+          <tr><td>source</td><td>文本</td><td>错题复盘</td></tr>
+          <tr><td>priority</td><td>数字</td><td>3</td></tr>
+          <tr><td>status</td><td>文本</td><td>复习中</td></tr>
+          <tr><td>last_wrong_question_id</td><td>文本</td><td>wq001</td></tr>
+          <tr><td>updated_at</td><td>时间</td><td>2026-07-13</td></tr>
+        </tbody>
+      </table>
+
+      <h3>math_review_plans</h3>
+      <table class="config-table">
+        <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td>plan_id</td><td>文本</td><td>plan001</td></tr>
+          <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+          <tr><td>trigger_wrong_question_id</td><td>文本</td><td>wq001</td></tr>
+          <tr><td>plan_date</td><td>日期</td><td>2026-07-13</td></tr>
+          <tr><td>plan_items</td><td>长文本/JSON</td><td>[{"topic":"函数定义域","task":"专项练习"}]</td></tr>
+          <tr><td>next_task</td><td>文本</td><td>完成定义域专项练习后再复盘</td></tr>
+          <tr><td>created_at</td><td>时间</td><td>2026-07-13</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="phase-list">
+      <section class="phase-block" id="phase1">
+        <div class="kicker">Phase 01</div>
+        <h2>确认你要用哪些能力</h2>
+        <p class="subtitle">先把已经会用的节点列出来，再把它们接成数学错题复盘流程。</p>
+        <table class="config-table">
+          <thead><tr><th>来自</th><th>能力</th><th>在 L8 中的作用</th></tr></thead>
+          <tbody>
+            <tr><td>L6</td><td>输入、输出</td><td>定义工作流的入口和最终展示</td></tr>
+            <tr><td>L6</td><td>大模型 + JSON</td><td>把自然语言问题转成稳定字段</td></tr>
+            <tr><td>L6</td><td>选择器</td><td>根据任务类型、资料是否足够走不同分支</td></tr>
+            <tr><td>L7</td><td>变量赋值、变量聚合</td><td>保存中间结果，整理最终输出</td></tr>
+            <tr><td>L7</td><td>循环</td><td>批量处理多个错因、多个知识点或多条建议</td></tr>
+            <tr><td>L7</td><td>节点级测试</td><td>定位是字段、分支、生成还是输出出了问题</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase2">
+        <div class="kicker">Phase 02</div>
+        <h2>确定你的工作流场景</h2>
+        <p class="subtitle">这次只完成一个清晰功能：数学错题复盘。先把它做稳定，再扩展其他功能。</p>
+        <pre class="prompt-box">工作流场景：
+你做错一道数学题，希望 AI 判断错因，并给出下一步练习建议。
+
+输入信息：
+- 数学题目文字
+- 你的解题过程
+- 你的错误答案
+- 你希望获得的提示深度
+
+输出目标：
+- 判断错因
+- 给出分层提示
+- 推荐下一步练习
+- 必要时提醒资料不足</pre>
+      </section>
+
+      <section class="phase-block" id="phase3">
+        <div class="kicker">Phase 03</div>
+        <h2>入口字段设计</h2>
+        <p class="subtitle">字段不用一次设计很多。先保证每个字段都会被后续节点用到。</p>
+        <table class="config-table">
+          <thead><tr><th>字段名</th><th>类型</th><th>用途</th></tr></thead>
+          <tbody>
+            <tr><td>question_text</td><td>长文本</td><td>数学题目文字</td></tr>
+            <tr><td>student_solution</td><td>长文本</td><td>你的解题过程</td></tr>
+            <tr><td>wrong_answer</td><td>文本</td><td>你的错误答案</td></tr>
+            <tr><td>hint_level</td><td>选项</td><td>只给提示、给思路、给讲解</td></tr>
+            <tr><td>student_id</td><td>文本</td><td>用于读取和保存学习记录</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase4">
+        <div class="kicker">Phase 04</div>
+        <h2>主流程拆解</h2>
+        <p class="subtitle">先写清楚流程，再拖节点。这样你在画布里更容易判断每一步该接什么。</p>
+        <div class="flow-line">
+          <div class="flow-step"><strong>输入</strong><span>收集题目和解题过程</span></div>
+          <div class="flow-step"><strong>读取</strong><span>查询学习记录</span></div>
+          <div class="flow-step"><strong>检索</strong><span>查找数学资料</span></div>
+          <div class="flow-step"><strong>复盘</strong><span>诊断错因和提示</span></div>
+          <div class="flow-step"><strong>保存</strong><span>写入错题和日志</span></div>
+          <div class="flow-step"><strong>输出</strong><span>生成可执行反馈</span></div>
+        </div>
+      </section>
+
+      <section class="phase-block" id="phase5">
+        <div class="kicker">Phase 05</div>
+        <h2>节点职责表</h2>
+        <p class="subtitle">一个节点只承担一种主要职责。节点变重时，优先拆字段或拆节点。</p>
+        <table class="config-table">
+          <thead><tr><th>节点</th><th>职责</th><th>关键输出</th></tr></thead>
+          <tbody>
+            <tr><td>输入</td><td>接收题目、解题过程、错误答案和提示级别</td><td>question_text, student_solution, wrong_answer</td></tr>
+            <tr><td>数据库查询</td><td>读取学生画像、历史薄弱点和相似错题</td><td>student_context</td></tr>
+            <tr><td>大模型：题目信息解析</td><td>整理知识点、已知条件、目标和疑似错误步骤</td><td>math_topic, student_error_step</td></tr>
+            <tr><td>选择器</td><td>判断题干是否完整、是否有解题过程、是否直接要答案</td><td>normal / need_question / need_solution / direct_answer</td></tr>
+            <tr><td>知识库检索</td><td>检索数学概念、公式、典型例题和复盘规则</td><td>evidence</td></tr>
+            <tr><td>大模型：错因诊断</td><td>生成错误类型、错因、提示和下一步任务</td><td>error_type, diagnosis, next_task</td></tr>
+            <tr><td>新增数据</td><td>保存错题记录和复习日志</td><td>rowNum</td></tr>
+            <tr><td>输出</td><td>展示最终复盘结果</td><td>final_answer</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase6">
+        <div class="kicker">Phase 06</div>
+        <h2>中间字段表</h2>
+        <p class="subtitle">字段名尽量短、稳定、可读。连接节点时，优先按这张表引用字段。</p>
+        <table class="config-table">
+          <thead><tr><th>字段名</th><th>来自节点</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>math_topic</td><td>题目信息解析</td><td>函数定义域、二次函数最值等</td></tr>
+            <tr><td>question_summary</td><td>题目信息解析</td><td>用一句话概括题目</td></tr>
+            <tr><td>student_solution_summary</td><td>题目信息解析</td><td>概括你的解题过程</td></tr>
+            <tr><td>student_error_step</td><td>题目信息解析</td><td>疑似出错的步骤</td></tr>
+            <tr><td>evidence</td><td>知识库检索</td><td>可引用资料，不存在时为空</td></tr>
+            <tr><td>diagnosis</td><td>错因诊断</td><td>错因判断</td></tr>
+            <tr><td>hint</td><td>分层提示</td><td>按照提示级别生成</td></tr>
+            <tr><td>risk_flags</td><td>边界检查</td><td>direct_answer, no_evidence, unclear_input</td></tr>
+            <tr><td>next_task</td><td>错因诊断</td><td>下一步练习或复习动作</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase7">
+        <div class="kicker">Phase 07</div>
+        <h2>选择器分支设计</h2>
+        <p class="subtitle">分支不追求多，先覆盖最容易出错的几种情况。</p>
+        <table class="config-table">
+          <thead><tr><th>条件</th><th>走向</th><th>输出策略</th></tr></thead>
+          <tbody>
+            <tr><td>题干、过程都清楚</td><td>正常复盘</td><td>生成错因、提示、下一步练习</td></tr>
+            <tr><td>题干缺失或太短</td><td>补充信息</td><td>要求补充题干或关键条件</td></tr>
+            <tr><td>知识库没有相关资料</td><td>无依据回答</td><td>说明资料不足，只给通用思路</td></tr>
+            <tr><td>直接要求交作业答案</td><td>学习边界</td><td>拒绝代写，改给提纲、提示或检查标准</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase8">
+        <div class="kicker">Phase 08</div>
+        <h2>循环的轻量用法</h2>
+        <p class="subtitle">循环适合处理多个同类项目。只有真的有多个知识点、多个错因或多个任务时再使用。</p>
+        <pre class="prompt-box">可选循环场景：
+1. 一次提交 3 个错因，逐个生成改进建议；
+2. 知识库返回多个相关概念，逐个整理成一句解释；
+3. 下一步练习包含多个任务，逐个写出完成标准。
+
+循环输出字段：
+- item_name
+- short_reason
+- next_action
+- check_standard</pre>
+      </section>
+
+      <section class="phase-block" id="phase9">
+        <div class="kicker">Phase 09</div>
+        <h2>大模型 JSON 提示词</h2>
+        <p class="subtitle">只要后续节点要读取字段，大模型节点就必须稳定输出 JSON。</p>
+        <pre class="prompt-box">请只输出合法 JSON，不要输出 Markdown、解释文字或代码块。
+所有字段都必须出现；没有信息时填空字符串，不要删除字段。
+字符串中的换行请用 \n 表示。
+
+{
+  "task_type": "",
+  "question_summary": "",
+  "answer_summary": "",
+  "stuck_point": "",
+  "need_more_info": false,
+  "risk_flags": [],
+  "next_step": ""
+}</pre>
+      </section>
+
+      <section class="phase-block" id="phase10">
+        <div class="kicker">Phase 10</div>
+        <h2>测试样本</h2>
+        <p class="subtitle">每个分支至少准备一条测试输入，避免只测正常情况。</p>
+        <table class="config-table">
+          <thead><tr><th>类型</th><th>测试输入</th><th>合格标准</th></tr></thead>
+          <tbody>
+            <tr><td>正常复盘</td><td>给出完整题干和解题过程</td><td>能指出错因，并给分层提示</td></tr>
+            <tr><td>题干不足</td><td>只说“这题我不会”</td><td>要求补充题目和已尝试步骤</td></tr>
+            <tr><td>资料不足</td><td>问一个知识库没有的概念</td><td>不假装引用资料</td></tr>
+            <tr><td>越界请求</td><td>“直接帮我写完整答案交上去”</td><td>拒绝代写，改为学习支持</td></tr>
+            <tr><td>JSON 异常</td><td>输入很长、符号很多的题目</td><td>字段仍能被下游节点读取</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase11">
+        <div class="kicker">Phase 11</div>
+        <h2>节点级调试</h2>
+        <p class="subtitle">哪里错，就测哪里。不要每次都从头到尾重跑。</p>
+        <table class="config-table">
+          <thead><tr><th>问题表现</th><th>优先检查</th><th>修复方向</th></tr></thead>
+          <tbody>
+            <tr><td>走错分支</td><td>问题理解、选择器条件</td><td>检查 task_type 和 need_more_info</td></tr>
+            <tr><td>下游取不到值</td><td>JSON 输出、字段引用</td><td>固定字段名，避免中文/空格混用</td></tr>
+            <tr><td>答案像泛泛聊天</td><td>复盘生成节点</td><td>补充输入字段和输出格式</td></tr>
+            <tr><td>编造资料</td><td>知识库检索、边界检查</td><td>没有 evidence 时切换无依据回答</td></tr>
+            <tr><td>最终输出太散</td><td>变量聚合、输出节点</td><td>统一 final_payload 结构</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="phase-block" id="phase12">
+        <div class="kicker">Phase 12</div>
+        <h2>保存版本记录</h2>
+        <pre class="prompt-box">版本：v8 成熟学习工作流
+场景：错题复盘
+入口字段：
+核心节点：
+关键分支：
+循环使用场景：
+测试通过样本：
+仍需自己判断的情况：
+下一步：进入 L9 个人学习仪表盘项目</pre>
+      </section>
+
+      <section class="phase-block">
+        <div class="kicker">Next</div>
+        <h2>下一阶段：学习仪表盘项目</h2>
+        <p class="subtitle">L9 会把 Agent 的计划、记录和复盘结果放进一个更直观的学习仪表盘。</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

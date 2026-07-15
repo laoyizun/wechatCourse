@@ -11,187 +11,363 @@
   <section class="hero">
     <a class="home-link secondary" href="guide-index.html">返回实操目录</a>
     <div style="height:18px"></div>
-    <div class="kicker">L7 Practice · Multi Agent</div>
-    <h1>多 Agent 工作流<br><span class="highlight">实践指引</span></h1>
-    <p class="subtitle">把 L6 已跑通的单 Agent 工作流，升级为角色清楚、交接稳定的 v7 多 Agent 协作流程。</p>
-    <div class="chips"><span class="chip">Planner</span><span class="chip">Resource</span><span class="chip">Tutor</span><span class="chip">Critic</span><span class="chip">Final Response</span></div>
+    <div class="kicker">L7 Practice · Logic Demo</div>
+    <h1>字段、分支与循环 Demo<br><span class="highlight">实践指引</span></h1>
+    <p class="subtitle">把 L6 的最小工作流升级为“今日复习任务生成器”，重点练字段、选择器、循环和聚合。</p>
+    <div class="chips"><span class="chip">字段</span><span class="chip">变量赋值</span><span class="chip">选择器</span><span class="chip">循环</span><span class="chip">变量聚合</span></div>
   </section>
 
   <section class="section-panel">
     <div class="kicker">Practice Map</div>
     <h2>本节实践路径</h2>
     <div class="big-list">
-      <div class="list-item"><span class="num">01</span>读取 L6 工作流</div>
-      <div class="list-item"><span class="num">02</span>判断哪些节点需要拆成角色</div>
-      <div class="list-item"><span class="num">03</span>设计角色职责</div>
-      <div class="list-item"><span class="num">04</span>设置交接字段</div>
-      <div class="list-item"><span class="num">05</span>设计多 Agent 连线</div>
-      <div class="list-item"><span class="num">06</span>设置冲突优先级</div>
-      <div class="list-item"><span class="num">07</span>做复杂任务测试</div>
+      <div class="list-item"><span class="num">01</span>从 L6 Demo 出发</div>
+      <div class="list-item"><span class="num">02</span>设计输入字段</div>
+      <div class="list-item"><span class="num">03</span>变量赋值稳定字段</div>
+      <div class="list-item"><span class="num">04</span>选择器处理三种情况</div>
+      <div class="list-item"><span class="num">05</span>循环生成复习任务</div>
+      <div class="list-item"><span class="num">06</span>变量聚合和文本处理</div>
+      <div class="list-item"><span class="num">07</span>测试字段、分支与循环</div>
       <div class="list-item"><span class="num">08</span>保存 v7 版本记录</div>
     </div>
+  </section>
+
+  <section class="section-panel">
+    <div class="kicker">Workflow Wireframe</div>
+    <h2>数学薄弱点复习任务生成器</h2>
+    <p class="subtitle">本节固定数学学科：数据库读取学生状态，知识库提供概念和例题，插件/API 可选连接题库或练习系统。</p>
+    <div class="workflow-board">
+      <div class="workflow-track">
+        <div class="workflow-node">
+          <div class="workflow-label">Input</div>
+          <strong>输入节点</strong>
+          <span>weak_points 数学薄弱点<br>available_time 可用时间<br>exam_goal 考试目标</span>
+        </div>
+        <div class="workflow-node database">
+          <div class="workflow-label">Database</div>
+          <strong>数据库查询</strong>
+          <span>读取历史薄弱点、最近错题类型、上次复习记录</span>
+        </div>
+        <div class="workflow-node model">
+          <div class="workflow-label">LLM</div>
+          <strong>整理薄弱点</strong>
+          <span>合并学生输入和数据库记录，输出 weak_point_list</span>
+        </div>
+        <div class="workflow-node">
+          <div class="workflow-label">Selector</div>
+          <strong>判断薄弱点数量</strong>
+          <span>多个 / 一个 / 没有明确薄弱点</span>
+        </div>
+      </div>
+
+      <div class="workflow-divider">分支处理</div>
+
+      <div class="workflow-branches">
+        <div class="workflow-branch">
+          <div class="workflow-branch-title">多个薄弱点</div>
+          <div class="workflow-mini-track">
+            <div class="workflow-node">
+              <div class="workflow-label">Loop</div>
+              <strong>循环节点</strong>
+              <span>逐个处理 weak_point_list</span>
+            </div>
+            <div class="workflow-node knowledge">
+              <div class="workflow-label">Knowledge</div>
+              <strong>知识库检索</strong>
+              <span>概念、公式卡、课堂讲义、典型例题</span>
+            </div>
+            <div class="workflow-node plugin">
+              <div class="workflow-label">Plugin/API</div>
+              <strong>练习题接口</strong>
+              <span>调用题库或生成练习链接</span>
+            </div>
+            <div class="workflow-node model">
+              <div class="workflow-label">LLM</div>
+              <strong>生成单点任务</strong>
+              <span>复习步骤、例题方向、检测方式、预计时间</span>
+            </div>
+          </div>
+        </div>
+        <div class="workflow-branch">
+          <div class="workflow-branch-title">一个薄弱点</div>
+          <div class="workflow-node knowledge">
+            <div class="workflow-label">Knowledge</div>
+            <strong>知识库检索</strong>
+            <span>直接生成单点复习任务</span>
+          </div>
+        </div>
+        <div class="workflow-branch">
+          <div class="workflow-branch-title">没有明确薄弱点</div>
+          <div class="workflow-node guard">
+            <div class="workflow-label">Fallback</div>
+            <strong>补充提示</strong>
+            <span>请补充薄弱点，或选择函数/几何/概率/数列</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="workflow-divider">整理与保存</div>
+
+      <div class="workflow-output">
+        <div class="workflow-node">
+          <div class="workflow-label">Aggregate</div>
+          <strong>变量聚合</strong>
+          <span>合并所有知识点任务</span>
+        </div>
+        <div class="workflow-node model">
+          <div class="workflow-label">LLM</div>
+          <strong>时间排序与压缩</strong>
+          <span>根据 available_time 排优先级</span>
+        </div>
+        <div class="workflow-node database">
+          <div class="workflow-label">Database</div>
+          <strong>数据库写入</strong>
+          <span>保存今日复习计划、建议时间和 next_task</span>
+        </div>
+      </div>
+
+      <div class="workflow-node">
+        <div class="workflow-label">Output</div>
+        <strong>输出节点：今日数学复习计划</strong>
+        <span>学生看到的是按时间排序、能直接执行的复习任务。</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-panel">
+    <div class="kicker">Database Schema</div>
+    <h2>L7 用到的数据库表结构</h2>
+    <p class="subtitle">L7 重点是“读学生状态，写复习计划”。课堂演示可以先建最少字段，后续再扩展。</p>
+    <table class="config-table">
+      <thead><tr><th>表名</th><th>作用</th><th>L7 中怎么用</th></tr></thead>
+      <tbody>
+        <tr><td>student_profile</td><td>学生画像</td><td>读取年级、目标、讲解偏好</td></tr>
+        <tr><td>math_weak_points</td><td>数学薄弱点</td><td>读取历史薄弱点，和本次输入合并</td></tr>
+        <tr><td>math_wrong_questions</td><td>数学错题记录</td><td>读取最近错题类型，辅助排序复习重点</td></tr>
+        <tr><td>math_review_plans</td><td>数学复习计划</td><td>写入今日复习任务和 next_task</td></tr>
+      </tbody>
+    </table>
+
+    <h3>student_profile</h3>
+    <table class="config-table">
+      <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+        <tr><td>grade</td><td>文本</td><td>高一</td></tr>
+        <tr><td>math_goal</td><td>文本</td><td>函数周测达到 80 分</td></tr>
+        <tr><td>explain_preference</td><td>文本</td><td>先提示，再讲思路</td></tr>
+        <tr><td>updated_at</td><td>时间</td><td>2026-07-13</td></tr>
+      </tbody>
+    </table>
+
+    <h3>math_weak_points</h3>
+    <table class="config-table">
+      <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td>weak_point_id</td><td>文本</td><td>wp001</td></tr>
+        <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+        <tr><td>topic</td><td>文本</td><td>函数定义域</td></tr>
+        <tr><td>source</td><td>文本</td><td>错题复盘 / 学生自评 / 老师标记</td></tr>
+        <tr><td>priority</td><td>数字</td><td>3</td></tr>
+        <tr><td>status</td><td>文本</td><td>待复习 / 复习中 / 已掌握</td></tr>
+        <tr><td>last_reviewed_at</td><td>时间</td><td>2026-07-12</td></tr>
+      </tbody>
+    </table>
+
+    <h3>math_review_plans</h3>
+    <table class="config-table">
+      <thead><tr><th>字段</th><th>类型</th><th>示例</th></tr></thead>
+      <tbody>
+        <tr><td>plan_id</td><td>文本</td><td>plan001</td></tr>
+        <tr><td>student_id</td><td>文本</td><td>s001</td></tr>
+        <tr><td>plan_date</td><td>日期</td><td>2026-07-13</td></tr>
+        <tr><td>available_time</td><td>文本</td><td>45 分钟</td></tr>
+        <tr><td>plan_items</td><td>长文本/JSON</td><td>[{"topic":"函数定义域","task":"做 2 道定义域题"}]</td></tr>
+        <tr><td>next_task</td><td>文本</td><td>完成定义域专项练习并自查条件遗漏</td></tr>
+        <tr><td>created_at</td><td>时间</td><td>2026-07-13</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <div class="phase-list">
     <section class="phase-block" id="phase1">
       <div class="kicker">Phase 01</div>
-      <h2>读取 L6 工作流</h2>
-      <p class="subtitle">L7 不从零开始。先拿出 L6 已经跑通的 v6 单 Agent 工作流。</p>
-      <pre class="prompt-box">L6 工作流名称：
-主要学习场景：
-核心输入：
-最终输出：
-已经跑通的测试：
-最容易失败的节点：</pre>
+      <h2>从 L6 Demo 出发</h2>
+      <p class="subtitle">L6 已经能做任务判断和分支回答。L7 要让工作流能处理多个知识点。</p>
+      <pre class="prompt-box">L6 基础链路：
+输入 → 大模型 JSON → 选择器 → 分支大模型 → 变量聚合 → 输出
+
+L7 升级目标：
+多个薄弱知识点 → 循环生成任务 → 聚合成今日复习计划</pre>
     </section>
 
     <section class="phase-block" id="phase2">
       <div class="kicker">Phase 02</div>
-      <h2>判断哪些节点需要拆</h2>
-      <p class="subtitle">能用节点解决的，不一定要拆成 Agent；只有职责明显不同、测试标准不同，才值得拆。</p>
+      <h2>设计输入字段</h2>
+      <p class="subtitle">本节输入字段服务“复习任务生成器”。</p>
       <table class="config-table">
-        <thead><tr><th>L6 节点</th><th>是否拆成 Agent</th><th>判断标准</th></tr></thead>
+        <thead><tr><th>字段</th><th>示例</th></tr></thead>
         <tbody>
-          <tr><td>Router</td><td>可拆/可保留</td><td>任务类型很多时拆成 Planner</td></tr>
-          <tr><td>Resource</td><td>可拆</td><td>需要同时调用资料、网页、题图或插件</td></tr>
-          <tr><td>Generate</td><td>可拆</td><td>讲题、作文、计划输出差异很大</td></tr>
-          <tr><td>Check</td><td>建议拆</td><td>需要严格检查越界、编造、代写</td></tr>
-          <tr><td>Save</td><td>可拆或保留节点</td><td>记录字段复杂时拆成 Memory</td></tr>
-          <tr><td>Output</td><td>保留整合节点</td><td>避免多个 Agent 同时对学生说话</td></tr>
+          <tr><td>subject</td><td>数学</td></tr>
+          <tr><td>weak_points</td><td>函数定义域、函数单调性、二次函数图像</td></tr>
+          <tr><td>available_time</td><td>45 分钟</td></tr>
+          <tr><td>goal</td><td>准备周测</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase3">
       <div class="kicker">Phase 03</div>
-      <h2>设计角色职责</h2>
-      <p class="subtitle">每个角色都要写清负责什么、不负责什么。</p>
+      <h2>变量赋值</h2>
+      <p class="subtitle">把输入保存为后续节点更容易引用的变量。</p>
       <table class="config-table">
-        <thead><tr><th>角色</th><th>负责什么</th><th>不负责什么</th></tr></thead>
+        <thead><tr><th>输入字段</th><th>变量名</th></tr></thead>
         <tbody>
-          <tr><td>Planner</td><td>判断任务、安排顺序、控制时间</td><td>不讲题、不批改</td></tr>
-          <tr><td>Resource</td><td>找资料、调资料库/插件/网页</td><td>不生成最终回答</td></tr>
-          <tr><td>Tutor</td><td>分层讲解、提示、生成练习</td><td>不保存记录、不做最终质检</td></tr>
-          <tr><td>Critic</td><td>检查编造、越界、代写、依据不足</td><td>不重新讲一遍题</td></tr>
-          <tr><td>Reviewer</td><td>总结错因、进步点、下一步建议</td><td>不重新处理原题</td></tr>
-          <tr><td>Memory</td><td>整理学习记录字段</td><td>不和学生长篇对话</td></tr>
-          <tr><td>Final Response</td><td>整合结果给学生</td><td>不新增未经检查的信息</td></tr>
+          <tr><td>subject</td><td>study_subject</td></tr>
+          <tr><td>weak_points</td><td>weak_point_list</td></tr>
+          <tr><td>available_time</td><td>time_limit</td></tr>
+          <tr><td>goal</td><td>study_goal</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase4">
       <div class="kicker">Phase 04</div>
-      <h2>设置交接字段</h2>
-      <p class="subtitle">多 Agent 之间不要只传一大段话，要用固定字段交接。</p>
+      <h2>选择器分支</h2>
+      <p class="subtitle">选择器根据 weak_point_list 的状态走不同路径。</p>
       <table class="config-table">
-        <thead><tr><th>交接</th><th>字段</th></tr></thead>
+        <thead><tr><th>条件</th><th>路径</th></tr></thead>
         <tbody>
-          <tr><td>Planner → Resource</td><td>task_type、subject、input_type、student_goal</td></tr>
-          <tr><td>Resource → Tutor</td><td>evidence、source_status、question_summary</td></tr>
-          <tr><td>Tutor → Critic</td><td>draft_answer、stuck_point、next_task</td></tr>
-          <tr><td>Critic → Reviewer</td><td>critic_notes、approved_answer、risk_flags</td></tr>
-          <tr><td>Reviewer → Memory</td><td>stuck_point、next_task、review_summary</td></tr>
-          <tr><td>Memory → Final Response</td><td>memory_update、save_status</td></tr>
+          <tr><td>有多个知识点</td><td>进入循环节点</td></tr>
+          <tr><td>只有一个知识点</td><td>生成单点复习任务</td></tr>
+          <tr><td>没有知识点</td><td>输出补充提示</td></tr>
         </tbody>
       </table>
     </section>
 
     <section class="phase-block" id="phase5">
       <div class="kicker">Phase 05</div>
-      <h2>设计多 Agent 连线</h2>
-      <p class="subtitle">先做一条主链路，再加分支。不要第一版就做复杂网状结构。</p>
-      <div class="concept-map compact-map">
-        <div class="concept-node">Planner<span>判断任务和顺序</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Resource<span>找依据</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Tutor<span>生成讲解</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Critic<span>检查风险</span></div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Reviewer / Memory / Final<span>复盘、记录、输出</span></div>
-      </div>
+      <h2>循环节点</h2>
+      <p class="subtitle">循环对象是 weak_point_list，每轮只处理一个 knowledge_point。</p>
+      <pre class="prompt-box">循环对象：
+weak_point_list
+
+单轮输入：
+knowledge_point
+time_limit
+study_goal
+
+单轮输出：
+knowledge_point
+review_task
+estimated_time
+check_method</pre>
     </section>
 
     <section class="phase-block" id="phase6">
       <div class="kicker">Phase 06</div>
-      <h2>设置冲突优先级</h2>
-      <p class="subtitle">多个角色意见冲突时，提前写清听谁的。</p>
-      <table class="config-table">
-        <thead><tr><th>冲突</th><th>优先规则</th></tr></thead>
-        <tbody>
-          <tr><td>Tutor 想直接给完整答案，Critic 判断越界</td><td>听 Critic，改为提示和下一步</td></tr>
-          <tr><td>Planner 安排 60 分钟，学生只有 15 分钟</td><td>听学生时间限制</td></tr>
-          <tr><td>模型默认知识和资料依据冲突</td><td>优先资料依据，并提示人工确认</td></tr>
-          <tr><td>Reviewer 建议很多，Final Response 太长</td><td>压缩输出，保留最小行动</td></tr>
-        </tbody>
-      </table>
-      <div class="mini-template">优先级：边界规则 &gt; 学生输入限制 &gt; 资料依据 &gt; 学习目标 &gt; 表达美观</div>
+      <h2>循环内大模型 Prompt</h2>
+      <p class="subtitle">循环里的 Prompt 要短，只生成一个知识点的任务。</p>
+      <pre class="prompt-box">请为知识点 {{knowledge_point}} 生成一个 10-15 分钟复习任务。
+
+背景：
+学科：{{study_subject}}
+目标：{{study_goal}}
+总时间：{{time_limit}}
+
+请输出：
+1. 任务名称
+2. 复习步骤
+3. 检测方式
+
+不要生成其他知识点的任务。</pre>
     </section>
 
     <section class="phase-block" id="phase7">
       <div class="kicker">Phase 07</div>
-      <h2>复杂任务测试</h2>
-      <p class="subtitle">L7 的测试必须比 L6 更复杂，否则看不出多 Agent 价值。</p>
-      <table class="config-table">
-        <thead><tr><th>测试输入</th><th>理想流程</th><th>合格表现</th></tr></thead>
-        <tbody>
-          <tr><td>我下周要函数小测，定义域和单调性都不稳，帮我安排复习，并讲一题。</td><td>Planner → Resource → Tutor → Critic → Reviewer → Memory → Final</td><td>先排优先级，再讲一题，最后保存薄弱点和任务</td></tr>
-          <tr><td>这是英语作文开头，按评分标准帮我改，但不要代写。</td><td>Planner → Resource → Tutor → Critic → Final</td><td>指出问题和修改方向，不整篇代写</td></tr>
-          <tr><td>这张题图很糊，你猜一下。</td><td>Planner → Resource → Final</td><td>要求补充清晰图片或文字题干</td></tr>
-          <tr><td>今天只剩 15 分钟，别安排太多。</td><td>Planner → Memory → Final</td><td>任务压缩，不调用无关角色</td></tr>
-        </tbody>
-      </table>
+      <h2>变量聚合</h2>
+      <p class="subtitle">把循环产生的多个任务合并成 review_plan_items。</p>
+      <div class="concept-map compact-map">
+        <div class="concept-node">函数定义域任务</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">函数单调性任务</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">二次函数任务</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">review_plan_items</div>
+      </div>
     </section>
 
     <section class="phase-block" id="phase8">
       <div class="kicker">Phase 08</div>
-      <h2>保存 v7 版本记录</h2>
-      <pre class="prompt-box">版本：v7 多 Agent 工作流
+      <h2>文本处理与输出</h2>
+      <p class="subtitle">把 review_plan_items 整理成学生能直接照做的计划。</p>
+      <pre class="prompt-box">输出字段：
+final_plan
 
-基于的 L6 工作流：
-为什么需要拆：
-保留为节点的部分：
-拆成 Agent 的部分：
+推荐格式：
+今日复习计划：
+1. 知识点：
+   任务：
+   检测方式：
+2. 知识点：
+   任务：
+   检测方式：
 
-角色列表：
-每个角色职责：
-交接字段：
-主链路：
-分支规则：
-冲突优先级：
-
-通过的复杂测试：
-失败过的地方：
-下一次要优化的节点或角色：</pre>
+完成标准：</pre>
     </section>
 
-    <section class="phase-block" id="final-prompt">
-      <div class="kicker">Final Prompt</div>
-      <h2>完整 Prompt 折叠区</h2>
-      <p class="subtitle">先完成角色、字段和测试，再展开这里对照。</p>
-      <details class="prompt-details">
-        <summary>点击展开：L7 完整 Prompt 示例</summary>
-        <pre class="prompt-box">当前系统基于 L6 单 Agent 工作流升级为多 Agent 协作。
+    <section class="phase-block" id="phase9">
+      <div class="kicker">Phase 09</div>
+      <h2>测试字段传递</h2>
+      <p class="subtitle">逐项检查字段有没有丢。</p>
+      <table class="config-table">
+        <thead><tr><th>检查项</th><th>合格表现</th></tr></thead>
+        <tbody>
+          <tr><td>weak_points</td><td>能被拆成 weak_point_list</td></tr>
+          <tr><td>选择器</td><td>多个知识点进入循环分支</td></tr>
+          <tr><td>循环</td><td>每个知识点都生成任务</td></tr>
+          <tr><td>变量聚合</td><td>没有丢失任何任务</td></tr>
+          <tr><td>输出</td><td>final_plan 清楚可执行</td></tr>
+        </tbody>
+      </table>
+    </section>
 
-Planner：判断任务类型、安排顺序和时间，不讲题。
-Resource：调用资料、知识库、插件或题图识别，不生成最终回答。
-Tutor：基于资料和学生状态进行分层讲解，不直接代写。
-Critic：检查编造、越界、代写、依据不足，必要时打回修改。
-Reviewer：总结错因、进步点和下一步建议，不重新讲题。
-Memory：整理学习记录字段，不和学生长篇对话。
-Final Response：整合各角色结果，只给学生一份统一回答。
+    <section class="phase-block" id="phase10">
+      <div class="kicker">Phase 10</div>
+      <h2>异常测试</h2>
+      <p class="subtitle">字段、分支和循环最容易在异常输入下出错。</p>
+      <table class="config-table">
+        <thead><tr><th>测试输入</th><th>合格表现</th></tr></thead>
+        <tbody>
+          <tr><td>weak_points 为空</td><td>要求补充薄弱知识点</td></tr>
+          <tr><td>available_time = 10 分钟</td><td>压缩成 1 个核心任务</td></tr>
+          <tr><td>我想复习数学</td><td>要求补充目标或薄弱点</td></tr>
+          <tr><td>weak_points 是一整句话</td><td>先拆成列表再处理</td></tr>
+        </tbody>
+      </table>
+    </section>
 
-所有角色必须使用固定交接字段。
-冲突优先级：边界规则 > 学生输入限制 > 资料依据 > 学习目标 > 表达美观。</pre>
-      </details>
+    <section class="phase-block" id="version">
+      <div class="kicker">Version</div>
+      <h2>保存 v7 版本记录</h2>
+      <pre class="prompt-box">版本：v7 字段、分支与循环 Demo
+输入字段：
+变量赋值：
+选择器分支：
+循环对象：
+循环单次输出：
+聚合字段：
+最终输出字段：
+通过的测试：
+失败情况：
+下一步要升级：成熟学习工作流设计</pre>
     </section>
 
     <section class="phase-block">
       <div class="kicker">Next</div>
-      <h2>下一节：最终 Agent 整合与测试</h2>
-      <p class="subtitle">下一节把 Prompt、参数、记忆、资料、插件、工作流和多 Agent 做系统检查。</p>
+      <h2>下一节：成熟学习工作流设计</h2>
+      <p class="subtitle">下一节把节点能力组织成真实学习场景中的完整流程。</p>
     </section>
   </div>
 </main>

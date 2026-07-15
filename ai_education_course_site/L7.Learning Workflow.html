@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI教育赋能｜L7 多 Agent 工作流</title>
+  <title>AI教育赋能｜L7 字段、分支与循环 Demo</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body class="deck-page">
 <main class="deck">
   <section class="slide title-slide">
     <div class="left">
-      <div class="kicker">L7 · Multi Agent</div>
-      <h1>多 Agent 工作流<br><span class="highlight">把复杂流程拆成角色协作</span></h1>
-      <p class="subtitle">在 L6 单 Agent 工作流基础上，拆分规划、资料、讲解、检查、复盘和记录。</p>
-      <div class="chips"><span class="chip">Planner</span><span class="chip">Resource</span><span class="chip">Tutor</span><span class="chip">Critic</span><span class="chip">Memory</span></div>
+      <div class="kicker">L7 · Logic Demo</div>
+      <h1>字段、分支与循环<br><span class="highlight">让工作流更稳定</span></h1>
+      <p class="subtitle">在 L6 基础上，处理字段传递、选择器分支、循环和聚合这些真实卡点。</p>
+      <div class="chips"><span class="chip">字段</span><span class="chip">选择器</span><span class="chip">变量赋值</span><span class="chip">循环</span><span class="chip">聚合</span></div>
     </div>
     <div class="right"></div>
   </section>
@@ -21,53 +21,56 @@
   <section class="slide part-slide">
     <div class="left">
       <div class="kicker">Part 1 · 从 L6 出发</div>
-      <h2>先看 L6 的单 Agent 工作流</h2>
-      <p class="subtitle">L7 不是重新做一套系统，而是把 L6 中过重的节点拆成协作角色。</p>
+      <h2>L6 已经跑通最小 Demo</h2>
+      <p class="subtitle">L7 不新增一堆复杂功能，而是把字段、分支和循环做稳。</p>
     </div>
     <div class="right">
       <div class="concept-map compact-map">
-        <div class="concept-node">Start</div>
+        <div class="concept-node">输入</div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">Router</div>
+        <div class="concept-node">大模型 JSON</div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">Resource</div>
+        <div class="concept-node">选择器</div>
         <div class="concept-arrow">↓</div>
-        <div class="concept-node">Generate / Check / Save / Output</div>
+        <div class="concept-node">分支回答 / 输出</div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Overload</div>
-      <h2>单 Agent 什么时候过载？</h2>
-      <p class="subtitle">当一个 Agent 同时承担太多标准，Prompt 会越来越长，失败也更难定位。</p>
+      <div class="kicker">Upgrade</div>
+      <h2>本节升级：复习任务生成器</h2>
+      <p class="subtitle">输入多个薄弱知识点，工作流依次生成复习任务，再合并成今日计划。</p>
     </div>
     <div class="right">
-      <div class="big-list">
-        <div class="list-item"><span class="num">01</span>Prompt 越写越长</div>
-        <div class="list-item"><span class="num">02</span>讲解和检查互相冲突</div>
-        <div class="list-item"><span class="num">03</span>资料调用越来越复杂</div>
-        <div class="list-item"><span class="num">04</span>保存字段越来越多</div>
-        <div class="list-item"><span class="num">05</span>失败时不知道是哪一步错</div>
+      <div class="concept-map compact-map">
+        <div class="concept-node">输入薄弱点列表</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">循环生成任务</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">变量聚合</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">输出复习清单</div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Decision</div>
-      <h2>不是复杂就拆，是职责不同才拆</h2>
-      <p class="subtitle">多 Agent 不是越多越好。只有职责、标准和输出明显不同，拆分才有价值。</p>
+      <div class="kicker">Fields</div>
+      <h2>字段设计先于节点连线</h2>
+      <p class="subtitle">字段名不稳定，后面的选择器、循环和聚合都会出问题。</p>
     </div>
     <div class="right">
       <table class="config-table">
-        <thead><tr><th>不需要拆</th><th>可以拆</th></tr></thead>
+        <thead><tr><th>字段</th><th>用途</th></tr></thead>
         <tbody>
-          <tr><td>只是换学科</td><td>规划、讲解、检查职责不同</td></tr>
-          <tr><td>只是换语气</td><td>需要互相质检</td></tr>
-          <tr><td>只是输出格式不同</td><td>资料调用和最终回答要分开</td></tr>
-          <tr><td>简单问答</td><td>记录字段复杂</td></tr>
+          <tr><td>subject</td><td>学科</td></tr>
+          <tr><td>weak_points</td><td>薄弱知识点列表</td></tr>
+          <tr><td>available_time</td><td>可用学习时间</td></tr>
+          <tr><td>goal</td><td>学习目标</td></tr>
+          <tr><td>review_plan_items</td><td>循环后聚合出的任务清单</td></tr>
         </tbody>
       </table>
     </div>
@@ -75,54 +78,33 @@
 
   <section class="slide part-slide">
     <div class="left">
-      <div class="kicker">Part 2 · 从节点到角色</div>
-      <h2>L6 节点如何升级成 L7 角色？</h2>
-      <p class="subtitle">这页是 L6 到 L7 的核心映射：不是凭空增加 Agent，而是把过重节点角色化。</p>
-    </div>
-    <div class="right">
-      <table class="config-table">
-        <thead><tr><th>L6 节点</th><th>L7 角色</th></tr></thead>
-        <tbody>
-          <tr><td>Router / Planner</td><td>Planner Agent</td></tr>
-          <tr><td>Resource</td><td>Resource Agent</td></tr>
-          <tr><td>Generate</td><td>Tutor Agent</td></tr>
-          <tr><td>Check</td><td>Critic Agent</td></tr>
-          <tr><td>复盘总结 / Save</td><td>Reviewer / Memory Agent</td></tr>
-          <tr><td>Output</td><td>Final Response</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Team</div>
-      <h2>每个 Agent 是一个岗位</h2>
-      <p class="subtitle">多 Agent 的价值不是“人多”，而是职责清楚。</p>
+      <div class="kicker">Part 2 · 字段与分支</div>
+      <h2>选择器不是猜，而是读字段</h2>
+      <p class="subtitle">先把输入整理成稳定字段，再让选择器决定路径。</p>
     </div>
     <div class="right">
       <div class="big-list">
-        <div class="list-item"><span class="num">01</span>Planner：安排任务</div>
-        <div class="list-item"><span class="num">02</span>Resource：找资料</div>
-        <div class="list-item"><span class="num">03</span>Tutor：讲解</div>
-        <div class="list-item"><span class="num">04</span>Critic：质检</div>
-        <div class="list-item"><span class="num">05</span>Reviewer / Memory：复盘和记录</div>
+        <div class="list-item"><span class="num">01</span>变量赋值保存字段</div>
+        <div class="list-item"><span class="num">02</span>选择器读取字段</div>
+        <div class="list-item"><span class="num">03</span>不同输入走不同路径</div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Planner / Resource</div>
-      <h2>先决定做什么，再找依据</h2>
-      <p class="subtitle">Planner 不讲题，只判断任务和安排顺序。Resource 不生成最终回答，只负责找到依据。</p>
+      <div class="kicker">Variable Assign</div>
+      <h2>变量赋值：把输入变成稳定变量</h2>
+      <p class="subtitle">变量赋值不是多余步骤，它让后续节点引用更清楚。</p>
     </div>
     <div class="right">
       <table class="config-table">
-        <thead><tr><th>角色</th><th>输出字段</th></tr></thead>
+        <thead><tr><th>输入</th><th>保存为变量</th></tr></thead>
         <tbody>
-          <tr><td>Planner</td><td>task_type、subject、input_type</td></tr>
-          <tr><td>Resource</td><td>evidence、source_status</td></tr>
+          <tr><td>subject</td><td>study_subject</td></tr>
+          <tr><td>weak_points</td><td>weak_point_list</td></tr>
+          <tr><td>available_time</td><td>time_limit</td></tr>
+          <tr><td>goal</td><td>study_goal</td></tr>
         </tbody>
       </table>
     </div>
@@ -130,30 +112,82 @@
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Tutor / Critic</div>
-      <h2>一个讲解，一个质检</h2>
-      <p class="subtitle">Tutor 负责分层提示和讲解；Critic 负责检查代写、编造、越界和依据不足。</p>
+      <div class="kicker">Selector</div>
+      <h2>选择器：处理三种情况</h2>
+      <p class="subtitle">不要让所有输入都走同一条线。</p>
+    </div>
+    <div class="right">
+      <table class="config-table">
+        <thead><tr><th>条件</th><th>路径</th></tr></thead>
+        <tbody>
+          <tr><td>多个 weak_points</td><td>循环生成任务</td></tr>
+          <tr><td>一个 weak_point</td><td>生成单点复习任务</td></tr>
+          <tr><td>没有 weak_points</td><td>输出补充提示</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Branch Output</div>
+      <h2>不同分支也要统一输出字段</h2>
+      <p class="subtitle">无论走哪条分支，最后都要回到同一个 final_plan 字段。</p>
+    </div>
+    <div class="right">
+      <pre class="prompt-box">多知识点分支 → review_plan_items
+单知识点分支 → review_plan_items
+缺少信息分支 → need_more_info_message
+
+最终统一：
+final_plan</pre>
+    </div>
+  </section>
+
+  <section class="slide part-slide">
+    <div class="left">
+      <div class="kicker">Part 3 · 循环与聚合</div>
+      <h2>什么时候需要循环？</h2>
+      <p class="subtitle">当同一种处理要对多个对象重复执行时，用循环比复制多个节点更清楚。</p>
     </div>
     <div class="right">
       <div class="card-stack">
-        <div class="card"><h3>Tutor</h3><p>输出 draft_answer、stuck_point、next_task。</p></div>
-        <div class="card success"><h3>Critic</h3><p>检查风险，必要时打回修改。</p></div>
+        <div class="card"><h3>不适合</h3><p>只有一个知识点，不需要循环。</p></div>
+        <div class="card success"><h3>适合</h3><p>多个薄弱点逐个生成复习任务。</p></div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Reviewer / Memory</div>
-      <h2>一个复盘，一个记录</h2>
-      <p class="subtitle">Reviewer 总结错因、进步点和下一步建议；Memory 整理结构化学习记录。</p>
+      <div class="kicker">Loop Item</div>
+      <h2>循环节点：每次处理一个知识点</h2>
+      <p class="subtitle">循环里的大模型节点只需要生成一个知识点的复习任务。</p>
+    </div>
+    <div class="right">
+      <pre class="prompt-box">当前知识点：{{knowledge_point}}
+可用总时间：{{time_limit}}
+学习目标：{{study_goal}}
+
+请生成一个 10-15 分钟复习任务。
+输出：任务名称、复习步骤、检测方式。</pre>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Loop Output</div>
+      <h2>循环单次输出要固定</h2>
+      <p class="subtitle">每轮输出字段一致，变量聚合才不会丢内容。</p>
     </div>
     <div class="right">
       <table class="config-table">
-        <thead><tr><th>角色</th><th>字段</th></tr></thead>
+        <thead><tr><th>字段</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>Reviewer</td><td>review_summary、next_task</td></tr>
-          <tr><td>Memory</td><td>memory_update、save_status</td></tr>
+          <tr><td>knowledge_point</td><td>当前知识点</td></tr>
+          <tr><td>review_task</td><td>复习任务</td></tr>
+          <tr><td>estimated_time</td><td>预计时长</td></tr>
+          <tr><td>check_method</td><td>检测方式</td></tr>
         </tbody>
       </table>
     </div>
@@ -161,124 +195,84 @@
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Final Response</div>
-      <h2>最终只能有一个声音</h2>
-      <p class="subtitle">多个 Agent 可以协作，但不能让学生看到一堆角色各说各话。</p>
+      <div class="kicker">Aggregation</div>
+      <h2>变量聚合：把多轮结果合并</h2>
+      <p class="subtitle">循环输出是一组任务，变量聚合负责整理成复习清单。</p>
     </div>
     <div class="right">
-      <div class="big-list">
-        <div class="list-item"><span class="num">01</span>任务判断</div>
-        <div class="list-item"><span class="num">02</span>关键帮助</div>
-        <div class="list-item"><span class="num">03</span>下一步行动</div>
-        <div class="list-item"><span class="num">04</span>记录说明</div>
+      <div class="concept-map compact-map">
+        <div class="concept-node">任务 1</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">任务 2</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">任务 3</div>
+        <div class="concept-arrow">↓</div>
+        <div class="concept-node">review_plan_items</div>
       </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Text Processing</div>
+      <h2>文本处理：把字段变成学生能读的计划</h2>
+      <p class="subtitle">最后输出要清楚，不要像调试日志。</p>
+    </div>
+    <div class="right">
+      <pre class="prompt-box">今日复习计划：
+1. 函数定义域：……
+2. 函数单调性：……
+3. 二次函数图像：……
+
+完成标准：
+每个知识点做 1 道小题并自查。</pre>
     </div>
   </section>
 
   <section class="slide part-slide">
     <div class="left">
-      <div class="kicker">Part 3 · 交接与连线</div>
-      <h2>交接字段就是团队工单</h2>
-      <p class="subtitle">多 Agent 之间不要只传一大段自然语言，要用固定字段交接。</p>
+      <div class="kicker">Part 4 · 测试修复</div>
+      <h2>字段、分支、循环都要单独测</h2>
+      <p class="subtitle">不要只看最终计划，要看字段有没有传对、循环有没有漏项。</p>
     </div>
     <div class="right">
       <div class="big-list">
-        <div class="list-item"><span class="num">01</span>question_summary</div>
-        <div class="list-item"><span class="num">02</span>evidence</div>
-        <div class="list-item"><span class="num">03</span>draft_answer</div>
-        <div class="list-item"><span class="num">04</span>critic_notes</div>
-        <div class="list-item"><span class="num">05</span>memory_update</div>
+        <div class="list-item"><span class="num">01</span>字段是否正确保存</div>
+        <div class="list-item"><span class="num">02</span>选择器是否走对</div>
+        <div class="list-item"><span class="num">03</span>循环是否逐项执行</div>
+        <div class="list-item"><span class="num">04</span>聚合是否丢失项目</div>
       </div>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Main Chain</div>
-      <h2>先做主链路，再加分支</h2>
-      <p class="subtitle">第一版多 Agent 不要做成复杂网状结构，先让一条主链路跑通。</p>
+      <div class="kicker">Normal Test</div>
+      <h2>正常输入测试</h2>
+      <p class="subtitle">先用标准输入确认主链路能跑通。</p>
     </div>
     <div class="right">
-      <div class="concept-map compact-map">
-        <div class="concept-node">Planner</div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Resource</div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Tutor</div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Critic</div>
-        <div class="concept-arrow">↓</div>
-        <div class="concept-node">Reviewer / Memory / Final</div>
-      </div>
+      <pre class="prompt-box">subject = 数学
+weak_points = 函数定义域、函数单调性、二次函数图像
+available_time = 45 分钟
+goal = 准备周测</pre>
     </div>
   </section>
 
   <section class="slide">
     <div class="left">
-      <div class="kicker">Branch</div>
-      <h2>不同任务可以少走一些角色</h2>
-      <p class="subtitle">多 Agent 不是每次全员上场，简单任务要走短路径。</p>
+      <div class="kicker">Edge Test</div>
+      <h2>异常输入测试</h2>
+      <p class="subtitle">工作流不是只测理想输入，也要测字段缺失和格式混乱。</p>
     </div>
     <div class="right">
       <table class="config-table">
-        <thead><tr><th>任务</th><th>建议路径</th></tr></thead>
+        <thead><tr><th>测试</th><th>合格表现</th></tr></thead>
         <tbody>
-          <tr><td>题目讲解</td><td>Planner → Resource → Tutor → Critic → Memory → Final</td></tr>
-          <tr><td>今日计划</td><td>Planner → Memory → Final</td></tr>
-          <tr><td>作文修改</td><td>Planner → Resource → Tutor → Critic → Reviewer → Final</td></tr>
-          <tr><td>资料不足</td><td>Resource → Final 提示补充资料</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Priority</div>
-      <h2>多 Agent 冲突时听谁的？</h2>
-      <p class="subtitle">冲突优先级要提前写清，否则多个角色会互相拉扯。</p>
-    </div>
-    <div class="right">
-      <div class="concept-map compact-map">
-        <div class="concept-node">边界规则</div>
-        <div class="concept-arrow">></div>
-        <div class="concept-node">学生输入限制</div>
-        <div class="concept-arrow">></div>
-        <div class="concept-node">资料依据</div>
-        <div class="concept-arrow">></div>
-        <div class="concept-node">学习目标 / 表达美观</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide part-slide">
-    <div class="left">
-      <div class="kicker">Part 4 · 测试与风险</div>
-      <h2>多 Agent 要用复杂任务测试</h2>
-      <p class="subtitle">简单问答不需要多 Agent。测试要覆盖规划、资料、讲解、检查、记录多个环节。</p>
-    </div>
-    <div class="right">
-      <div class="card-stack">
-        <div class="card"><h3>测试输入</h3><p>我下周要函数小测，定义域和单调性都不稳，帮我安排复习，并讲一题。</p></div>
-        <div class="card success"><h3>理想流程</h3><p>Planner → Resource → Tutor → Critic → Reviewer → Memory → Final</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Risk</div>
-      <h2>多 Agent 也会带来成本</h2>
-      <p class="subtitle">拆分是为了稳定和可维护，不是为了显得复杂。</p>
-    </div>
-    <div class="right">
-      <table class="config-table">
-        <thead><tr><th>风险</th><th>控制方式</th></tr></thead>
-        <tbody>
-          <tr><td>更慢</td><td>只在复杂任务使用</td></tr>
-          <tr><td>重复输出</td><td>设置 Final Response</td></tr>
-          <tr><td>交接不清</td><td>固定字段</td></tr>
-          <tr><td>角色冲突</td><td>写清优先级</td></tr>
+          <tr><td>weak_points 为空</td><td>提示补充薄弱知识点</td></tr>
+          <tr><td>available_time 太短</td><td>压缩成 1 个任务</td></tr>
+          <tr><td>只有“我想复习数学”</td><td>要求补充目标或薄弱点</td></tr>
+          <tr><td>weak_points 是一句话</td><td>先拆成列表再循环</td></tr>
         </tbody>
       </table>
     </div>
@@ -288,15 +282,15 @@
     <div class="left">
       <div class="kicker">v7 Standard</div>
       <h2>v7 完成标准</h2>
-      <p class="subtitle">能说明为什么从 L6 拆到 L7，并让复杂任务跑通。</p>
+      <p class="subtitle">能处理字段、分支和循环，不再只是把节点连成一条线。</p>
     </div>
     <div class="right">
       <div class="big-list">
-        <div class="list-item"><span class="num">01</span>角色职责清楚</div>
-        <div class="list-item"><span class="num">02</span>交接字段固定</div>
-        <div class="list-item"><span class="num">03</span>主链路跑通</div>
-        <div class="list-item"><span class="num">04</span>冲突规则明确</div>
-        <div class="list-item"><span class="num">05</span>最终输出统一</div>
+        <div class="list-item"><span class="num">01</span>输入字段稳定</div>
+        <div class="list-item"><span class="num">02</span>选择器分支正确</div>
+        <div class="list-item"><span class="num">03</span>循环逐项执行</div>
+        <div class="list-item"><span class="num">04</span>变量聚合不丢内容</div>
+        <div class="list-item"><span class="num">05</span>异常输入有兜底</div>
       </div>
     </div>
   </section>
@@ -304,11 +298,11 @@
   <section class="slide">
     <div class="left">
       <div class="kicker">Next</div>
-      <h2>下一节：最终 Agent 整合与测试</h2>
-      <p class="subtitle">L7 完成的是复杂流程协作。下一节把 Prompt、参数、记忆、资料、插件、工作流和多 Agent 做最终整合。</p>
+      <h2>下一节：成熟学习工作流设计</h2>
+      <p class="subtitle">L7 解决字段、分支和循环；L8 把这些能力组织成真实可用的学习工作流。</p>
     </div>
     <div class="right"></div>
-  <div class="link-row"><a class="button-link" href="L8.Multi Agent System.html">进入 L8</a></div></section>
+  <div class="link-row"><a class="button-link" href="L8.Multi Agent System.html">进入 L8</a><a class="button-link secondary" href="L7-guide.html">L7实操</a></div></section>
 </main>
 <nav class="nav"><a class="home-link secondary" href="index.html">目录</a><button data-prev>上一页</button><div class="counter" data-counter>1 / 18</div><div class="progress-bar"><span></span></div><button data-next>下一页</button></nav>
 <script src="assets/script.js"></script>
