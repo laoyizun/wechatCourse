@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>最终项目｜AI 数学学习助手网页</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="home">
+  <main class="wrap">
+    <section class="hero">
+      <a class="home-link secondary" href="index.html">返回课程目录</a>
+      <div style="height:18px"></div>
+      <div class="kicker">Final Project · AI Math Assistant</div>
+      <h1>最终项目｜AI 数学学习助手网页</h1>
+      <p class="subtitle">把 Agent 对话、错题复盘、学习进度、错题本和复习任务放进同一个网页工具。当前页面是静态模拟交互，不连接真实 Coze 数据库。</p>
+      <div class="chips"><span class="chip">Agent 对话</span><span class="chip">错题复盘</span><span class="chip">学习进度</span><span class="chip">错题本</span><span class="chip">复习任务</span></div>
+      <div class="link-row"><a class="button-link" href="final-project-guide.html">进入项目实践指引</a><a class="button-link secondary" href="L8.Multi Agent System.html">回到 L8</a></div>
+    </section>
+
+    <section class="metric-grid" aria-label="学习概览">
+      <div class="metric-card"><strong id="weekReviewCount">8</strong><span>本周复习次数</span></div>
+      <div class="metric-card"><strong id="masteredCount">3</strong><span>已掌握知识点</span></div>
+      <div class="metric-card"><strong id="pendingCount">5</strong><span>待复习知识点</span></div>
+      <div class="metric-card"><strong id="wrongReviewCount">12</strong><span>错题复习记录</span></div>
+    </section>
+
+    <section class="project-shell">
+      <div class="project-panel">
+        <h2>Agent 对话区</h2>
+        <p class="subtitle">普通提问走 Agent，对固定任务按钮进入对应工作流。</p>
+        <div class="chat-box" id="chatBox">
+          <div class="chat-message user">这道定义域题我错了，帮我复盘。</div>
+          <div class="chat-message agent">可以。请把题目、你的解题过程、错误答案填到错题复盘区，我会先判断错因，再给你下一步练习。</div>
+        </div>
+        <div class="project-toolbar">
+          <input class="project-input" id="chatInput" value="我想知道今天数学应该复习什么">
+          <button class="project-btn" id="sendBtn">发送</button>
+          <button class="project-btn secondary" id="planBtn">生成今日复习任务</button>
+          <button class="project-btn secondary" id="weakBtn">查询薄弱点</button>
+        </div>
+      </div>
+
+      <div class="project-panel">
+        <h2>学习目标</h2>
+        <div class="tag-list">
+          <div class="tag-row"><strong>学生</strong><span class="project-badge">高一 · 小明</span></div>
+          <div class="tag-row"><strong>当前目标</strong><span class="project-badge green">函数周测 80 分</span></div>
+          <div class="tag-row"><strong>讲解偏好</strong><span class="project-badge amber">先提示，再讲思路</span></div>
+        </div>
+        <div class="project-note">网页展示的是模拟数据。真实接入时，页面通过工作流 API 获取数据库查询结果。</div>
+      </div>
+    </section>
+
+    <section class="project-shell">
+      <div class="project-panel">
+        <h2>错题复盘区</h2>
+        <div class="project-form-grid">
+          <div class="project-field wide">
+            <label for="questionText">数学题目</label>
+            <textarea class="project-textarea" id="questionText">已知函数 f(x)=√(x-1)/(x-3)，求函数定义域。</textarea>
+          </div>
+          <div class="project-field wide">
+            <label for="solutionText">我的解题过程</label>
+            <textarea class="project-textarea" id="solutionText">根号里面 x-1 ≥ 0，所以 x ≥ 1。</textarea>
+          </div>
+          <div class="project-field">
+            <label for="wrongAnswer">错误答案</label>
+            <input class="project-input" id="wrongAnswer" value="x ≥ 1">
+          </div>
+          <div class="project-field">
+            <label for="hintLevel">提示深度</label>
+            <select class="project-select" id="hintLevel">
+              <option>只给提示</option>
+              <option>给思路</option>
+              <option>给讲解</option>
+            </select>
+          </div>
+        </div>
+        <div class="project-toolbar">
+          <button class="project-btn" id="reviewBtn">提交错题复盘</button>
+          <button class="project-btn secondary" id="markReviewedBtn">标记已复习</button>
+        </div>
+      </div>
+
+      <div class="project-panel">
+        <h2>薄弱知识点</h2>
+        <div class="tag-list" id="weakList">
+          <div class="tag-row"><strong>函数定义域</strong><span class="project-badge amber">复习中</span></div>
+          <div class="tag-row"><strong>函数单调性</strong><span class="project-badge">待复习</span></div>
+          <div class="tag-row"><strong>二次函数最值</strong><span class="project-badge">待复习</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-shell">
+      <div class="project-panel">
+        <h2>错题本</h2>
+        <div class="wrong-list" id="wrongList">
+          <div class="wrong-row"><strong>定义域题</strong><span>条件遗漏</span><span>复习 3 次</span><span class="project-badge amber">复习中</span></div>
+          <div class="wrong-row"><strong>单调性题</strong><span>区间忽略</span><span>复习 1 次</span><span class="project-badge">待复习</span></div>
+          <div class="wrong-row"><strong>二次函数最值题</strong><span>方法不当</span><span>复习 2 次</span><span class="project-badge">待复习</span></div>
+        </div>
+      </div>
+
+      <div class="project-panel">
+        <h2>今日复习任务</h2>
+        <div class="task-list" id="taskList">
+          <div class="task-row"><input type="checkbox"><strong>定义域专项：根号 + 分母</strong><span>15 分钟</span></div>
+          <div class="task-row"><input type="checkbox"><strong>单调性区间判断</strong><span>15 分钟</span></div>
+          <div class="task-row"><input type="checkbox"><strong>二次函数最值检查</strong><span>15 分钟</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const weekReviewCount = document.getElementById('weekReviewCount');
+    const wrongReviewCount = document.getElementById('wrongReviewCount');
+    const wrongList = document.getElementById('wrongList');
+    const taskList = document.getElementById('taskList');
+
+    function addMessage(role, text) {
+      const msg = document.createElement('div');
+      msg.className = `chat-message ${role}`;
+      msg.textContent = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      const input = document.getElementById('chatInput');
+      addMessage('user', input.value);
+      addMessage('agent', '我会优先安排函数定义域，因为最近错题里“条件遗漏”出现最多。建议先做 15 分钟定义域专项，再做 1 道单调性区间判断。');
+    });
+
+    document.getElementById('reviewBtn').addEventListener('click', () => {
+      addMessage('user', '我提交了一道定义域错题，请帮我复盘。');
+      addMessage('agent', '你的主要错因是条件遗漏：你检查了根号内非负，但漏掉了分母不能为 0。先补一步：在 x ≥ 1 的基础上，还要排除哪个值？下一步做 2 道“根号 + 分母”的定义域题。');
+      wrongList.firstElementChild.innerHTML = '<strong>定义域题</strong><span>条件遗漏</span><span>复习 4 次</span><span class="project-badge amber">复习中</span>';
+      wrongReviewCount.textContent = String(Number(wrongReviewCount.textContent) + 1);
+      weekReviewCount.textContent = String(Number(weekReviewCount.textContent) + 1);
+    });
+
+    document.getElementById('planBtn').addEventListener('click', () => {
+      addMessage('agent', '已根据薄弱点生成今日任务：定义域专项 15 分钟、单调性区间判断 15 分钟、二次函数最值检查 15 分钟。');
+      taskList.innerHTML = `
+        <div class="task-row"><input type="checkbox"><strong>定义域专项：根号 + 分母</strong><span>15 分钟</span></div>
+        <div class="task-row"><input type="checkbox"><strong>单调性：先标区间再判断</strong><span>15 分钟</span></div>
+        <div class="task-row"><input type="checkbox"><strong>二次函数：端点和顶点都检查</strong><span>15 分钟</span></div>
+      `;
+    });
+
+    document.getElementById('weakBtn').addEventListener('click', () => {
+      addMessage('agent', '当前最需要优先处理的是函数定义域。原因：最近错题中出现了 3 次条件遗漏，尤其容易漏掉分母不能为 0。');
+    });
+
+    document.getElementById('markReviewedBtn').addEventListener('click', () => {
+      addMessage('agent', '已模拟新增一条复习日志。复习次数来自日志条数，而不是在数据库里直接做 +1。');
+      wrongReviewCount.textContent = String(Number(wrongReviewCount.textContent) + 1);
+    });
+  </script>
+</body>
+</html>

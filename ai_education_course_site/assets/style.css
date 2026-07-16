@@ -1357,12 +1357,248 @@ h3 {
   gap: 12px;
 }
 
+.project-shell {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.project-panel {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: var(--shadow);
+}
+
+.project-panel h2,
+.project-panel h3 {
+  margin-bottom: 12px;
+}
+
+.project-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 9px 13px;
+  border: 1px solid rgba(37, 99, 235, .24);
+  border-radius: 8px;
+  background: rgba(37, 99, 235, .08);
+  color: #1d4ed8;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.project-btn.secondary {
+  color: #0f766e;
+  border-color: rgba(15, 159, 154, .24);
+  background: rgba(15, 159, 154, .08);
+}
+
+.project-input,
+.project-textarea,
+.project-select {
+  width: 100%;
+  min-height: 42px;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+}
+
+.project-textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.project-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.project-field.wide {
+  grid-column: 1 / -1;
+}
+
+.project-field label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.chat-box {
+  display: grid;
+  gap: 10px;
+  max-height: 430px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fbff;
+}
+
+.chat-message {
+  max-width: 88%;
+  padding: 11px 13px;
+  border-radius: 8px;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.chat-message.user {
+  justify-self: end;
+  background: #2563eb;
+  color: #fff;
+}
+
+.chat-message.agent {
+  justify-self: start;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.metric-card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .9);
+}
+
+.metric-card strong {
+  display: block;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.metric-card span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.tag-list,
+.task-list,
+.wrong-list {
+  display: grid;
+  gap: 10px;
+}
+
+.tag-row,
+.task-row,
+.wrong-row {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.tag-row {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.wrong-row {
+  grid-template-columns: 1.4fr .8fr .7fr .6fr;
+  align-items: center;
+}
+
+.task-row {
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.project-badge {
+  display: inline-flex;
+  width: max-content;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, .08);
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.project-badge.green {
+  color: #047857;
+  background: rgba(22, 163, 74, .1);
+}
+
+.project-badge.amber {
+  color: #b45309;
+  background: rgba(217, 119, 6, .12);
+}
+
+.project-note {
+  margin-top: 14px;
+  padding: 13px;
+  border: 1px solid rgba(15, 159, 154, .22);
+  border-radius: 8px;
+  background: rgba(15, 159, 154, .08);
+  color: #164e63;
+  line-height: 1.65;
+  font-weight: 800;
+}
+
+.uc-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.uc-card {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.uc-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 18px;
+}
+
 @media (max-width: 980px) {
   .workflow-track,
   .workflow-mini-track,
   .workflow-mini-track.three,
   .workflow-branches,
-  .workflow-output {
+  .workflow-output,
+  .project-shell,
+  .project-form-grid,
+  .metric-grid,
+  .uc-board {
+    grid-template-columns: 1fr;
+  }
+
+  .wrong-row,
+  .task-row,
+  .tag-row {
     grid-template-columns: 1fr;
   }
 

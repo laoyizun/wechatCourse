@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>最终项目｜实践指引</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="home">
+  <main class="wrap">
+    <section class="hero">
+      <a class="home-link secondary" href="guide-index.html">返回实操目录</a>
+      <div style="height:18px"></div>
+      <div class="kicker">Final Project Guide</div>
+      <h1>最终项目｜AI 数学学习助手网页<br><span class="highlight">实践指引</span></h1>
+      <p class="subtitle">用一个网页整合 Agent 对话、错题复盘工作流、复习计划工作流、数据库表和知识库。技术视图默认折叠，展开后逐项查看。</p>
+      <div class="chips"><span class="chip">UC 图</span><span class="chip">数据表</span><span class="chip">工作流</span><span class="chip">Prompt</span><span class="chip">模拟数据</span></div>
+      <div class="link-row"><a class="button-link" href="final-project.html">打开样例网页</a><a class="button-link secondary" href="index.html">课程目录</a></div>
+    </section>
+
+    <section class="section-panel">
+      <div class="kicker">Project Goal</div>
+      <h2>项目目标</h2>
+      <p class="subtitle">做一个清晰简洁的 AI 数学学习助手网页：能对话、能提交错题复盘、能展示学习进度、错题本、薄弱点和今日任务。</p>
+      <div class="big-list">
+        <div class="list-item"><span class="num">01</span>网页展示学习状态</div>
+        <div class="list-item"><span class="num">02</span>Agent 负责对话和任务判断</div>
+        <div class="list-item"><span class="num">03</span>工作流负责错题复盘和复习计划</div>
+        <div class="list-item"><span class="num">04</span>数据库保存错题、薄弱点和复习日志</div>
+      </div>
+    </section>
+
+    <div class="phase-list">
+      <details class="prompt-details" open>
+        <summary>UC 用例图</summary>
+        <div class="phase-block">
+          <div class="uc-board">
+            <div class="uc-card"><strong>学生</strong><p>和 Agent 对话、提交错题、查看错题本、生成今日任务、标记已复习。</p></div>
+            <div class="uc-card"><strong>Agent</strong><p>回答数学问题，判断是否调用工作流，把工作流结果整理成网页对话回复。</p></div>
+            <div class="uc-card"><strong>工作流</strong><p>执行错题复盘、复习计划生成、复习日志写入等固定任务。</p></div>
+            <div class="uc-card"><strong>数据库</strong><p>保存学生画像、薄弱点、错题记录、复习日志、复习计划。</p></div>
+            <div class="uc-card"><strong>知识库</strong><p>提供数学概念、公式、典型例题、错题复盘规则。</p></div>
+            <div class="uc-card"><strong>网页</strong><p>展示对话、进度、错题、薄弱点和任务，模拟按钮交互。</p></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>页面模块线框图</summary>
+        <div class="phase-block">
+          <div class="wireframe">
+            <div class="wire-box wide-box"><b>顶部概览</b><span>学生、目标、本周复习次数、待复习知识点</span></div>
+            <div class="wire-box"><b>Agent 对话区</b><span>普通提问、AI 回复、快捷按钮</span></div>
+            <div class="wire-box"><b>错题复盘区</b><span>题目、解题过程、错误答案、提示深度</span></div>
+            <div class="wire-box"><b>学习进度</b><span>本周复习、已掌握、待复习、复习记录</span></div>
+            <div class="wire-box"><b>错题本</b><span>题目摘要、错因类型、复习次数、状态</span></div>
+            <div class="wire-box"><b>今日任务</b><span>任务名称、对应知识点、预计时间、完成状态</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>数据表结构</summary>
+        <div class="phase-block">
+          <table class="config-table">
+            <thead><tr><th>表</th><th>关键字段</th><th>页面展示</th></tr></thead>
+            <tbody>
+              <tr><td>student_profile</td><td>student_id, student_name, grade, math_goal, explain_preference</td><td>顶部学生信息、学习目标</td></tr>
+              <tr><td>math_weak_points</td><td>weak_point_id, student_id, topic, priority, status, updated_at</td><td>薄弱知识点列表</td></tr>
+              <tr><td>math_wrong_questions</td><td>wrong_question_id, question_text, math_topic, error_type, diagnosis, next_task, status</td><td>错题本、错题详情</td></tr>
+              <tr><td>math_question_review_logs</td><td>log_id, wrong_question_id, student_id, review_result, created_at</td><td>复习次数、最近复习记录</td></tr>
+              <tr><td>math_review_plans</td><td>plan_id, student_id, plan_date, plan_items, next_task, status</td><td>今日复习任务</td></tr>
+            </tbody>
+          </table>
+          <div class="project-note">复习次数不靠字段自增。每复习一次就在 `math_question_review_logs` 新增一条记录，某道题的日志条数就是复习次数。</div>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>页面数据来源映射</summary>
+        <div class="phase-block">
+          <table class="config-table">
+            <thead><tr><th>页面模块</th><th>数据来源</th><th>更新方式</th></tr></thead>
+            <tbody>
+              <tr><td>学习目标</td><td>student_profile</td><td>查询学生画像</td></tr>
+              <tr><td>学习进度</td><td>math_weak_points + math_question_review_logs</td><td>统计状态和日志条数</td></tr>
+              <tr><td>薄弱知识点</td><td>math_weak_points</td><td>错题复盘后更新状态</td></tr>
+              <tr><td>错题本</td><td>math_wrong_questions</td><td>错题复盘后新增记录</td></tr>
+              <tr><td>今日任务</td><td>math_review_plans</td><td>生成计划后写入</td></tr>
+              <tr><td>Agent 对话</td><td>Agent / Workflow 返回结果</td><td>按钮触发后追加消息</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>L8 错题复盘工作流线框图</summary>
+        <div class="phase-block">
+          <div class="workflow-board">
+            <div class="workflow-track">
+              <div class="workflow-node"><div class="workflow-label">Web</div><strong>提交错题</strong><span>题目、过程、错误答案、提示深度</span></div>
+              <div class="workflow-node database"><div class="workflow-label">Database</div><strong>查询历史状态</strong><span>学生画像、薄弱点、相似错题</span></div>
+              <div class="workflow-node model"><div class="workflow-label">LLM JSON</div><strong>题目信息解析</strong><span>math_topic、条件、目标、错误步骤</span></div>
+              <div class="workflow-node"><div class="workflow-label">Selector</div><strong>判断输入</strong><span>完整 / 缺题干 / 缺过程 / 要答案</span></div>
+            </div>
+            <div class="workflow-mini-track">
+              <div class="workflow-node knowledge"><div class="workflow-label">Knowledge</div><strong>知识库检索</strong><span>概念、公式、典型例题</span></div>
+              <div class="workflow-node model"><div class="workflow-label">LLM</div><strong>错因诊断</strong><span>错误类型、诊断、next_task</span></div>
+              <div class="workflow-node guard"><div class="workflow-label">Check</div><strong>边界检查</strong><span>不代写、不编造</span></div>
+              <div class="workflow-node database"><div class="workflow-label">Database</div><strong>写入记录</strong><span>错题记录、复习日志</span></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>L7 复习计划工作流线框图</summary>
+        <div class="phase-block">
+          <div class="workflow-board">
+            <div class="workflow-track">
+              <div class="workflow-node"><div class="workflow-label">Web</div><strong>生成今日任务</strong><span>薄弱点、可用时间、目标</span></div>
+              <div class="workflow-node database"><div class="workflow-label">Database</div><strong>查询薄弱点</strong><span>历史错题和优先级</span></div>
+              <div class="workflow-node model"><div class="workflow-label">LLM</div><strong>整理 weak_point_list</strong><span>合并输入和历史记录</span></div>
+              <div class="workflow-node"><div class="workflow-label">Loop</div><strong>循环生成任务</strong><span>每个知识点一个任务</span></div>
+            </div>
+            <div class="workflow-output">
+              <div class="workflow-node knowledge"><div class="workflow-label">Knowledge</div><strong>检索资料</strong><span>概念、例题、检查标准</span></div>
+              <div class="workflow-node"><div class="workflow-label">Aggregate</div><strong>变量聚合</strong><span>合并任务列表</span></div>
+              <div class="workflow-node database"><div class="workflow-label">Database</div><strong>写入复习计划</strong><span>math_review_plans</span></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>按钮与工作流映射</summary>
+        <div class="phase-block">
+          <table class="config-table">
+            <thead><tr><th>按钮</th><th>调用对象</th><th>输入</th><th>输出/展示</th></tr></thead>
+            <tbody>
+              <tr><td>发送</td><td>Agent 对话</td><td>用户问题</td><td>对话区回复</td></tr>
+              <tr><td>提交错题复盘</td><td>L8 错题复盘工作流</td><td>题目、过程、错误答案、提示深度</td><td>错因、提示、错题记录、复习日志</td></tr>
+              <tr><td>生成今日复习任务</td><td>L7 复习计划工作流</td><td>薄弱点、可用时间、目标</td><td>今日任务列表</td></tr>
+              <tr><td>标记已复习</td><td>新增复习日志</td><td>wrong_question_id, review_result</td><td>复习次数更新</td></tr>
+              <tr><td>查询薄弱点</td><td>查询数据库工作流</td><td>student_id</td><td>薄弱点摘要</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>Agent Prompt</summary>
+        <pre class="prompt-box">你是运行在网页中的 AI 数学学习助手。
+
+你的职责：
+1. 回答学生的数学学习问题；
+2. 遇到错题复盘请求时，引导学生提供题目、解题过程、错误答案和提示深度；
+3. 需要稳定处理时，调用对应工作流；
+4. 不直接代写完整作业答案；
+5. 输出适合展示在网页对话区；
+6. 如果资料不足，要说明不能确认；
+7. 每次尽量给出下一步学习动作。
+
+当用户点击“提交错题复盘”：
+收集 question_text、student_solution、wrong_answer、hint_level，调用错题复盘工作流。
+
+当用户点击“生成今日复习任务”：
+读取薄弱点和可用时间，调用复习计划工作流。
+
+当用户点击“查询薄弱点”：
+根据数据库记录总结当前数学薄弱点。</pre>
+      </details>
+
+      <details class="prompt-details">
+        <summary>为什么网页不能直接读 Coze 数据库？</summary>
+        <div class="phase-block">
+          <p class="subtitle">Coze 数据库是 Agent/工作流内部能力，不适合让网页前端像普通后端数据库一样直接查询。</p>
+          <div class="concept-map">
+            <div class="concept-node">网页前端<span>展示界面、收集输入、点击按钮</span></div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">后端代理 / 云函数<span>保护 API Token，转发请求</span></div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">Coze 工作流 API<span>执行工作流</span></div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">工作流数据库节点<span>查询、写入、更新 Coze 数据库</span></div>
+            <div class="concept-arrow">↓</div>
+            <div class="concept-node">返回结构化 JSON<span>网页展示错题、进度、任务</span></div>
+          </div>
+          <div class="project-note">课堂项目先用静态模拟数据。真实接入时，网页调用工作流 API，由工作流内部查询数据库，再把结果返回给网页。</div>
+        </div>
+      </details>
+
+      <details class="prompt-details">
+        <summary>静态模拟数据 JSON</summary>
+        <pre class="prompt-box">{
+  "profile": {
+    "student_name": "小明",
+    "grade": "高一",
+    "math_goal": "函数周测达到 80 分",
+    "explain_preference": "先提示，再讲思路"
+  },
+  "weak_points": ["函数定义域", "函数单调性", "二次函数最值"],
+  "wrong_questions": [
+    {"title": "定义域题", "error_type": "条件遗漏", "review_count": 3, "status": "复习中"},
+    {"title": "单调性题", "error_type": "区间忽略", "review_count": 1, "status": "待复习"}
+  ],
+  "today_tasks": [
+    {"task": "定义域专项：根号 + 分母", "time": "15 分钟"},
+    {"task": "单调性区间判断", "time": "15 分钟"}
+  ]
+}</pre>
+      </details>
+
+      <details class="prompt-details">
+        <summary>项目完成标准</summary>
+        <div class="phase-block">
+          <div class="big-list">
+            <div class="list-item"><span class="num">01</span>页面模块完整：对话、错题复盘、进度、错题本、任务</div>
+            <div class="list-item"><span class="num">02</span>能说明每个按钮调用什么 Agent 或工作流</div>
+            <div class="list-item"><span class="num">03</span>能说明每个数据块来自哪张表</div>
+            <div class="list-item"><span class="num">04</span>能说明错题复盘工作流如何读写数据库</div>
+            <div class="list-item"><span class="num">05</span>能说明为什么真实接入需要通过工作流 API 间接读数据库</div>
+          </div>
+        </div>
+      </details>
+    </div>
+  </main>
+</body>
+</html>
