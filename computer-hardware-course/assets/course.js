@@ -230,13 +230,10 @@ function selectPart(partKey) {
   });
 
   const image = document.querySelector("[data-detail-image]");
-  const placeholder = document.querySelector("[data-detail-placeholder]");
-  if (image && placeholder) {
+  if (image) {
     image.classList.remove("missing");
     image.src = `images/${part.image}`;
     image.alt = `${part.zh} ${part.en}`;
-    placeholder.hidden = true;
-    placeholder.innerHTML = `<strong>等待补充实物照片</strong><br>images/${part.image}`;
   }
   drawConnections();
 }
