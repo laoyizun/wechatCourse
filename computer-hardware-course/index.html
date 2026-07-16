@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="面向初中生的计算机硬件交互课程，认识 Intel 台式机配件、连接方式与数据流。">
+  <title>认识电脑硬件｜Intel 台式机拆装实践</title>
+  <link rel="stylesheet" href="assets/course.css">
+</head>
+<body class="hardware-page">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../">
+        <span class="brand-mark">PC</span>
+        <span>计算机硬件与装机实践</span>
+      </a>
+      <nav class="topnav" aria-label="课程导航">
+        <a class="nav-link" href="#hardware-map">认识配件</a>
+        <a class="nav-link primary" href="assembly-guide.html">开始装机</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Inside a Computer</p>
+        <h1>打开机箱，看看电脑如何工作</h1>
+        <p class="lead">以 Intel 第三代 Core i3 台式机为样机，认识主板、CPU、DDR3 内存、SATA 硬盘、电源和显卡之间的连接。</p>
+      </div>
+      <div class="intro-note">
+        <strong>本课目标 Learning Goal</strong>
+        能说出主要配件的作用，找到安装位置，并区分数据连接与电力连接。
+      </div>
+    </section>
+
+    <section class="section" id="hardware-map">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Interactive Hardware Map</p>
+          <h2>点击配件，追踪它的连接</h2>
+        </div>
+        <p>主板在中央。蓝色表示数据连接，橙色表示电力连接，紫色表示外部输入输出。</p>
+      </div>
+
+      <div class="panel hardware-workbench">
+        <div class="map-side">
+          <div class="mode-tabs" role="tablist" aria-label="连接显示模式">
+            <button class="mode-tab" type="button" data-mode="all" aria-selected="true">全部 All</button>
+            <button class="mode-tab" type="button" data-mode="data" aria-selected="false">数据 Data</button>
+            <button class="mode-tab" type="button" data-mode="power" aria-selected="false">电力 Power</button>
+            <button class="mode-tab" type="button" data-mode="external" aria-selected="false">外设 I/O</button>
+          </div>
+
+          <div class="hardware-map" aria-label="台式机硬件连接示意图">
+            <button class="board" type="button" data-part="motherboard" data-connections="data power external">
+              <span class="board-label">主板 Motherboard</span>
+            </button>
+            <canvas class="connection-canvas" aria-hidden="true"></canvas>
+
+            <button class="component" type="button" data-part="cooler" data-connections="power"><span>散热器</span><small>CPU Cooler</small></button>
+            <button class="component" type="button" data-part="io" data-connections="external"><span>输入输出</span><small>I/O Ports</small></button>
+            <button class="component" type="button" data-part="sata" data-connections="data power"><span>SATA 硬盘</span><small>Storage</small></button>
+            <button class="component" type="button" data-part="cpu" data-connections="data power"><span>处理器</span><small>CPU</small></button>
+            <button class="component" type="button" data-part="ram" data-connections="data"><span>内存</span><small>DDR3 RAM</small></button>
+            <button class="component" type="button" data-part="gpu" data-connections="data power external"><span>显卡</span><small>GPU / PCIe</small></button>
+            <button class="component" type="button" data-part="m2" data-connections="data"><span>M.2 SSD</span><small>现代扩展</small></button>
+            <button class="component" type="button" data-part="psu" data-connections="power"><span>电源</span><small>PSU</small></button>
+          </div>
+
+          <div class="connection-legend">
+            <span><i class="legend-dot" style="background:var(--blue)"></i>数据 Data</span>
+            <span><i class="legend-dot" style="background:var(--amber)"></i>电力 Power</span>
+            <span><i class="legend-dot" style="background:var(--purple)"></i>外设 External I/O</span>
+          </div>
+        </div>
+
+        <aside class="detail-side" aria-live="polite">
+          <span class="part-code" data-detail="code"></span>
+          <h2 data-detail="zh"></h2>
+          <p class="detail-en" data-detail="en"></p>
+          <div class="photo-frame">
+            <img data-detail-image alt="">
+            <div class="photo-placeholder" data-detail-placeholder hidden></div>
+          </div>
+          <dl class="spec-list">
+            <div class="spec-row"><dt>作用 What it does</dt><dd data-detail="job"></dd></div>
+            <div class="spec-row"><dt>位置 Where</dt><dd data-detail="location"></dd></div>
+            <div class="spec-row"><dt>连接 Connection</dt><dd data-detail="connection"></dd></div>
+            <div class="spec-row"><dt>性能 Performance</dt><dd data-detail="impact"></dd></div>
+            <div class="spec-row"><dt>常见参数 Parameters</dt><dd data-detail="parameter"></dd></div>
+            <div class="spec-row"><dt>理解比喻 Analogy</dt><dd data-detail="analogy"></dd></div>
+            <div class="spec-row"><dt>安装提醒 Installation</dt><dd data-detail="note"></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Data Flow</p>
+          <h2>打开一个程序时，发生了什么？</h2>
+        </div>
+        <p>这是帮助理解系统协作的简化模型。硬件实际工作时会有更多并行传输和缓存过程。</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step">SATA 硬盘<small>长期保存程序</small></div>
+        <div class="flow-step">RAM 内存<small>装入当前数据</small></div>
+        <div class="flow-step">CPU<small>执行指令</small></div>
+        <div class="flow-step">GPU<small>生成画面</small></div>
+        <div class="flow-step">显示器<small>输出结果</small></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Storage Comparison</p>
+          <h2>三种常见存储设备</h2>
+        </div>
+        <p>课堂样机使用 SATA 连接；M.2 用来认识现代电脑的存储方式。</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare-table">
+          <thead><tr><th>项目</th><th>SATA HDD</th><th>SATA SSD</th><th>M.2 NVMe SSD</th></tr></thead>
+          <tbody>
+            <tr><th>内部结构</th><td>有机械部件</td><td>闪存，无机械部件</td><td>闪存，无机械部件</td></tr>
+            <tr><th>连接方式</th><td>SATA 数据线 + 电源线</td><td>SATA 数据线 + 电源线</td><td>直接安装在主板</td></tr>
+            <tr><th>传输协议</th><td>SATA</td><td>SATA</td><td>通常是 PCIe / NVMe</td></tr>
+            <tr><th>本课实践</th><td>按实机情况安装</td><td>按实机情况安装</td><td>只介绍，不安装</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip"><strong>记住：</strong>M.2 描述外形与接口规格，不完全等于 NVMe。有些 M.2 SSD 也使用 SATA 协议。</div>
+    </section>
+
+    <section class="section">
+      <div class="panel" style="padding:28px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+        <div>
+          <p class="eyebrow">Hands-on Practice</p>
+          <h2 style="margin-bottom:8px">准备把它重新装起来了吗？</h2>
+          <p style="margin-bottom:0;color:var(--muted)">先完成安全确认，再按步骤安装 CPU、散热器、内存、SATA 硬盘和供电线。</p>
+        </div>
+        <a class="button primary" href="assembly-guide.html">进入装机指引 →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">计算机硬件与装机实践 · Computer Hardware & PC Assembly</footer>
+  <script src="assets/course.js"></script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="面向初中生的 Intel 台式机拆装指引，包括安全检查、部件安装、接线、首次启动和故障排查。">
+  <title>装机实践指引｜Intel 台式机</title>
+  <link rel="stylesheet" href="assets/course.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">PC</span>
+        <span>计算机硬件与装机实践</span>
+      </a>
+      <nav class="topnav" aria-label="课程导航">
+        <a class="nav-link" href="index.html">返回配件地图</a>
+        <a class="nav-link primary" href="#steps">装机步骤</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Assembly Guide</p>
+        <h1>把配件装回一台能启动的电脑</h1>
+        <p class="lead">每完成一步，先让同组成员检查，再进入下一步。遇到阻力时立即停止，不要用蛮力。</p>
+      </div>
+      <div class="intro-note">
+        <strong>实践边界 Safety Boundary</strong>
+        CPU 和散热器建议在教师直接监督下操作；任何学生都不得打开电源外壳。
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Safety Check</p>
+          <h2>开始前完成四项确认</h2>
+        </div>
+        <p>只有四项全部完成，才可以开始拆装。</p>
+      </div>
+      <div class="safety-grid">
+        <label class="safety-item"><input type="checkbox" data-safety-check><span><strong>已经关机并拔掉电源</strong>Power disconnected</span></label>
+        <label class="safety-item"><input type="checkbox" data-safety-check><span><strong>桌面干燥且没有液体</strong>Dry workspace</span></label>
+        <label class="safety-item"><input type="checkbox" data-safety-check><span><strong>已经释放身体静电</strong>Static discharged</span></label>
+        <label class="safety-item"><input type="checkbox" data-safety-check><span><strong>拆线前已经拍照记录</strong>Connections photographed</span></label>
+      </div>
+      <div class="safety-status" data-safety-status>完成全部安全确认后，再开始拆装。</div>
+    </section>
+
+    <section class="section" id="steps">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">12 Assembly Steps</p>
+          <h2>按照顺序完成装机</h2>
+        </div>
+        <p>点击每一步展开操作。页面中的照片位置会在补充对应图片后自动显示。</p>
+      </div>
+
+      <div class="steps">
+        <details class="step" open>
+          <summary><span class="step-number">01</span><span class="step-title"><strong>准备机箱与工具</strong><span>Prepare the case and tools</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-01-safety-check.jpg" alt="断电和防静电准备"></div>
+            <div>
+              <ol class="action-list"><li>准备十字螺丝刀和小盒，用来收纳螺丝。</li><li>平放机箱，确认电源线已经拔下。</li><li>触摸接地金属物释放静电，拿配件时只拿边缘。</li><li>核对主板铜柱位置，避免多余铜柱接触主板背面。</li></ol>
+              <div class="warning"><strong>禁止：</strong>不要打开电源外壳，不要在通电状态下插拔内部配件。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">02</span><span class="step-title"><strong>安装 CPU</strong><span>Install the CPU · 教师监督</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-02-install-cpu.jpg" alt="安装 Intel CPU"></div>
+            <div>
+              <ol class="action-list"><li>打开 LGA 插槽压杆和金属压盖。</li><li>拿住 CPU 两侧边缘，寻找 CPU 和插槽上的三角标记。</li><li>对齐缺口和三角标记，把 CPU 平放进插槽。</li><li>确认 CPU 完全平整后，放下压盖并锁紧压杆。</li></ol>
+              <div class="warning"><strong>停止信号：</strong>CPU 不能平放或需要用力压入时，方向可能错误。不要触碰插槽针脚。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">03</span><span class="step-title"><strong>安装散热器</strong><span>Install the CPU cooler</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-03-install-cooler.jpg" alt="安装 CPU 散热器"></div>
+            <div>
+              <ol class="action-list"><li>清理旧硅脂，并在 CPU 中央放置适量新硅脂。</li><li>让四个固定脚对准主板孔位。</li><li>按照对角顺序均匀固定散热器。</li><li>轻轻检查散热器没有松动。</li><li>把风扇线接入主板 CPU_FAN 接口。</li></ol>
+              <div class="tip">CPU_FAN 没有连接时，电脑可能报警、过热或自动关机。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">04</span><span class="step-title"><strong>安装 DDR3 内存</strong><span>Install RAM</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-04-install-ram.jpg" alt="安装 DDR3 内存"></div>
+            <div>
+              <ol class="action-list"><li>打开内存槽两端卡扣。</li><li>对齐内存金手指缺口与插槽凸点。</li><li>双手在内存两端垂直、均匀按下。</li><li>确认卡扣自动锁住，内存两端高度一致。</li></ol>
+              <div class="warning">不要触摸金手指。缺口没有对齐时，不要按压。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">05</span><span class="step-title"><strong>安装主板</strong><span>Install the motherboard</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-05-install-motherboard.jpg" alt="安装主板"></div>
+            <div>
+              <ol class="action-list"><li>安装主板 I/O 挡板，如机箱和主板需要。</li><li>确认铜柱与主板螺丝孔位置一致。</li><li>把后部接口对准挡板，再让主板落在铜柱上。</li><li>先轻轻定位所有螺丝，再逐步拧紧。</li></ol>
+              <div class="warning">螺丝固定即可，不要过度拧紧。多余铜柱可能造成短路。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">06</span><span class="step-title"><strong>安装电源</strong><span>Install the power supply</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-06-install-power-supply.jpg" alt="安装电脑电源"></div>
+            <div>
+              <ol class="action-list"><li>根据机箱通风孔确定电源风扇方向。</li><li>把电源推入电源仓，对齐机箱后部螺丝孔。</li><li>用四颗螺丝固定。</li><li>暂时把线材放到机箱侧面，避免遮挡主板。</li></ol>
+              <div class="warning">任何情况下都不要拆开电源金属外壳。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">07</span><span class="step-title"><strong>安装 SATA 硬盘</strong><span>Install the SATA drive</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-07-install-sata-drive.jpg" alt="安装 SATA 硬盘"></div>
+            <div>
+              <ol class="action-list"><li>把硬盘放入对应尺寸的硬盘位。</li><li>使用螺丝或机箱免工具卡扣固定。</li><li>让接口朝向方便接线的一侧。</li><li>轻推硬盘，确认不会晃动。</li></ol>
+              <div class="tip">机械硬盘含有精密机械部件，避免碰撞和跌落。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">08</span><span class="step-title"><strong>连接主板与 CPU 供电</strong><span>Connect motherboard power</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-08-connect-power.jpg" alt="连接主板与 CPU 供电"></div>
+            <div>
+              <ol class="action-list"><li>把 24-pin ATX 插头接入主板长插座。</li><li>把 CPU 4-pin 或 8-pin 插头接入 CPU 附近的供电插座。</li><li>确认两个插头的锁扣都已扣住。</li></ol>
+              <div class="warning">只接 24-pin 而漏接 CPU 供电，是“风扇可能转但无法正常启动”的常见原因。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">09</span><span class="step-title"><strong>连接 SATA 数据与电源</strong><span>Connect SATA data and power</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-09-connect-sata.jpg" alt="连接 SATA 数据线和电源线"></div>
+            <div>
+              <ol class="action-list"><li>用较窄的 SATA 数据线连接硬盘与主板 SATA 接口。</li><li>用较宽的 SATA 电源线连接硬盘与电源。</li><li>检查两种 L 形接口方向正确并插紧。</li></ol>
+              <div class="tip"><strong>两条线，两种作用：</strong>数据线负责传输，电源线负责供电。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">10</span><span class="step-title"><strong>连接前面板与风扇</strong><span>Connect front panel and fans</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-10-connect-front-panel.jpg" alt="连接前面板线"></div>
+            <div>
+              <ol class="action-list"><li>根据主板标识连接 Power SW、Reset SW 和 LED。</li><li>连接前置 USB 和 HD AUDIO。</li><li>把机箱风扇接入 SYS_FAN 或 CHA_FAN。</li><li>整理线材，避免碰到风扇叶片。</li></ol>
+              <div class="warning">不同主板的前面板针脚排列可能不同，应查看主板丝印或说明书，不能只靠线材颜色猜测。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">11</span><span class="step-title"><strong>完成开机前检查</strong><span>Final inspection</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body text-only">
+            <div>
+              <ol class="action-list"><li>检查所有供电、数据线和风扇线。</li><li>确认内存和显卡已经完全插入。</li><li>确认机箱中没有散落螺丝和工具。</li><li>让另一名组员独立复查一次。</li></ol>
+              <div class="tip">先检查，再通电。把故障排除在按下开机键之前。</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="step">
+          <summary><span class="step-number">12</span><span class="step-title"><strong>首次启动与 BIOS 检查</strong><span>First boot and BIOS check</span></span><span class="step-arrow">›</span></summary>
+          <div class="step-body">
+            <div class="photo-frame"><img src="images/step-12-first-boot.jpg" alt="首次启动进入 BIOS"></div>
+            <div>
+              <ol class="action-list"><li>连接显示器、键盘和电源线。</li><li>确认显示器接在正确的视频输出接口。</li><li>开机，观察风扇、指示灯和屏幕信息。</li><li>进入 BIOS，检查 CPU、内存容量、硬盘和温度。</li></ol>
+              <div class="warning">出现异味、烟雾、火花或异常声音时，立即切断电源并报告教师。</div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Final Checklist</p>
+          <h2>按下开机键前再检查一次</h2>
+        </div>
+      </div>
+      <div class="final-checks">
+        <label class="final-check"><input type="checkbox"><span><strong>CPU 散热器已固定</strong>CPU_FAN 已连接</span></label>
+        <label class="final-check"><input type="checkbox"><span><strong>内存两端卡扣已锁定</strong>RAM fully seated</span></label>
+        <label class="final-check"><input type="checkbox"><span><strong>24-pin 主板供电已连接</strong>ATX power connected</span></label>
+        <label class="final-check"><input type="checkbox"><span><strong>CPU 4/8-pin 已连接</strong>CPU power connected</span></label>
+        <label class="final-check"><input type="checkbox"><span><strong>SATA 两条线已连接</strong>Data and power connected</span></label>
+        <label class="final-check"><input type="checkbox"><span><strong>机箱中没有遗留螺丝</strong>No loose screws</span></label>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Troubleshooting</p>
+          <h2>没有成功启动时，按症状检查</h2>
+        </div>
+        <p>每次只改变一项，再重新测试，这样才能知道哪一项解决了问题。</p>
+      </div>
+      <div class="trouble-grid">
+        <article class="trouble-card"><h3>完全不通电</h3><p>检查插座、电源线、电源背部开关、24-pin 供电、CPU 供电和 Power SW 位置。</p></article>
+        <article class="trouble-card"><h3>风扇转但没有画面</h3><p>检查显示器输入源、视频线接口、内存是否插紧；有独立显卡时确认视频线位置。</p></article>
+        <article class="trouble-card"><h3>找不到 SATA 硬盘</h3><p>分别检查 SATA 数据线和 SATA 电源线，并在 BIOS 中查看硬盘是否被识别。</p></article>
+        <article class="trouble-card"><h3>开机后很快关机</h3><p>立即停止反复开机，检查散热器固定、硅脂、CPU_FAN 接线和 BIOS 温度。</p></article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel" style="padding:28px">
+        <p class="eyebrow">Explain Your System</p>
+        <h2>完成挑战</h2>
+        <p>向同组成员解释：为什么 SATA 硬盘要接两条线？为什么内存断电后不能保存文件？为什么 CPU 必须安装散热器？</p>
+        <a class="button primary" href="index.html">返回配件地图复习</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">计算机硬件与装机实践 · Computer Hardware & PC Assembly</footer>
+  <script src="assets/course.js"></script>
+</body>
+</html>
