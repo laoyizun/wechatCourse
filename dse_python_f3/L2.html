@@ -236,12 +236,25 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   padding: 0; margin: 0;
 }
 
-/* 代码块 · 按钮直接浮在 pre 右上角（由 JS 实时计算位置） */
+/* 代码块 · 按钮放在 pre 内部右上角 */
+pre {
+  cursor: default;
+  position: relative !important;
+  padding-top: 42px !important;
+}
+.code-actions {
+  cursor: pointer;
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide:not(.active) .code-actions { display: none !important; }
 .code-actions {
   position: absolute;
-  z-index: 9999;
+  top: 10px; right: 10px;
   display: flex; gap: 6px;
+  z-index: 1000;
   pointer-events: auto !important;
+  isolation: isolate;
 }
 .code-actions button,
 .code-actions a.run-btn {
@@ -273,8 +286,6 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   background: rgba(217, 119, 6, .9) !important;
   transform: translateY(-1px);
 }
-pre { cursor: pointer; }
-
 .nav {
   position: fixed; z-index: 10;
   left: 80px; right: 80px; bottom: 28px;
@@ -309,7 +320,7 @@ pre { cursor: pointer; }
 }
 /* 紧凑页 · 一屏内放下 · 标题左上 · 留白更少 */
 .sllide.compact, .slide.compact { padding: 32px 56px 96px; }
-.slide.compact {
+.slide.compact.active {
   display: flex !important;
   flex-direction: column;
   gap: 0;
@@ -477,7 +488,7 @@ pre { cursor: pointer; }
           <tr><td><code class="inline">"hello"</code></td><td>____</td><td>____</td></tr>
         </table>
         <div class="label" style="margin-top:14px;">验证代码</div>
-<pre><code><span class="fn">print</span>(<span class="fn">type</span>(<span class="num">15</span>))</code></pre>
+<pre><code><span class="fn">print</span>(<span class="fn">type</span>(<span class="num">15</span>))</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <p style="font-size:18px; margin-top:10px; color:var(--text);">至少猜错 2 个才说明你<strong>真的不懂</strong> —— 如果全对，可以跳过本节。</p>
       </div>
     </div>
@@ -510,7 +521,7 @@ pre { cursor: pointer; }
       <div class="card">
 <pre><code><span class="fn">print</span>(<span class="num">15</span> + <span class="fn">int</span>(<span class="str">"15"</span>))      <span class="com"># 15 + 15 = 30</span>
 <span class="fn">print</span>(<span class="str">"15"</span> + <span class="fn">str</span>(<span class="num">15</span>))        <span class="com"># "15" + "15" = "1515"</span>
-<span class="fn">print</span>(<span class="fn">float</span>(<span class="str">"3.14"</span>))       <span class="com"># 3.14</span></code></pre>
+<span class="fn">print</span>(<span class="fn">float</span>(<span class="str">"3.14"</span>))       <span class="com"># 3.14</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
       <div class="metaphor" style="margin-top:14px;">
         <span class="emo">🗣️</span><b>比喻：联合国翻译</b> 字符串是"中文"，整数是"英文"。<code class="inline">int()</code> 就是同声传译 —— 把"中文"翻译成"英文"才能跟其他"英文"对话。
@@ -528,7 +539,7 @@ pre { cursor: pointer; }
     <div class="right">
       <div class="card">
 <pre><code><span class="fn">print</span>(<span class="fn">int</span>(<span class="num">3.6</span>))   <span class="com"># 3，不是 4！</span>
-<span class="fn">print</span>(<span class="fn">round</span>(<span class="num">3.6</span>)) <span class="com"># 4</span></code></pre>
+<span class="fn">print</span>(<span class="fn">round</span>(<span class="num">3.6</span>)) <span class="com"># 4</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <div class="term-out">3</div>
         <div class="term-out success">4</div>
       </div>
@@ -556,7 +567,7 @@ pre { cursor: pointer; }
         <div class="label">任务</div>
 <pre><code>birth = <span class="fn">input</span>(<span class="str">"出生年份:"</span>)
 age   = <span class="num">2025</span> - birth           <span class="com"># ❌ 这里会报错</span>
-<span class="fn">print</span>(<span class="str">"你今年"</span> + age + <span class="str">"岁"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">"你今年"</span> + age + <span class="str">"岁"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <p style="font-size:18px; margin-top:14px;">Bug：<code class="inline">birth</code> 是字符串，不能和整数相减。</p>
       </div>
       <div class="takeaway" style="margin-top:14px;">
@@ -602,7 +613,7 @@ age   = <span class="num">2025</span> - birth           <span class="com"># ❌ 
 <pre><code><span class="fn">print</span>(<span class="num">10</span> / <span class="num">2</span>)      <span class="com"># 5.0</span>
 <span class="fn">print</span>(<span class="num">5</span>  / <span class="num">2</span>)      <span class="com"># 2.5</span>
 <span class="fn">print</span>(<span class="num">5</span>  // <span class="num">2</span>)     <span class="com"># 2（整除）</span>
-<span class="fn">print</span>(<span class="num">10</span> % <span class="num">3</span>)     <span class="com"># 1（取余）</span></code></pre>
+<span class="fn">print</span>(<span class="num">10</span> % <span class="num">3</span>)     <span class="com"># 1（取余）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <div class="term-out">5.0</div>
         <div class="term-out">2.5</div>
         <div class="term-out success">2</div>
@@ -681,13 +692,13 @@ age   = <span class="num">2025</span> - birth           <span class="com"># ❌ 
           <div class="label">❌ 旧写法（+ 拼接）</div>
 <pre><code>name = <span class="str">"Jordan"</span>
 score = <span class="num">95</span>
-<span class="fn">print</span>(<span class="str">"Hi, "</span> + name + <span class="str">"! Score: "</span> + <span class="fn">str</span>(score))</code></pre>
+<span class="fn">print</span>(<span class="str">"Hi, "</span> + name + <span class="str">"! Score: "</span> + <span class="fn">str</span>(score))</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         </div>
         <div class="card success" style="margin:0; border-left:5px solid var(--green);">
           <div class="label" style="background:rgba(22,163,74,.12); color:#047857;">✅ 新写法（f-string）</div>
 <pre><code>name = <span class="str">"Jordan"</span>
 score = <span class="num">95</span>
-<span class="fn">print</span>(<span class="str">f"Hi, {name}! Score: {score}"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">f"Hi, {name}! Score: {score}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         </div>
       </div>
       <div class="metaphor" style="margin-top:18px;">
@@ -708,7 +719,7 @@ score = <span class="num">95</span>
 <pre><code><span class="fn">print</span>(<span class="str">f"a + b = {a+b}"</span>)             <span class="com"># 算式</span>
 <span class="fn">print</span>(<span class="str">f"你 10 年后 {age+10} 岁"</span>)    <span class="com"># 加 10</span>
 <span class="fn">print</span>(<span class="str">f"身高 {height:.2f} 米"</span>)      <span class="com"># 保留 2 位小数</span>
-<span class="fn">print</span>(<span class="str">f"班级 {classno:03d}"</span>)        <span class="com"># 补 0 到 3 位</span></code></pre>
+<span class="fn">print</span>(<span class="str">f"班级 {classno:03d}"</span>)        <span class="com"># 补 0 到 3 位</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
       <div class="takeaway" style="margin-top:14px;">
         <div class="label">💡 进阶 · 格式化</div>
@@ -729,16 +740,16 @@ score = <span class="num">95</span>
         <div class="label">任务 1 · 自我介绍</div>
 <pre><code>name = <span class="fn">input</span>(<span class="str">"名字:"</span>)
 age  = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄:"</span>))
-<span class="fn">print</span>(<span class="str">f"我是 {name}，明年 {age+1} 岁"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">f"我是 {name}，明年 {age+1} 岁"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <div class="label" style="margin-top:14px;">任务 2 · 班级信息</div>
 <pre><code>classname = <span class="fn">input</span>()
 classno   = <span class="fn">input</span>()
 name      = <span class="fn">input</span>()
-<span class="fn">print</span>(<span class="str">f"Hello, you are {name} from {classno}, class {classname}"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">f"Hello, you are {name} from {classno}, class {classname}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <div class="label" style="margin-top:14px;">任务 3 · 算式展示</div>
 <pre><code>a = <span class="fn">int</span>(<span class="fn">input</span>())
 b = <span class="fn">int</span>(<span class="fn">input</span>())
-<span class="fn">print</span>(<span class="str">f"{a} + {b} = {a+b}"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">f"{a} + {b} = {a+b}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <p style="font-size:18px; margin-top:14px; color:var(--text);">每题至少<strong style="color:var(--green);">跑 3 组数据</strong>验证。</p>
       </div>
     </div>
@@ -771,7 +782,7 @@ b = <span class="fn">int</span>(<span class="fn">input</span>())
       <div class="card">
 <pre><code>birth_year = <span class="str">"2010"</span>           <span class="com"># Bug 1 在这</span>
 age = <span class="num">2025</span> - birth_year      <span class="com"># Bug 2 在这</span>
-<span class="fn">print</span>(<span class="str">"age"</span>)               <span class="com"># Bug 3 在这</span></code></pre>
+<span class="fn">print</span>(<span class="str">"age"</span>)               <span class="com"># Bug 3 在这</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
       <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:14px;">
         <div class="bug" style="margin:0;">
@@ -805,7 +816,7 @@ age = <span class="num">2025</span> - birth_year      <span class="com"># Bug 2 
         <div class="label">✅ 修复后</div>
 <pre><code>birth_year = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"出生年份:"</span>))   <span class="com"># 用 int() 转</span>
 age = <span class="num">2025</span> - birth_year
-<span class="fn">print</span>(<span class="str">f"age = {age}"</span>)           <span class="com"># 用 f-string</span></code></pre>
+<span class="fn">print</span>(<span class="str">f"age = {age}"</span>)           <span class="com"># 用 f-string</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <div class="term-out success">age = 15</div>
       </div>
       <div class="takeaway" style="margin-top:14px;">
@@ -833,7 +844,7 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
 <span class="fn">print</span>(<span class="str">f"--- 个人信息 ---"</span>)
 <span class="fn">print</span>(<span class="str">f"姓名: {name}"</span>)
 <span class="fn">print</span>(<span class="str">f"明年: {age + 1} 岁"</span>)
-<span class="fn">print</span>(<span class="str">f"身高: {height:.2f} 米"</span>)</code></pre>
+<span class="fn">print</span>(<span class="str">f"身高: {height:.2f} 米"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         <p style="font-size:18px; margin-top:10px; color:var(--text);">至少跑 3 组数据，对照输出检查。</p>
       </div>
     </div>
@@ -947,7 +958,7 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
   });
 
   // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===
-  (function wrapCodeBlocks() {
+    (function bindCodeBlocks() {
     const pres = document.querySelectorAll('pre');
     function copyText(text) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -970,46 +981,22 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
     }
 
     pres.forEach(pre => {
-      let host = pre.parentElement;
-      while (host && host !== document.body) {
-        const pos = window.getComputedStyle(host).position;
-        if (pos === 'relative' || pos === 'absolute' || pos === 'fixed') break;
-        host = host.parentElement;
-      }
-      if (!host || host === document.body) host = document.body;
-
-      const actions = document.createElement('div');
-      actions.className = 'code-actions';
-      actions.innerHTML =
-        '<a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a>' +
-        '<button class="copy-btn" type="button">�� Copy</button>';
-      host.appendChild(actions);
-
-      const reposition = () => {
-        const pr = pre.getBoundingClientRect();
-        const hr = host.getBoundingClientRect();
-        actions.style.top = (pr.top - hr.top + 8) + 'px';
-        actions.style.left = (pr.right - hr.left - 10) + 'px';
-      };
-      reposition();
-      window.addEventListener('resize', reposition);
-      window.addEventListener('scroll', reposition, true);
-
+      const actions = pre.querySelector('.code-actions');
+      if (!actions) return;
       const btn = actions.querySelector('.copy-btn');
+      if (!btn) return;
       const doCopy = (e) => {
         if (e) { e.stopPropagation(); e.preventDefault(); }
-        copyText(pre.innerText).then(() => {
+        const code = pre.querySelector('code');
+        const text = code ? code.innerText : pre.innerText;
+        copyText(text).then(() => {
           btn.innerHTML = '✓ Copied';
           btn.classList.add('copied');
-          setTimeout(() => { btn.innerHTML = '�� Copy'; btn.classList.remove('copied'); }, 1500);
+          setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
         });
       };
       btn.addEventListener('mousedown', doCopy);
       btn.addEventListener('click', doCopy);
-      pre.addEventListener('mousedown', e => {
-        if (e.target.closest('.code-actions')) return;
-        doCopy();
-      });
     });
   })();
 </script>
