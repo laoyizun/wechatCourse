@@ -236,57 +236,48 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   padding: 0; margin: 0;
 }
 
-/* 代码块容器 · 右上角 Run + Copy 按钮 */
+/* 代码块容器 · 右上角放 Run + Copy 按钮 */
 .code-wrap {
   position: relative;
   margin: 12px 0;
+  overflow: visible !important;
 }
 .code-wrap > pre { margin: 0; }
 .code-actions {
   position: absolute;
   top: 8px; right: 10px;
   display: flex; gap: 6px;
-  z-index: 5;
+  z-index: 999;
+  pointer-events: auto !important;
 }
-.code-actions button {
-  display: inline-flex; align-items: center; gap: 5px;
+.code-actions button,
+.code-actions a.run-btn {
+  display: inline-flex !important; align-items: center; gap: 5px;
   min-height: 30px;
   padding: 5px 11px;
   border-radius: 7px;
-  border: 1px solid rgba(237, 246, 255, .22);
-  background: rgba(255, 255, 255, .08);
-  color: #edf6ff;
+  border: 1px solid rgba(237, 246, 255, .35) !important;
+  background: rgba(15, 36, 63, .75) !important;
+  color: #edf6ff !important;
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
   font-family: inherit;
+  text-decoration: none !important;
+  pointer-events: auto !important;
   transition: background .15s ease, transform .12s ease;
   letter-spacing: 0;
 }
 .code-actions button:hover {
-  background: rgba(110, 231, 183, .22);
+  background: rgba(22, 163, 74, .85) !important;
   transform: translateY(-1px);
 }
 .code-actions .copy-btn.copied {
-  background: rgba(110, 231, 183, .35);
-  color: #c8ffe5;
-}
-.code-actions a.run-btn {
-  text-decoration: none;
-  display: inline-flex; align-items: center; gap: 5px;
-  min-height: 30px;
-  padding: 5px 11px;
-  border-radius: 7px;
-  border: 1px solid rgba(237, 246, 255, .22);
-  background: rgba(255, 255, 255, .08);
-  color: #edf6ff;
-  font-size: 12px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: background .15s ease, transform .12s ease;
+  background: rgba(22, 163, 74, .9) !important;
+  color: #fff !important;
 }
 .code-actions a.run-btn:hover {
-  background: rgba(255, 181, 71, .28);
+  background: rgba(217, 119, 6, .85) !important;
   transform: translateY(-1px);
 }
 .code-wrap pre { cursor: pointer; }
@@ -965,7 +956,8 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
   // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===
   (function wrapCodeBlocks() {
     const pres = document.querySelectorAll('pre');
-    pres.forEach(pre => {
+    console.log('[code-actions] found', pres.length, 'pre elements');
+    pres.forEach((pre, idx) => {
       if (pre.parentElement.classList.contains('code-wrap')) return;
       const wrap = document.createElement('div');
       wrap.className = 'code-wrap';
@@ -976,26 +968,48 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
       actions.className = 'code-actions';
       actions.innerHTML =
         '<a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener" title="在新窗口打开在线编辑器">▶ Run</a>' +
-        '<button class="copy-btn" title="点击复制代码">📋 Copy</button>';
+        '<button class="copy-btn" type="button" title="点击复制代码">📋 Copy</button>';
       wrap.appendChild(actions);
 
       const btn = actions.querySelector('.copy-btn');
-      btn.addEventListener('click', e => {
+      btn.addEventListener('mousedown', e => {
         e.stopPropagation();
-        const txt = pre.innerText.replace(/ /g, ' ');
-        navigator.clipboard.writeText(txt).then(() => {
-          const old = btn.innerHTML;
+        e.preventDefault();
+        const txt = pre.innerText;
+        const fallbackCopy = (text) => {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.top = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (_) {}
+          document.body.removeChild(ta);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(() => {
+            btn.innerHTML = '✓ Copied';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
+          }).catch(() => {
+            fallbackCopy(txt);
+            btn.innerHTML = '✓ Copied';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
+          });
+        } else {
+          fallbackCopy(txt);
           btn.innerHTML = '✓ Copied';
           btn.classList.add('copied');
-          setTimeout(() => { btn.innerHTML = old; btn.classList.remove('copied'); }, 1500);
-        }).catch(() => {
-          btn.innerHTML = '失败';
-          setTimeout(() => { btn.innerHTML = '📋 Copy'; }, 1500);
-        });
+          setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
+        }
       });
-      // 整块点击也能复制
-      pre.addEventListener('click', () => btn.click());
+      pre.addEventListener('mousedown', e => {
+        if (e.target.closest('.code-actions')) return;
+        btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: false }));
+      });
     });
+    console.log('[code-actions] wrapped', document.querySelectorAll('.code-wrap').length, 'blocks');
   })();
 </script>
 </body>
