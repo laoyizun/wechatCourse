@@ -1,11 +1,11 @@
 # AI 助手任务提示 · DSE F.3 Python 课件维护
 
 > 用于在不同电脑的 TRAE Work 中调用 AI 助手时，作为初始 prompt 加载。
-> 配套使用：`TRAE_TASK_STATUS.md`（项目进度同步文件）
+> 配套使用：[TRAE_TASK_STATUS.md](https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/TRAE_TASK_STATUS.md)（项目进度同步文件）
 
 ---
 
-## �� 任务一句话
+## 🎯 任务一句话
 
 **DSE F.3 Python 课件 L1、L2 的 HTML 维护、术语校对、增量开发。**
 
@@ -20,7 +20,7 @@
 - **每个 lesson** 是一个独立的 HTML 文件
 - 每个 HTML 用 CSS grid 排版，**左侧文字 + 右侧代码 + 比喻图**
 - **slide 切换**通过 `.slide.active` class 控制
-- **代码块**右下角有 `▶ Run` + `�� Copy` 按钮（HTML 内置）
+- **代码块**右下角有 `▶ Run` + `📋 Copy` 按钮（HTML 内置）
 - 全程使用 **GroK Learning** F.3 Python cheatsheet 的术语
 
 ### L1+L2 知识范围
@@ -43,27 +43,43 @@
 
 ---
 
-## 2. 文件结构
+## 2. 仓库文件结构（GitHub 视角）
+
+GitHub 仓库：[`laoyizun/wechatCourse`](https://github.com/laoyizun/wechatCourse)
 
 ```
-C:\Users\54132\Desktop\wechatCourse\
+wechatCourse/
 ├── dse_python_f3/
-│   ├── L1.html               ← 主要工作文件
+│   ├── L1.html                                ← 主要工作文件
 │   ├── L2.html
-│   ├── TRAE_TASK_STATUS.md   ← 当前进度（必读）
-│   ├── F3CL_Notes_Python.pdf ← BLMCSS 官方教材
-│   └── ...
-├── ai_education_course_site/  ← 另一个课件项目
-└── F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf  ← GROK Learning cheatsheet
+│   ├── TRAE_TASK_STATUS.md                    ← 当前进度（必读）
+│   ├── prompt.md                              ← 本文件
+│   ├── README                                 ← （如有）
+│   └── F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf  ← BLMCSS 官方教材
+├── ai_education_course_site/                  ← 另一个课件项目
+└── ...（其他项目）
 ```
 
-```
-C:\Users\54132\Desktop\项目\备课\
-├── DSE_F3_Python_词汇表.md      ← cheatsheet 词汇总结
-├── GROK_Python3_Cheatsheet.png  ← cheatsheet 截图
-├── 关键知识点英文检查.md       ← 课件术语校对
-└── TRAE_TASK_STATUS.md         ← 同步进度（备份）
-```
+### 关键文件 GitHub URL
+
+| 文件 | URL |
+| --- | --- |
+| L1.html | https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/L1.html |
+| L2.html | https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/L2.html |
+| TRAE_TASK_STATUS.md | https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/TRAE_TASK_STATUS.md |
+| prompt.md | https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/prompt.md |
+| F3CL_Notes_Python.pdf | https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf |
+| GROK Cheatsheet PDF | https://github.com/laoyizun/wechatCourse/raw/main/dse_python_f3/F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf （第 2 页） |
+
+### 备课目录文件（用户本地）
+
+> 以下是**用户备课用**的文件，**不在 GitHub 仓库里**。AI 不应该写这些路径。
+
+| 文件 | 用途 |
+| --- | --- |
+| `DSE_F3_Python_词汇表.md` | cheatsheet 词汇总结 |
+| `GROK_Python3_Cheatsheet.png` | cheatsheet 截图 |
+| `关键知识点英文检查.md` | 课件术语校对 |
 
 ---
 
@@ -97,39 +113,64 @@ C:\Users\54132\Desktop\项目\备课\
 
 ---
 
-## 4. 常用脚本
+## 4. 常用脚本（跨平台）
 
-### 启动本地 server 测试课件
-
-```bash
-cd C:\Users\54132\Desktop\wechatCourse
-# 用 venv 的 python
-& 'C:\Users\54132\.virtualenvs\face-recognition-ZkQjCaSi\Scripts\python.exe' -m http.server 8765 --bind 127.0.0.1
-# 然后浏览器打开 http://127.0.0.1:8765/dse_python_f3/L1.html
-```
-
-### Git 同步流程
+### 4.1 Git 同步（Windows / Mac / Linux 通用）
 
 ```bash
-cd C:\Users\54132\Desktop\wechatCourse
-git pull                           # 拉取最新
-git status                         # 看修改
-git add dse_python_f3/             # stage
+# 在任意电脑开始会话
+cd <your-local-wechatCourse-path>
+git pull origin main
+
+# 看历史
+git log --oneline -10
+
+# 修改后
+git status
+git add dse_python_f3/
 git commit -m "descriptive message"
-git push                           # 推送
+git push origin main
 ```
 
-### 提取 PDF 文本
+**注意**：本地路径不复用 —— 写到 prompt 里会失效。本地用 `git remote -v` 确认远端是 `laoyizun/wechatCourse`。
+
+### 4.2 启动本地 server 测试课件
+
+**Windows (PowerShell)**：
+
+```powershell
+cd <your-local-wechatCourse-path>
+# 找 venv python
+& "$env:USERPROFILE\.virtualenvs\face-recognition-ZkQjCaSi\Scripts\python.exe" -m http.server 8765 --bind 127.0.0.1
+# 或用系统 python
+python -m http.server 8765 --bind 127.0.0.1
+```
+
+**Mac / Linux**：
+
+```bash
+cd <your-local-wechatCourse-path>
+python3 -m http.server 8765 --bind 127.0.0.1
+# 或
+python -m http.server 8765 --bind 127.0.0.1
+```
+
+浏览器打开 `http://127.0.0.1:8765/dse_python_f3/L1.html`
+
+### 4.3 提取 GROK Cheatsheet PDF 文本
 
 ```python
 import pypdf
-reader = pypdf.PdfReader(r'C:\Users\54132\Desktop\项目\备课\F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf')
+# Windows 路径示例
+reader = pypdf.PdfReader(r'C:\Users\54132\Desktop\wechatCourse\dse_python_f3\F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf')
+# Mac 路径示例
+# reader = pypdf.PdfReader(r'/Users/yourname/path/to/dse_python_f3/F3CL_Notes_Python_v1_(2025-26)_student_(P1-P26).pdf')
 for i, page in enumerate(reader.pages):
     print(f'=== Page {i+1} ===')
     print(page.extract_text())
 ```
 
-### 浏览器测试（TRAE 有 browser 插件）
+### 4.4 浏览器实地测试（TRAE 有 browser 插件）
 
 ```javascript
 // 在浏览器 DevTools / TRAE browser MCP 跑：
@@ -137,6 +178,29 @@ const pre = document.querySelector('.slide.active').querySelector('pre');
 const actions = pre.querySelector('.code-actions');
 console.log('actions exists:', !!actions);
 console.log('opacity:', getComputedStyle(actions).opacity);
+```
+
+### 4.5 修 Python emoji 乱码（跨平台）
+
+```python
+# -*- coding: utf-8 -*-
+import os
+import re
+
+# 替换文件路径 ↓（按你电脑改）
+SOURCE_DIR = r'<your-local-wechatCourse-path>/dse_python_f3'
+
+for fname in ['L1.html', 'L2.html']:
+    p = os.path.join(SOURCE_DIR, fname)
+    with open(p, encoding='utf-8') as f:
+        c = f.read()
+    bom = chr(0xFFFD) + chr(0xFFFD)
+    emo = chr(0x1F4CB)
+    print(fname, 'before:', c.count(bom + ' Copy'))
+    c = c.replace(bom + ' Copy', emo + ' Copy')
+    print(fname, 'after:', c.count(emo + ' Copy'))
+    with open(p, 'w', encoding='utf-8') as f:
+        f.write(c)
 ```
 
 ---
@@ -192,6 +256,7 @@ console.log('opacity:', getComputedStyle(actions).opacity);
 - ❌ 不要 push 到 main 之前忘了 commit
 - ❌ 不要给课件加 analytics / tracking
 - ❌ 不要删除 PDF 文件（`F3CL_Notes_Python_v1_*.pdf` 是教材）
+- ❌ 不要写死本地路径（在 prompt / 文档里）
 
 ### 6.3 要做
 
@@ -200,19 +265,21 @@ console.log('opacity:', getComputedStyle(actions).opacity);
 - ✅ 重大修改前**先开浏览器测试**（用 `python -m http.server`）
 - ✅ 重大修改后**更新 `TRAE_TASK_STATUS.md`**
 - ✅ 用 `git log --oneline -10` 跟踪历史
+- ✅ 跨平台脚本用 `<your-local-path>` 占位符
 
 ---
 
 ## 7. 接续这个任务时
 
 1. **拉取最新**：
+
    ```bash
-   cd C:\Users\54132\Desktop\wechatCourse
-   git pull
+   cd <your-local-wechatCourse-path>
+   git pull origin main
    ```
 
 2. **读进度**：
-   - 打开 `dse_python_f3/TRAE_TASK_STATUS.md`
+   - GitHub 上看：[TRAE_TASK_STATUS.md](https://github.com/laoyizun/wechatCourse/blob/main/dse_python_f3/TRAE_TASK_STATUS.md)
    - 看"已完成"+"进行中"+"待办"三栏
 
 3. **询问用户**：
@@ -220,7 +287,7 @@ console.log('opacity:', getComputedStyle(actions).opacity);
    - 或者 "要修复什么问题？"
 
 4. **开始工作**：
-   - 先读 L1.html / L2.html 实际 HTML 结构
+   - 先读 L1.html / L2.html 实际 HTML 结构（GitHub 上有）
    - 用浏览器 MCP 实地测试
    - 仅修改课件文件（L1.html / L2.html）
    - 重要修改后 commit + push
@@ -243,7 +310,7 @@ console.log('opacity:', getComputedStyle(actions).opacity);
 
 ## 9. 词汇参考
 
-完整 GROK cheatsheet 词汇表：`DSE_F3_Python_词汇表.md`（已生成）
+完整 GROK cheatsheet 词汇表：`DSE_F3_Python_词汇表.md`（用户备课目录本地文件）
 
 最常用 10 个术语：
 
@@ -267,11 +334,13 @@ console.log('opacity:', getComputedStyle(actions).opacity);
 ```
 用户提出需求
    ↓
-AI 阅读 prompt.md + TRAE_TASK_STATUS.md
+AI 读 prompt.md (GitHub) + TRAE_TASK_STATUS.md (GitHub)
    ↓
-AI 用 browser MCP 实地测试（或读 L1.html 源码）
+AI 看 L1.html / L2.html 源码（GitHub 上）
    ↓
-AI 做出修改（只改 dse_python_f3/L1.html + L2.html）
+AI 用 browser MCP 实地测试（或本地启动 server）
+   ↓
+AI 做出修改（只改 L1.html + L2.html）
    ↓
 AI 用浏览器测试修改
    ↓
@@ -287,4 +356,5 @@ AI commit + push 进度文件
 ---
 
 **最后更新**：2026-08-12
-**
+**作者**：AI 助手（基于用户对话历史整理）
+**配套文件**：[TRAE_TASK_STATUS.md](https://github.com/laoyizun/wechatCourse/blob/main/dse_python
