@@ -4,166 +4,108 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DSE F.3 Python 补习课 · 课程目录</title>
-<style>
-  :root {
-    --bg: #0f1115;
-    --bg-soft: #161922;
-    --surface: #1c2030;
-    --border: #262b3d;
-    --text-1: #e9ecf6;
-    --text-2: #a8b0c6;
-    --text-3: #6b7290;
-    --accent: #ffb547;
-    --accent-2: #6ee7b7;
-    --accent-3: #f472b6;
-    --accent-4: #60a5fa;
-    --code-bg: #0c0e15;
-    --code-text: #d3dae8;
-    --code-kw: #ff9d72;
-    --code-str: #a5e88c;
-    --code-num: #ffb547;
-    --code-com: #5b6178;
-    --code-fn: #82d4ff;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: var(--bg);
-    color: var(--text-1);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 64px 24px 96px; }
-  .hero { padding: 24px 0 48px; border-bottom: 1px solid var(--border); margin-bottom: 48px; }
-  .eyebrow { font-size: 13px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
-  h1 { font-size: 38px; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 16px; }
-  h1 .hl { color: var(--accent); }
-  .sub { font-size: 17px; color: var(--text-2); max-width: 640px; }
-  .meta { display: flex; gap: 24px; margin-top: 24px; font-size: 13px; color: var(--text-3); }
-  .meta b { color: var(--text-1); font-weight: 600; }
-  .section-title { font-size: 13px; color: var(--text-3); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 20px; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 30px; } }
-  .card {
-    display: block;
-    background: var(--bg-soft);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 22px 22px 20px;
-    color: inherit;
-    text-decoration: none;
-    transition: transform .15s ease, border-color .15s ease, background .15s ease;
-  }
-  .card:hover { transform: translateY(-2px); border-color: var(--accent); background: var(--surface); }
-  .card .tag { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.05em; margin-bottom: 12px; }
-  .tag-l1 { background: rgba(255,181,71,0.15); color: var(--accent); }
-  .tag-l2 { background: rgba(110,231,183,0.15); color: var(--accent-2); }
-  .tag-exam { background: rgba(244,114,182,0.15); color: var(--accent-3); }
-  .tag-final { background: rgba(96,165,250,0.15); color: var(--accent-4); }
-  .card h3 { font-size: 18px; margin-bottom: 8px; }
-  .card p { font-size: 14px; color: var(--text-2); line-height: 1.55; }
-  .card .arrow { margin-top: 14px; font-size: 13px; color: var(--accent); font-weight: 600; }
-  .card.locked { opacity: 0.55; pointer-events: none; }
-  .card.locked .arrow { color: var(--text-3); font-weight: 400; }
-  .legend { margin-top: 48px; padding: 20px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; font-size: 13px; color: var(--text-2); }
-  .legend b { color: var(--text-1); }
-  .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-3); text-align: center; }
-</style>
+<title>DSE F.3 Python 补习课 · 课程入口</title>
+<link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-<div class="wrap">
+<body class="home">
+<main class="wrap">
 
-  <div class="hero">
-    <div class="eyebrow">DSE F.3 · 1 对 1 补习</div>
-    <h1>DSE F.3 Python <span class="hl">补习课</span></h1>
-    <p class="sub">十节课，从零基础到 DSE 编程题型全覆盖。每节 1.5 小时网课，含 2 节习题课与 1 节总复习，全部围绕 DSE 考点设计。</p>
-    <div class="meta">
-      <div>学生：<b>F.3 · 不熟悉粤语</b></div>
-      <div>平台：<b>网课 1v1</b></div>
-      <div>讲义：<b>中英术语对照</b></div>
+  <section class="hero">
+    <div class="kicker">DSE F.3 · 1 对 1 补习 · Python</div>
+    <h1>DSE F.3 Python <span class="highlight">补习课</span></h1>
+    <p class="subtitle">面向香港 DSE F.3 不熟悉粤语的学生：十节课从零基础到 DSE 编程题型全覆盖。每节 1.5 小时网课，含 2 节习题课与 1 节总复习，全部围绕 DSE 考点设计。</p>
+    <div class="chips">
+      <span class="chip">DSE F.3</span>
+      <span class="chip">Python</span>
+      <span class="chip">1v1 网课</span>
+      <span class="chip">Dry Run</span>
+      <span class="chip">Bug Fix</span>
+    </div>
+    <div class="link-row">
+      <a class="button-link" href="L1.html">进入 L1 PPT</a>
+      <a class="button-link secondary" href="L2.html">进入 L2 PPT</a>
+    </div>
+  </section>
+
+  <div class="section-title">
+    <div>
+      <h2>课程目录</h2>
+      <p>L1-L2 已开放，L3-L10 备课中。讲课 7 节 + 习题课 2 节 + 总复习 1 节。</p>
     </div>
   </div>
 
-  <div class="section-title">课程主线</div>
-  <div class="grid">
+  <section class="course-grid">
 
-    <a class="card" href="L1.html">
-      <span class="tag tag-l1">L1 · 讲课</span>
+    <a class="course-card" href="L1.html">
+      <small>L1 · 讲课</small>
       <h3>I/O + 变量 + IPO 模型</h3>
-      <p>第一个 Python 程序、print/input、变量是数据的"碗"、IPO 三步曲。</p>
-      <div class="arrow">进入 L1 →</div>
+      <p>第一个 Python 程序、print/input、变量是数据的"碗"、IPO 三步曲。每知识点配现实比喻与 Dry Run 练习。</p>
+      <div class="chips"><span class="status open">已开放 · 22 页</span></div>
     </a>
 
-    <a class="card" href="L2.html">
-      <span class="tag tag-l2">L2 · 讲课</span>
+    <a class="course-card" href="L2.html">
+      <small>L2 · 讲课</small>
       <h3>数据类型 + 转换 + f-string</h3>
-      <p>int/float/str 的区别、"15" 与 15 的暗坑、f-string 让输出变漂亮。</p>
-      <div class="arrow">进入 L2 →</div>
+      <p>int / float / str / bool 四件套、int() 与 float() 转换、/ 永远返回 float 的暗坑、f-string 让输出变漂亮。</p>
+      <div class="chips"><span class="status open">已开放 · 23 页</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-exam">L3 · 习题课</span>
+    <a class="course-card disabled">
+      <small>L3 · 习题课</small>
       <h3>运算符 + if…else + 边界测试</h3>
-      <p>综合 I/O + 变量 + if 的实战演练，专治一类题：什么时候 >= 该写 >？</p>
-      <div class="arrow">待开放</div>
+      <p>综合 I/O + 变量 + if 的实战演练，专治一类题：什么时候 >= 该写 >？DSE 边界用例设计训练。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-exam">L4 · 习题课</span>
+    <a class="course-card disabled">
+      <small>L4 · 习题课</small>
       <h3>for + range + end 参数</h3>
-      <p>从"一行一个输出"到"一行十个输出"的蜕变，range 左闭右开必考。</p>
-      <div class="arrow">待开放</div>
+      <p>从"一行一个输出"到"一行十个输出"的蜕变，range 左闭右开必考，print(..., end=' ') 实战。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-exam">L5 · 讲课</span>
+    <a class="course-card disabled">
+      <small>L5 · 讲课</small>
       <h3>while + break/continue + 嵌套</h3>
-      <p>猜数字游戏实战，while 死循环与 break 是高频考点。</p>
-      <div class="arrow">待开放</div>
+      <p>猜数字游戏实战，while 死循环与 break 是高频考点，循环嵌套打印图形。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-exam">L6 · 讲课</span>
+    <a class="course-card disabled">
+      <small>L6 · 讲课</small>
       <h3>列表 + 切片 + 索引</h3>
-      <p>从单值变量到"数据盒子"，列表 + 切片是 DSE 中段大题常客。</p>
-      <div class="arrow">待开放</div>
+      <p>从单值变量到"数据盒子"，列表 + 切片是 DSE 中段大题常客，append/insert/pop 全家桶。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-exam">L7 · 习题课</span>
+    <a class="course-card disabled">
+      <small>L7 · 习题课</small>
       <h3>中级综合（列表 + 字符串 + 循环）</h3>
-      <p>回文判断、成绩统计、密码验证三大综合题一网打尽。</p>
-      <div class="arrow">待开放</div>
+      <p>回文判断、成绩统计、密码验证三大综合题一网打尽，模拟 DSE 卷二 Section B 题型。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-exam">L8 · 讲课</span>
+    <a class="course-card disabled">
+      <small>L8 · 讲课</small>
       <h3>函数 def + 参数 + return</h3>
-      <p>把代码装进"工厂"，函数让程序从 50 行缩到 10 行。</p>
-      <div class="arrow">待开放</div>
+      <p>把代码装进"工厂"，函数让程序从 50 行缩到 10 行，理解作用域与 return 的意义。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
-    <a class="card locked" href="#">
-      <span class="tag tag-final">L9 · 复习</span>
+    <a class="course-card disabled">
+      <small>L9 · 总复习</small>
       <h3>DSE 综合实战 + 错题回顾</h3>
-      <p>最后一节不教新课，4 道 DSE 综合题 + 易错点 Top 10 大串讲。</p>
-      <div class="arrow">待开放</div>
+      <p>最后一节不教新课，4 道 DSE 综合题 + 易错点 Top 10 大串讲，含 Past Paper 选做。</p>
+      <div class="chips"><span class="status locked">备课中</span></div>
     </a>
 
+  </section>
+
+  <div class="footer-note">
+    课程主线：不是考临时问答，而是把"凭感觉写代码"变成"有章法的工程"。<br>
+    教学语言策略：每节开头 30 秒展示术语中英对照表，全程英文术语 + 中文短句，避免粤语口头解释。
   </div>
 
-  <div class="legend">
-    <b>课程节奏</b> · 讲课 7 节 + 习题课 2 节 + 总复习 1 节。<br>
-    <b>作业设计</b> · 大量借鉴 F3CL Classwork 的 Dry Run（纸上预测输出）+ Bug Fix（找错改错）题，让学生"先猜再跑"。<br>
-    <b>趣味元素</b> · 全程穿插现实比喻（碗、工厂、门卫、菜单等），让抽象概念可触摸。
-  </div>
-
-  <div class="footer">
-    用心 · 慢就是快 · 10 节课搞定 DSE 编程
-  </div>
-
-</div>
+</main>
 </body>
 </html>
