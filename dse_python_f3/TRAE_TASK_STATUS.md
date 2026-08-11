@@ -5,7 +5,9 @@
 ## 项目仓库
 
 - **GitHub**: [`laoyizun/wechatCourse`](https://github.com/laoyizun/wechatCourse)
-- **本地路径**: `C:\Users\54132\Desktop\wechatCourse`
+- **本地路径（多电脑）**: 各自 clone，路径无标准
+  - 用户电脑 A (Windows): `C:\Users\54132\Desktop\项目\备课\wechatCourse`
+  - 用户电脑 B (Mac): `~/Desktop/项目/备课/wechatCourse`（推测）
 - **课件目录**: `dse_python_f3/`
 - **进度文件**: `dse_python_f3/TRAE_TASK_STATUS.md` (本文件)
 
