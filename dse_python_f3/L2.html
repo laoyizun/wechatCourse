@@ -236,11 +236,67 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   padding: 0; margin: 0;
 }
 
+/* 代码块容器 · 右上角 Run + Copy 按钮 */
+.code-wrap {
+  position: relative;
+  margin: 12px 0;
+}
+.code-wrap > pre { margin: 0; }
+.code-actions {
+  position: absolute;
+  top: 8px; right: 10px;
+  display: flex; gap: 6px;
+  z-index: 5;
+}
+.code-actions button {
+  display: inline-flex; align-items: center; gap: 5px;
+  min-height: 30px;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: 1px solid rgba(237, 246, 255, .22);
+  background: rgba(255, 255, 255, .08);
+  color: #edf6ff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s ease, transform .12s ease;
+  letter-spacing: 0;
+}
+.code-actions button:hover {
+  background: rgba(110, 231, 183, .22);
+  transform: translateY(-1px);
+}
+.code-actions .copy-btn.copied {
+  background: rgba(110, 231, 183, .35);
+  color: #c8ffe5;
+}
+.code-actions a.run-btn {
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  min-height: 30px;
+  padding: 5px 11px;
+  border-radius: 7px;
+  border: 1px solid rgba(237, 246, 255, .22);
+  background: rgba(255, 255, 255, .08);
+  color: #edf6ff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, transform .12s ease;
+}
+.code-actions a.run-btn:hover {
+  background: rgba(255, 181, 71, .28);
+  transform: translateY(-1px);
+}
+.code-wrap pre { cursor: pointer; }
+
 .nav {
   position: fixed; z-index: 10;
   left: 80px; right: 80px; bottom: 28px;
   display: flex; align-items: center; gap: 16px;
 }
+.nav a { text-decoration: none; }
 .nav button:disabled { opacity: .38; cursor: not-allowed; }
 .counter { font-weight: 900; color: #314860; min-width: 84px; text-align: center; font-size: 18px; }
 .progress-bar { flex: 1; height: 10px; border-radius: 999px; background: rgba(37, 99, 235, .12); overflow: hidden; }
@@ -905,6 +961,42 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 50) { if (dx < 0) next(); else prev(); }
   });
+
+  // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===
+  (function wrapCodeBlocks() {
+    const pres = document.querySelectorAll('pre');
+    pres.forEach(pre => {
+      if (pre.parentElement.classList.contains('code-wrap')) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'code-wrap';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+
+      const actions = document.createElement('div');
+      actions.className = 'code-actions';
+      actions.innerHTML =
+        '<a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener" title="在新窗口打开在线编辑器">▶ Run</a>' +
+        '<button class="copy-btn" title="点击复制代码">📋 Copy</button>';
+      wrap.appendChild(actions);
+
+      const btn = actions.querySelector('.copy-btn');
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const txt = pre.innerText.replace(/ /g, ' ');
+        navigator.clipboard.writeText(txt).then(() => {
+          const old = btn.innerHTML;
+          btn.innerHTML = '✓ Copied';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.innerHTML = old; btn.classList.remove('copied'); }, 1500);
+        }).catch(() => {
+          btn.innerHTML = '失败';
+          setTimeout(() => { btn.innerHTML = '📋 Copy'; }, 1500);
+        });
+      });
+      // 整块点击也能复制
+      pre.addEventListener('click', () => btn.click());
+    });
+  })();
 </script>
 </body>
 </html>
