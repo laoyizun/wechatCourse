@@ -257,8 +257,10 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   font-weight: 900; cursor: pointer;
   box-shadow: 0 12px 28px rgba(15, 36, 63, .18);
   font-size: 16px;
+  text-decoration: none;
 }
-.nav button.secondary { background: #eef4fb; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.nav button.secondary, .nav .home-link.secondary { background: #eef4fb; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.nav .home-link.secondary { padding: 12px 22px; }
 
 @media (max-width: 1080px) {
   .slide.active { grid-template-columns: 1fr; gap: 28px; }
@@ -869,6 +871,7 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
 </main>
 
 <div class="nav">
+  <a class="home-link secondary" href="index.html">📚 目录</a>
   <button class="secondary" onclick="prev()">← 上页</button>
   <span class="counter"><span id="cur">1</span> / <span id="total">23</span></span>
   <div class="progress-bar"><span id="bar"></span></div>

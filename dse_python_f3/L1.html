@@ -280,8 +280,10 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   font-weight: 900; cursor: pointer;
   box-shadow: 0 12px 28px rgba(15, 36, 63, .18);
   font-size: 16px;
+  text-decoration: none;
 }
-.nav button.secondary { background: #eef4fb; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.nav button.secondary, .nav .home-link.secondary { background: #eef4fb; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.nav .home-link.secondary { padding: 12px 22px; }
 
 @media (max-width: 1080px) {
   .slide.active { grid-template-columns: 1fr; gap: 28px; }
@@ -395,6 +397,9 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
       <div class="kicker">Part 1 · 01</div>
       <h2>什么是 <span class="highlight">print</span> <small style="font-size:0.45em; color:var(--muted); font-weight:700; vertical-align:middle;">/ 打印输出</small>？</h2>
       <p class="subtitle"><code class="inline">print()</code> 是 Python 最简单的指令 —— 把括号里的内容打到屏幕上。</p>
+      <div class="metaphor">
+        <span class="emo">📢</span><b>比喻</b>：<code class="inline">print</code> = 电脑拿一个<strong>大喇叭</strong>喊话。括号里的内容是喊的话，记得加<strong>引号</strong>告诉电脑"这是文字"。
+      </div>
     </div>
     <div class="right">
       <div class="card">
@@ -404,9 +409,15 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
         <div class="muted" style="font-size:16px; margin:10px 0 6px;">输出 · 屏幕显示</div>
         <div class="term-out">Hello World</div>
       </div>
-      <div class="metaphor">
-        <span class="emo">📢</span><b>比喻</b>：<code class="inline">print</code> = 电脑拿一个<strong>大喇叭</strong>喊话。括号里的内容是喊的话，记得加<strong>引号</strong>告诉电脑"这是文字"。
-      </div>
+      <a class="ide-card" href="https://www.online-python.com/" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:14px; margin-top:14px; padding:18px 22px; background:linear-gradient(135deg, rgba(37,99,235,.08), rgba(15,159,154,.06)); border:2px solid rgba(37,99,235,.3); border-radius:12px; text-decoration:none; color:var(--ink); box-shadow:var(--shadow); transition:transform .15s ease, border-color .15s ease;">
+        <div style="font-size:38px; line-height:1;">⌨️</div>
+        <div style="flex:1;">
+          <div style="font-size:11px; color:#1d4ed8; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px;">👉 边学边练 · 在线 Python 编辑器</div>
+          <div style="font-size:20px; font-weight:900; color:var(--ink);">online-python.com</div>
+          <div style="font-size:14px; color:var(--muted); margin-top:4px;">免登录 · 打开就能写 · 自动保存</div>
+        </div>
+        <div style="font-size:24px; color:#1d4ed8; font-weight:900;">→</div>
+      </a>
     </div>
   </section>
 
@@ -899,8 +910,9 @@ age = <span class="num">2025</span> - birth_year     <span class="com"># Bug 2 �
 </main>
 
 <div class="nav">
+  <a class="home-link secondary" href="index.html">📚 目录</a>
   <button class="secondary" onclick="prev()">← 上页</button>
-  <span class="counter"><span id="cur">1</span> / <span id="total">21</span></span>
+  <span class="counter"><span id="cur">1</span> / <span id="total">22</span></span>
   <div class="progress-bar"><span id="bar"></span></div>
   <button onclick="next()">下页 →</button>
 </div>
