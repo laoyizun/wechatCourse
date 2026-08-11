@@ -236,18 +236,11 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   padding: 0; margin: 0;
 }
 
-/* 代码块容器 · 右上角放 Run + Copy 按钮 */
-.code-wrap {
-  position: relative;
-  margin: 12px 0;
-  overflow: visible !important;
-}
-.code-wrap > pre { margin: 0; }
+/* 代码块 · 按钮直接浮在 pre 右上角（由 JS 实时计算位置） */
 .code-actions {
   position: absolute;
-  top: 8px; right: 10px;
+  z-index: 9999;
   display: flex; gap: 6px;
-  z-index: 999;
   pointer-events: auto !important;
 }
 .code-actions button,
@@ -257,7 +250,7 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   padding: 5px 11px;
   border-radius: 7px;
   border: 1px solid rgba(237, 246, 255, .35) !important;
-  background: rgba(15, 36, 63, .75) !important;
+  background: rgba(15, 36, 63, .85) !important;
   color: #edf6ff !important;
   font-size: 12px;
   font-weight: 800;
@@ -269,18 +262,18 @@ pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
   letter-spacing: 0;
 }
 .code-actions button:hover {
-  background: rgba(22, 163, 74, .85) !important;
+  background: rgba(22, 163, 74, .9) !important;
   transform: translateY(-1px);
 }
 .code-actions .copy-btn.copied {
-  background: rgba(22, 163, 74, .9) !important;
+  background: rgba(22, 163, 74, .95) !important;
   color: #fff !important;
 }
 .code-actions a.run-btn:hover {
-  background: rgba(217, 119, 6, .85) !important;
+  background: rgba(217, 119, 6, .9) !important;
   transform: translateY(-1px);
 }
-.code-wrap pre { cursor: pointer; }
+pre { cursor: pointer; }
 
 .nav {
   position: fixed; z-index: 10;
@@ -956,60 +949,68 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
   // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===
   (function wrapCodeBlocks() {
     const pres = document.querySelectorAll('pre');
-    console.log('[code-actions] found', pres.length, 'pre elements');
-    pres.forEach((pre, idx) => {
-      if (pre.parentElement.classList.contains('code-wrap')) return;
-      const wrap = document.createElement('div');
-      wrap.className = 'code-wrap';
-      pre.parentNode.insertBefore(wrap, pre);
-      wrap.appendChild(pre);
+    function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).catch(() => {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed'; ta.style.top = '-9999px';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch (_) {}
+          document.body.removeChild(ta);
+        });
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.top = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (_) {}
+      document.body.removeChild(ta);
+      return Promise.resolve();
+    }
+
+    pres.forEach(pre => {
+      let host = pre.parentElement;
+      while (host && host !== document.body) {
+        const pos = window.getComputedStyle(host).position;
+        if (pos === 'relative' || pos === 'absolute' || pos === 'fixed') break;
+        host = host.parentElement;
+      }
+      if (!host || host === document.body) host = document.body;
 
       const actions = document.createElement('div');
       actions.className = 'code-actions';
       actions.innerHTML =
-        '<a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener" title="在新窗口打开在线编辑器">▶ Run</a>' +
-        '<button class="copy-btn" type="button" title="点击复制代码">📋 Copy</button>';
-      wrap.appendChild(actions);
+        '<a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a>' +
+        '<button class="copy-btn" type="button">�� Copy</button>';
+      host.appendChild(actions);
+
+      const reposition = () => {
+        const pr = pre.getBoundingClientRect();
+        const hr = host.getBoundingClientRect();
+        actions.style.top = (pr.top - hr.top + 8) + 'px';
+        actions.style.left = (pr.right - hr.left - 10) + 'px';
+      };
+      reposition();
+      window.addEventListener('resize', reposition);
+      window.addEventListener('scroll', reposition, true);
 
       const btn = actions.querySelector('.copy-btn');
-      btn.addEventListener('mousedown', e => {
-        e.stopPropagation();
-        e.preventDefault();
-        const txt = pre.innerText;
-        const fallbackCopy = (text) => {
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          ta.style.position = 'fixed';
-          ta.style.top = '-9999px';
-          document.body.appendChild(ta);
-          ta.select();
-          try { document.execCommand('copy'); } catch (_) {}
-          document.body.removeChild(ta);
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(txt).then(() => {
-            btn.innerHTML = '✓ Copied';
-            btn.classList.add('copied');
-            setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
-          }).catch(() => {
-            fallbackCopy(txt);
-            btn.innerHTML = '✓ Copied';
-            btn.classList.add('copied');
-            setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
-          });
-        } else {
-          fallbackCopy(txt);
+      const doCopy = (e) => {
+        if (e) { e.stopPropagation(); e.preventDefault(); }
+        copyText(pre.innerText).then(() => {
           btn.innerHTML = '✓ Copied';
           btn.classList.add('copied');
-          setTimeout(() => { btn.innerHTML = '📋 Copy'; btn.classList.remove('copied'); }, 1500);
-        }
-      });
+          setTimeout(() => { btn.innerHTML = '�� Copy'; btn.classList.remove('copied'); }, 1500);
+        });
+      };
+      btn.addEventListener('mousedown', doCopy);
+      btn.addEventListener('click', doCopy);
       pre.addEventListener('mousedown', e => {
         if (e.target.closest('.code-actions')) return;
-        btn.dispatchEvent(new MouseEvent('mousedown', { bubbles: false }));
+        doCopy();
       });
     });
-    console.log('[code-actions] wrapped', document.querySelectorAll('.code-wrap').length, 'blocks');
   })();
 </script>
 </body>
