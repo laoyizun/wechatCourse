@@ -240,6 +240,15 @@ td code, th code { font-size: 17px; }
   white-space: pre-wrap;
 }
 .answer-code .kw { color: #ff9d72; font-weight: 700; }
+
+/* 答案代码块专用 · 数字高亮（避免与全局 .num 冲突） */
+.answer-code .ac-num {
+  display: inline;
+  color: #ffb547;
+  font-weight: inherit;
+  font-size: inherit;
+}
+
 .answer-code .str { color: #a5e88c; }
 .answer-code .num { color: #ffb547; }
 .answer-code .com { color: #7c8aa8; font-style: italic; }
@@ -262,12 +271,25 @@ td code, th code { font-size: 17px; }
   background: #eaf1ff; color: #1d4ed8;
   font-weight: 900; font-size: 18px;
 }
-pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com {
-  display: inline;
-  min-width: 0; height: auto;
-  background: none; border-radius: 0;
-  padding: 0; margin: 0;
+/* 修复：pre/code 里的 .num/.fn/.str 等不要变成块级元素 */
+pre .num, code .num, pre .fn, pre .str, pre .num, pre .kw, pre .com,
+.answer-code .num, .answer-code .fn, .answer-code .str, .answer-code .kw, .answer-code .com {
+  display: inline !important;
+  min-width: 0 !important;
+  height: auto !important;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
 }
+.answer-code .fn { color: #82d4ff !important; font-weight: 700 !important; }
+.answer-code .str { color: #a5e88c !important; }
+.answer-code .num { color: #ffb547 !important; }
+.answer-code .com { color: #7c8aa8 !important; font-style: italic !important; }
+.answer-code .kw { color: #ff9d72 !important; font-weight: 700 !important; }
 
 /* 代码块 · 按钮在 pre 右上角 */
 pre {
@@ -673,7 +695,7 @@ age = <span class="num">2025</span> - birth
       <div class="answer-block">
         <div class="label">✓ 修复后</div>
 <div class="answer-code">birth = <span class="fn">input</span>(<span class="str">"出生年份: "</span>)
-age = <span class="num">2025</span> - <span class="fn">int</span>(birth)
+age = <span class="ac-num">2025</span> - <span class="fn">int</span>(birth)
 <span class="fn">print</span>(age)</div>
         <p style="margin-top:8px;"><strong>错误</strong>：<code class="inline">TypeError: unsupported operand type(s) for -: 'int' and 'str'</code></p>
         <p><strong>诊断信号</strong>：✅ 一眼看穿 + 正确修复 → 优秀 / ⚠️ 知道错但不会修 → 中等 / ❌ → L2 重点讲类型转换</p>
@@ -714,10 +736,10 @@ age = <span class="num">2025</span> - <span class="fn">int</span>(birth)
 <span class="fn">print</span>(<span class="str">"你"</span> + age + <span class="str">"岁"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       <div class="answer-block">
         <div class="label">✓ 修法 1（用 <code class="inline">str()</code>）</div>
-<div class="answer-code">age = <span class="num">15</span>
+<div class="answer-code">age = <span class="ac-num">15</span>
 <span class="fn">print</span>(<span class="str">"你"</span> + <span class="fn">str</span>(age) + <span class="str">"岁"</span>)</div>
         <div class="label" style="margin-top:10px;">✓ 修法 2（用 f-string）</div>
-<div class="answer-code">age = <span class="num">15</span>
+<div class="answer-code">age = <span class="ac-num">15</span>
 <span class="fn">print</span>(<span class="str">f"你{age}岁"</span>)</div>
         <p style="margin-top:10px;"><strong>诊断信号</strong>：✅ 两种修法 → 优秀 / ⚠️ 只会一种 → 中等 / ❌ → L2 重点讲</p>
       </div>
@@ -798,7 +820,7 @@ b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
       <div class="card success">
         <h3>✅ 期望代码</h3>
 <div class="answer-code">score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数:"</span>))
-<span class="kw">if</span> score >= <span class="num">60</span>:
+<span class="kw">if</span> score >= <span class="ac-num">60</span>:
     <span class="fn">print</span>(<span class="str">"Pass"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"Fail"</span>)</div>
@@ -882,8 +904,8 @@ c = <span class="fn">int</span>(<span class="fn">input</span>())
       <div class="card success" style="margin-top:12px;">
         <h3>✅ 期望代码</h3>
 <div class="answer-code">n = <span class="fn">int</span>(<span class="fn">input</span>())
-total = <span class="num">0</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, n + <span class="num">1</span>):
+total = <span class="ac-num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="ac-num">1</span>, n + <span class="ac-num">1</span>):
     total = total + i
 <span class="fn">print</span>(total)</div>
         <p style="font-size:17px; margin-top:10px;"><strong>诊断信号</strong>：✅ 用 for + 累加 → L5 可提前 / ⚠️ 知道累加但写不出 for → L5 重点 / ❌ → L5 从头讲循环</p>
