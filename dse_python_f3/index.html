@@ -5,133 +5,792 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Python 补习课 · 课程入口</title>
-<link rel="stylesheet" href="assets/style.css">
+<style>
+:root {
+  --bg: #f3f7fb;
+  --panel: #ffffff;
+  --panel-soft: #f8fbff;
+  --text: #102033;
+  --muted: #5a6b7f;
+  --line: #d8e2ee;
+  --blue: #2563eb;
+  --teal: #0f9f9a;
+  --green: #16a34a;
+  --amber: #d97706;
+  --ink: #0f243f;
+  --shadow: 0 18px 46px rgba(30, 64, 113, .12);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "HarmonyOS Sans", "Source Han Sans SC", "Alibaba PuHuiTi", "PingFang SC", Inter, Arial, sans-serif;
+  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(37, 99, 235, .08), transparent 36%),
+    linear-gradient(225deg, rgba(15, 159, 154, .08), transparent 34%),
+    var(--bg);
+  min-height: 100vh;
+  font-size: 17px;
+  line-height: 1.7;
+}
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(37, 99, 235, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, .06) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .52), transparent 78%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ==== Layout: Left Sidebar + Main ==== */
+.app-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  gap: 0;
+}
+
+/* ==== Left Sidebar (一级导航) ==== */
+.sidebar {
+  background: rgba(255, 255, 255, .7);
+  border-right: 1px solid var(--line);
+  padding: 32px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex; flex-direction: column;
+  gap: 8px;
+}
+.sidebar-brand {
+  padding: 8px 12px 16px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.sidebar-brand h2 {
+  margin: 0; font-size: 18px; color: var(--ink);
+}
+.sidebar-brand p {
+  margin: 4px 0 0; font-size: 13px; color: var(--muted);
+}
+.nav-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  font-weight: 800;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: inherit;
+}
+.nav-btn:hover {
+  background: rgba(37, 99, 235, .08);
+  color: var(--ink);
+}
+.nav-btn.active {
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, .25);
+}
+.nav-btn .icon {
+  font-size: 18px;
+}
+
+/* ==== Main Area ==== */
+.main {
+  padding: 36px 48px 60px;
+  overflow-x: auto;
+}
+
+/* Hero 区 */
+.hero {
+  margin-bottom: 32px;
+}
+.kicker {
+  display: inline-flex; align-items: center;
+  padding: 8px 14px; border-radius: 999px;
+  background: rgba(37, 99, 235, .08);
+  border: 1px solid rgba(37, 99, 235, .18);
+  color: #1d4ed8;
+  font-size: 14px; font-weight: 800;
+  margin-bottom: 14px;
+}
+h1 {
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  margin: 0 0 16px; color: var(--ink);
+}
+h1 .highlight { color: var(--blue); }
+.subtitle {
+  color: var(--muted);
+  font-size: 18px; line-height: 1.7;
+  max-width: 800px;
+  margin: 0 0 18px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  display: inline-flex; align-items: center;
+  padding: 8px 14px; border-radius: 999px;
+  background: var(--panel); border: 1px solid var(--line);
+  color: #25415f; font-weight: 800; font-size: 14px;
+}
+
+/* Section title + 二级标签栏 */
+.section-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.section-title {
+  flex: 1;
+}
+.section-title h2 {
+  margin: 0 0 4px; font-size: 28px; color: var(--ink);
+}
+.section-title p {
+  margin: 0; color: var(--muted); font-size: 15px;
+}
+
+/* 二级标签栏（横向） */
+.sub-tabs {
+  display: flex; gap: 8px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 0;
+  margin-bottom: 22px;
+}
+.sub-tab {
+  padding: 10px 18px;
+  border-radius: 10px 10px 0 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  font-weight: 800; font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  position: relative;
+  bottom: -2px;
+  transition: all .2s;
+  font-family: inherit;
+}
+.sub-tab:hover { color: var(--ink); background: var(--panel-soft); }
+.sub-tab.active {
+  color: var(--blue);
+  background: var(--panel);
+  border-color: var(--line);
+  border-bottom: 2px solid var(--panel);
+}
+.sub-tab.locked { opacity: 0.5; cursor: not-allowed; }
+
+/* Course Grid（瀑布流式：每列独立，高度自适应）*/
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+  align-items: start;  /* 瀑布流：卡片顶部对齐 */
+}
+.course-card {
+  display: block;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  transition: all .25s;
+  box-shadow: var(--shadow);
+}
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px rgba(30, 64, 113, .18);
+  border-color: var(--blue);
+}
+.course-card.disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.course-card.disabled:hover {
+  transform: none;
+  border-color: var(--line);
+}
+.course-card small {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, .1);
+  color: var(--blue);
+  font-weight: 800;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.course-card.disabled small {
+  background: rgba(90, 107, 127, .1);
+  color: var(--muted);
+}
+.course-card h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.course-card p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.course-card .chips {
+  margin: 0;
+}
+.status {
+  display: inline-flex;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.status.open {
+  background: rgba(22, 163, 74, .12);
+  color: var(--green);
+}
+.status.locked {
+  background: rgba(90, 107, 127, .12);
+  color: var(--muted);
+}
+
+/* 视图切换：隐藏非激活视图 */
+.view { display: none; }
+.view.active { display: block; }
+
+.footer-note {
+  margin-top: 40px;
+  padding: 18px 22px;
+  background: var(--panel-soft);
+  border-radius: 10px;
+  border: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-layout { grid-template-columns: 1fr; }
+  .sidebar { position: relative; height: auto; flex-direction: row; padding: 12px; }
+  .sidebar-brand { display: none; }
+  .nav-btn { padding: 10px 14px; }
+  .main { padding: 20px; }
+}
+</style>
 </head>
-<body class="home">
-<main class="wrap">
+<body>
 
-  <section class="hero">
-    <div class="kicker">1 对 1 补习 · Python</div>
-    <h1>Python <span class="highlight">补习课</span></h1>
-    <p class="subtitle">十一节课从零基础到 DSE 编程题型全覆盖。每节 1 小时网课，含 1 节摸底测评 + 6 节知识课 + 4 节巩固课（其中 2 节模拟考）。</p>
-    <div class="chips">
-      <span class="chip">Python</span>
-      <span class="chip">1v1 网课</span>
-      <span class="chip">Dry Run</span>
-      <span class="chip">Bug Fix</span>
-      <span class="chip">DSE 考纲</span>
+<div class="app-layout">
+
+  <!-- ===== 一级导航：左侧纵向按钮 ===== -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>课程中心</h2>
+      <p>Course Hub</p>
     </div>
-    <div class="link-row">
-      <a class="button-link" href="#course-catalog">Python 课程</a>
-    </div>
-  </section>
+    <button class="nav-btn active" data-view="courses">
+      <span class="icon">📘</span> Python 课程
+    </button>
+    <button class="nav-btn" data-view="homework">
+      <span class="icon">📝</span> 作业
+    </button>
+    <button class="nav-btn" data-view="flashcards">
+      <span class="icon">📇</span> 记忆卡片
+    </button>
+  </aside>
 
-  <div class="section-title" id="course-catalog">
-    <div>
-      <h2>Python 课程目录</h2>
-      <p>L0-L2 已开放，L3-L10 备课中。1 节摸底 + 6 节知识 + 4 节巩固（含 2 节模拟考）。</p>
-    </div>
-  </div>
+  <!-- ===== 主区 ===== -->
+  <main class="main">
 
-  <section class="course-grid">
+    <!-- 视图 1：Python 课程目录 -->
+    <section class="view active" id="view-courses">
 
-    <a class="course-card" href="L0_assessment.html">
-      <small>L0 · 摸底测评</small>
-      <h3>入学摸底测评 · 15 题诊断</h3>
-      <p>不评分只诊断，5 个维度摸底：基础识别、Dry Run、Bug 修复、IPO 设计、限时综合。根据结果调整 L1 节奏。</p>
-      <div class="chips"><span class="status open">已开放 · 26 页</span></div>
-    </a>
+      <div class="hero">
+        <div class="kicker">1 对 1 补习 · Python</div>
+        <h1>Python <span class="highlight">补习课</span></h1>
+        <p class="subtitle">十一节课从零基础到 DSE 编程题型全覆盖。每节 1 小时网课，含 1 节摸底测评 + 6 节知识课 + 4 节巩固课（其中 2 节模拟考）。</p>
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">1v1 网课</span>
+          <span class="chip">Dry Run</span>
+          <span class="chip">Bug Fix</span>
+          <span class="chip">DSE 考纲</span>
+        </div>
+      </div>
 
-    <a class="course-card" href="L1.html">
-      <small>L1 · 讲课</small>
-      <h3>I/O + 变量 + IPO 模型</h3>
-      <p>第一个 Python 程序、print/input、变量是数据的"碗"、IPO 三步曲。每知识点配现实比喻与 Dry Run 练习。</p>
-      <div class="chips"><span class="status open">已开放 · 22 页</span></div>
-    </a>
+      <div class="section-header">
+        <div class="section-title">
+          <h2>📘 Python 课程目录</h2>
+          <p>1 节摸底 + 6 节知识 + 4 节巩固（含 2 节模拟考）</p>
+        </div>
+      </div>
 
-    <a class="course-card" href="L2.html">
-      <small>L2 · 讲课</small>
-      <h3>数据类型 + 转换 + f-string</h3>
-      <p>int / float / str / bool 四件套、int() 与 float() 转换、/ 永远返回 float 的暗坑、f-string 让输出变漂亮。</p>
-      <div class="chips"><span class="status open">已开放 · 23 页</span></div>
-    </a>
+      <div class="course-grid">
 
-    <a class="course-card disabled">
-      <small>L3 · 讲课</small>
-      <h3>if/elif/else + 比较 + 边界测试 + better if</h3>
-      <p>程序的十字路口。比较运算符、逻辑运算 and/or/not、边界测试（49/50/51 三角验证）、better if 早返错误结构。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card" href="L0_assessment.html">
+          <small>L0 · 摸底测评</small>
+          <h3>入学摸底测评 · 15 题诊断</h3>
+          <p>不评分只诊断，5 个维度摸底：基础识别、Dry Run、Bug 修复、IPO 设计、限时综合。根据结果调整 L1 节奏。</p>
+          <div class="chips"><span class="status open">已开放 · 26 页</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L4 · 讲课</small>
-      <h3>while + break/continue + 防死循环</h3>
-      <p>旋转门式条件循环。break 紧急出口、continue 跳过本轮、防死循环（计数器位置），实战讨价还价与密码验证。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card" href="L1.html">
+          <small>L1 · 讲课</small>
+          <h3>I/O + 变量 + IPO 模型</h3>
+          <p>第一个 Python 程序、print/input、变量是数据的"碗"、IPO 三步曲。每知识点配现实比喻与 Dry Run 练习。</p>
+          <div class="chips"><span class="status open">已开放 · 22 页</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L5 · 讲课</small>
-      <h3>for + range + 遍历字符串/列表</h3>
-      <p>班长念名单。range(start, stop, step) 左闭右开，倒计时 -1 步长，遍历字符串和列表。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card" href="L2.html">
+          <small>L2 · 讲课</small>
+          <h3>数据类型 + 转换 + f-string</h3>
+          <p>int / float / str / bool 四件套、int() 与 float() 转换、/ 永远返回 float 的暗坑、f-string 让输出变漂亮。</p>
+          <div class="chips"><span class="status open">已开放 · 23 页</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L6 · 讲课</small>
-      <h3>list + 索引 + 切片 + 增删改 + 排序</h3>
-      <p>一列储物柜。正/负索引、切片 [start:end:step]、append/insert/pop/del/remove、max/min/sum/sort/reverse。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card disabled">
+          <small>L3 · 讲课</small>
+          <h3>if/elif/else + 比较 + 边界测试 + better if</h3>
+          <p>程序的十字路口。比较运算符、逻辑运算 and/or/not、边界测试（49/50/51 三角验证）、better if 早返错误结构。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L7 · 模拟考</small>
-      <h3>L1-L3 期中模拟考（45 分钟真实考试）</h3>
-      <p>45 分钟真实考试 + 45 分钟讲解。Section A 选择 + Section B 简答 + Section C 解题，60 分覆盖输入输出与判断。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card disabled">
+          <small>L4 · 讲课</small>
+          <h3>while + break/continue + 防死循环</h3>
+          <p>旋转门式条件循环。break 紧急出口、continue 跳过本轮、防死循环（计数器位置），实战讨价还价与密码验证。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L8 · 习题课</small>
-      <h3>L4-L5 循环强化</h3>
-      <p>while/for 循环综合 + Dry Run + Bug 修复专项。旋转门式条件循环 + 班长念名单式 for 遍历。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card disabled">
+          <small>L5 · 讲课</small>
+          <h3>for + range + 遍历字符串/列表</h3>
+          <p>班长念名单。range(start, stop, step) 左闭右开，倒计时 -1 步长，遍历字符串和列表。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L9 · 综合实战</small>
-      <h3>L1-L6 综合 + 期终模拟卷</h3>
-      <p>项目式题目（班级成绩管理系统）+ 期终模拟真题演练，覆盖所有章节核心知识点。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card disabled">
+          <small>L6 · 讲课</small>
+          <h3>list + 索引 + 切片 + 增删改 + 排序</h3>
+          <p>一列储物柜。正/负索引、切片 [start:end:step]、append/insert/pop/del/remove、max/min/sum/sort/reverse。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-    <a class="course-card disabled">
-      <small>L10 · 模拟考</small>
-      <h3>完整 60 分期终模拟（45 分钟真实考试）</h3>
-      <p>临考前最后一次完整模拟。Section A/B/C 完整结构，覆盖 L1-L6 全部知识点，结束后讲解错题 + 知识图谱总结。</p>
-      <div class="chips"><span class="status locked">备课中</span></div>
-    </a>
+        <a class="course-card disabled">
+          <small>L7 · 模拟考</small>
+          <h3>L1-L3 期中模拟考（45 分钟真实考试）</h3>
+          <p>45 分钟真实考试 + 45 分钟讲解。Section A 选择 + Section B 简答 + Section C 解题，60 分覆盖输入输出与判断。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-  </section>
+        <a class="course-card disabled">
+          <small>L8 · 习题课</small>
+          <h3>L4-L5 循环强化</h3>
+          <p>while/for 循环综合 + Dry Run + Bug 修复专项。旋转门式条件循环 + 班长念名单式 for 遍历。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-  <div class="footer-note">
-    课程主线：不是考临时问答，而是把"凭感觉写代码"变成"有章法的工程"。
-  </div>
+        <a class="course-card disabled">
+          <small>L9 · 综合实战</small>
+          <h3>L1-L6 综合 + 期终模拟卷</h3>
+          <p>项目式题目（班级成绩管理系统）+ 期终模拟真题演练，覆盖所有章节核心知识点。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
-</main>
+        <a class="course-card disabled">
+          <small>L10 · 模拟考</small>
+          <h3>完整 60 分期终模拟（45 分钟真实考试）</h3>
+          <p>临考前最后一次完整模拟。Section A/B/C 完整结构，覆盖 L1-L6 全部知识点，结束后讲解错题 + 知识图谱总结。</p>
+          <div class="chips"><span class="status locked">备课中</span></div>
+        </a>
 
+      </div>
+
+      <div class="footer-note">
+        课程主线：不是考临时问答，而是把"凭感觉写代码"变成"有章法的工程"。
+      </div>
+
+    </section>
+
+    <!-- 视图 2：作业 -->
+    <section class="view" id="view-homework">
+
+      <div class="hero">
+        <div class="kicker">Homework · 课后作业</div>
+        <h1>📝 课后<span class="highlight">作业</span></h1>
+        <p class="subtitle">做完截图发给老师，下节讲评 · L1/L2 已开放 · 后续课程作业随课件发布</p>
+        <div class="chips">
+          <span class="chip">必做 + 选做</span>
+          <span class="chip">截图发老师</span>
+          <span class="chip">下节讲评</span>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">
+          <h2>📝 作业目录</h2>
+          <p>已完成课程的作业 · 点击展开查看</p>
+        </div>
+      </div>
+
+      <div class="course-grid" id="homework-grid">
+        <!-- 由 JS 渲染 -->
+      </div>
+
+    </section>
+
+    <!-- 视图 3：记忆卡片 -->
+    <section class="view" id="view-flashcards">
+
+      <div class="hero">
+        <div class="kicker">Flashcards · 闪卡复习</div>
+        <h1>📇 记忆<span class="highlight">卡片</span></h1>
+        <p class="subtitle">每个知识点一张闪卡 · 正面题目、反面答案 · 点击卡片可翻转 · ⭐ 标记易错点</p>
+        <div class="chips">
+          <span class="chip">Anki 风格</span>
+          <span class="chip">点击翻转</span>
+          <span class="chip">⭐ 易错点</span>
+        </div>
+      </div>
+
+      <!-- 二级标签栏：横向 -->
+      <div class="sub-tabs" id="course-tabs">
+        <button class="sub-tab active" data-course="python">Python 课程</button>
+        <button class="sub-tab locked" data-course="cs">CS 基础 🔒</button>
+      </div>
+
+      <!-- 课程说明 -->
+      <div class="section-header">
+        <div class="section-title" id="course-info-python">
+          <h2>Python 课程 · L1-L6 记忆卡片</h2>
+          <p>按课次复习 · L1/L2 已开放 · 点击卡片可翻转查看答案</p>
+        </div>
+        <div class="section-title" id="course-info-cs" style="display:none;">
+          <h2>CS 基础 · 备课中</h2>
+          <p>未来扩展：二进制、计算机组件、HDD vs SSD、AI/ML 概念等</p>
+        </div>
+      </div>
+
+      <!-- 课次筛选（按课次复习，无"全部"） -->
+      <div class="sub-tabs" id="lesson-filter" style="margin-bottom:18px;">
+        <button class="sub-tab active" data-lesson="L1">L1 (4)</button>
+        <button class="sub-tab" data-lesson="L2">L2 (5)</button>
+      </div>
+
+      <!-- 卡片网格（由 JS 渲染） -->
+      <div class="course-grid" id="card-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"></div>
+
+      <!-- 翻转统计 -->
+      <div id="stats-bar" style="position:fixed; bottom:24px; right:24px; background:var(--ink); color:#fff; padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; box-shadow:0 12px 28px rgba(15,36,63,.25); display:none; z-index:100;">
+        已翻 <span id="flip-count">0</span> 张
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<!-- ======================== 卡片数据 ======================== -->
 <script>
-  // 平滑滚动到锚点
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href').slice(1);
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+// ===== 一级导航切换 =====
+const navBtns = document.querySelectorAll('.nav-btn');
+const views = document.querySelectorAll('.view');
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    navBtns.forEach(x => x.classList.remove('active'));
+    btn.classList.add('active');
+    views.forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + btn.dataset.view).classList.add('active');
+  });
+});
+
+// ===== 作业数据 =====
+const HOMEWORKS = [
+  {
+    id: 'L1',
+    title: 'L1 · 让电脑开口说话',
+    subtitle: '3 个必做 + 1 个选做',
+    description: '做完截图发给老师，下节讲评。',
+    items: [
+      {
+        level: '必做 1',
+        color: 'success',
+        title: '自我介绍 3 种写法',
+        content: '用 <code class="inline">+</code> 拼接 / f-string / 多个 <code class="inline">print</code> 三种方式输出自我介绍。'
+      },
+      {
+        level: '必做 2',
+        color: 'blue',
+        title: '8 道 Dry Run',
+        content: '先在纸上写出每段代码的预期输出，再敲进 online-python 验证。',
+        code: `<span class="com"># a)</span> a = <span class="num">20</span>; b = <span class="num">25</span>; <span class="fn">print</span>(a + b)
+<span class="com"># b)</span> x = <span class="str">"20"</span>; y = <span class="str">"25"</span>; <span class="fn">print</span>(x + y)
+<span class="com"># c)</span> level = <span class="num">1</span>; level = level + <span class="num">5</span>; <span class="fn">print</span>(level)
+<span class="com"># d)</span> level = <span class="num">1</span>; level = level + <span class="num">5</span>; level = <span class="num">10</span>; <span class="fn">print</span>(level)
+<span class="com"># e)</span> x = <span class="num">10</span>; y = <span class="num">20</span>; y = x + y; <span class="fn">print</span>(y)
+<span class="com"># f)</span> a = <span class="num">10</span>; A = <span class="num">20</span>; <span class="fn">print</span>(a)
+<span class="com"># g)</span> p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + n)
+<span class="com"># h)</span> p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + <span class="fn">str</span>(n))`
+      },
+      {
+        level: '必做 3',
+        color: 'amber',
+        title: '修 3-Bug 年龄程序',
+        content: '把 3-Bug 年龄程序<strong>修到能跑通</strong>。'
+      },
+      {
+        level: '选做 · 挑战',
+        color: 'red',
+        title: '加法练习器',
+        content: '输入两数，输出和、差、积、商。'
+      }
+    ]
+  },
+  {
+    id: 'L2',
+    title: 'L2 · 让程序学会算数',
+    subtitle: '4 个必做 + 1 个选做',
+    description: 'L3 习题课会讲评。',
+    items: [
+      {
+        level: '必做 1',
+        color: 'success',
+        title: '三种几何面积计算器',
+        content: '正方形 / 长方形 / 圆。<br>注意 <code class="inline">/</code> 暗坑。'
+      },
+      {
+        level: '必做 2',
+        color: 'blue',
+        title: '改错题 + Dry Run 4 道',
+        content: '<strong>改错题：</strong>下面这段代码要算"10 年后的年龄"，但有 Bug，写出正确版本：',
+        code: `age = <span class="fn">input</span>(<span class="str">"Your age? "</span>)
+<span class="fn">print</span>(<span class="str">f"Age in ten years { age + 10 }"</span>)`,
+        code2: '<strong>Dry Run 题：</strong>不看代码，预测 4 段代码的输出。',
+        code3: `<span class="com"># a)</span> name = <span class="str">"Peter"</span>
+    <span class="fn">print</span>(<span class="str">f"Hello, {name}"</span>)
+<span class="com"># b)</span> a = <span class="str">"Yes"</span>
+    <span class="fn">print</span>(<span class="str">f"{a}? {a}?"</span>)
+<span class="com"># c)</span> a = <span class="num">3</span>; b = <span class="num">5</span>
+    <span class="fn">print</span>(<span class="str">f"a+b is {a+b}"</span>)
+<span class="com"># d)</span> age = <span class="num">14</span>
+    <span class="fn">print</span>(<span class="str">f"Your age is\\n{age+3}"</span>)`
+      },
+      {
+        level: '必做 3',
+        color: 'amber',
+        title: '修复 L1 全部 3 个 Bug',
+        content: '修复 L1 全部 3 个 Bug，并用 f-string 输出。附加：输入负数年龄时输出"错误输入"。'
+      },
+      {
+        level: '必做 4',
+        color: 'teal',
+        title: '选词游戏',
+        content: '输入两个英文单词，输出 <code class="inline">"Word1: ___ (length ___), Word2: ___ (length ___)"</code>，用 f-string 和 <code class="inline">len()</code>。'
+      },
+      {
+        level: '选做 · 挑战',
+        color: 'red',
+        title: '自助问答机器人',
+        content: '问 3 个问题（姓名/年龄/科目），最后输出 <code class="inline">"Hi {姓名}，你 {明年年龄} 岁，最爱 {科目}，祝你学习愉快！"</code>。'
+      }
+    ]
+  }
+];
+
+// ===== 渲染作业（折叠式） =====
+function renderHomeworks() {
+  const grid = document.getElementById('homework-grid');
+  grid.innerHTML = HOMEWORKS.map(hw => {
+    const items = hw.items.map(it => {
+      let inner = `<p style="margin:6px 0; font-size:15px;">${it.content}</p>`;
+      if (it.code) inner += `<pre style="background:#0f243f; color:#edf6ff; padding:10px 12px; border-radius:8px; font-family:monospace; font-size:12.5px; line-height:1.6; margin:8px 0; overflow-x:auto; white-space:pre-wrap;">${it.code}</pre>`;
+      if (it.code2) inner += `<p style="margin:6px 0; font-size:15px;">${it.code2}</p>`;
+      if (it.code3) inner += `<pre style="background:#0f243f; color:#edf6ff; padding:10px 12px; border-radius:8px; font-family:monospace; font-size:12.5px; line-height:1.6; margin:8px 0; overflow-x:auto; white-space:pre-wrap;">${it.code3}</pre>`;
+      const borderColor = it.color === 'success' ? 'rgba(22,163,74,.4)'
+                         : it.color === 'blue'   ? 'rgba(37,99,235,.4)'
+                         : it.color === 'amber'  ? 'rgba(217,119,6,.4)'
+                         : it.color === 'teal'   ? 'rgba(15,159,154,.4)'
+                         : it.color === 'red'    ? 'rgba(220,38,38,.4)'
+                         : 'var(--line)';
+      const textColor = it.color === 'success' ? '#047857'
+                      : it.color === 'blue'   ? 'var(--blue)'
+                      : it.color === 'amber'  ? 'var(--amber)'
+                      : it.color === 'teal'   ? 'var(--teal)'
+                      : it.color === 'red'    ? '#b91c1c'
+                      : 'var(--ink)';
+      return `
+        <div class="card" style="border-left:5px solid ${borderColor}; margin-bottom:12px; background:var(--panel-soft);">
+          <h3 style="color:${textColor}; font-size:16px;">${it.level} · ${it.title}</h3>
+          ${inner}
+        </div>
+      `;
+    }).join('');
+
+    // 折叠式：默认收起，header 可点击
+    const hwId = `hw-${hw.id}`;
+    return `
+      <div class="course-card homework-card" style="grid-column: 1 / -1; padding:0; overflow:hidden;">
+        <div class="homework-header" onclick="toggleHomework('${hwId}')" style="cursor:pointer; padding:20px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; background:var(--panel);">
+          <div style="flex:1;">
+            <small style="display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(217,119,6,.1); color:var(--amber); font-weight:800; font-size:12px; margin-bottom:8px;">${hw.id} · 课后作业</small>
+            <h3 style="margin:0 0 4px; font-size:20px; color:var(--ink);">${hw.title}</h3>
+            <p style="margin:0; color:var(--muted); font-size:14px;">${hw.subtitle} · ${hw.description}</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="status open" style="font-size:12px;">${hw.items.length} 题</span>
+            <span class="expand-icon" id="${hwId}-icon" style="font-size:20px; color:var(--muted); transition:transform .3s;">▼</span>
+          </div>
+        </div>
+        <div class="homework-body" id="${hwId}-body" style="display:none; padding:0 24px 24px; background:var(--panel-soft);">
+          ${items}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleHomework(id) {
+  const body = document.getElementById(id + '-body');
+  const icon = document.getElementById(id + '-icon');
+  if (body.style.display === 'none') {
+    body.style.display = 'block';
+    icon.style.transform = 'rotate(180deg)';
+  } else {
+    body.style.display = 'none';
+    icon.style.transform = '';
+  }
+}
+
+// ===== 卡片数据（9 张，L1/L2）=====
+const FLASHCARDS = [
+  // L1
+  { id:"L1-C01", lesson:"L1", type:"concept", title:"print 让电脑说话", term:"print = 打印/输出", question:"Python 里让电脑「喊话」用哪个函数？", fill:"______(\"Hello\") 输出 Hello 到屏幕", answer:"print() 函数", mnemonic:"print = 大喇叭，对着电脑喊一句话", code:`print("Hello")     # Hello\nprint(2 + 3)       # 5\nprint("a", "b")    # a b`, warnings:["⭐ 漏掉括号 print(\"Hello\") → SyntaxError","⭐ 漏掉引号 print(Hello) → NameError"] },
+  { id:"L1-C02", lesson:"L1", type:"concept", title:"变量 = 装数据的碗", term:"Variable = 变量", question:"Python 里 age = 15 是什么意思？", fill:"变量就像贴了标签的______，碗里可以换东西", answer:"把数字 15 放进名字叫 age 的碗里", mnemonic:"变量 = 贴标签的碗（标签 = 变量名，碗里的东西 = 值）", code:`age = 15\nprint(age)    # 15\nage = 18      # 覆盖原值\nprint(age)    # 18`, warnings:["⭐ 数字开头非法：2name = 5 → SyntaxError","⭐ 关键字不能当变量名：class = 5 → SyntaxError","⭐ 大小写敏感：Age 和 age 是不同变量"] },
+  { id:"L1-C03", lesson:"L1", type:"concept", title:"input 让电脑听键盘", term:"input = 输入", question:"input() 函数永远返回什么类型？", fill:"name = input(\"名字?\") —— name 永远是______类型", answer:"str（字符串）", mnemonic:"input 永远给你「文字」，想算数要 int(input())", code:`a = input("First: ")   # 用户输入 5\nb = input("Second: ")  # 用户输入 3\nprint(a + b)            # 53（不是 8！）`, warnings:["⭐ 永远返回字符串：「5」+「3」=「53」","⭐ 想算数必须包 int：int(input(...))"] },
+  { id:"L1-C04", lesson:"L1", type:"concept", title:"IPO 模型", term:"Input-Process-Output", question:"IPO 三个字母分别代表什么？", fill:"写程序的三步曲：I（输入）→ P（处理）→ O（______）", answer:"Input（输入）/ Process（处理）/ Output（输出）", mnemonic:"IPO = 餐厅点菜（听单 → 厨房做 → 上菜）", code:`# I - Input\nname = input("你的名字: ")\n# P - Process\ngreeting = "Hello, " + name + "!"\n# O - Output\nprint(greeting)`, warnings:["⭐ 忘了写 O","⭐ IPO 顺序：先 I 再 P 最后 O"] },
+
+  // L2
+  { id:"L2-C01", lesson:"L2", type:"concept", title:"四种数据类型", term:"int / float / str / bool", question:"Python 里 4 种基础数据类型分别用什么关键字？", fill:`15 是 ______（整数）\n3.14 是 ______（小数）\n"Hello" 是 ______（文字）\nTrue 是 ______（开关）`, answer:"int / float / str / bool", mnemonic:"碗装四种食材（米 = int，水 = float，文字 = str，开关 = bool）", code:`age = 15        # int\nheight = 1.75   # float\nname = "Peter"  # str\nis_adult = True # bool`, warnings:["⭐ 5 是 int，5.0 是 float","⭐ 「5」是 str，5 是 int"] },
+  { id:"L2-C02", lesson:"L2", type:"concept", title:"类型转换函数", term:"Type Conversion", question:"int(3.6) 等于多少？", fill:"字符串变整数用 ______(\"3\")，整数变字符串用 ______(5)", answer:"3（不是 4 —— int() 截断，不是四舍五入）", mnemonic:"转换函数 = 改装师傅（str/int/float/bool 四件套）", code:`int("3")      # → 3\nfloat("3.14") # → 3.14\nstr(15)       # → "15"\nbool(1)       # → True\nint(3.6)      # → 3（截断，不是 4！）`, warnings:["⭐ int(3.6) 是 3 不是 4（截断）","⭐ int(\"3.6\") 会报错"] },
+  { id:"L2-C03", lesson:"L2", type:"concept", title:"f-string 模板填空", term:"formatted string", question:"print(f\"Hello, {name}\") 里的 f 和 {} 是什么意思？", fill:"f-string 的 {} 是______，里面放变量或表达式", answer:"f = format（格式化），{} = 占位空位", mnemonic:"f-string = 模板填空，{} 是空格，填入变量值", code:`name = "Peter"\nage = 15\nprint(f"Hello, {name}!")\nprint(f"You are {age}")\nprint(f"Next year: {age + 1}")`, warnings:["⭐ 忘写 f：「Hello, {name}」→ 字面输出","⭐ {} 里放 str 需要引号"] },
+  { id:"L2-C04", lesson:"L2", type:"concept", title:"算术运算符 6 件套", term:"Arithmetic Operators", question:"Python 里 6 个算术运算符分别是什么？", fill:`10 / 3 → ______（除法，永远 float）\n10 % 3 → ______（取余）\n2 ** 3 → ______（幂）`, answer:"+ - * / % **", mnemonic:"取余 = 分糖果后剩下的；幂 = 自我复制 N 次", code:`print(10 / 4)    # 2.5（注意！）\nprint(10 // 4)   # 2（// 是整除）\nprint(10 % 3)    # 1\nprint(2 ** 10)   # 1024`, warnings:["⭐ / 永远返回 float：5 / 2 = 2.5","⭐ ** 不是 ^"] },
+  { id:"L2-C05", lesson:"L2", type:"bug", title:"L1 三个 Bug 怎么修", term:"Bug Fix / TypeError", question:"下面代码会怎样？怎么修？", fill:"input() 永远返回______，想算数必须用 ______ 转换", answer:"TypeError；用 int() 包裹 input", mnemonic:"input 后想算数，必须 int(input(...))", code:`# ❌ 错误\nbirth = input("出生年份: ")\nage = 2025 - birth  # TypeError\n# ✅ 修复\nage = 2025 - int(birth)\nprint(f"You are {age}")`, warnings:["⭐ input 没转 int → TypeError","⭐ print 漏引号 → NameError","⭐ 字符串拼接 int → TypeError"] },
+
+
+
+
+];
+
+// ===== 渲染逻辑 =====
+function escapeHTML(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlightCode(code) {
+  return escapeHTML(code)
+    .replace(/(#[^\n]*)/g, '<span style="color:#7c8aa8;font-style:italic;">$1</span>')
+    .replace(/(\"[^\"]*\"|\'[^\']*\')/g, '<span style="color:#a5e88c;">$1</span>')
+    .replace(/\b(\d+\.?\d*)\b/g, '<span style="color:#ffb547;">$1</span>')
+    .replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span style="color:#ff9d72;font-weight:700;">$1</span>');
+}
+
+let flippedCount = 0;
+
+function renderCards(lessonFilter) {
+  const cards = FLASHCARDS.filter(c => c.lesson === lessonFilter);
+  const grid = document.getElementById('card-grid');
+
+  if (cards.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--muted);">暂无卡片</div>';
+    return;
+  }
+  grid.innerHTML = cards.map(c => `
+    <div class="course-card flashcard" data-id="${c.id}" style="cursor:pointer; padding:0; perspective:1200px; overflow:visible;">
+      <div class="flashcard-inner" style="position:relative; width:100%; transition:transform 0.6s cubic-bezier(0.4,0,0.2,1); transform-style:preserve-3d; cursor:pointer; display:grid; grid-template-columns:1fr; grid-template-rows:1fr;">
+        <!-- 正面 -->
+        <div class="flashcard-face flashcard-front" style="grid-area:1 / 1; backface-visibility:hidden; -webkit-backface-visibility:hidden; padding:18px; display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:12px;">
+          <small style="display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(37,99,235,.1); color:var(--blue); font-weight:800; font-size:12px; margin-bottom:10px; width:fit-content;">${c.id} · ${c.type === 'killer' ? '杀手锏' : c.type === 'bug' ? 'Bug' : '概念'}</small>
+          <div style="display:inline-block; padding:3px 8px; background:rgba(37,99,235,.08); color:var(--blue); border-radius:4px; font-family:monospace; font-size:12px; margin-bottom:8px; width:fit-content;">${escapeHTML(c.term)}</div>
+          <h3 style="margin:0 0 8px; font-size:16px; color:var(--ink); line-height:1.5;">${escapeHTML(c.question)}</h3>
+          <div style="background:#fafbff; padding:10px 12px; border-radius:8px; font-family:monospace; font-size:13px; color:var(--text); border-left:3px solid var(--blue); white-space:pre-wrap; margin-bottom:10px;">${escapeHTML(c.fill)}</div>
+          <div style="margin-top:auto; padding-top:10px; text-align:center; font-size:11px; color:var(--muted); font-weight:800; letter-spacing:1px;">点击翻面 →</div>
+        </div>
+        <!-- 反面 -->
+        <div class="flashcard-face flashcard-back" style="grid-area:1 / 1; backface-visibility:hidden; -webkit-backface-visibility:hidden; transform:rotateY(180deg); padding:18px; display:flex; flex-direction:column; background:#f0fdf4; border:1px solid var(--green); border-radius:12px;">
+          <small style="display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(22,163,74,.12); color:var(--green); font-weight:800; font-size:12px; margin-bottom:10px; width:fit-content;">答案 · ${c.id}</small>
+          <h3 style="margin:0 0 8px; font-size:16px; color:var(--ink); line-height:1.5;">${escapeHTML(c.title)}</h3>
+          <div style="font-size:14px; color:var(--text); margin:6px 0;"><strong>答：</strong>${escapeHTML(c.answer)}</div>
+          <div style="background:rgba(15,159,154,.08); border-left:3px solid var(--teal); padding:8px 10px; border-radius:6px; font-size:13px; color:var(--text); margin:6px 0;">💡 ${escapeHTML(c.mnemonic)}</div>
+          <pre style="background:#0f243f; color:#edf6ff; padding:10px 12px; border-radius:6px; font-family:monospace; font-size:12px; line-height:1.6; margin:6px 0; overflow-x:auto; white-space:pre-wrap;">${highlightCode(c.code)}</pre>
+          ${c.warnings.length > 0 ? `<div style="background:rgba(220,38,38,.06); border-left:3px solid var(--red); padding:6px 10px; border-radius:6px; font-size:12px; color:var(--text);">${c.warnings.map(w => `<span style="color:var(--red); font-weight:900;">${escapeHTML(w)}</span>`).join('<br>')}</div>` : ''}
+          <div style="margin-top:auto; padding-top:6px; text-align:center; font-size:11px; color:var(--muted); font-weight:800; letter-spacing:1px;">← 点击翻回</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // 绑定翻转
+  grid.querySelectorAll('.flashcard-inner').forEach(inner => {
+    inner.addEventListener('click', e => {
+      e.stopPropagation();
+      e.preventDefault();
+      const isFlipped = inner.style.transform && inner.style.transform.includes('180');
+      inner.style.transform = isFlipped ? '' : 'rotateY(180deg)';
+      if (!isFlipped) {
+        flippedCount++;
+        document.getElementById('flip-count').textContent = flippedCount;
+        document.getElementById('stats-bar').style.display = 'block';
       }
     });
   });
+}
+
+// ===== 二级标签栏切换 =====
+const courseTabs = document.querySelectorAll('#course-tabs .sub-tab');
+const lessonTabs = document.querySelectorAll('#lesson-filter .sub-tab');
+const courseInfoPython = document.getElementById('course-info-python');
+const courseInfoCs = document.getElementById('course-info-cs');
+
+courseTabs.forEach(t => {
+  t.addEventListener('click', () => {
+    if (t.classList.contains('locked')) return;
+    courseTabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const course = t.dataset.course;
+    courseInfoPython.style.display = course === 'python' ? '' : 'none';
+    courseInfoCs.style.display = course === 'cs' ? '' : 'none';
+    if (course !== 'python') {
+      document.getElementById('card-grid').innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--muted);">该课程卡片备课中...</div>';
+    } else {
+      renderCards('L1');
+      lessonTabs.forEach(x => x.classList.remove('active'));
+      lessonTabs[0].classList.add('active');
+    }
+  });
+});
+
+lessonTabs.forEach(t => {
+  t.addEventListener('click', () => {
+    lessonTabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    renderCards(t.dataset.lesson);
+  });
+});
+
+// 初始化
+renderCards('L1');
+renderHomeworks();
 </script>
+
 </body>
 </html>
