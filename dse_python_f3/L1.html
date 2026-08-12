@@ -720,7 +720,7 @@ age  = <span class="fn">input</span>(<span class="str">"年龄:"</span>)
 <pre><code>birth = <span class="fn">input</span>(<span class="str">"出生年份:"</span>)
 age   = <span class="num">2025</span> - birth           <span class="com"># 会报错吗？</span>
 <span class="fn">print</span>(<span class="str">"你今年"</span> + age + <span class="str">"岁"</span>)  <span class="com"># 也会？</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-        <p style="font-size:18px; margin-top:14px; color:var(--text);"><strong style="color:var(--green);">🎯 目标</strong>：先猜哪行会报错，再敲代码验证 —— 这就是 F3CL 风格的 Dry Run。</p>
+        <p style="font-size:18px; margin-top:14px; color:var(--text);"><strong style="color:var(--green);">🎯 目标</strong>：先猜哪行会报错，再敲代码验证 —— 这就是 F.3 课堂风格的 Dry Run（手写预测再上机）。</p>
       </div>
     </div>
   </section>
@@ -907,7 +907,15 @@ age = <span class="num">2025</span> - birth_year     <span class="com"># Bug 2 �
         </div>
         <div class="card" style="border-left:5px solid var(--blue);">
           <h3 style="color:var(--blue);">必做 2</h3>
-          <p style="font-size:18px; margin-top:8px;">F3CL PDF PY.2.1 的 a) ~ h) 8 道 Dry Run，<strong>先猜再跑</strong></p>
+          <p style="font-size:18px; margin-top:8px;"><strong>8 道 Dry Run</strong>：先在纸上写出每段代码的预期输出，再敲进 online-python 验证。</p>
+<pre><code><span class="com"># a)</span> a = <span class="num">20</span>; b = <span class="num">25</span>; <span class="fn">print</span>(a + b)        <span class="com"># → ?</span>
+<span class="com"># b)</span> x = <span class="str">"20"</span>; y = <span class="str">"25"</span>; <span class="fn">print</span>(x + y)        <span class="com"># → ?</span>
+<span class="com"># c)</span> level = <span class="num">1</span>; level = level + <span class="num">5</span>; <span class="fn">print</span>(level)  <span class="com"># → ?</span>
+<span class="com"># d)</span> level = <span class="num">1</span>; level = level + <span class="num">5</span>; level = <span class="num">10</span>; <span class="fn">print</span>(level)  <span class="com"># → ?</span>
+<span class="com"># e)</span> x = <span class="num">10</span>; y = <span class="num">20</span>; y = x + y; <span class="fn">print</span>(y)  <span class="com"># → ?</span>
+<span class="com"># f)</span> a = <span class="num">10</span>; A = <span class="num">20</span>; <span class="fn">print</span>(a)             <span class="com"># → ?  为什么？</span>
+<span class="com"># g)</span> p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + n)      <span class="com"># → ?  报错还是输出？</span>
+<span class="com"># h)</span> p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + <span class="fn">str</span>(n)) <span class="com"># → ?  为什么 g 报错 h 不报错？</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         </div>
         <div class="card" style="border-left:5px solid var(--amber);">
           <h3 style="color:var(--amber);">必做 3</h3>
