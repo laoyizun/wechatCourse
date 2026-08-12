@@ -429,7 +429,7 @@ h1 .highlight { color: var(--blue); }
         <h1>📝 课后<span class="highlight">作业</span></h1>
         <p class="subtitle">做完截图发给老师，下节讲评 · L1/L2 已开放 · 后续课程作业随课件发布</p>
         <div class="chips">
-          <span class="chip">必做 + 选做</span>
+          <span class="chip">必做作业</span>
           <span class="chip">截图发老师</span>
           <span class="chip">下节讲评</span>
         </div>
@@ -483,7 +483,7 @@ h1 .highlight { color: var(--blue); }
       <!-- 课次筛选（按课次复习，无"全部"） -->
       <div class="sub-tabs" id="lesson-filter" style="margin-bottom:18px;">
         <button class="sub-tab active" data-lesson="L1">L1 (4)</button>
-        <button class="sub-tab" data-lesson="L2">L2 (5)</button>
+        <button class="sub-tab" data-lesson="L2">L2 (4)</button>
       </div>
 
       <!-- 卡片网格（由 JS 渲染） -->
@@ -519,14 +519,14 @@ const HOMEWORKS = [
   {
     id: 'L1',
     title: 'L1 · 让电脑开口说话',
-    subtitle: '3 个必做 + 1 个选做',
+    subtitle: '3 个必做',
     description: '做完截图发给老师，下节讲评。',
     items: [
       {
         level: '必做 1',
         color: 'success',
-        title: '自我介绍 3 种写法',
-        content: '用 <code class="inline">+</code> 拼接 / f-string / 多个 <code class="inline">print</code> 三种方式输出自我介绍。'
+        title: '自我介绍 2 种写法',
+        content: '用 <code class="inline">+</code> 拼接字符串、多个 <code class="inline">print</code> 两种方式输出自我介绍。'
       },
       {
         level: '必做 2',
@@ -547,12 +547,6 @@ const HOMEWORKS = [
         color: 'amber',
         title: '修 3-Bug 年龄程序',
         content: '把 3-Bug 年龄程序<strong>修到能跑通</strong>。'
-      },
-      {
-        level: '选做 · 挑战',
-        color: 'red',
-        title: '加法练习器',
-        content: '输入两数，输出和、差、积、商。'
       }
     ]
   },
@@ -675,20 +669,15 @@ function toggleHomework(id) {
 const FLASHCARDS = [
   // L1
   { id:"L1-C01", lesson:"L1", type:"concept", title:"print 让电脑说话", term:"print = 打印/输出", question:"Python 里让电脑「喊话」用哪个函数？", fill:"______(\"Hello\") 输出 Hello 到屏幕", answer:"print() 函数", mnemonic:"print = 大喇叭，对着电脑喊一句话", code:`print("Hello")     # Hello\nprint(2 + 3)       # 5\nprint("a", "b")    # a b`, warnings:["⭐ 漏掉括号 print(\"Hello\") → SyntaxError","⭐ 漏掉引号 print(Hello) → NameError"] },
-  { id:"L1-C02", lesson:"L1", type:"concept", title:"变量 = 装数据的碗", term:"Variable = 变量", question:"Python 里 age = 15 是什么意思？", fill:"变量就像贴了标签的______，碗里可以换东西", answer:"把数字 15 放进名字叫 age 的碗里", mnemonic:"变量 = 贴标签的碗（标签 = 变量名，碗里的东西 = 值）", code:`age = 15\nprint(age)    # 15\nage = 18      # 覆盖原值\nprint(age)    # 18`, warnings:["⭐ 数字开头非法：2name = 5 → SyntaxError","⭐ 关键字不能当变量名：class = 5 → SyntaxError","⭐ 大小写敏感：Age 和 age 是不同变量"] },
+  { id:"L1-C02", lesson:"L1", type:"concept", title:"变量 = 数据的引用名", term:"Variable = 变量", question:"Python 里 age = 15 是什么意思？", fill:"变量就是给一个数据起的______，后面用名字就能调出数据", answer:"创建名为 age 的变量，指向整数 15", mnemonic:"变量命名规则：字母/数字/下划线；不能数字开头；不能用关键字；大小写敏感", code:`age = 15       # 赋值：把 15 绑定到 age\nprint(age)     # 15\nage = 18       # 重新赋值\nprint(age)     # 18`, warnings:["⭐ 数字开头非法：2name = 5 → SyntaxError","⭐ 关键字不能当变量名：class = 5 → SyntaxError","⭐ 大小写敏感：Age 和 age 是不同变量"] },
   { id:"L1-C03", lesson:"L1", type:"concept", title:"input 让电脑听键盘", term:"input = 输入", question:"input() 函数永远返回什么类型？", fill:"name = input(\"名字?\") —— name 永远是______类型", answer:"str（字符串）", mnemonic:"input 永远给你「文字」，想算数要 int(input())", code:`a = input("First: ")   # 用户输入 5\nb = input("Second: ")  # 用户输入 3\nprint(a + b)            # 53（不是 8！）`, warnings:["⭐ 永远返回字符串：「5」+「3」=「53」","⭐ 想算数必须包 int：int(input(...))"] },
   { id:"L1-C04", lesson:"L1", type:"concept", title:"IPO 模型", term:"Input-Process-Output", question:"IPO 三个字母分别代表什么？", fill:"写程序的三步曲：I（输入）→ P（处理）→ O（______）", answer:"Input（输入）/ Process（处理）/ Output（输出）", mnemonic:"IPO = 餐厅点菜（听单 → 厨房做 → 上菜）", code:`# I - Input\nname = input("你的名字: ")\n# P - Process\ngreeting = "Hello, " + name + "!"\n# O - Output\nprint(greeting)`, warnings:["⭐ 忘了写 O","⭐ IPO 顺序：先 I 再 P 最后 O"] },
 
   // L2
-  { id:"L2-C01", lesson:"L2", type:"concept", title:"四种数据类型", term:"int / float / str / bool", question:"Python 里 4 种基础数据类型分别用什么关键字？", fill:`15 是 ______（整数）\n3.14 是 ______（小数）\n"Hello" 是 ______（文字）\nTrue 是 ______（开关）`, answer:"int / float / str / bool", mnemonic:"碗装四种食材（米 = int，水 = float，文字 = str，开关 = bool）", code:`age = 15        # int\nheight = 1.75   # float\nname = "Peter"  # str\nis_adult = True # bool`, warnings:["⭐ 5 是 int，5.0 是 float","⭐ 「5」是 str，5 是 int"] },
-  { id:"L2-C02", lesson:"L2", type:"concept", title:"类型转换函数", term:"Type Conversion", question:"int(3.6) 等于多少？", fill:"字符串变整数用 ______(\"3\")，整数变字符串用 ______(5)", answer:"3（不是 4 —— int() 截断，不是四舍五入）", mnemonic:"转换函数 = 改装师傅（str/int/float/bool 四件套）", code:`int("3")      # → 3\nfloat("3.14") # → 3.14\nstr(15)       # → "15"\nbool(1)       # → True\nint(3.6)      # → 3（截断，不是 4！）`, warnings:["⭐ int(3.6) 是 3 不是 4（截断）","⭐ int(\"3.6\") 会报错"] },
-  { id:"L2-C03", lesson:"L2", type:"concept", title:"f-string 模板填空", term:"formatted string", question:"print(f\"Hello, {name}\") 里的 f 和 {} 是什么意思？", fill:"f-string 的 {} 是______，里面放变量或表达式", answer:"f = format（格式化），{} = 占位空位", mnemonic:"f-string = 模板填空，{} 是空格，填入变量值", code:`name = "Peter"\nage = 15\nprint(f"Hello, {name}!")\nprint(f"You are {age}")\nprint(f"Next year: {age + 1}")`, warnings:["⭐ 忘写 f：「Hello, {name}」→ 字面输出","⭐ {} 里放 str 需要引号"] },
-  { id:"L2-C04", lesson:"L2", type:"concept", title:"算术运算符 6 件套", term:"Arithmetic Operators", question:"Python 里 6 个算术运算符分别是什么？", fill:`10 / 3 → ______（除法，永远 float）\n10 % 3 → ______（取余）\n2 ** 3 → ______（幂）`, answer:"+ - * / % **", mnemonic:"取余 = 分糖果后剩下的；幂 = 自我复制 N 次", code:`print(10 / 4)    # 2.5（注意！）\nprint(10 // 4)   # 2（// 是整除）\nprint(10 % 3)    # 1\nprint(2 ** 10)   # 1024`, warnings:["⭐ / 永远返回 float：5 / 2 = 2.5","⭐ ** 不是 ^"] },
-  { id:"L2-C05", lesson:"L2", type:"bug", title:"L1 三个 Bug 怎么修", term:"Bug Fix / TypeError", question:"下面代码会怎样？怎么修？", fill:"input() 永远返回______，想算数必须用 ______ 转换", answer:"TypeError；用 int() 包裹 input", mnemonic:"input 后想算数，必须 int(input(...))", code:`# ❌ 错误\nbirth = input("出生年份: ")\nage = 2025 - birth  # TypeError\n# ✅ 修复\nage = 2025 - int(birth)\nprint(f"You are {age}")`, warnings:["⭐ input 没转 int → TypeError","⭐ print 漏引号 → NameError","⭐ 字符串拼接 int → TypeError"] },
-
-
-
-
+  { id:"L2-C01", lesson:"L2", type:"concept", title:"四种数据类型", term:"int / float / str / bool", question:"Python 里 4 种基础数据类型分别用什么关键字？", fill:`15 是 ______（整数）\n3.14 是 ______（小数）\n"Hello" 是 ______（文字）\nTrue 是 ______（开关）`, answer:"int / float / str / bool", mnemonic:"", code:`age = 15        # int\nheight = 1.75   # float\nname = "Peter"  # str\nis_adult = True # bool`, warnings:["⭐ 5 是 int，5.0 是 float","⭐ 「5」是 str，5 是 int"] },
+  { id:"L2-C02", lesson:"L2", type:"concept", title:"类型转换函数", term:"Type Conversion", question:"int(3.6) 等于多少？", fill:"字符串变整数用 ______(\"3\")，整数变字符串用 ______(5)", answer:"3（不是 4 —— int() 截断，不是四舍五入）", mnemonic:"", code:`int("3")      # → 3\nfloat("3.14") # → 3.14\nstr(15)       # → "15"\nbool(1)       # → True\nint(3.6)      # → 3（截断，不是 4！）`, warnings:["⭐ int(3.6) 是 3 不是 4（截断）","⭐ int(\"3.6\") 会报错"] },
+  { id:"L2-C03", lesson:"L2", type:"concept", title:"f-string 模板填空", term:"formatted string", question:"print(f\"Hello, {name}\") 里的 f 和 {} 是什么意思？", fill:"f-string 的 {} 是______，里面放变量或表达式", answer:"f = format（格式化），{} = 占位空位", mnemonic:"", code:`name = "Peter"\nage = 15\nprint(f"Hello, {name}!")\nprint(f"You are {age}")\nprint(f"Next year: {age + 1}")`, warnings:["⭐ 忘写 f：「Hello, {name}」→ 字面输出","⭐ {} 里放 str 需要引号"] },
+  { id:"L2-C04", lesson:"L2", type:"concept", title:"算术运算符 6 件套", term:"Arithmetic Operators", question:"Python 里 6 个算术运算符分别是什么？", fill:`10 / 3 → ______（除法，永远 float）\n10 % 3 → ______（取余）\n2 ** 3 → ______（幂）`, answer:"+ - * / % **", mnemonic:"取余: 分糖果后剩下的；幂: 自我复制 N 次", code:`print(10 / 4)    # 2.5（注意！）\nprint(10 // 4)   # 2（// 是整除）\nprint(10 % 3)    # 1\nprint(2 ** 10)   # 1024`, warnings:["⭐ / 永远返回 float：5 / 2 = 2.5","⭐ ** 不是 ^"] }
 ];
 
 // ===== 渲染逻辑 =====
@@ -730,7 +719,7 @@ function renderCards(lessonFilter) {
           <small style="display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(22,163,74,.12); color:var(--green); font-weight:800; font-size:12px; margin-bottom:10px; width:fit-content;">答案 · ${c.id}</small>
           <h3 style="margin:0 0 8px; font-size:16px; color:var(--ink); line-height:1.5;">${escapeHTML(c.title)}</h3>
           <div style="font-size:14px; color:var(--text); margin:6px 0;"><strong>答：</strong>${escapeHTML(c.answer)}</div>
-          <div style="background:rgba(15,159,154,.08); border-left:3px solid var(--teal); padding:8px 10px; border-radius:6px; font-size:13px; color:var(--text); margin:6px 0;">💡 ${escapeHTML(c.mnemonic)}</div>
+          ${c.mnemonic && c.mnemonic.trim() ? `<div style="background:rgba(15,159,154,.08); border-left:3px solid var(--teal); padding:8px 10px; border-radius:6px; font-size:13px; color:var(--text); margin:6px 0;">💡 ${escapeHTML(c.mnemonic)}</div>` : ''}
           <pre style="background:#0f243f; color:#edf6ff; padding:10px 12px; border-radius:6px; font-family:monospace; font-size:12px; line-height:1.6; margin:6px 0; overflow-x:auto; white-space:pre-wrap;">${highlightCode(c.code)}</pre>
           ${c.warnings.length > 0 ? `<div style="background:rgba(220,38,38,.06); border-left:3px solid var(--red); padding:6px 10px; border-radius:6px; font-size:12px; color:var(--text);">${c.warnings.map(w => `<span style="color:var(--red); font-weight:900;">${escapeHTML(w)}</span>`).join('<br>')}</div>` : ''}
           <div style="margin-top:auto; padding-top:6px; text-align:center; font-size:11px; color:var(--muted); font-weight:800; letter-spacing:1px;">← 点击翻回</div>
