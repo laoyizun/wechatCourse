@@ -226,6 +226,25 @@ td code, th code { font-size: 17px; }
   margin-bottom: 10px;
 }
 
+/* 答案 / 期望代码块（浅色卡片里展示，背景非深色） */
+.answer-code {
+  background: #0f243f;
+  color: #edf6ff;
+  font-size: 18px;
+  line-height: 1.7;
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 8px 0;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
+  white-space: pre-wrap;
+}
+.answer-code .kw { color: #ff9d72; font-weight: 700; }
+.answer-code .str { color: #a5e88c; }
+.answer-code .num { color: #ffb547; }
+.answer-code .com { color: #7c8aa8; font-style: italic; }
+.answer-code .fn { color: #82d4ff; font-weight: 700; }
+
 /* big-list */
 .big-list { display: grid; gap: 12px; }
 .list-item {
@@ -653,9 +672,9 @@ age = <span class="num">2025</span> - birth
 <span class="fn">print</span>(age)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       <div class="answer-block">
         <div class="label">✓ 修复后</div>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0; font-size:17px;">birth = <span class="fn" style="color:#0f243f;">input</span>(<span class="str" style="color:#0f243f;">"出生年份: "</span>)
-age = <span class="num" style="color:#0f243f;">2025</span> - <span class="fn" style="color:#0f243f;">int</span>(birth)
-<span class="fn" style="color:#0f243f;">print</span>(age)</code></pre>
+<div class="answer-code">birth = <span class="fn">input</span>(<span class="str">"出生年份: "</span>)
+age = <span class="num">2025</span> - <span class="fn">int</span>(birth)
+<span class="fn">print</span>(age)</div>
         <p style="margin-top:8px;"><strong>错误</strong>：<code class="inline">TypeError: unsupported operand type(s) for -: 'int' and 'str'</code></p>
         <p><strong>诊断信号</strong>：✅ 一眼看穿 + 正确修复 → 优秀 / ⚠️ 知道错但不会修 → 中等 / ❌ → L2 重点讲类型转换</p>
       </div>
@@ -674,7 +693,7 @@ age = <span class="num" style="color:#0f243f;">2025</span> - <span class="fn" st
 <pre><code><span class="fn">print</span>(Hello)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       <div class="answer-block">
         <div class="label">✓ 修复后</div>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0; font-size:17px;"><span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Hello"</span>)</code></pre>
+<div class="answer-code"><span class="fn">print</span>(<span class="str">"Hello"</span>)</div>
         <p style="margin-top:8px;"><strong>错误</strong>：<code class="inline">NameError: name 'Hello' is not defined</code></p>
         <p><strong>口诀</strong>：没引号的"Hello"是变量名，但电脑找不到这个名字</p>
         <p><strong>诊断信号</strong>：✅ → 懂"没引号 = 变量" / ❌ → L1 强调</p>
@@ -695,11 +714,11 @@ age = <span class="num" style="color:#0f243f;">2025</span> - <span class="fn" st
 <span class="fn">print</span>(<span class="str">"你"</span> + age + <span class="str">"岁"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       <div class="answer-block">
         <div class="label">✓ 修法 1（用 <code class="inline">str()</code>）</div>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0; font-size:17px;">age = <span class="num" style="color:#0f243f;">15</span>
-<span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"你"</span> + <span class="fn" style="color:#0f243f;">str</span>(age) + <span class="str" style="color:#0f243f;">"岁"</span>)</code></pre>
+<div class="answer-code">age = <span class="num">15</span>
+<span class="fn">print</span>(<span class="str">"你"</span> + <span class="fn">str</span>(age) + <span class="str">"岁"</span>)</div>
         <div class="label" style="margin-top:10px;">✓ 修法 2（用 f-string）</div>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0; font-size:17px;">age = <span class="num" style="color:#0f243f;">15</span>
-<span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">f"你{age}岁"</span>)</code></pre>
+<div class="answer-code">age = <span class="num">15</span>
+<span class="fn">print</span>(<span class="str">f"你{age}岁"</span>)</div>
         <p style="margin-top:10px;"><strong>诊断信号</strong>：✅ 两种修法 → 优秀 / ⚠️ 只会一种 → 中等 / ❌ → L2 重点讲</p>
       </div>
     </div>
@@ -732,11 +751,11 @@ age = <span class="num" style="color:#0f243f;">2025</span> - <span class="fn" st
     <div class="right">
       <div class="card success">
         <h3>✅ 期望代码</h3>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0;">name = <span class="fn" style="color:#0f243f;">input</span>(<span class="str" style="color:#0f243f;">"你的名字: "</span>)
-<span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">f"Hello, {name}!"</span>)</code></pre>
+<div class="answer-code">name = <span class="fn">input</span>(<span class="str">"你的名字: "</span>)
+<span class="fn">print</span>(<span class="str">f"Hello, {name}!"</span>)</div>
         <p style="font-size:17px; margin-top:8px;">或 <code class="inline">+</code> 拼接版：</p>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0;">name = <span class="fn" style="color:#0f243f;">input</span>(<span class="str" style="color:#0f243f;">"你的名字: "</span>)
-<span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Hello, "</span> + name + <span class="str" style="color:#0f243f;">"!"</span>)</code></pre>
+<div class="answer-code">name = <span class="fn">input</span>(<span class="str">"你的名字: "</span>)
+<span class="fn">print</span>(<span class="str">"Hello, "</span> + name + <span class="str">"!"</span>)</div>
       </div>
       <div class="answer-block" style="margin-top:12px;">
         <div class="label">诊断信号</div>
@@ -756,9 +775,9 @@ age = <span class="num" style="color:#0f243f;">2025</span> - <span class="fn" st
     <div class="right">
       <div class="card success">
         <h3>✅ 期望代码</h3>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0;">a = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>(<span class="str" style="color:#0f243f;">"First: "</span>))
-b = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>(<span class="str" style="color:#0f243f;">"Second: "</span>))
-<span class="fn" style="color:#0f243f;">print</span>(a + b)</code></pre>
+<div class="answer-code">a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"First: "</span>))
+b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Second: "</span>))
+<span class="fn">print</span>(a + b)</div>
       </div>
       <div class="answer-block" style="margin-top:12px;">
         <div class="label">诊断信号</div>
@@ -778,11 +797,11 @@ b = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="c
     <div class="right">
       <div class="card success">
         <h3>✅ 期望代码</h3>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0;">score = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>(<span class="str" style="color:#0f243f;">"分数:"</span>))
-<span class="kw" style="color:#0f243f;">if</span> score >= <span class="num" style="color:#0f243f;">60</span>:
-    <span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Pass"</span>)
-<span class="kw" style="color:#0f243f;">else</span>:
-    <span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Fail"</span>)</code></pre>
+<div class="answer-code">score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数:"</span>))
+<span class="kw">if</span> score >= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Fail"</span>)</div>
       </div>
       <div class="answer-block" style="margin-top:12px;">
         <div class="label">诊断信号</div>
@@ -827,17 +846,17 @@ b = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="c
       </div>
       <div class="card success" style="margin-top:12px;">
         <h3>✅ 期望代码</h3>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0;">a = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>())
-b = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>())
-c = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>())
-<span class="kw" style="color:#0f243f;">if</span> a + b <= c <span class="kw" style="color:#0f243f;">or</span> b + c <= a <span class="kw" style="color:#0f243f;">or</span> a + c <= b:
-    <span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Invalid"</span>)
-<span class="kw" style="color:#0f243f;">elif</span> a == b == c:
-    <span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Equilateral"</span>)
-<span class="kw" style="color:#0f243f;">elif</span> a == b <span class="kw" style="color:#0f243f;">or</span> b == c <span class="kw" style="color:#0f243f;">or</span> a == c:
-    <span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Isosceles"</span>)
-<span class="kw" style="color:#0f243f;">else</span>:
-    <span class="fn" style="color:#0f243f;">print</span>(<span class="str" style="color:#0f243f;">"Scalene"</span>)</code></pre>
+<div class="answer-code">a = <span class="fn">int</span>(<span class="fn">input</span>())
+b = <span class="fn">int</span>(<span class="fn">input</span>())
+c = <span class="fn">int</span>(<span class="fn">input</span>())
+<span class="kw">if</span> a + b <= c <span class="kw">or</span> b + c <= a <span class="kw">or</span> a + c <= b:
+    <span class="fn">print</span>(<span class="str">"Invalid"</span>)
+<span class="kw">elif</span> a == b == c:
+    <span class="fn">print</span>(<span class="str">"Equilateral"</span>)
+<span class="kw">elif</span> a == b <span class="kw">or</span> b == c <span class="kw">or</span> a == c:
+    <span class="fn">print</span>(<span class="str">"Isosceles"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Scalene"</span>)</div>
       </div>
     </div>
   </section>
@@ -862,11 +881,11 @@ c = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="c
       </div>
       <div class="card success" style="margin-top:12px;">
         <h3>✅ 期望代码</h3>
-<pre><code style="background:transparent; color:#0f243f; padding:0; margin:0;">n = <span class="fn" style="color:#0f243f;">int</span>(<span class="fn" style="color:#0f243f;">input</span>())
-total = <span class="num" style="color:#0f243f;">0</span>
-<span class="kw" style="color:#0f243f;">for</span> i <span class="kw" style="color:#0f243f;">in</span> <span class="fn" style="color:#0f243f;">range</span>(<span class="num" style="color:#0f243f;">1</span>, n + <span class="num" style="color:#0f243f;">1</span>):
+<div class="answer-code">n = <span class="fn">int</span>(<span class="fn">input</span>())
+total = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, n + <span class="num">1</span>):
     total = total + i
-<span class="fn" style="color:#0f243f;">print</span>(total)</code></pre>
+<span class="fn">print</span>(total)</div>
         <p style="font-size:17px; margin-top:10px;"><strong>诊断信号</strong>：✅ 用 for + 累加 → L5 可提前 / ⚠️ 知道累加但写不出 for → L5 重点 / ❌ → L5 从头讲循环</p>
       </div>
     </div>
