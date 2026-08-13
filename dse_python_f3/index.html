@@ -752,19 +752,20 @@ function escapeHTML(s) {
 
 function highlightCode(code) {
   // 用占位符避免后续正则误匹配生成的 HTML
+  // 占位符用 \x01 + 大写字母T + 数字 + \x01，绝对不会被数字/关键字/字符串正则匹配
   const tokens = [];
   let escaped = escapeHTML(code);
 
   // 1) 注释（# 开头到行尾）— 用占位符
   escaped = escaped.replace(/(\#[^\n]*)/g, (m) => {
     tokens.push(`<span class="c-com">${m}</span>`);
-    return `\x00${tokens.length - 1}\x00`;
+    return `\x01T${tokens.length - 1}\x01`;
   });
 
   // 2) 字符串 — 用占位符
   escaped = escaped.replace(/(\"[^\"\n]*\"|\'[^\'\n]*\')/g, (m) => {
     tokens.push(`<span class="c-str">${m}</span>`);
-    return `\x00${tokens.length - 1}\x00`;
+    return `\x01T${tokens.length - 1}\x01`;
   });
 
   // 3) 数字
@@ -774,7 +775,7 @@ function highlightCode(code) {
   escaped = escaped.replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span class="c-kw">$1</span>');
 
   // 还原占位符
-  escaped = escaped.replace(/\x00(\d+)\x00/g, (_, i) => tokens[+i]);
+  escaped = escaped.replace(/\x01T(\d+)\x01/g, (_, i) => tokens[+i]);
 
   return escaped;
 }
