@@ -542,14 +542,29 @@ const HOMEWORKS = [
         color: 'blue',
         title: '8 道 Dry Run',
         content: '先在纸上写出每段代码的预期输出，再敲进 online-python 验证。',
-        code: `<span class="com"># a)</span> a = <span class="num">20</span>; b = <span class="num">25</span>; <span class="fn">print</span>(a + b)
-<span class="com"># b)</span> x = <span class="str">"20"</span>; y = <span class="str">"25"</span>; <span class="fn">print</span>(x + y)
-<span class="com"># c)</span> level = <span class="num">1</span>; level = level + <span class="num">5</span>; <span class="fn">print</span>(level)
-<span class="com"># d)</span> level = <span class="num">1</span>; level = level + <span class="num">5</span>; level = <span class="num">10</span>; <span class="fn">print</span>(level)
-<span class="com"># e)</span> x = <span class="num">10</span>; y = <span class="num">20</span>; y = x + y; <span class="fn">print</span>(y)
-<span class="com"># f)</span> a = <span class="num">10</span>; A = <span class="num">20</span>; <span class="fn">print</span>(a)
-<span class="com"># g)</span> p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + n)
-<span class="com"># h)</span> p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + <span class="fn">str</span>(n))`
+        code: `<span class="com"># a) 输出什么？</span>
+a = <span class="num">20</span>; b = <span class="num">25</span>; <span class="fn">print</span>(a + b)
+
+<span class="com"># b) 输出什么？</span>
+x = <span class="str">"20"</span>; y = <span class="str">"25"</span>; <span class="fn">print</span>(x + y)
+
+<span class="com"># c) 输出什么？</span>
+level = <span class="num">1</span>; level = level + <span class="num">5</span>; <span class="fn">print</span>(level)
+
+<span class="com"># d) 输出什么？</span>
+level = <span class="num">1</span>; level = level + <span class="num">5</span>; level = <span class="num">10</span>; <span class="fn">print</span>(level)
+
+<span class="com"># e) 输出什么？</span>
+x = <span class="num">10</span>; y = <span class="num">20</span>; y = x + y; <span class="fn">print</span>(y)
+
+<span class="com"># f) 输出什么？为什么？</span>
+a = <span class="num">10</span>; A = <span class="num">20</span>; <span class="fn">print</span>(a)
+
+<span class="com"># g) 输出什么？报错还是输出？</span>
+p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + n)
+
+<span class="com"># h) 输出什么？为什么 g 报错 h 不报错？</span>
+p = <span class="str">"LeBron"</span>; n = <span class="num">23</span>; <span class="fn">print</span>(p + <span class="fn">str</span>(n))`
       },
       {
         level: '必做 3',
@@ -579,14 +594,21 @@ const HOMEWORKS = [
         code: `age = <span class="fn">input</span>(<span class="str">"Your age? "</span>)
 <span class="fn">print</span>(<span class="str">f"Age in ten years { age + 10 }"</span>)`,
         code2: '<strong>Dry Run 题：</strong>不看代码，预测 4 段代码的输出。',
-        code3: `<span class="com"># a)</span> name = <span class="str">"Peter"</span>
-    <span class="fn">print</span>(<span class="str">f"Hello, {name}"</span>)
-<span class="com"># b)</span> a = <span class="str">"Yes"</span>
-    <span class="fn">print</span>(<span class="str">f"{a}? {a}?"</span>)
-<span class="com"># c)</span> a = <span class="num">3</span>; b = <span class="num">5</span>
-    <span class="fn">print</span>(<span class="str">f"a+b is {a+b}"</span>)
-<span class="com"># d)</span> age = <span class="num">14</span>
-    <span class="fn">print</span>(<span class="str">f"Your age is\\n{age+3}"</span>)`
+        code3: `<span class="com"># a) 输出什么？</span>
+name = <span class="str">"Peter"</span>
+<span class="fn">print</span>(<span class="str">f"Hello, {name}"</span>)
+
+<span class="com"># b) 输出什么？</span>
+a = <span class="str">"Yes"</span>
+<span class="fn">print</span>(<span class="str">f"{a}? {a}?"</span>)
+
+<span class="com"># c) 输出什么？</span>
+a = <span class="num">3</span>; b = <span class="num">5</span>
+<span class="fn">print</span>(<span class="str">f"a+b is {a+b}"</span>)
+
+<span class="com"># d) 输出什么？</span>
+age = <span class="num">14</span>
+<span class="fn">print</span>(<span class="str">f"Your age is\\n{age+3}"</span>)`
       },
       {
         level: '必做 3',
@@ -729,12 +751,32 @@ function escapeHTML(s) {
 }
 
 function highlightCode(code) {
-  return escapeHTML(code)
-    // 用 class 避免 style 里出现颜色 hex（避免被字符串正则误识别）
-    .replace(/(\#[^\n]*)/g, '<span class="c-com">$1</span>')
-    .replace(/(\"[^\"]*\"|\'[^\']*\')/g, '<span class="c-str">$1</span>')
-    .replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>')
-    .replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span class="c-kw">$1</span>');
+  // 用占位符避免后续正则误匹配生成的 HTML
+  const tokens = [];
+  let escaped = escapeHTML(code);
+
+  // 1) 注释（# 开头到行尾）— 用占位符
+  escaped = escaped.replace(/(\#[^\n]*)/g, (m) => {
+    tokens.push(`<span class="c-com">${m}</span>`);
+    return `\x00${tokens.length - 1}\x00`;
+  });
+
+  // 2) 字符串 — 用占位符
+  escaped = escaped.replace(/(\"[^\"\n]*\"|\'[^\'\n]*\')/g, (m) => {
+    tokens.push(`<span class="c-str">${m}</span>`);
+    return `\x00${tokens.length - 1}\x00`;
+  });
+
+  // 3) 数字
+  escaped = escaped.replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>');
+
+  // 4) 关键字
+  escaped = escaped.replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span class="c-kw">$1</span>');
+
+  // 还原占位符
+  escaped = escaped.replace(/\x00(\d+)\x00/g, (_, i) => tokens[+i]);
+
+  return escaped;
 }
 
 let flippedCount = 0;
