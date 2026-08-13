@@ -152,7 +152,7 @@ pre, .prompt-box {
   margin: 12px 0;
   overflow-x: auto;
   font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
-  white-space: pre-wrap;
+  white-space: pre;  /* 代码块不自动换行，超出则横向滚动 */
 }
 .prompt-box { padding: 24px 28px; }
 pre code .kw { color: #ff9d72; font-weight: 700; }
@@ -167,6 +167,7 @@ code.inline {
   font-family: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, monospace;
   font-size: 0.92em; color: #1d4ed8;
   font-weight: 700;
+  white-space: nowrap;  /* 防止代码被强制换行 */
 }
 
 .term-out {
@@ -330,7 +331,7 @@ pre {
 .slide.compact h2 { font-size: clamp(28px, 3.4vw, 40px); margin-bottom: 14px; }
 .slide.compact .subtitle { font-size: 19px; line-height: 1.6; margin-bottom: 14px; }
 .slide.compact .kicker { margin-bottom: 14px; padding: 8px 12px; font-size: 14px; }
-.slide.compact pre { white-space: pre; }
+.slide.compact pre { white-space: pre; }  /* 兼容旧规则 */
 .slide.compact .practice { padding: 16px 20px; }
 .slide.compact .practice .label { padding: 5px 10px; font-size: 13px; margin-bottom: 8px; }
 </style>
@@ -365,7 +366,7 @@ pre {
         <div class="card">
           <div class="label">print</div>
           <p style="font-size:18px; margin-top:8px;"><code class="inline">print("Hi")</code></p>
-          <p style="margin-top:6px;font-size:14px; color:var(--muted);">让电脑喊话</p>
+          <p style="margin-top:6px;font-size:14px; color:var(--muted);">输出数据</p>
         </div>
         <div class="card">
           <div class="label">input</div>
@@ -375,12 +376,10 @@ pre {
         <div class="card">
           <div class="label">变量</div>
           <p style="font-size:18px; margin-top:8px;"><code class="inline">age = 15</code></p>
-          <p style="margin-top:6px;font-size:14px; color:var(--muted);">碗里装数据</p>
+          <p style="margin-top:6px;font-size:14px; color:var(--muted);">变量赋值</p>
         </div>
       </div>
-      <div class="metaphor" style="margin-top:18px;">
-        <span class="emo">🔁</span><b>还记得吗？</b> <code class="inline">15 + 15 = 30</code>（算）vs <code class="inline">"15" + "15" = "1515"</code>（拼） —— <code class="inline">+</code> 是<strong>双面人</strong>。
-      </div>
+      
       <div class="takeaway" style="margin-top:14px;">
         <div class="label">❓ 自检 3 问</div>
         <p>· 你能写出 <code class="inline">print("Hi, " + name)</code> 吗？<br>
@@ -399,12 +398,12 @@ pre {
     </div>
     <div class="right">
       <table>
-        <tr><th style="width:60px;">#</th><th>主题</th><th>比喻</th></tr>
-        <tr><td><code class="inline">01</code></td><td><strong>数据类型 4 件套</strong></td><td>🦕 物种分类</td></tr>
-        <tr><td><code class="inline">02</code></td><td><strong>类型转换</strong></td><td>🗣️ 联合国翻译</td></tr>
-        <tr><td><code class="inline">03</code></td><td><strong>/ 永远返回 float</strong></td><td>🍰 分蛋糕</td></tr>
-        <tr><td><code class="inline">04</code></td><td><strong>f-string</strong></td><td>💌 明信片</td></tr>
-        <tr><td><code class="inline">05</code></td><td><strong>Bug Fix</strong></td><td>👨‍⚕️ 小医生</td></tr>
+        <tr><th style="width:60px;">#</th><th>主题</th><th>例子</th></tr>
+        <tr><td><code class="inline">01</code></td><td><strong>数据类型 4 件套</strong></td><td>int / float / str / bool</td></tr>
+        <tr><td><code class="inline">02</code></td><td><strong>类型转换</strong></td><td>int() / float() / str() / bool()</td></tr>
+        <tr><td><code class="inline">03</code></td><td><strong>算术运算</strong></td><td>+ - * / // % **</td></tr>
+        <tr><td><code class="inline">04</code></td><td><strong>f-string</strong></td><td>f"Hello {name}"</td></tr>
+        <tr><td><code class="inline">05</code></td><td><strong>Bug Fix</strong></td><td>3 个常见 Bug + 修复</td></tr>
       </table>
     </div>
   </section>
@@ -413,7 +412,7 @@ pre {
   <section class="slide part-slide">
     <div class="left">
       <div class="kicker">Part 1 · 数据类型</div>
-      <h2>数据的<span class="highlight">物种</span></h2>
+      <h2>数据的<span class="highlight">类型</span></h2>
       <p class="subtitle">L1 介绍了 int 和 str，L2 补两位：float 和 bool。</p>
     </div>
     <div class="right">
@@ -433,7 +432,7 @@ pre {
     </div>
     <div class="right">
       <table>
-        <tr><th>类型</th><th>英文</th><th>例子</th><th>比喻</th></tr>
+        <tr><th>类型</th><th>英文</th><th>例子</th><th>应用</th></tr>
         <tr>
           <td><code class="inline">int</code></td>
           <td>integer</td>
@@ -456,12 +455,9 @@ pre {
           <td><code class="inline">bool</code></td>
           <td>boolean</td>
           <td><code class="inline">True</code>、<code class="inline">False</code></td>
-          <td>开关</td>
+          <td>真假</td>
         </tr>
       </table>
-      <div class="metaphor" style="margin-top:18px;">
-        <span class="emo">🦕</span><b>比喻：物种分类</b> 生物学有界门纲目科属种，Python 也有"数据类型"。不同物种决定了它<strong>能吃什么 / 不能吃什么</strong>。
-      </div>
     </div>
   </section>
 
@@ -522,9 +518,7 @@ pre {
 <span class="fn">print</span>(<span class="str">"15"</span> + <span class="fn">str</span>(<span class="num">15</span>))        <span class="com"># "15" + "15" = "1515"</span>
 <span class="fn">print</span>(<span class="fn">float</span>(<span class="str">"3.14"</span>))       <span class="com"># 3.14</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
-      <div class="metaphor" style="margin-top:14px;">
-        <span class="emo">🗣️</span><b>比喻：联合国翻译</b> 字符串是"中文"，整数是"英文"。<code class="inline">int()</code> 就是同声传译 —— 把"中文"翻译成"英文"才能跟其他"英文"对话。
-      </div>
+      
     </div>
   </section>
 
@@ -618,9 +612,7 @@ age   = <span class="num">2025</span> - birth           <span class="com"># ❌ 
         <div class="term-out success">2</div>
         <div class="term-out success">1</div>
       </div>
-      <div class="metaphor" style="margin-top:14px;">
-        <span class="emo">🍰</span><b>比喻：分蛋糕</b> <code class="inline">/</code> 像分蛋糕 —— 哪怕你切得非常整齐，它也会给你<strong>带着小数</strong>。想要整数块？用 <code class="inline">//</code>。
-      </div>
+      
       <div class="takeaway" style="margin-top:14px;">
         <div class="label">⚠️ 高频考点</div>
         <p>DSE 常考：<code class="inline">5 / 2 = ?</code> → 答案是 <code class="inline">2.5</code>，不是 <code class="inline">2</code>。</p>
@@ -700,9 +692,7 @@ score = <span class="num">95</span>
 <span class="fn">print</span>(<span class="str">f"Hi, {name}! Score: {score}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
         </div>
       </div>
-      <div class="metaphor" style="margin-top:18px;">
-        <span class="emo">💌</span><b>比喻：明信片</b> 普通明信片只有字；f-string 明信片可以<strong>在文字里贴照片</strong>（<code class="inline">{变量}</code>）和<strong>插图说明</strong>（<code class="inline">{表达式}</code>）。
-      </div>
+      
     </div>
   </section>
 
@@ -850,24 +840,23 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
   </section>
 
   <!-- 22 Homework -->
-  <section class="slide">
-    <div class="left">
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
       <div class="kicker">Homework · 课后作业</div>
-      <h2>📚 4 个必做 + 1 个选做</h2>
-      <p class="subtitle">L3 习题课会讲评。</p>
+      <h2 style="margin:0; font-size:24px;">📚 4 个必做</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">L3 习题课会讲评</p>
     </div>
-    <div class="right">
-      <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-        <div class="card success">
-          <h3 style="color:#047857;">必做 1</h3>
-          <p style="font-size:17px; margin-top:6px;">三种几何面积计算器：正方形 / 长方形 / 圆。<br>注意 <code class="inline">/</code> 暗坑。</p>
-        </div>
-        <div class="card" style="border-left:5px solid var(--blue);">
-          <h3 style="color:var(--blue);">必做 2</h3>
-          <p style="font-size:17px; margin-top:6px;"><strong>改错题：</strong>下面这段代码要算"10 年后的年龄"，但有 Bug，写出正确版本：</p>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card success">
+        <h3 style="color:#047857;">必做 1 · 三种几何面积</h3>
+        <p style="font-size:17px; margin-top:6px;">正方形 / 长方形 / 圆。<br>注意 <code class="inline">/</code> 暗坑。</p>
+      </div>
+      <div class="card" style="border-left:5px solid var(--blue);">
+        <h3 style="color:var(--blue);">必做 2 · 改错 + Dry Run</h3>
+        <p style="font-size:17px; margin-top:6px;"><strong>改错：</strong>下面代码要算"10 年后的年龄"，有 Bug，写出正确版本：</p>
 <pre><code>age = <span class="fn">input</span>(<span class="str">"Your age? "</span>)
 <span class="fn">print</span>(<span class="str">f"Age in ten years { age + 10 }"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-          <p style="font-size:17px; margin-top:6px;"><strong>Dry Run 题：</strong>不看代码，预测 4 段代码的输出，再敲进 online-python 验证。</p>
+        <p style="font-size:17px; margin-top:6px;"><strong>Dry Run：</strong>不看代码，预测 4 段代码的输出。</p>
 <pre><code><span class="com"># a)</span> name = <span class="str">"Peter"</span>
     <span class="fn">print</span>(<span class="str">f"Hello, {name}"</span>)
 
@@ -880,19 +869,14 @@ height = <span class="fn">float</span>(<span class="fn">input</span>(<span class
 
 <span class="com"># d)</span> age = <span class="num">14</span>
     <span class="fn">print</span>(<span class="str">f"Your age is\n{age+3}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-        </div>
-        <div class="card" style="border-left:5px solid var(--amber);">
-          <h3 style="color:var(--amber);">必做 3</h3>
-          <p style="font-size:17px; margin-top:6px;">修复 L1 全部 3 个 Bug，并用 f-string 输出。附加：输入负数年龄时输出"错误输入"。</p>
-        </div>
-        <div class="card" style="border-left:5px solid var(--teal);">
-          <h3 style="color:var(--teal);">必做 4</h3>
-          <p style="font-size:17px; margin-top:6px;">选词游戏：输入两个英文单词，输出 "Word1: ___ (length ___), Word2: ___ (length ___)"，用 f-string 和 <code class="inline">len()</code>。</p>
-        </div>
-        <div class="card" style="border-left:5px solid var(--red);">
-          <h3 style="color:var(--red);">选做 · 挑战</h3>
-          <p style="font-size:17px; margin-top:6px;">自助问答机器人：问 3 个问题（姓名/年龄/科目），最后输出 "Hi {姓名}，你 {明年年龄} 岁，最爱 {科目}，祝你学习愉快！"。</p>
-        </div>
+      </div>
+      <div class="card" style="border-left:5px solid var(--amber);">
+        <h3 style="color:var(--amber);">必做 3 · 修复 L1 三个 Bug</h3>
+        <p style="font-size:17px; margin-top:6px;">修复 L1 全部 3 个 Bug，并用 f-string 输出。附加：输入负数年龄时输出"错误输入"。</p>
+      </div>
+      <div class="card" style="border-left:5px solid var(--teal);">
+        <h3 style="color:var(--teal);">必做 4 · 选词游戏</h3>
+        <p style="font-size:17px; margin-top:6px;">输入两个英文单词，输出 <code class="inline">"Word1: ___ (length ___), Word2: ___ (length ___)"</code>，用 f-string 和 <code class="inline">len()</code>。</p>
       </div>
     </div>
   </section>

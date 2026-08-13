@@ -600,3 +600,87 @@ L1 / L2 已完成的课件节奏，作为 L3-L10 开发的模板基线。
 - `prompt.md` — AI 任务提示
 - `TRAE_TASK_STATUS.md` — 任务进度同步
 - `L1.html` / `L2.html` — 已完成课件
+---
+
+## 附录 A：PPT 布局设计原则
+
+PPT 页面有 3 类布局，根据内容类型选择：
+
+### 类型 1：过渡页 / 标题页
+
+**用途**：Cover、Part 标题、Recap、Takeaway
+
+**CSS 类**：`.slide.title-slide` 或 `.slide.part-slide`
+
+**特征**：
+- 居中、占满、单色背景
+- 视觉冲击强、文字大
+- 无内容区，只有标题
+
+### 类型 2：内容页 — 左右布局
+
+**用途**：单一概念讲解（带比喻、解释、单一代码示例）
+
+**CSS 类**：默认 `.slide`（不加额外类）
+
+**结构**：
+```html
+<section class="slide">
+  <div class="left">     <!-- 标题区 40% -->
+    <div class="kicker">...</div>
+    <h2>...</h2>
+    <p class="subtitle">...</p>
+  </div>
+  <div class="right">    <!-- 内容区 60% -->
+    <div class="card">...</div>
+  </div>
+</section>
+```
+
+### 类型 3：内容页 — 上下布局
+
+**用途**：作业页、表格密集、多卡片对比、代码密集
+
+**CSS 类**：`.slide.wide`
+
+**结构**：
+```html
+<section class="slide wide">
+  <div style="display:flex; align-items:center; ...">
+    <div class="kicker">...</div>
+    <h2>...</h2>
+    <p class="subtitle">...</p>
+  </div>
+  <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr;">
+    <div class="card">...</div>
+    <div class="card">...</div>
+  </div>
+</section>
+```
+
+### 类型 4：紧凑页（代码 / 考试）
+
+**用途**：模拟考、长代码块
+
+**CSS 类**：`.slide.compact`
+
+**结构**：flex column，head + 内容
+
+---
+
+## 附录 B：作业设计原则
+
+- **不设挑战题**（学生不需要选做题，避免增加负担）
+- **作业难度不超过本课内容**
+- **必做 1-4 道**，覆盖本节核心概念
+- **截图发老师**，下节讲评
+
+---
+
+## 附录 C：记忆卡片设计原则
+
+- **结构**：定义 → 填空 → 代码 → 口诀 → 易错点
+- **口诀仅作辅助**，不是必须的（无口诀的卡不显示口诀段）
+- **比喻**：当前全部删除（待未来根据学生反馈决定是否恢复）
+- **命名规则用 `:`**，不用 `=`（避免和赋值混淆）
+- **代码高亮用 class**，不用 inline style（避免颜色 hex 被字符串正则误匹配）

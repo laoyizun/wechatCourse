@@ -277,6 +277,12 @@ h1 .highlight { color: var(--blue); }
   font-size: 14px;
 }
 
+/* 代码高亮类（记忆卡片代码块） */
+.c-com { color: #7c8aa8; font-style: italic; }
+.c-str { color: #a5e88c; }
+.c-num { color: #ffb547; }
+.c-kw  { color: #ff9d72; font-weight: 700; }
+
 /* Responsive */
 @media (max-width: 768px) {
   .app-layout { grid-template-columns: 1fr; }
@@ -518,7 +524,7 @@ navBtns.forEach(btn => {
 const HOMEWORKS = [
   {
     id: 'L1',
-    title: 'L1 · 让电脑开口说话',
+    title: 'L1 · I/O + 变量 + IPO',
     subtitle: '3 个必做',
     description: '做完截图发给老师，下节讲评。',
     items: [
@@ -553,7 +559,7 @@ const HOMEWORKS = [
   {
     id: 'L2',
     title: 'L2 · 让程序学会算数',
-    subtitle: '4 个必做 + 1 个选做',
+    subtitle: '4 个必做',
     description: 'L3 习题课会讲评。',
     items: [
       {
@@ -592,11 +598,6 @@ const HOMEWORKS = [
         content: '输入两个英文单词，输出 <code class="inline">"Word1: ___ (length ___), Word2: ___ (length ___)"</code>，用 f-string 和 <code class="inline">len()</code>。'
       },
       {
-        level: '选做 · 挑战',
-        color: 'red',
-        title: '自助问答机器人',
-        content: '问 3 个问题（姓名/年龄/科目），最后输出 <code class="inline">"Hi {姓名}，你 {明年年龄} 岁，最爱 {科目}，祝你学习愉快！"</code>。'
-      }
     ]
   }
 ];
@@ -668,7 +669,7 @@ function toggleHomework(id) {
 // ===== 卡片数据（9 张，L1/L2）=====
 const FLASHCARDS = [
   // L1
-  { id:"L1-C01", lesson:"L1", type:"concept", title:"print 让电脑说话", term:"print = 打印/输出", question:"Python 里让电脑「喊话」用哪个函数？", fill:"______(\"Hello\") 输出 Hello 到屏幕", answer:"print() 函数", mnemonic:"print = 大喇叭，对着电脑喊一句话", code:`print("Hello")     # Hello\nprint(2 + 3)       # 5\nprint("a", "b")    # a b`, warnings:["⭐ 漏掉括号 print(\"Hello\") → SyntaxError","⭐ 漏掉引号 print(Hello) → NameError"] },
+  { id:"L1-C01", lesson:"L1", type:"concept", title:"print 函数", term:"print: 打印 / 输出", question:"Python 里让数据输出到屏幕用哪个函数？", fill:"______(\"Hello\") 输出 Hello 到屏幕", answer:"print() 函数", mnemonic:"print: 把数据发送到标准输出（默认屏幕）", code:`print("Hello")     # 输出 Hello\nprint(2 + 3)       # 输出 5\nprint("a", "b")    # 输出 a b（逗号分隔）`, warnings:["⭐ 漏掉括号 print(\"Hello\") → SyntaxError","⭐ 漏掉引号 print(Hello) → NameError"] },
   { id:"L1-C02", lesson:"L1", type:"concept", title:"变量 = 数据的引用名", term:"Variable = 变量", question:"Python 里 age = 15 是什么意思？", fill:"变量就是给一个数据起的______，后面用名字就能调出数据", answer:"创建名为 age 的变量，指向整数 15", mnemonic:"变量命名规则：字母/数字/下划线；不能数字开头；不能用关键字；大小写敏感", code:`age = 15       # 赋值：把 15 绑定到 age\nprint(age)     # 15\nage = 18       # 重新赋值\nprint(age)     # 18`, warnings:["⭐ 数字开头非法：2name = 5 → SyntaxError","⭐ 关键字不能当变量名：class = 5 → SyntaxError","⭐ 大小写敏感：Age 和 age 是不同变量"] },
   { id:"L1-C03", lesson:"L1", type:"concept", title:"input 让电脑听键盘", term:"input = 输入", question:"input() 函数永远返回什么类型？", fill:"name = input(\"名字?\") —— name 永远是______类型", answer:"str（字符串）", mnemonic:"input 永远给你「文字」，想算数要 int(input())", code:`a = input("First: ")   # 用户输入 5\nb = input("Second: ")  # 用户输入 3\nprint(a + b)            # 53（不是 8！）`, warnings:["⭐ 永远返回字符串：「5」+「3」=「53」","⭐ 想算数必须包 int：int(input(...))"] },
   { id:"L1-C04", lesson:"L1", type:"concept", title:"IPO 模型", term:"Input-Process-Output", question:"IPO 三个字母分别代表什么？", fill:"写程序的三步曲：I（输入）→ P（处理）→ O（______）", answer:"Input（输入）/ Process（处理）/ Output（输出）", mnemonic:"IPO = 餐厅点菜（听单 → 厨房做 → 上菜）", code:`# I - Input\nname = input("你的名字: ")\n# P - Process\ngreeting = "Hello, " + name + "!"\n# O - Output\nprint(greeting)`, warnings:["⭐ 忘了写 O","⭐ IPO 顺序：先 I 再 P 最后 O"] },
@@ -687,10 +688,11 @@ function escapeHTML(s) {
 
 function highlightCode(code) {
   return escapeHTML(code)
-    .replace(/(#[^\n]*)/g, '<span style="color:#7c8aa8;font-style:italic;">$1</span>')
-    .replace(/(\"[^\"]*\"|\'[^\']*\')/g, '<span style="color:#a5e88c;">$1</span>')
-    .replace(/\b(\d+\.?\d*)\b/g, '<span style="color:#ffb547;">$1</span>')
-    .replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span style="color:#ff9d72;font-weight:700;">$1</span>');
+    // 用 class 避免 style 里出现颜色 hex（避免被字符串正则误识别）
+    .replace(/(\#[^\n]*)/g, '<span class="c-com">$1</span>')
+    .replace(/(\"[^\"]*\"|\'[^\']*\')/g, '<span class="c-str">$1</span>')
+    .replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>')
+    .replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span class="c-kw">$1</span>');
 }
 
 let flippedCount = 0;
