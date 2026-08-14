@@ -378,6 +378,62 @@ pre {
   white-space: pre-wrap;
 }
 
+/* ===== Recap 网格卡片（v1.4 极简版）===== */
+.recap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-top: 8px;
+}
+.recap-card {
+  padding: 18px 16px;
+  background: var(--panel);
+  border-radius: 12px;
+  border: 2px solid var(--line);
+  position: relative;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.recap-card.card-blue   { border-color: var(--blue);   background: rgba(37, 99, 235, .04); }
+.recap-card.card-red    { border-color: var(--red);    background: rgba(220, 38, 38, .04); }
+.recap-card.card-green  { border-color: var(--green);  background: rgba(22, 163, 74, .04); }
+.recap-card.card-purple { border-color: #8b5cf6;       background: rgba(139, 92, 246, .04); }
+.recap-card.card-orange { border-color: var(--amber);  background: rgba(217, 119, 6, .04); }
+.recap-card.card-teal   { border-color: var(--teal);   background: rgba(15, 159, 154, .04); }
+
+.recap-num {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+.recap-card.card-blue   .recap-num { color: var(--blue); }
+.recap-card.card-red    .recap-num { color: var(--red); }
+.recap-card.card-green  .recap-num { color: var(--green); }
+.recap-card.card-purple .recap-num { color: #8b5cf6; }
+.recap-card.card-orange .recap-num { color: var(--amber); }
+.recap-card.card-teal   .recap-num { color: var(--teal); }
+
+.recap-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.recap-sub {
+  font-size: 13px;
+  color: var(--muted);
+}
+.recap-next {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 16px;
+  text-align: left;
+}
+
 .slide.compact .practice { padding: 16px 20px; }
 .slide.compact .practice .label { padding: 5px 10px; font-size: 13px; margin-bottom: 8px; }
 </style>
@@ -730,19 +786,45 @@ poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
   </section>
 
   <!-- 12 Recap -->
-  <section class="slide title-slide">
+  <section class="slide">
     <div class="left">
       <div class="kicker">Recap</div>
       <h2>今天学 6 件事</h2>
-      <p style="font-size:18px; color:var(--text); margin-top:14px; line-height:2;">
-        ① 比较运算（6 个）<br>
-        ② <code class="inline">=</code> vs <code class="inline">==</code> 区别<br>
-        ③ if-else 二选一<br>
-        ④ 逻辑运算 and / or<br>
-        ⑤ not 取反<br>
-        ⑥ 综合应用（三条件 / 演唱会 / 奖学金）<br>
-        <span style="font-size:14px; color:var(--muted);">下次学：if-elif-else 多分支</span>
-      </p>
+      <p class="recap-next">下次学：if-elif-else 多分支</p>
+    </div>
+    <div class="right">
+      <div class="recap-grid">
+        <div class="recap-card card-blue">
+          <div class="recap-num">①</div>
+          <div class="recap-title">比较运算</div>
+          <div class="recap-sub">6 个运算符</div>
+        </div>
+        <div class="recap-card card-red">
+          <div class="recap-num">②</div>
+          <div class="recap-title">= vs ==</div>
+          <div class="recap-sub">赋值 vs 比较</div>
+        </div>
+        <div class="recap-card card-green">
+          <div class="recap-num">③</div>
+          <div class="recap-title">if-else</div>
+          <div class="recap-sub">二选一</div>
+        </div>
+        <div class="recap-card card-purple">
+          <div class="recap-num">④</div>
+          <div class="recap-title">and / or</div>
+          <div class="recap-sub">组合 bool</div>
+        </div>
+        <div class="recap-card card-orange">
+          <div class="recap-num">⑤</div>
+          <div class="recap-title">not</div>
+          <div class="recap-sub">取反</div>
+        </div>
+        <div class="recap-card card-teal">
+          <div class="recap-num">⑥</div>
+          <div class="recap-title">综合应用</div>
+          <div class="recap-sub">实战 4 道</div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
