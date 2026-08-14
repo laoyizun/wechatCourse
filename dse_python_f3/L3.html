@@ -535,13 +535,12 @@ pre {
         <tr><td><code class="inline">or</code></td><td>一边真就真</td><td>F or F → F，其他都 T</td></tr>
       </table>
       <div class="practice">
-        <div class="label">演唱会入场</div>
-<pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-ticket = <span class="fn">input</span>(<span class="str">"有票吗(yes/no)?"</span>)
-<span class="kw">if</span> age &gt;= <span class="num">18</span> <span class="kw">and</span> ticket == <span class="str">"yes"</span>:
-    <span class="fn">print</span>(<span class="str">"欢迎"</span>)
+        <div class="label">成绩判断（简短演示）</div>
+<pre><code>score = <span class="num">75</span>
+<span class="kw">if</span> score &gt;= <span class="num">60</span> <span class="kw">and</span> score &lt; <span class="num">80</span>:
+    <span class="fn">print</span>(<span class="str">"及格"</span>)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"不能进"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+    <span class="fn">print</span>(<span class="str">"不及格"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
       <div class="check-q">
         <div class="check-q-text">❓ Q1 · True and False 等于 ______ ？</div>
@@ -555,6 +554,15 @@ ticket = <span class="fn">input</span>(<span class="str">"有票吗(yes/no)?"</s
         <details>
           <summary>看答案</summary>
           <div class="check-a">True（一边真就真）</div>
+        </details>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q3 · 找错：下面代码哪里错？<br><code class="inline">if score &gt; 60 and &lt; 80:</code></div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">❌ if score > 60 and < 80:
+✅ if score > 60 and score < 80:
+and / or 后面的条件表达式必须重新写前面的变量（不能省略 score）</div>
         </details>
       </div>
     </div>
