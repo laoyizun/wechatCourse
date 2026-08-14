@@ -365,9 +365,9 @@ h1 .highlight { color: var(--blue); }
 
         <a class="course-card" href="L3.html">
           <small>L3 · 讲课</small>
-          <h3>比较 + if-else</h3>
-          <p>3 个概念 · 60 分钟 · 极简版。比较运算（6 个）、= vs == 区别、if-else 二选一。</p>
-          <div class="chips"><span class="status open">已开放 · 8 页</span></div>
+          <h3>判断 + 逻辑</h3>
+          <p>6 个概念 · 60 分钟。比较运算（6 个）、= vs == 区别、if-else 二选一、and/or/not 逻辑运算、综合应用。</p>
+          <div class="chips"><span class="status open">已开放 · 12 页</span></div>
         </a>
 
         <a class="course-card disabled">
@@ -490,7 +490,7 @@ h1 .highlight { color: var(--blue); }
       <div class="sub-tabs" id="lesson-filter" style="margin-bottom:18px;">
         <button class="sub-tab active" data-lesson="L1">L1 (4)</button>
         <button class="sub-tab" data-lesson="L2">L2 (4)</button>
-        <button class="sub-tab" data-lesson="L3">L3 (2)</button>
+        <button class="sub-tab" data-lesson="L3">L3 (5)</button>
       </div>
 
       <!-- 卡片网格（由 JS 渲染） -->
@@ -626,21 +626,33 @@ age = <span class="num">14</span>
   },
   {
     id: 'L3',
-    title: 'L3 · 比较 + if-else',
-    subtitle: '2 个必做',
+    title: 'L3 · 判断 + 逻辑',
+    subtitle: '4 个必做',
     description: '做完截图发老师，下节讲评。',
     items: [
       {
         level: '必做 1',
         color: 'success',
-        title: '年龄判断',
-        content: '输入年龄，输出"成年"或"未成年"。附加：负数或 &gt; 150 输出"错误输入"。边界测试：-1, 0, 17, 18, 150, 151。'
+        title: '基础题（问答 + 选择 + 判断）',
+        content: '① 填空：Python 6 个比较运算符分别是什么？② 选择：哪个是"问碗里是不是"的符号（A. = B. == C. === D. !==）？③ 判断对错：<code class="inline">if age = 18: print("成年")</code>'
       },
       {
         level: '必做 2',
         color: 'blue',
-        title: '三数比大小',
-        content: '输入 3 个数 a / b / c，输出最大的那个。提示：用 if-else 多次比较。测试：(3, 5, 4) → 5；(10, 10, 5) → 10；(1, 2, 3) → 3。'
+        title: '逻辑运算填空',
+        content: '① <code class="inline">True and False</code> = ______ ② <code class="inline">True or False</code> = ______ ③ <code class="inline">not True</code> = ______'
+      },
+      {
+        level: '必做 3',
+        color: 'amber',
+        title: '年龄分级（综合编程）',
+        content: '输入年龄（0-150），输出 4 个分级：0-12 儿童、13-17 青少年、18-59 成人、60+ 老人。附加：&lt; 0 或 &gt; 150 输出"错误输入"。提示：用 if-else 嵌套。'
+      },
+      {
+        level: '必做 4',
+        color: 'teal',
+        title: '演唱会入场（应用场景）',
+        content: '输入年龄 + 票种（vip / normal）。&lt; 12 不能入；12-17 且 vip → 半价可入；12-17 且 普通票 → 不能入；18+ → 任何票都可入。边界：12, 18。提示：用 and / or。'
       }
     ]
   }
@@ -724,9 +736,12 @@ const FLASHCARDS = [
   { id:"L2-C03", lesson:"L2", type:"concept", title:"f-string 模板填空", term:"formatted string", question:"print(f\"Hello, {name}\") 里的 f 和 {} 是什么意思？", fill:"f-string 的 {} 是______，里面放变量或表达式", answer:"f = format（格式化），{} = 占位空位", mnemonic:"", code:`name = "Peter"\nage = 15\nprint(f"Hello, {name}!")\nprint(f"You are {age}")\nprint(f"Next year: {age + 1}")`, warnings:["⭐ 忘写 f：「Hello, {name}」→ 字面输出","⭐ {} 里放 str 需要引号"] },
   { id:"L2-C04", lesson:"L2", type:"concept", title:"算术运算符 6 件套", term:"Arithmetic Operators", question:"Python 里 6 个算术运算符分别是什么？", fill:`10 / 3 → ______（除法，永远 float）\n10 % 3 → ______（取余）\n2 ** 3 → ______（幂）`, answer:"+ - * / % **", mnemonic:"取余: 分糖果后剩下的；幂: 自我复制 N 次", code:`print(10 / 4)    # 2.5（注意！）\nprint(10 // 4)   # 2（// 是整除）\nprint(10 % 3)    # 1\nprint(2 ** 10)   # 1024`, warnings:["⭐ / 永远返回 float：5 / 2 = 2.5","⭐ ** 不是 ^"] },
 
-  // L3（极简版 · 只覆盖 PY.4 比较 + if-else）
+  // L3（v1.4 · 6 概念：比较 + `=`/`==` + if-else + and/or + not）
   { id:"L3-C01", lesson:"L3", type:"concept", title:"比较运算符 6 件套", term:"Comparison Operators", question:"Python 里 6 个比较运算符分别是什么？", fill:`5 == 5 → ______\n5 != 3 → ______\n5 > 3  → ______`, answer:"== != > < >= <=", mnemonic:"", code:`age = 18\nprint(age == 18)   # True\nprint(age >= 18)   # True\nprint(age < 18)    # False`, warnings:["⭐ = vs ==：= 是赋值，== 是比较","⭐ if age = 18 → SyntaxError"] },
-  { id:"L3-C02", lesson:"L3", type:"concept", title:"if-else 二选一", term:"Conditional Statement", question:"if-else 的基本语法是什么？哪个符号不能漏？", fill:`if 条件:\n    ______\n______:\n    print("条件为假")`, answer:"if 后必须写冒号 + 缩进 4 空格", mnemonic:"", code:`age = int(input("年龄?"))\nif age >= 18:\n    print("成年")\nelse:\n    print("未成年")`, warnings:["⭐ 冒号漏掉 → SyntaxError","⭐ 缩进错 → IndentationError"] }
+  { id:"L3-C02", lesson:"L3", type:"concept", title:"= vs == 区别", term:"Assignment vs Comparison", question:"= 和 == 的本质区别是什么？", fill:`= 是______（动词）\n== 是______（问号）`, answer:"= 赋值（把数据放进碗）；== 比较（问碗里是不是）", mnemonic:"", code:`age = 18           # = 赋值\nif age == 18:      # == 比较\n    print("成年")`, warnings:["⭐ = vs == 混用 → SyntaxError"] },
+  { id:"L3-C03", lesson:"L3", type:"concept", title:"if-else 二选一", term:"Conditional Statement", question:"if-else 的基本语法是什么？哪个符号不能漏？", fill:`if 条件:\n    ______\n______:\n    print("条件为假")`, answer:"if 后必须写冒号 + 缩进 4 空格", mnemonic:"", code:`age = int(input("年龄?"))\nif age >= 18:\n    print("成年")\nelse:\n    print("未成年")`, warnings:["⭐ 冒号漏掉 → SyntaxError","⭐ 缩进错 → IndentationError"] },
+  { id:"L3-C04", lesson:"L3", type:"concept", title:"逻辑运算 and / or", term:"Logical Operators", question:"and 和 or 的真假规则分别是什么？", fill:`True and False → ______\nTrue or False  → ______`, answer:"and: 两边都真才真；or: 一边真就真", mnemonic:"", code:`age = int(input("年龄?"))\nticket = input("有票(yes/no)?")\nif age >= 18 and ticket == "yes":\n    print("欢迎")\nelse:\n    print("不能进")`, warnings:["⭐ has_ticket == \"yes\" 是字符串相等，不是赋值"] },
+  { id:"L3-C05", lesson:"L3", type:"concept", title:"not 取反", term:"Negation", question:"not 的作用是什么？", fill:`not True  → ______\nnot False → ______`, answer:"True ↔ False（取反）", mnemonic:"", code:`is_login = False\nif not is_login:\n    print("请先登录")\nelse:\n    print("已登录")`, warnings:["⭐ not 只对一个值取反，不影响其他"] }
 ];
 
 // ===== 渲染逻辑 =====
