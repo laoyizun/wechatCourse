@@ -339,6 +339,52 @@ pre {
   padding: 14px 18px;
   margin: 12px 0;
   background: rgba(245, 158, 11, .08);
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+}
+/* 回顾页检验（蓝色） */
+.check-q-blue {
+  background: rgba(37, 99, 235, .08);
+  border-left-color: var(--blue);
+}
+.check-q-text {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.6;
+}
+.check-q details summary {
+  cursor: pointer;
+  color: var(--blue);
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  list-style: none;
+}
+.check-q details summary::-webkit-details-marker { display: none; }
+.check-q details summary::before { content: '▸ '; color: var(--blue); }
+.check-q details[open] summary::before { content: '▾ '; }
+.check-q details summary:hover { text-decoration: underline; }
+.check-q details[open] summary { margin-bottom: 8px; }
+.check-a {
+  padding: 10px 14px;
+  background: rgba(22, 163, 74, .08);
+  border-radius: 6px;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-size: 16px;
+  color: #047857;
+  margin-top: 4px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.slide.compact .practice { padding: 16px 20px; }
+.slide.compact .practice .label { padding: 5px 10px; font-size: 13px; margin-bottom: 8px; }
+</style>
+</head>
+<body class="deck-page">
+<main class="deck" id="deck">
+
   <!-- 01 Cover -->
   <section class="slide title-slide active">
     <div class="left">
@@ -364,14 +410,14 @@ pre {
         </details>
       </div>
       <div class="check-q check-q-blue">
-        <div class="check-q-text">Q2 · int("3.6") 等于 ______？</div>
+        <div class="check-q-text">Q2 · int("3.6") 等于 ______ ？</div>
         <details>
           <summary>看答案</summary>
           <div class="check-a">3（截断小数，不是 4）</div>
         </details>
       </div>
       <div class="check-q check-q-blue">
-        <div class="check-q-text">Q3 · 5 / 2 等于 ______？为什么？______</div>
+        <div class="check-q-text">Q3 · 5 / 2 等于 ______ ？为什么？______</div>
         <details>
           <summary>看答案</summary>
           <div class="check-a">2.5（/ 永远返回 float）</div>
@@ -433,7 +479,7 @@ pre {
 <span class="kw">if</span> age == <span class="num">18</span>:       <span class="com"># == 等于号</span>
     <span class="fn">print</span>(<span class="str">"成年"</span>)</code></div>
       <div class="check-q">
-        <div class="check-q-text">� Q · 下面代码哪里错？<br><code class="inline">if age = 18:</code></div>
+        <div class="check-q-text">❓ Q · 下面代码哪里错？<br><code class="inline">if age = 18:</code></div>
         <details>
           <summary>看答案</summary>
           <div class="check-a">= 应改成 ==（= 是赋值，== 才是比较）</div>
@@ -542,19 +588,7 @@ pre {
       </p>
     </div>
   </section>
-age = <span class="num">14</span>
-<span class="fn">print</span>(<span class="str">f"Your age is\n{age+3}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="card" style="border-left:5px solid var(--amber);">
-        <h3 style="color:var(--amber);">必做 3 · 修复 L1 三个 Bug</h3>
-        <p style="font-size:17px; margin-top:6px;">修复 L1 全部 3 个 Bug，并用 f-string 输出。附加：输入负数年龄时输出"错误输入"。</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--teal);">
-        <h3 style="color:var(--teal);">必做 4 · 选词游戏</h3>
-        <p style="font-size:17px; margin-top:6px;">输入两个英文单词，输出 <code class="inline">"Word1: ___ (length ___), Word2: ___ (length ___)"</code>，用 f-string 和 <code class="inline">len()</code>。</p>
-      </div>
-    </div>
-  </section>
+</main>
 
 <div class="nav">
   <a class="home-link secondary" href="index.html">📚 目录</a>
