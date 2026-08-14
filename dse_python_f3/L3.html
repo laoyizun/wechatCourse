@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L3 · 让程序学会判断 — Python</title>
+<title>L3 · 比较 + if-else — Python</title>
 <style>
 :root {
   --bg: #f3f7fb;
@@ -332,97 +332,60 @@ pre {
 .slide.compact .subtitle { font-size: 19px; line-height: 1.6; margin-bottom: 14px; }
 .slide.compact .kicker { margin-bottom: 14px; padding: 8px 12px; font-size: 14px; }
 .slide.compact pre { white-space: pre; }  /* 兼容旧规则 */
-.slide.compact .practice { padding: 16px 20px; }
-.slide.compact .practice .label { padding: 5px 10px; font-size: 13px; margin-bottom: 8px; }
-</style>
-</head>
-<body class="deck-page">
-<main class="deck" id="deck">
 
+/* ===== 检验问题卡（v1.3 极简版）===== */
+/* 概念页检验（橙色） */
+.check-q {
+  padding: 14px 18px;
+  margin: 12px 0;
+  background: rgba(245, 158, 11, .08);
   <!-- 01 Cover -->
   <section class="slide title-slide active">
     <div class="left">
-      <div class="kicker">Lesson 3 · 让程序学会判断</div>
+      <div class="kicker">Lesson 3</div>
       <h1>让程序学会<span class="highlight">判断</span></h1>
-      <p class="subtitle">if / elif / else + 比较运算 + 逻辑运算 + 边界测试 + better if</p>
-    </div>
-    <div class="right">
-      <div style="display:flex; flex-direction:column; gap:14px; padding:24px;">
-        <div style="font-size:18px; color:var(--text); line-height:1.8;">
-          <strong>本节 4 个新概念：</strong><br>
-          ① 比较运算符（6 个）<br>
-          ② if-else 二选一<br>
-          ③ 逻辑运算 and / or / not<br>
-          ④ if-elif-else 多分支<br>
-          ⑤ 杀手锏：边界测试 + better if
-        </div>
-      </div>
+      <p class="subtitle">比较运算 + if-else · 3 个概念</p>
     </div>
   </section>
 
   <!-- 02 Recap L2 -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">Recap · L2 回顾</div>
-      <h2>上周学了什么？</h2>
-      <p class="subtitle">3 个核心能力，缺哪个今天就会卡。</p>
+      <div class="kicker">L2 回顾</div>
+      <h2>答 3 个问题</h2>
+      <p class="subtitle">60 秒回忆 · 点开看答案</p>
     </div>
     <div class="right">
-      <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;">
-        <div class="card">
-          <div class="label">① 数据类型</div>
-          <p style="font-size:18px; margin-top:8px;">int / float / str / bool</p>
-        </div>
-        <div class="card">
-          <div class="label">② 类型转换</div>
-          <p style="font-size:18px; margin-top:8px;">int() / float() / str() / bool()</p>
-        </div>
-        <div class="card">
-          <div class="label">③ f-string</div>
-          <p style="font-size:18px; margin-top:8px;">f"Hello {name}"</p>
-        </div>
+      <div class="check-q check-q-blue">
+        <div class="check-q-text">Q1 · L2 讲了哪 4 种数据类型？<br>______、______、______、______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">int / float / str / bool</div>
+        </details>
       </div>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">关键回顾</div>
-        <p>今天每个 if 都会用到 <strong>bool</strong>（True/False）；每次 input 都要先 <strong>int(...)</strong>；输出建议用 <strong>f-string</strong>。</p>
+      <div class="check-q check-q-blue">
+        <div class="check-q-text">Q2 · int("3.6") 等于 ______？</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">3（截断小数，不是 4）</div>
+        </details>
+      </div>
+      <div class="check-q check-q-blue">
+        <div class="check-q-text">Q3 · 5 / 2 等于 ______？为什么？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">2.5（/ 永远返回 float）</div>
+        </details>
       </div>
     </div>
   </section>
 
-  <!-- 03 Goals -->
+  <!-- 03 比较运算 -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">Today · 今天目标</div>
-      <h2>🎯 学完能做什么？</h2>
-    </div>
-    <div class="right">
-      <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-        <div class="card success">
-          <h3 style="color:#047857;">能写</h3>
-          <ul style="padding-left:22px; margin-top:8px; font-size:18px; line-height:1.8;">
-            <li>成年判断（<code class="inline">if-else</code>）</li>
-            <li>演唱会入场（<code class="inline">and</code>）</li>
-            <li>成绩分级（<code class="inline">if-elif-else</code>）</li>
-          </ul>
-        </div>
-        <div class="card" style="border-left:5px solid var(--amber);">
-          <h3 style="color:var(--amber);">能做</h3>
-          <ul style="padding-left:22px; margin-top:8px; font-size:18px; line-height:1.8;">
-            <li>边界测试 49 / 50 / 51</li>
-            <li>识别 <code class="inline">=</code> vs <code class="inline">==</code></li>
-            <li>用 better if 扁平化嵌套</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 Comparison -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 1 · 比较运算符</div>
-      <h2>比较运算符 · <span class="highlight">6 件套</span></h2>
-      <p class="subtitle">比较两个值，返回 True / False。</p>
+      <div class="kicker">Concept 1</div>
+      <h2>比较运算 · <span class="highlight">6 件套</span></h2>
+      <p class="subtitle">比较两个值，返回 True / False</p>
     </div>
     <div class="right">
       <table>
@@ -434,44 +397,57 @@ pre {
         <tr><td><code class="inline">&gt;=</code></td><td>大于等于</td><td><code class="inline">5 &gt;= 5</code></td><td>True</td></tr>
         <tr><td><code class="inline">&lt;=</code></td><td>小于等于</td><td><code class="inline">5 &lt;= 3</code></td><td>False</td></tr>
       </table>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">关键点</div>
-        <p>比较运算的结果是 <strong>bool</strong>（True 或 False）。</p>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q1 · 5 == 5 返回 ______ ？</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">True（== 是等于号）</div>
+        </details>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q2 · 5 >= 5 返回 ______ ？（不是 &gt;）</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">True（>= 含等于，> 不含）</div>
+        </details>
       </div>
     </div>
   </section>
 
-  <!-- 05 = vs == -->
+  <!-- 04 = vs == -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">Bug 警告 · 经典陷阱</div>
+      <div class="kicker">Bug 警告</div>
       <h2><code class="inline">=</code> vs <code class="inline">==</code></h2>
-      <p class="subtitle">两个长得像，意思完全不同。</p>
+      <p class="subtitle">长得像，意思不同</p>
     </div>
     <div class="right">
       <div class="bug">
-        <div class="label">错误</div>
+        <div class="label">错</div>
 <pre><code>age = <span class="num">18</span>
 <span class="kw">if</span> age = <span class="num">18</span>:        <span class="com"># SyntaxError</span>
     <span class="fn">print</span>(<span class="str">"成年"</span>)</code></div>
       <div style="margin-top:14px;" class="practice">
-        <div class="label">正确</div>
+        <div class="label">对</div>
 <pre><code>age = <span class="num">18</span>
-<span class="kw">if</span> age == <span class="num">18</span>:       <span class="com"># 等于号（双）</span>
+<span class="kw">if</span> age == <span class="num">18</span>:       <span class="com"># == 等于号</span>
     <span class="fn">print</span>(<span class="str">"成年"</span>)</code></div>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">口诀</div>
-        <p>单 <code class="inline">=</code> 赋值（动词，把数据放进变量）<br>双 <code class="inline">==</code> 比较（问号，问变量里是不是）</p>
+      <div class="check-q">
+        <div class="check-q-text">� Q · 下面代码哪里错？<br><code class="inline">if age = 18:</code></div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">= 应改成 ==（= 是赋值，== 才是比较）</div>
+        </details>
       </div>
     </div>
   </section>
 
-  <!-- 06 if-else -->
+  <!-- 05 if-else -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">Concept 2 · if-else</div>
+      <div class="kicker">Concept 3</div>
       <h2>if-else · <span class="highlight">二选一</span></h2>
-      <p class="subtitle">程序的十字路口。</p>
+      <p class="subtitle">3 件套：冒号 + 缩进 + 对齐</p>
     </div>
     <div class="right">
       <div class="practice">
@@ -482,29 +458,43 @@ pre {
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"未成年"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">3 件套</div>
-        <p>① <strong>冒号</strong>（if / else 后必须有）<br>② <strong>缩进 4 空格</strong>（块内必须）<br>③ <strong>else 与 if 顶格对齐</strong></p>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q1 · <code class="inline">if age >= 18</code> 后漏了 ______ ？</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">冒号 :</div>
+        </details>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q2 · <code class="inline">print("成年")</code> 没 ______ ？</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">缩进 4 空格（块内必须缩进）</div>
+        </details>
       </div>
     </div>
   </section>
 
-  <!-- 07 Practice 成年判断 -->
+  <!-- 06 实战 1 年龄判断 -->
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">Practice 1 · 实战</div>
-      <h2 style="margin:0; font-size:24px;">✏️ 成年判断（自己写）</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">不看上面的代码，自己写一遍</p>
+      <div class="kicker">实战 1</div>
+      <h2 style="margin:0; font-size:24px;">✏️ 年龄判断</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">输入年龄，输出成年 / 未成年</p>
     </div>
     <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
       <div class="card">
         <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">输入年龄，输出"成年"或"未成年"。<br><br>测试 3 个值：<br><code class="inline">10</code> → 未成年<br><code class="inline">18</code> → 成年<br><code class="inline">25</code> → 成年</p>
+        <p style="font-size:17px; margin-top:6px;">输入 10 / 18 / 25，输出对应结果：<br>
+          <code class="inline">10</code> → 未成年<br>
+          <code class="inline">18</code> → 成年<br>
+          <code class="inline">25</code> → 成年
+        </p>
       </div>
       <div class="card success">
         <h3 style="color:#047857;">答案骨架</h3>
 <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-<span class="kw">if</span> ___:       <span class="com"># 填条件</span>
+<span class="kw">if</span> ___:
     <span class="fn">print</span>(<span class="str">"成年"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"未成年"</span>)</code></pre>
@@ -512,299 +502,64 @@ pre {
     </div>
   </section>
 
-  <!-- 08 Logical -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 3 · 逻辑运算</div>
-      <h2>and / or / <span class="highlight">not</span></h2>
-      <p class="subtitle">组合多个 bool 表达式。</p>
-    </div>
-    <div class="right">
-      <table>
-        <tr><th>运算符</th><th>含义</th><th>真值表</th></tr>
-        <tr><td><code class="inline">and</code></td><td>两边都真才真</td><td>T and T → T，其他都 F</td></tr>
-        <tr><td><code class="inline">or</code></td><td>一边真就真</td><td>F or F → F，其他都 T</td></tr>
-        <tr><td><code class="inline">not</code></td><td>取反</td><td>not T → F，not F → T</td></tr>
-      </table>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">实战</div>
-        <p>演唱会入场：<strong>年龄 ≥ 18</strong> 且 <strong>有票</strong>。<br>两个条件都用 and 连接。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 09 Practice 演唱会 -->
+  <!-- 07 实战 2 及格判断 -->
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">Practice 2 · 实战</div>
-      <h2 style="margin:0; font-size:24px;">🎤 演唱会入场（综合 and）</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">年龄 + 票，两个条件都要满足</p>
+      <div class="kicker">实战 2</div>
+      <h2 style="margin:0; font-size:24px;">✏️ 及格判断</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">边界测试 49 / 50 / 51</p>
     </div>
     <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
       <div class="card">
         <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">输入年龄 + 是否有票（yes/no），输出能否入场：<br><br>
-          · 年龄 &lt; 18 → 不能<br>
-          · 年龄 ≥ 18 且 票为 yes → 可以<br>
-          · 年龄 ≥ 18 但 无票 → 不能<br><br>
-          测试 4 组：<code class="inline">(17, yes)</code> / <code class="inline">(20, yes)</code> / <code class="inline">(20, no)</code> / <code class="inline">(15, no)</code>
+        <p style="font-size:17px; margin-top:6px;">输入分数 0-100，输出及格 / 不及格：<br>
+          <code class="inline">49</code> → 不及格<br>
+          <code class="inline">50</code> → 及格<br>
+          <code class="inline">51</code> → 及格
         </p>
       </div>
       <div class="card success">
-        <h3 style="color:#047857;">答案</h3>
-<pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-ticket = <span class="fn">input</span>(<span class="str">"有票吗(yes/no)?"</span>)
-
-<span class="kw">if</span> age &gt;= <span class="num">18</span> <span class="kw">and</span> ticket == <span class="str">"yes"</span>:
-    <span class="fn">print</span>(<span class="str">"欢迎入场"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"不能入场"</span>)</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10 if-elif-else -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 4 · 多分支</div>
-      <h2>if-elif-else · <span class="highlight">多分支</span></h2>
-      <p class="subtitle">多个条件，依次检查。</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">成绩分级</div>
+        <h3 style="color:#047857;">答案骨架</h3>
 <pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
-<span class="kw">if</span> score &gt;= <span class="num">90</span>:
-    <span class="fn">print</span>(<span class="str">"A 优秀"</span>)
-<span class="kw">elif</span> score &gt;= <span class="num">80</span>:
-    <span class="fn">print</span>(<span class="str">"B 良好"</span>)
-<span class="kw">elif</span> score &gt;= <span class="num">70</span>:
-    <span class="fn">print</span>(<span class="str">"C 中等"</span>)
-<span class="kw">elif</span> score &gt;= <span class="num">60</span>:
-    <span class="fn">print</span>(<span class="str">"D 及格"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"F 不及格"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">关键规则</div>
-        <p>Python <strong>从上到下</strong> 检查，遇到第一个 True <strong>就停</strong>。后续 elif 不再检查。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 Practice 成绩分级 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">Practice 3 · 实战</div>
-      <h2 style="margin:0; font-size:24px;">📊 成绩分级（边界测试）</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">测 5 个值，看程序对不对</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">测试矩阵</h3>
-        <p style="font-size:16px; margin-top:6px;">
-          输入 <code class="inline">59</code> → 预期 F<br>
-          输入 <code class="inline">60</code> → 预期 D（边界）<br>
-          输入 <code class="inline">89</code> → 预期 B（边界）<br>
-          输入 <code class="inline">90</code> → 预期 A（边界）<br>
-          输入 <code class="inline">101</code> → 预期 F（错误）
-        </p>
-      </div>
-      <div class="card success">
-        <h3 style="color:#047857;">Dry Run 答案</h3>
-        <p style="font-size:16px; margin-top:6px;">
-          59 → 60不满足,70不满足,80不满足,90不满足 → F ✓<br>
-          60 → 60 满足 → D ✓<br>
-          89 → 90不满足,80满足 → B ✓<br>
-          90 → 90 满足 → A ✓<br>
-          101 → 全部不满足 → F ⚠️ 但其实是错误输入
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 12 Boundary -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">杀手锏 1 · 边界测试</div>
-      <h2>边界测试 · <span class="highlight">49 / 50 / 51</span></h2>
-      <p class="subtitle">临界点的三角验证。</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">测 if score >= 50</div>
-<pre><code><span class="com"># 输入 49</span>
-<span class="com"># 预期: 不及格</span>
-<span class="com"># 验证 else 分支</span>
-
-<span class="com"># 输入 50</span>
-<span class="com"># 预期: 及格（验证 >= 不是 >）</span>
-
-<span class="com"># 输入 51</span>
-<span class="com"># 预期: 及格</span>
-<span class="com"># 验证 if 主分支</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">为什么是 3 个</div>
-        <p>49 看 else，50 看 if 用 <code class="inline">&gt;=</code> 还是 <code class="inline">&gt;</code>，51 看 if 主分支。<br>只测 49 和 50 <strong>测不出错</strong>，必须用 51。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 13 Better If -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">杀手锏 2 · Better If</div>
-      <h2 style="margin:0; font-size:24px;">🪜 Better If · 早返错误</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">先排除错误，主体逻辑更扁平</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card" style="border-left:5px solid var(--red);">
-        <h3 style="color:var(--red);">❌ 嵌套版（难读）</h3>
-<pre><code><span class="kw">if</span> score &gt;= <span class="num">0</span> <span class="kw">and</span> score &lt;= <span class="num">100</span>:
-    <span class="kw">if</span> score &gt;= <span class="num">50</span>:
-        <span class="fn">print</span>(<span class="str">"及格"</span>)
-    <span class="kw">else</span>:
-        <span class="fn">print</span>(<span class="str">"不及格"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"无效"</span>)</code></pre>
-        <p style="font-size:14px; color:var(--muted); margin-top:8px;">3 层嵌套，缩进深，难维护</p>
-      </div>
-      <div class="card success">
-        <h3 style="color:#047857;">✅ Better If（推荐）</h3>
-<pre><code><span class="kw">if</span> score &lt; <span class="num">0</span> <span class="kw">or</span> score &gt; <span class="num">100</span>:
-    <span class="fn">print</span>(<span class="str">"无效"</span>)
-<span class="kw">elif</span> score &gt;= <span class="num">50</span>:
+<span class="kw">if</span> score ___ ___:
     <span class="fn">print</span>(<span class="str">"及格"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"不及格"</span>)</code></pre>
-        <p style="font-size:14px; color:var(--muted); margin-top:8px;">错误提前，主体扁平</p>
       </div>
     </div>
   </section>
 
-  <!-- 14 Recap -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Recap · L3 回顾</div>
-      <h2>📌 今天 4 + 2 个概念</h2>
-    </div>
-    <div class="right">
-      <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-        <div class="card success">
-          <h3 style="color:#047857;">4 个基础</h3>
-          <ul style="padding-left:22px; margin-top:8px; font-size:18px; line-height:1.8;">
-            <li><strong>比较运算符</strong>：6 个 + <code class="inline">=</code> vs <code class="inline">==</code></li>
-            <li><strong>if-else</strong>：二选一</li>
-            <li><strong>and / or / not</strong>：组合 bool</li>
-            <li><strong>if-elif-else</strong>：多分支</li>
-          </ul>
-        </div>
-        <div class="card" style="border-left:5px solid var(--amber);">
-          <h3 style="color:var(--amber);">2 个杀手锏</h3>
-          <ul style="padding-left:22px; margin-top:8px; font-size:18px; line-height:1.8;">
-            <li><strong>边界测试</strong>：49/50/51 三角验证</li>
-            <li><strong>Better If</strong>：早返错误 + 扁平化</li>
-          </ul>
-        </div>
-      </div>
-      <div class="takeaway" style="margin-top:14px;">
-        <div class="label">下一步</div>
-        <p>今天学完，你应该能写一个有判断逻辑的小程序了。<br><strong>试试看</strong>：用 better if 写"出租车计费"——起跳 25 港币，每公里 8 港币，10 公里后翻倍。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 15 Bug Fix -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">Bug Fix · 修 L2 Bug</div>
-      <h2 style="margin:0; font-size:24px;">🔧 用 if 修 L2 的 3 个 Bug</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">跨课复习：上节课 Bug + 今天新知识</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card" style="border-left:5px solid var(--red);">
-        <h3 style="color:var(--red);">Bug 1：年龄负数没拦截</h3>
-<pre><code><span class="com"># ❌ L2 修过的版本</span>
-age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-age = age + <span class="num">1</span>
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"明年 {age} 岁"</span>)
-
-<span class="com"># ✅ 用 if 拦截负数</span>
-age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-<span class="kw">if</span> age &lt; <span class="num">0</span>:
-    <span class="fn">print</span>(<span class="str">"错误输入"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="fn">f</span><span class="str">"明年 {age+1} 岁"</span>)</code></pre>
-      </div>
-      <div class="card success">
-        <h3 style="color:#047857;">学到了什么</h3>
-        <p style="font-size:16px; margin-top:6px;">
-          · L2 修 Bug 用了 <strong>int()</strong><br>
-          · L3 新增 <strong>if</strong> 拦截非法输入<br>
-          · 这就是 better if 早返错误思想<br><br>
-          实际写程序时，<strong>所有 input 都要先 if 验证合法性</strong>，再用 int() 转换。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 16 Homework -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">Homework · 课后作业</div>
-      <h2 style="margin:0; font-size:24px;">📚 4 个必做</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">做完截图发给老师，L4 习题课讲评</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card success">
-        <h3 style="color:#047857;">必做 1 · 年龄判断</h3>
-        <p style="font-size:17px; margin-top:6px;">输入年龄，输出"成年"或"未成年"。<br>附加：负数或 > 150 输出"错误输入"。<br>边界测试：-1, 0, 17, 18, 150, 151</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--blue);">
-        <h3 style="color:var(--blue);">必做 2 · 演唱会入场</h3>
-        <p style="font-size:17px; margin-top:6px;">输入年龄 + 票种（普通/VIP）：<br>· &lt; 12 不能<br>· 12-17 普通票 → 半价<br>· 12-17 VIP → 可入<br>· 18+ 任何票都可入<br>边界：12, 18</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--amber);">
-        <h3 style="color:var(--amber);">必做 3 · 成绩分级（完整版）</h3>
-        <p style="font-size:17px; margin-top:6px;">输入分数 0-100，输出 A/B/C/D/F。<br>· &lt; 0 或 &gt; 100 → "错误"<br>· 90+/80-89/70-79/60-69/&lt;60<br>测试 8 个值：-1, 0, 59, 60, 89, 90, 100, 101</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--teal);">
-        <h3 style="color:var(--teal);">必做 4 · UV Index 分级</h3>
-        <p style="font-size:17px; margin-top:6px;">输入 UV 指数（0-15），输出 5 个等级：<br>· 0-2 → Low · 无需防护<br>· 3-5 → Moderate · 涂防晒<br>· 6-7 → High · 戴帽子<br>· 8-10 → Very High · 待在室内<br>· 11+ → Extreme · 不要外出</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 17 Takeaway -->
+  <!-- 08 Recap -->
   <section class="slide title-slide">
     <div class="left">
-      <div class="kicker">Takeaway · 收获</div>
-      <h2>🎁 今天带走什么？</h2>
+      <div class="kicker">Recap</div>
+      <h2>今天学 3 件事</h2>
+      <p style="font-size:18px; color:var(--text); margin-top:14px; line-height:2;">
+        ① 比较运算（6 个）<br>
+        ② <code class="inline">=</code> vs <code class="inline">==</code> 区别<br>
+        ③ if-else 二选一<br>
+        <span style="font-size:14px; color:var(--muted);">下次学：and / or / not + if-elif</span>
+      </p>
     </div>
-    <div class="right">
-      <div style="display:flex; flex-direction:column; gap:18px; padding:24px;">
-        <div class="takeaway" style="margin:0;">
-          <div class="label">3 个核心能力</div>
-          <p>① 能用 6 个比较运算符判断关系<br>
-             ② 能写 if / if-elif / 多分支<br>
-             ③ 懂得边界测试 + better if</p>
-        </div>
-        <div class="takeaway" style="margin:0;">
-          <div class="label">下次预告</div>
-          <p>L4 · while 循环 + break + continue + 防死循环<br>
-             <strong>讨价还价 + 密码验证</strong> 两个实战</p>
-        </div>
+  </section>
+age = <span class="num">14</span>
+<span class="fn">print</span>(<span class="str">f"Your age is\n{age+3}"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div class="card" style="border-left:5px solid var(--amber);">
+        <h3 style="color:var(--amber);">必做 3 · 修复 L1 三个 Bug</h3>
+        <p style="font-size:17px; margin-top:6px;">修复 L1 全部 3 个 Bug，并用 f-string 输出。附加：输入负数年龄时输出"错误输入"。</p>
+      </div>
+      <div class="card" style="border-left:5px solid var(--teal);">
+        <h3 style="color:var(--teal);">必做 4 · 选词游戏</h3>
+        <p style="font-size:17px; margin-top:6px;">输入两个英文单词，输出 <code class="inline">"Word1: ___ (length ___), Word2: ___ (length ___)"</code>，用 f-string 和 <code class="inline">len()</code>。</p>
       </div>
     </div>
   </section>
-
-</main>
 
 <div class="nav">
   <a class="home-link secondary" href="index.html">📚 目录</a>
   <button class="secondary" onclick="prev()">← 上页</button>
-  <span class="counter"><span id="cur">1</span> / <span id="total">23</span></span>
+  <span class="counter"><span id="cur">1</span> / <span id="total">8</span></span>
   <div class="progress-bar"><span id="bar"></span></div>
   <button onclick="next()">下页 →</button>
 </div>
