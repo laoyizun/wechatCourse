@@ -378,7 +378,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ===== 参考代码折叠（v1.5 · 全部答案骨架改为折叠）===== */
+/* ===== 参考代码折叠（v1.6 · 只显示点击展开/隐藏）===== */
 .answer-fold {
   margin-top: 14px;
   background: rgba(255, 255, 255, .88);
@@ -398,21 +398,16 @@ pre {
   list-style: none;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.answer-fold > summary::before {
-  content: '💡 参考代码';
-  flex: 1;
+  justify-content: flex-end;
 }
 .answer-fold > summary::after {
-  content: '点击展开';
-  font-size: 12px;
+  content: '点击显示';
+  font-size: 13px;
   color: var(--muted);
   font-weight: 400;
 }
 .answer-fold[open] > summary::after {
-  content: '点击收起';
+  content: '点击隐藏';
 }
 .answer-fold > summary::-webkit-details-marker { display: none; }
 .answer-fold > summary:hover { background: rgba(15, 159, 154, .06); }
@@ -722,7 +717,7 @@ and / or 后面的条件表达式必须重新写前面的变量（不能省略 s
           (15, yes, yes) → 收费</p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 ticket = <span class="fn">input</span>(<span class="str">"有票(yes/no)?"</span>))
 member = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>))
@@ -754,7 +749,7 @@ member = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 ticket = <span class="fn">input</span>(<span class="str">"票种(vip/normal)?"</span>)
 
@@ -788,7 +783,7 @@ ticket = <span class="fn">input</span>(<span class="str">"票种(vip/normal)?"</
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
 poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
 
@@ -821,7 +816,7 @@ poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 
 <span class="kw">if</span> age &lt; <span class="num">0</span> ___ age &gt; <span class="num">150</span>:

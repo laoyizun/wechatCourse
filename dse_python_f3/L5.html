@@ -378,7 +378,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ===== 参考代码折叠（v1.5 · 全部答案骨架改为折叠）===== */
+/* ===== 参考代码折叠（v1.6 · 只显示点击展开/隐藏）===== */
 .answer-fold {
   margin-top: 14px;
   background: rgba(255, 255, 255, .88);
@@ -398,21 +398,16 @@ pre {
   list-style: none;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.answer-fold > summary::before {
-  content: '💡 参考代码';
-  flex: 1;
+  justify-content: flex-end;
 }
 .answer-fold > summary::after {
-  content: '点击展开';
-  font-size: 12px;
+  content: '点击显示';
+  font-size: 13px;
   color: var(--muted);
   font-weight: 400;
 }
 .answer-fold[open] > summary::after {
-  content: '点击收起';
+  content: '点击隐藏';
 }
 .answer-fold > summary::-webkit-details-marker { display: none; }
 .answer-fold > summary:hover { background: rgba(15, 159, 154, .06); }
@@ -706,7 +701,7 @@ count = <span class="num">0</span>
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>total = <span class="num">0</span>
 <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
     total += i
@@ -733,7 +728,7 @@ count = <span class="num">0</span>
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>n = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"n?"</span>))
 total = <span class="num">0</span>
 
@@ -769,7 +764,7 @@ total = <span class="num">0</span>
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>total = <span class="num">0</span>
 <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">101</span>, <span class="num">2</span>):
     total += i

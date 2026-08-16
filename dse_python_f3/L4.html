@@ -378,7 +378,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ===== 参考代码折叠（v1.5 · 全部答案骨架改为折叠）===== */
+/* ===== 参考代码折叠（v1.6 · 只显示点击展开/隐藏）===== */
 .answer-fold {
   margin-top: 14px;
   background: rgba(255, 255, 255, .88);
@@ -398,21 +398,16 @@ pre {
   list-style: none;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.answer-fold > summary::before {
-  content: '💡 参考代码';
-  flex: 1;
+  justify-content: flex-end;
 }
 .answer-fold > summary::after {
-  content: '点击展开';
-  font-size: 12px;
+  content: '点击显示';
+  font-size: 13px;
   color: var(--muted);
   font-weight: 400;
 }
 .answer-fold[open] > summary::after {
-  content: '点击收起';
+  content: '点击隐藏';
 }
 .answer-fold > summary::-webkit-details-marker { display: none; }
 .answer-fold > summary:hover { background: rgba(15, 159, 154, .06); }
@@ -605,7 +600,7 @@ pre {
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
 <span class="kw">if</span> score ___ <span class="num">90</span>:
     <span class="fn">print</span>(<span class="str">"A"</span>)
@@ -757,7 +752,7 @@ pre {
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 
 <span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
@@ -799,7 +794,7 @@ pre {
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
 b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"b?"</span>))
 c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"c?"</span>))
@@ -834,7 +829,7 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
 <span class="kw">if</span> uv ___ <span class="num">11</span>:
     <span class="fn">print</span>(<span class="str">"Extreme"</span>)
@@ -869,7 +864,7 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
 <span class="kw">if</span> bmi ___ <span class="num">18.5</span>:
     <span class="fn">print</span>(<span class="str">"偏瘦"</span>)
@@ -901,7 +896,7 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
         </p>
       </div>
       <details class="answer-fold">
-        <summary>参考代码</summary>
+        <summary></summary>
         <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
 
