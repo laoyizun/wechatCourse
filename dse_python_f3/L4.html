@@ -378,6 +378,32 @@ pre {
   white-space: pre-wrap;
 }
 
+/* ===== 参考代码折叠（v1.5 · 全部答案骨架改为折叠）===== */
+.answer-fold {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(15, 159, 154, .04);
+  border-left: 4px solid var(--teal);
+  border-radius: 8px;
+}
+.answer-fold summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--teal);
+  font-size: 16px;
+  list-style: none;
+}
+.answer-fold summary::before { content: '💡 '; }
+.answer-fold summary::-webkit-details-marker { display: none; }
+.answer-fold[open] summary { margin-bottom: 10px; }
+.answer-fold pre {
+  background: var(--ink);
+  margin: 8px 0 0 0;
+}
+.answer-fold pre code {
+  color: #e6edf3;
+}
+
 /* ===== Recap 网格卡片（v1.4 极简版）===== */
 .recap-grid {
   display: grid;
@@ -549,9 +575,9 @@ pre {
           边界测试：59 / 60 / 89 / 90 / 100
         </p>
       </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+      <details class="answer-fold">
+        <summary>参考代码</summary>
+        <pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
 <span class="kw">if</span> score ___ <span class="num">90</span>:
     <span class="fn">print</span>(<span class="str">"A"</span>)
 <span class="kw">elif</span> score ___ <span class="num">80</span>:
@@ -562,7 +588,7 @@ pre {
     <span class="fn">print</span>(<span class="str">"D"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
-      </div>
+      </details>
     </div>
     <div class="check-q" style="margin-top:14px;">
       <div class="check-q-text">❓ Q · 50 → 落入哪一档？______</div>
@@ -701,9 +727,9 @@ pre {
           测试：-1, 0, 12, 13, 17, 18, 59, 60, 150, 151
         </p>
       </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <details class="answer-fold">
+        <summary>参考代码</summary>
+        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 
 <span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
     <span class="fn">print</span>(<span class="str">"错误"</span>)
@@ -715,7 +741,7 @@ pre {
     <span class="fn">print</span>(<span class="str">"成人"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"老人"</span>)</code></pre>
-      </div>
+      </details>
     </div>
     <div class="check-q" style="margin-top:14px;">
       <div class="check-q-text">❓ Q · -1 输出什么？______</div>
@@ -743,9 +769,9 @@ pre {
           (1, 2, 3) → 3
         </p>
       </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
+      <details class="answer-fold">
+        <summary>参考代码</summary>
+        <pre><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
 b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"b?"</span>))
 c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"c?"</span>))
 
@@ -755,7 +781,7 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
     <span class="fn">print</span>(<span class="str">"最大 b"</span>, b)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"最大 c"</span>, c)</code></pre>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -778,9 +804,9 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
           测试：2, 3, 5, 6, 7, 8, 10, 11
         </p>
       </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
+      <details class="answer-fold">
+        <summary>参考代码</summary>
+        <pre><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
 <span class="kw">if</span> uv ___ <span class="num">11</span>:
     <span class="fn">print</span>(<span class="str">"Extreme"</span>)
 <span class="kw">elif</span> uv ___ <span class="num">8</span>:
@@ -791,7 +817,7 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
     <span class="fn">print</span>(<span class="str">"Moderate"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"Low"</span>)</code></pre>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -813,16 +839,16 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
           <span style="font-size:14px; color:var(--muted);">提示：用 float(input(...))</span>
         </p>
       </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
+      <details class="answer-fold">
+        <summary>参考代码</summary>
+        <pre><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
 <span class="kw">if</span> bmi ___ <span class="num">18.5</span>:
     <span class="fn">print</span>(<span class="str">"偏瘦"</span>)
 <span class="kw">elif</span> bmi ___ <span class="num">24</span>:
     <span class="fn">print</span>(<span class="str">"正常"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"偏胖"</span>)</code></pre>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -845,9 +871,9 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
           边界测试：-1, 0, 12, 13, 17, 18, 150
         </p>
       </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <details class="answer-fold">
+        <summary>参考代码</summary>
+        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
 
 <span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
@@ -860,7 +886,7 @@ vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
     <span class="fn">print</span>(<span class="str">"儿童票"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"成人票"</span>)</code></pre>
-      </div>
+      </details>
     </div>
   </section>
 
