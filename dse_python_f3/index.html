@@ -384,11 +384,11 @@ h1 .highlight { color: var(--blue); }
           <div class="chips"><span class="status open">已开放 · 11 页</span></div>
         </a>
 
-        <a class="course-card disabled">
+        <a class="course-card" href="L6.html">
           <small>L6 · 讲课</small>
-          <h3>list + 索引 + 切片 + 增删改 + 排序</h3>
-          <p>一列储物柜。正/负索引、切片 [start:end:step]、append/insert/pop/del/remove、max/min/sum/sort/reverse。</p>
-          <div class="chips"><span class="status locked">备课中</span></div>
+          <h3>list 列表</h3>
+          <p>5 个概念 · 60 分钟。list 创建、索引（正/负）、len、for 遍历列表。</p>
+          <div class="chips"><span class="status open">已开放 · 12 页</span></div>
         </a>
 
         <a class="course-card disabled">
@@ -493,6 +493,7 @@ h1 .highlight { color: var(--blue); }
         <button class="sub-tab" data-lesson="L3">L3 (5)</button>
         <button class="sub-tab" data-lesson="L4">L4 (4)</button>
         <button class="sub-tab" data-lesson="L5">L5 (3)</button>
+        <button class="sub-tab" data-lesson="L6">L6 (3)</button>
       </div>
 
       <!-- 卡片网格（由 JS 渲染） -->
@@ -725,6 +726,40 @@ age = <span class="num">14</span>
         content: '求 1-100 中所有奇数的和：1 + 3 + 5 + ... + 99 = ? 提示：<code class="inline">range(1, 100, 2)</code> 步长 2。预期：2500。'
       }
     ]
+  },
+
+  // L6
+  {
+    id: 'L6',
+    title: 'L6 · list 列表（基础）',
+    subtitle: '4 个必做',
+    description: '做完截图发老师，下节讲评。',
+    items: [
+      {
+        level: '必做 1',
+        color: 'success',
+        title: '基础（问答 + 选择 + 判断）',
+        content: '① 填空：list 用 ______ 包裹 ② 判断：<code class="inline">[1, "hi", True]</code> 合法吗？③ 选择：索引从几开始？④ 填空：<code class="inline">fruits[-1]</code> 是 ______'
+      },
+      {
+        level: '必做 2',
+        color: 'blue',
+        title: '索引预测',
+        content: 'fruits = ["a", "b", "c", "d", "e"]，求：① <code class="inline">fruits[0]</code> = ______ ② <code class="inline">fruits[2]</code> = ______ ③ <code class="inline">fruits[-1]</code> = ______ ④ <code class="inline">len(fruits)</code> = ______'
+      },
+      {
+        level: '必做 3',
+        color: 'amber',
+        title: '字符分类（综合编程）',
+        content: '输入字符串，输出元音数 + 辅音数。提示：<code class="inline">vowels = ["a","e","i","o","u"]</code>，for 遍历 + if 判断。测试："Hello" → 元 2，辅 3。'
+      },
+      {
+        level: '必做 4',
+        color: 'teal',
+        title: '班级成绩（应用场景）',
+        content: 'scores = [85, 92, 78, 95, 88]，输出最高分、最低分、平均分。提示：用 <code class="inline">max()</code> <code class="inline">min()</code> <code class="inline">sum()</code>。'
+      }
+    ]
   }
 ];
 
@@ -822,7 +857,12 @@ const FLASHCARDS = [
   // L5
   { id:"L5-C01", lesson:"L5", type:"concept", title:"for 遍历字符串", term:"For Loop over String", question:"for 循环如何一字一字遍历字符串？", fill:`for ch in \"Hi\":\n    ______`, answer:"print(ch)（ch 会依次取 H 和 i）", mnemonic:"", code:`for ch in \"HOPE\":\n    print(ch)\n\n# 输出：H / O / P / E（4 行）`, warnings:["⭐ ch 是变量名，可改","⭐ in 后必须是字符串"] },
   { id:"L5-C02", lesson:"L5", type:"concept", title:"range() 三种写法", term:"range() Three Forms", question:"range() 有哪 3 种写法？", fill:`range(5)        → 0 到______\nrange(2, 8)     → 2 到______\nrange(0, 10, 2) → 0 到 9，步长______`, answer:"4（含 0 不含 5）/ 7（含 2 不含 8）/ 2", mnemonic:"左闭右开 · 终点不算", code:`list(range(5))         # [0, 1, 2, 3, 4]\nlist(range(2, 8))      # [2, 3, 4, 5, 6, 7]\nlist(range(0, 10, 2))  # [0, 2, 4, 6, 8]`, warnings:["⭐ 左闭右开：含起点，不含终点","⭐ 步长不能为 0"] },
-  { id:"L5-C03", lesson:"L5", type:"killer", title:"杀手锏：左闭右开", term:"Left-Closed Right-Open", question:"range(1, n+1) 为何要写 n+1？", fill:`range(1, n+1) 含 ______ 不含 ______\n要让 range 含 n，必须写 ______`, answer:"含 1 不含 n+1 / 写 n+1", mnemonic:"", code:`# 让 range 含 n（1 到 n）：\nfor i in range(1, n+1):\n    print(i)\n\n# 错误写法：range(1, n) 只到 n-1`, warnings:["⭐ 求 1+...+n 必须 range(1, n+1)","⭐ 终点不算"] }
+  { id:"L5-C03", lesson:"L5", type:"killer", title:"杀手锏：左闭右开", term:"Left-Closed Right-Open", question:"range(1, n+1) 为何要写 n+1？", fill:`range(1, n+1) 含 ______ 不含 ______\n要让 range 含 n，必须写 ______`, answer:"含 1 不含 n+1 / 写 n+1", mnemonic:"", code:`# 让 range 含 n（1 到 n）：\nfor i in range(1, n+1):\n    print(i)\n\n# 错误写法：range(1, n) 只到 n-1`, warnings:["⭐ 求 1+...+n 必须 range(1, n+1)","⭐ 终点不算"] },
+
+  // L6
+  { id:"L6-C01", lesson:"L6", type:"concept", title:"list 列表创建", term:"List Creation", question:"如何创建一个 list？list 可装混合类型吗？", fill:`list 用 ______ 包裹\n元素之间用 ______ 分隔\n可装混合类型吗？______`, answer:"[]（方括号）/ 逗号 / 可以", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nnums = [10, 20, 30]\nmixed = [1, "hi", True]\nempty = []`, warnings:["⭐ 元素之间必须是英文逗号 ,（不是中文，）","⭐ list 用 []，不是 {}（dict）或 ()（tuple）"] },
+  { id:"L6-C02", lesson:"L6", type:"concept", title:"索引（正/负）", term:"List Indexing", question:"list 的索引从几开始？负索引是什么意思？", fill:`正索引从 ______ 开始\n负索引从 ______ 开始\n-1 是 ______`, answer:"0（不是 1）/-1（最后一个）", mnemonic:"", code:`fruits = ["apple", "banana", "cherry", "date"]\nprint(fruits[0])    # apple（第 1 个）\nprint(fruits[1])    # banana\nprint(fruits[-1])   # date（最后 1 个）\nprint(fruits[-2])   # cherry（倒数第 2 个）`, warnings:["⭐ 索引从 0 开始，不是 1","⭐ -1 是最后 1 个，-len 是第一个"] },
+  { id:"L6-C03", lesson:"L6", type:"killer", title:"杀手锏：for 遍历 list", term:"Iterate List", question:"如何用 for 循环遍历 list？", fill:`for x in ______:\n    ______`, answer:"list 名 / 操作 x", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nfor f in fruits:\n    print(f"我喜欢 {f}")\n\n# 输出：\n# 我喜欢 apple\n# 我喜欢 banana\n# 我喜欢 cherry`, warnings:["⭐ for + in + 冒号不能漏","⭐ 循环变量 f 可以改名"] }
 ];
 
 // ===== 渲染逻辑 =====
