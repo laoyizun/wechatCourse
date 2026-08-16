@@ -370,18 +370,18 @@ h1 .highlight { color: var(--blue); }
           <div class="chips"><span class="status open">已开放 · 12 页</span></div>
         </a>
 
-        <a class="course-card disabled">
+        <a class="course-card" href="L4.html">
           <small>L4 · 讲课</small>
-          <h3>while + break/continue + 防死循环</h3>
-          <p>旋转门式条件循环。break 紧急出口、continue 跳过本轮、防死循环（计数器位置），实战讨价还价与密码验证。</p>
-          <div class="chips"><span class="status locked">备课中</span></div>
+          <h3>多分支 + 边界 + better if</h3>
+          <p>3 个概念 · 60 分钟。if-elif-else 多分支、边界测试 49/50/51、better if 早返错误结构。</p>
+          <div class="chips"><span class="status open">已开放 · 14 页</span></div>
         </a>
 
-        <a class="course-card disabled">
+        <a class="course-card" href="L5.html">
           <small>L5 · 讲课</small>
-          <h3>for + range + 遍历字符串/列表</h3>
-          <p>班长念名单。range(start, stop, step) 左闭右开，倒计时 -1 步长，遍历字符串和列表。</p>
-          <div class="chips"><span class="status locked">备课中</span></div>
+          <h3>for + range</h3>
+          <p>2 个概念 · 60 分钟。for 遍历字符串、range(start, stop, step) 三种写法 + 左闭右开。</p>
+          <div class="chips"><span class="status open">已开放 · 11 页</span></div>
         </a>
 
         <a class="course-card disabled">
@@ -491,6 +491,8 @@ h1 .highlight { color: var(--blue); }
         <button class="sub-tab active" data-lesson="L1">L1 (4)</button>
         <button class="sub-tab" data-lesson="L2">L2 (4)</button>
         <button class="sub-tab" data-lesson="L3">L3 (5)</button>
+        <button class="sub-tab" data-lesson="L4">L4 (4)</button>
+        <button class="sub-tab" data-lesson="L5">L5 (3)</button>
       </div>
 
       <!-- 卡片网格（由 JS 渲染） -->
@@ -655,6 +657,74 @@ age = <span class="num">14</span>
         content: '输入年龄 + 票种（vip / normal）。&lt; 12 不能入；12-17 且 vip → 半价可入；12-17 且 普通票 → 不能入；18+ → 任何票都可入。边界：12, 18。提示：用 and / or。'
       }
     ]
+  },
+
+  // L4
+  {
+    id: 'L4',
+    title: 'L4 · 多分支 + 边界 + better if',
+    subtitle: '4 个必做',
+    description: '做完截图发老师，下节讲评。',
+    items: [
+      {
+        level: '必做 1',
+        color: 'success',
+        title: '基础（问答 + 选择 + 判断）',
+        content: '① 选择：if-elif 检查顺序？② 判断对错：elif 顺序错无影响 ③ 填空：85 分落入 ___ 档 ④ 填空：边界测试 &gt;= 60 要测哪 3 个值？'
+      },
+      {
+        level: '必做 2',
+        color: 'blue',
+        title: '边界测试填空',
+        content: '① age &gt;= 18 测哪 3 个值 ② 60 ≤ score &lt; 80 测哪 6 个值 ③ 判断：50 是 &gt; vs &gt;= 的关键值'
+      },
+      {
+        level: '必做 3',
+        color: 'amber',
+        title: '成绩分级（综合编程）',
+        content: '输入分数（0-100），输出 A/B/C/D/F，&lt; 0 或 &gt; 100 → 错误。测 8 个值：-1, 0, 59, 60, 89, 90, 100, 101。提示：if-elif-else + 边界测试。'
+      },
+      {
+        level: '必做 4',
+        color: 'teal',
+        title: '年龄分级（应用场景 + better if）',
+        content: '输入年龄（0-150），4 档 + 错误处理，用 better if 扁平结构。测：-1, 0, 12, 13, 17, 18, 59, 60, 150, 151。'
+      }
+    ]
+  },
+
+  // L5
+  {
+    id: 'L5',
+    title: 'L5 · for + range',
+    subtitle: '4 个必做',
+    description: '做完截图发老师，下节讲评。',
+    items: [
+      {
+        level: '必做 1',
+        color: 'success',
+        title: '基础（问答 + 选择 + 判断）',
+        content: '① 填空：<code class="inline">for ch in "Hi"</code> 输出 ___ 行 ② 判断：<code class="inline">range(5)</code> 含 5 吗？③ 选择：<code class="inline">range(2, 8)</code> 等价于 ④ 填空：<code class="inline">range(0, 10, 2)</code> 输出 ___ ___ ___ ___ ___'
+      },
+      {
+        level: '必做 2',
+        color: 'blue',
+        title: 'range 预测',
+        content: '① <code class="inline">list(range(3))</code> = ______ ② <code class="inline">list(range(1, 4))</code> = ______ ③ <code class="inline">list(range(0, 10, 2))</code> = ______ ④ <code class="inline">list(range(5, 1, -1))</code> = ______'
+      },
+      {
+        level: '必做 3',
+        color: 'amber',
+        title: '字符统计（综合编程）',
+        content: '输入字符串，输出字符总数 + 元音数（a/e/i/o/u）。提示：for 遍历 + if 判断。测试："Hello" → 总 5，元 2。'
+      },
+      {
+        level: '必做 4',
+        color: 'teal',
+        title: '1-100 奇数和（应用）',
+        content: '求 1-100 中所有奇数的和：1 + 3 + 5 + ... + 99 = ? 提示：<code class="inline">range(1, 100, 2)</code> 步长 2。预期：2500。'
+      }
+    ]
   }
 ];
 
@@ -741,7 +811,18 @@ const FLASHCARDS = [
   { id:"L3-C02", lesson:"L3", type:"concept", title:"= vs == 区别", term:"Assignment vs Comparison", question:"= 和 == 的本质区别是什么？", fill:`= 是______（动词）\n== 是______（问号）`, answer:"= 赋值（把数据放进碗）；== 比较（问碗里是不是）", mnemonic:"", code:`age = 18           # = 赋值\nif age == 18:      # == 比较\n    print("成年")`, warnings:["⭐ = vs == 混用 → SyntaxError"] },
   { id:"L3-C03", lesson:"L3", type:"concept", title:"if-else 二选一", term:"Conditional Statement", question:"if-else 的基本语法是什么？哪个符号不能漏？", fill:`if 条件:\n    ______\n______:\n    print("条件为假")`, answer:"if 后必须写冒号 + 缩进 4 空格", mnemonic:"", code:`age = int(input("年龄?"))\nif age >= 18:\n    print("成年")\nelse:\n    print("未成年")`, warnings:["⭐ 冒号漏掉 → SyntaxError","⭐ 缩进错 → IndentationError"] },
   { id:"L3-C04", lesson:"L3", type:"concept", title:"逻辑运算 and / or", term:"Logical Operators", question:"and 和 or 的真假规则分别是什么？", fill:`True and False → ______\nTrue or False  → ______`, answer:"and: 两边都真才真；or: 一边真就真", mnemonic:"", code:`score = 75\nif score >= 60 and score < 80:\n    print("及格")\nelse:\n    print("不及格")`, warnings:["⭐ and/or 后必须重写变量：and score < 80（不能省略 score）","⭐ has_ticket == \"yes\" 是字符串相等"] },
-  { id:"L3-C05", lesson:"L3", type:"concept", title:"not 取反", term:"Negation", question:"not 的作用是什么？", fill:`not True  → ______\nnot False → ______`, answer:"True ↔ False（取反）", mnemonic:"", code:`is_login = False\nif not is_login:\n    print("请先登录")\nelse:\n    print("已登录")`, warnings:["⭐ not 只对一个值取反，不影响其他"] }
+  { id:"L3-C05", lesson:"L3", type:"concept", title:"not 取反", term:"Negation", question:"not 的作用是什么？", fill:`not True  → ______\nnot False → ______`, answer:"True ↔ False（取反）", mnemonic:"", code:`is_login = False\nif not is_login:\n    print("请先登录")\nelse:\n    print("已登录")`, warnings:["⭐ not 只对一个值取反，不影响其他"] },
+
+  // L4
+  { id:"L4-C01", lesson:"L4", type:"concept", title:"if-elif-else 多分支", term:"Multi-way Decisions", question:"elif 是哪个关键字的简写？检查顺序是怎样的？", fill:`从______到______检查\n遇 True ______`, answer:"从上到下检查；遇 True 停", mnemonic:"", code:`score = 85\nif score >= 90:   print("A")\nelif score >= 80: print("B")\nelif score >= 70: print("C")\nelif score >= 60: print("D")\nelse:             print("F")`, warnings:["⭐ 顺序写错：先 >= 60 再 >= 90 → 永远命中第一个","⭐ elif 可多个，else 最多 1 个"] },
+  { id:"L4-S01", lesson:"L4", type:"killer", title:"杀手锏：边界测试 49/50/51", term:"Boundary Testing", question:"测试 if score >= 50 程序，至少要测哪 3 个值？", fill:"临界点测试要测______、______、______（刚好不达/刚好达到/刚好超过）", answer:"测 49 / 50 / 51", mnemonic:"49 看 else，50 看 if 用 >= 还是 >，51 看 if 主分支", code:`# 输入 49 → 不及格\n# 输入 50 → 及格（验证 >=）\n# 输入 51 → 及格`, warnings:["⭐ 只测 49 和 50 测不出错：必须用 51","⭐ 漏测边界"] },
+  { id:"L4-S02", lesson:"L4", type:"killer", title:"杀手锏：Better If 早返错误", term:"Early Return / Flat Code", question:"「Better If」的核心思想是什么？", fill:"先排除______情况，主体逻辑更扁平清晰", answer:"先返错（错误条件提前处理），主体逻辑更扁", mnemonic:"错误处理不污染主逻辑，缩进层数少", code:`# Better If 版本\nif score < 0 or score > 100:\n    print("无效")\nelif score >= 50:\n    print("及格")\nelse:\n    print("不及格")`, warnings:["⭐ 不要把错误处理嵌在主逻辑里","⭐ 嵌套深 = 难读 = 易错"] },
+  { id:"L4-W01", lesson:"L4", type:"warning", title:"elif 顺序陷阱", term:"elif Order Trap", question:"elif 顺序写错会怎样？", fill:"先判低分 → 永远命中第一个\n先判高分 → ______", answer:"正确分类（先高后低）", mnemonic:"", code:`# 错：先判低分\nif score >= 60: print("D")\nelif score >= 90: print("A")   # 永远到不了\n\n# 对：先判高分\nif score >= 90: print("A")\nelif score >= 60: print("D")`, warnings:["⭐ 必须先判高分，后判低分","⭐ 顺序错误 = 永远命中第一个"] },
+
+  // L5
+  { id:"L5-C01", lesson:"L5", type:"concept", title:"for 遍历字符串", term:"For Loop over String", question:"for 循环如何一字一字遍历字符串？", fill:`for ch in \"Hi\":\n    ______`, answer:"print(ch)（ch 会依次取 H 和 i）", mnemonic:"", code:`for ch in \"HOPE\":\n    print(ch)\n\n# 输出：H / O / P / E（4 行）`, warnings:["⭐ ch 是变量名，可改","⭐ in 后必须是字符串"] },
+  { id:"L5-C02", lesson:"L5", type:"concept", title:"range() 三种写法", term:"range() Three Forms", question:"range() 有哪 3 种写法？", fill:`range(5)        → 0 到______\nrange(2, 8)     → 2 到______\nrange(0, 10, 2) → 0 到 9，步长______`, answer:"4（含 0 不含 5）/ 7（含 2 不含 8）/ 2", mnemonic:"左闭右开 · 终点不算", code:`list(range(5))         # [0, 1, 2, 3, 4]\nlist(range(2, 8))      # [2, 3, 4, 5, 6, 7]\nlist(range(0, 10, 2))  # [0, 2, 4, 6, 8]`, warnings:["⭐ 左闭右开：含起点，不含终点","⭐ 步长不能为 0"] },
+  { id:"L5-C03", lesson:"L5", type:"killer", title:"杀手锏：左闭右开", term:"Left-Closed Right-Open", question:"range(1, n+1) 为何要写 n+1？", fill:`range(1, n+1) 含 ______ 不含 ______\n要让 range 含 n，必须写 ______`, answer:"含 1 不含 n+1 / 写 n+1", mnemonic:"", code:`# 让 range 含 n（1 到 n）：\nfor i in range(1, n+1):\n    print(i)\n\n# 错误写法：range(1, n) 只到 n-1`, warnings:["⭐ 求 1+...+n 必须 range(1, n+1)","⭐ 终点不算"] }
 ];
 
 // ===== 渲染逻辑 =====
