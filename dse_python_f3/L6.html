@@ -383,7 +383,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ===== 参考代码折叠（v1.6 · 只显示点击展开/隐藏）===== */
+/* ===== 参考代码折叠（v1.7 · 答案骨架 / 参考答案 双按钮切换）===== */
 .answer-fold {
   margin-top: 14px;
   background: rgba(255, 255, 255, .88);
@@ -394,40 +394,35 @@ pre {
   overflow: hidden;
   max-width: 100%;
 }
-.answer-fold > summary {
-  padding: 14px 18px;
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--teal);
-  font-size: 16px;
-  list-style: none;
+.answer-tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(15, 159, 154, .08);
+  border-bottom: 1px solid var(--line);
 }
-.answer-fold > summary::before {
-  content: '💡 参考代码';
+.answer-tab {
   flex: 1;
-}
-.answer-fold > summary::after {
-  content: '点击显示';
-  font-size: 13px;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--muted);
-  font-weight: 400;
+  transition: all 0.2s;
+  font-family: inherit;
 }
-.answer-fold[open] > summary::after {
-  content: '点击隐藏';
+.answer-tab:hover { background: rgba(15, 159, 154, .12); }
+.answer-tab.active {
+  background: white;
+  color: var(--teal);
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
 }
-.answer-fold > summary::-webkit-details-marker { display: none; }
-.answer-fold > summary:hover { background: rgba(15, 159, 154, .06); }
-
 .answer-fold > pre {
   margin: 0;
-  border-top: 1px solid var(--line);
   background: var(--ink);
-  max-height: 400px;
-  overflow: auto;
 }
 .answer-fold > pre code {
   color: #e6edf3;
@@ -436,13 +431,10 @@ pre {
   font-size: 15px;
   line-height: 1.6;
   white-space: pre;
-  text-decoration: none;
 }
-.answer-fold > pre code span {
+/* skeleton 中 ___ 的下划线（学生填空位置）*/
+.answer-fold .code-skeleton code {
   text-decoration: none;
-}
-.answer-fold pre * {
-  text-decoration: none !important;
 }
 
 /* ===== Recap 网格卡片（v1.4 极简版）===== */
@@ -737,15 +729,24 @@ empty = []
           · 总人数：______
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小李"</span>, <span class="str">"小华"</span>]
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小李"</span>, <span class="str">"小华"</span>]
 
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 1 个：{names[__]}"</span>)
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 3 个：{names[__]}"</span>)
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"最后一个：{names[__]}"</span>)
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"总人数：{___}"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小李"</span>, <span class="str">"小华"</span>]
+
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 1 个：{names[<span class="num">0</span>]}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 3 个：{names[<span class="num">2</span>]}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最后一个：{names[-<span class="num">1</span>]}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"总人数：{<span class="fn">len</span>(names)}"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -766,14 +767,22 @@ empty = []
           · 平均分：______（用 sum + len）
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>]
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>]
 
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"最高分：{___}"</span>)
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"最低分：{___}"</span>)
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"平均分：{___}"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>]
+
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最高分：{<span class="fn">max</span>(scores)}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最低分：{<span class="fn">min</span>(scores)}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"平均分：{<span class="fn">sum</span>(scores) / <span class="fn">len</span>(scores)}"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -795,9 +804,12 @@ empty = []
           <code class="inline">if ch in vowels:</code>
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>s = <span class="fn">input</span>(<span class="str">"字符串?"</span>)
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>s = <span class="fn">input</span>(<span class="str">"字符串?"</span>)
 vowels = [<span class="str">"a"</span>, <span class="str">"e"</span>, <span class="str">"i"</span>, <span class="str">"o"</span>, <span class="str">"u"</span>]
 
 v_count = <span class="num">0</span>
@@ -810,7 +822,20 @@ c_count = <span class="num">0</span>
         c_count += <span class="num">1</span>
 
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"元音: {v_count}, 辅音: {c_count}"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>s = <span class="fn">input</span>(<span class="str">"字符串?"</span>)
+vowels = [<span class="str">"a"</span>, <span class="str">"e"</span>, <span class="str">"i"</span>, <span class="str">"o"</span>, <span class="str">"u"</span>]
+
+v_count = <span class="num">0</span>
+c_count = <span class="num">0</span>
+
+<span class="kw">for</span> ch <span class="kw">in</span> s:
+    <span class="kw">if</span> ch <span class="kw">in</span> vowels:
+        v_count += <span class="num">1</span>
+    <span class="kw">else</span>:
+        c_count += <span class="num">1</span>
+
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"元音: {v_count}, 辅音: {c_count}"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -922,6 +947,27 @@ c_count = <span class="num">0</span>
   document.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 50) { if (dx < 0) next(); else prev(); }
+  });
+
+  // === 答案骨架 / 参考答案 按钮切换 ===
+  document.querySelectorAll('.answer-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const fold = tab.closest('.answer-fold');
+      const mode = tab.dataset.mode;
+      // 切换按钮状态
+      fold.querySelectorAll('.answer-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      // 切换内容
+      const skeleton = fold.querySelector('.code-skeleton');
+      const solution = fold.querySelector('.code-solution');
+      if (mode === 'skeleton') {
+        skeleton.style.display = 'block';
+        solution.style.display = 'none';
+      } else {
+        skeleton.style.display = 'none';
+        solution.style.display = 'block';
+      }
+    });
   });
 
   // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===

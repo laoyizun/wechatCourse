@@ -383,7 +383,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ===== 参考代码折叠（v1.6 · 只显示点击展开/隐藏）===== */
+/* ===== 参考代码折叠（v1.7 · 答案骨架 / 参考答案 双按钮切换）===== */
 .answer-fold {
   margin-top: 14px;
   background: rgba(255, 255, 255, .88);
@@ -394,40 +394,35 @@ pre {
   overflow: hidden;
   max-width: 100%;
 }
-.answer-fold > summary {
-  padding: 14px 18px;
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--teal);
-  font-size: 16px;
-  list-style: none;
+.answer-tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(15, 159, 154, .08);
+  border-bottom: 1px solid var(--line);
 }
-.answer-fold > summary::before {
-  content: '💡 参考代码';
+.answer-tab {
   flex: 1;
-}
-.answer-fold > summary::after {
-  content: '点击显示';
-  font-size: 13px;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--muted);
-  font-weight: 400;
+  transition: all 0.2s;
+  font-family: inherit;
 }
-.answer-fold[open] > summary::after {
-  content: '点击隐藏';
+.answer-tab:hover { background: rgba(15, 159, 154, .12); }
+.answer-tab.active {
+  background: white;
+  color: var(--teal);
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
 }
-.answer-fold > summary::-webkit-details-marker { display: none; }
-.answer-fold > summary:hover { background: rgba(15, 159, 154, .06); }
-
 .answer-fold > pre {
   margin: 0;
-  border-top: 1px solid var(--line);
   background: var(--ink);
-  max-height: 400px;
-  overflow: auto;
 }
 .answer-fold > pre code {
   color: #e6edf3;
@@ -436,13 +431,10 @@ pre {
   font-size: 15px;
   line-height: 1.6;
   white-space: pre;
-  text-decoration: none;
 }
-.answer-fold > pre code span {
+/* skeleton 中 ___ 的下划线（学生填空位置）*/
+.answer-fold .code-skeleton code {
   text-decoration: none;
-}
-.answer-fold pre * {
-  text-decoration: none !important;
 }
 
 /* ===== Recap 网格卡片（v1.4 极简版）===== */
@@ -616,9 +608,12 @@ pre {
           边界测试：59 / 60 / 89 / 90 / 100
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
 <span class="kw">if</span> score ___ <span class="num">90</span>:
     <span class="fn">print</span>(<span class="str">"A"</span>)
 <span class="kw">elif</span> score ___ <span class="num">80</span>:
@@ -629,7 +624,18 @@ pre {
     <span class="fn">print</span>(<span class="str">"D"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+<span class="kw">if</span> score >= <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"A"</span>)
+<span class="kw">elif</span> score >= <span class="num">80</span>:
+    <span class="fn">print</span>(<span class="str">"B"</span>)
+<span class="kw">elif</span> score >= <span class="num">70</span>:
+    <span class="fn">print</span>(<span class="str">"C"</span>)
+<span class="kw">elif</span> score >= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"D"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
+      </div>
     </div>
     <div class="check-q" style="margin-top:14px;">
       <div class="check-q-text">❓ Q · 50 → 落入哪一档？______</div>
@@ -768,9 +774,12 @@ pre {
           测试：-1, 0, 12, 13, 17, 18, 59, 60, 150, 151
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 
 <span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
     <span class="fn">print</span>(<span class="str">"错误"</span>)
@@ -782,7 +791,19 @@ pre {
     <span class="fn">print</span>(<span class="str">"成人"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"老人"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+
+<span class="kw">if</span> age &lt; <span class="num">0</span> <span class="kw">or</span> age &gt; <span class="num">150</span>:
+    <span class="fn">print</span>(<span class="str">"错误"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">12</span>:
+    <span class="fn">print</span>(<span class="str">"儿童"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">17</span>:
+    <span class="fn">print</span>(<span class="str">"青少年"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">59</span>:
+    <span class="fn">print</span>(<span class="str">"成人"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"老人"</span>)</code></pre>
+      </div>
     </div>
     <div class="check-q" style="margin-top:14px;">
       <div class="check-q-text">❓ Q · -1 输出什么？______</div>
@@ -810,9 +831,12 @@ pre {
           (1, 2, 3) → 3
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
 b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"b?"</span>))
 c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"c?"</span>))
 
@@ -822,7 +846,17 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
     <span class="fn">print</span>(<span class="str">"最大 b"</span>, b)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"最大 c"</span>, c)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
+b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"b?"</span>))
+c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"c?"</span>))
+
+<span class="kw">if</span> a >= b <span class="kw">and</span> a >= c:
+    <span class="fn">print</span>(<span class="str">"最大 a"</span>, a)
+<span class="kw">elif</span> b >= c:
+    <span class="fn">print</span>(<span class="str">"最大 b"</span>, b)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"最大 c"</span>, c)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -845,9 +879,12 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
           测试：2, 3, 5, 6, 7, 8, 10, 11
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
 <span class="kw">if</span> uv ___ <span class="num">11</span>:
     <span class="fn">print</span>(<span class="str">"Extreme"</span>)
 <span class="kw">elif</span> uv ___ <span class="num">8</span>:
@@ -858,7 +895,18 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
     <span class="fn">print</span>(<span class="str">"Moderate"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"Low"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
+<span class="kw">if</span> uv >= <span class="num">11</span>:
+    <span class="fn">print</span>(<span class="str">"Extreme"</span>)
+<span class="kw">elif</span> uv >= <span class="num">8</span>:
+    <span class="fn">print</span>(<span class="str">"Very High"</span>)
+<span class="kw">elif</span> uv >= <span class="num">6</span>:
+    <span class="fn">print</span>(<span class="str">"High"</span>)
+<span class="kw">elif</span> uv >= <span class="num">3</span>:
+    <span class="fn">print</span>(<span class="str">"Moderate"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Low"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -880,16 +928,26 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
           <span style="font-size:14px; color:var(--muted);">提示：用 float(input(...))</span>
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
 <span class="kw">if</span> bmi ___ <span class="num">18.5</span>:
     <span class="fn">print</span>(<span class="str">"偏瘦"</span>)
 <span class="kw">elif</span> bmi ___ <span class="num">24</span>:
     <span class="fn">print</span>(<span class="str">"正常"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"偏胖"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
+<span class="kw">if</span> bmi &lt; <span class="num">18.5</span>:
+    <span class="fn">print</span>(<span class="str">"偏瘦"</span>)
+<span class="kw">elif</span> bmi &lt; <span class="num">24</span>:
+    <span class="fn">print</span>(<span class="str">"正常"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"偏胖"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -912,9 +970,12 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
           边界测试：-1, 0, 12, 13, 17, 18, 150
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
 
 <span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
@@ -927,7 +988,20 @@ vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
     <span class="fn">print</span>(<span class="str">"儿童票"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"成人票"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
+
+<span class="kw">if</span> age &lt; <span class="num">0</span> <span class="kw">or</span> age &gt; <span class="num">150</span>:
+    <span class="fn">print</span>(<span class="str">"错误"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">12</span>:
+    <span class="fn">print</span>(<span class="str">"儿童票"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">17</span> <span class="kw">and</span> vip == <span class="str">"yes"</span>:
+    <span class="fn">print</span>(<span class="str">"学生票"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">17</span>:
+    <span class="fn">print</span>(<span class="str">"儿童票"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"成人票"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -1039,6 +1113,27 @@ vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
   document.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 50) { if (dx < 0) next(); else prev(); }
+  });
+
+  // === 答案骨架 / 参考答案 按钮切换 ===
+  document.querySelectorAll('.answer-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const fold = tab.closest('.answer-fold');
+      const mode = tab.dataset.mode;
+      // 切换按钮状态
+      fold.querySelectorAll('.answer-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      // 切换内容
+      const skeleton = fold.querySelector('.code-skeleton');
+      const solution = fold.querySelector('.code-solution');
+      if (mode === 'skeleton') {
+        skeleton.style.display = 'block';
+        solution.style.display = 'none';
+      } else {
+        skeleton.style.display = 'none';
+        solution.style.display = 'block';
+      }
+    });
   });
 
   // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===

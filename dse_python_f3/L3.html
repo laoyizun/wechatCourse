@@ -383,7 +383,7 @@ pre {
   white-space: pre-wrap;
 }
 
-/* ===== 参考代码折叠（v1.6 · 只显示点击展开/隐藏）===== */
+/* ===== 参考代码折叠（v1.7 · 答案骨架 / 参考答案 双按钮切换）===== */
 .answer-fold {
   margin-top: 14px;
   background: rgba(255, 255, 255, .88);
@@ -394,40 +394,35 @@ pre {
   overflow: hidden;
   max-width: 100%;
 }
-.answer-fold > summary {
-  padding: 14px 18px;
-  cursor: pointer;
-  font-weight: 700;
-  color: var(--teal);
-  font-size: 16px;
-  list-style: none;
+.answer-tabs {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 4px;
+  padding: 8px 12px;
+  background: rgba(15, 159, 154, .08);
+  border-bottom: 1px solid var(--line);
 }
-.answer-fold > summary::before {
-  content: '💡 参考代码';
+.answer-tab {
   flex: 1;
-}
-.answer-fold > summary::after {
-  content: '点击显示';
-  font-size: 13px;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--muted);
-  font-weight: 400;
+  transition: all 0.2s;
+  font-family: inherit;
 }
-.answer-fold[open] > summary::after {
-  content: '点击隐藏';
+.answer-tab:hover { background: rgba(15, 159, 154, .12); }
+.answer-tab.active {
+  background: white;
+  color: var(--teal);
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
 }
-.answer-fold > summary::-webkit-details-marker { display: none; }
-.answer-fold > summary:hover { background: rgba(15, 159, 154, .06); }
-
 .answer-fold > pre {
   margin: 0;
-  border-top: 1px solid var(--line);
   background: var(--ink);
-  max-height: 400px;
-  overflow: auto;
 }
 .answer-fold > pre code {
   color: #e6edf3;
@@ -436,13 +431,10 @@ pre {
   font-size: 15px;
   line-height: 1.6;
   white-space: pre;
-  text-decoration: none;
 }
-.answer-fold > pre code span {
+/* skeleton 中 ___ 的下划线（学生填空位置）*/
+.answer-fold .code-skeleton code {
   text-decoration: none;
-}
-.answer-fold pre * {
-  text-decoration: none !important;
 }
 
 /* ===== Recap 网格卡片（v1.4 极简版）===== */
@@ -733,9 +725,12 @@ and / or 后面的条件表达式必须重新写前面的变量（不能省略 s
           (20, yes, no) → 收费<br>
           (15, yes, yes) → 收费</p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 ticket = <span class="fn">input</span>(<span class="str">"有票(yes/no)?"</span>))
 member = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>))
 
@@ -743,7 +738,15 @@ member = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span
     <span class="fn">print</span>(<span class="str">"免费"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"收费"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+ticket = <span class="fn">input</span>(<span class="str">"有票(yes/no)?"</span>))
+member = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>))
+
+<span class="kw">if</span> age >= <span class="num">18</span> <span class="kw">and</span> ticket == <span class="str">"yes"</span> <span class="kw">and</span> member == <span class="str">"yes"</span>:
+    <span class="fn">print</span>(<span class="str">"免费"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"收费"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -765,9 +768,12 @@ member = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span
           <span style="font-size:14px; color:var(--muted);">提示：用 or 处理票种</span>
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 ticket = <span class="fn">input</span>(<span class="str">"票种(vip/normal)?"</span>)
 
 <span class="kw">if</span> age &lt; <span class="num">12</span>:
@@ -778,7 +784,18 @@ ticket = <span class="fn">input</span>(<span class="str">"票种(vip/normal)?"</
     <span class="fn">print</span>(<span class="str">"不能入"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"任何票都可入"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+ticket = <span class="fn">input</span>(<span class="str">"票种(vip/normal)?"</span>)
+
+<span class="kw">if</span> age &lt; <span class="num">12</span>:
+    <span class="fn">print</span>(<span class="str">"不能入场"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">17</span> <span class="kw">and</span> ticket == <span class="str">"vip"</span>:
+    <span class="fn">print</span>(<span class="str">"半价可入"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">17</span>:
+    <span class="fn">print</span>(<span class="str">"不能入"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"任何票都可入"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -799,9 +816,12 @@ ticket = <span class="fn">input</span>(<span class="str">"票种(vip/normal)?"</
           <span style="font-size:14px; color:var(--muted);">用 if-else 嵌套</span>
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
 poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
 
 <span class="kw">if</span> score ___ <span class="num">90</span>:
@@ -810,7 +830,16 @@ poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
     <span class="fn">print</span>(<span class="str">"二等奖学金"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"不获奖学金"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
+
+<span class="kw">if</span> score >= <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"一等奖学金"</span>)
+<span class="kw">elif</span> score >= <span class="num">80</span> <span class="kw">and</span> poor == <span class="str">"yes"</span>:
+    <span class="fn">print</span>(<span class="str">"二等奖学金"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"不获奖学金"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -832,9 +861,12 @@ poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
           附加：&lt; 0 或 &gt; 150 → "错误输入"
         </p>
       </div>
-      <details class="answer-fold">
-        <summary></summary>
-        <pre><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 
 <span class="kw">if</span> age &lt; <span class="num">0</span> ___ age &gt; <span class="num">150</span>:
     <span class="fn">print</span>(<span class="str">"错误输入"</span>)
@@ -846,7 +878,19 @@ poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
     <span class="fn">print</span>(<span class="str">"成人"</span>)
 <span class="kw">else</span>:
     <span class="fn">print</span>(<span class="str">"老人"</span>)</code></pre>
-      </details>
+        <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+
+<span class="kw">if</span> age &lt; <span class="num">0</span> <span class="kw">or</span> age &gt; <span class="num">150</span>:
+    <span class="fn">print</span>(<span class="str">"错误输入"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">12</span>:
+    <span class="fn">print</span>(<span class="str">"儿童"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">17</span>:
+    <span class="fn">print</span>(<span class="str">"青少年"</span>)
+<span class="kw">elif</span> age &lt;= <span class="num">59</span>:
+    <span class="fn">print</span>(<span class="str">"成人"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"老人"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
@@ -931,6 +975,27 @@ poor = <span class="fn">input</span>(<span class="str">"贫困(yes/no)?"</span>)
   document.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
     if (Math.abs(dx) > 50) { if (dx < 0) next(); else prev(); }
+  });
+
+  // === 答案骨架 / 参考答案 按钮切换 ===
+  document.querySelectorAll('.answer-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const fold = tab.closest('.answer-fold');
+      const mode = tab.dataset.mode;
+      // 切换按钮状态
+      fold.querySelectorAll('.answer-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      // 切换内容
+      const skeleton = fold.querySelector('.code-skeleton');
+      const solution = fold.querySelector('.code-solution');
+      if (mode === 'skeleton') {
+        skeleton.style.display = 'block';
+        solution.style.display = 'none';
+      } else {
+        skeleton.style.display = 'none';
+        solution.style.display = 'block';
+      }
+    });
   });
 
   // === 代码块 · 右上角 Run + Copy 按钮 + 整块点击复制 ===
