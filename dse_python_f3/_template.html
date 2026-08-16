@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L5 · for + range — Python</title>
+<title>L3 · 判断 + 逻辑 — Python</title>
 <style>
 :root {
   --bg: #f3f7fb;
@@ -441,374 +441,33 @@ pre {
 <body class="deck-page">
 <main class="deck" id="deck">
 
-  <!-- 01 Cover -->
+  <!-- =========================================== -->
+  <!--  ⬇️  在此粘贴你的 Lx body（不包含 main 标签）  -->
+  <!--  ⬇️  占位提示：用 _new_lesson.py 脚本自动插入  -->
+  <!-- =========================================== -->
+
+  <!-- 占位：以下内容会被 Python 脚本替换 -->
   <section class="slide title-slide active">
     <div class="left">
-      <div class="kicker">Lesson 5</div>
-      <h1>让程序学会<span class="highlight">循环</span></h1>
-      <p class="subtitle">for 遍历 + range() · 2 个概念</p>
-    </div>
-  </section>
-
-  <!-- 02 L4 回顾 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">L4 回顾</div>
-      <h2>答 3 个问题</h2>
-      <p class="subtitle">60 秒回忆 · 点开看答案</p>
-    </div>
-    <div class="right">
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q1 · L4 学了 3 个概念：______、______、______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">if-elif-else 多分支 / 边界测试 / better if 早返</div>
-        </details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q2 · 边界测试 <code class="inline">if score >= 50</code>，测哪 3 个值？______ ______ ______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">49 / 50 / 51（49 看 else，50 看 >=，51 看 if 主分支）</div>
-        </details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q3 · better if 核心是 ______ 错误</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">先返（错误条件提前处理）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 概念 1 for 遍历字符串 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 1</div>
-      <h2>for 遍历字符串</h2>
-      <p class="subtitle">一字一字走</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">遍历 "HOPE"</div>
-<pre><code><span class="kw">for</span> ch <span class="kw">in</span> <span class="str">"HOPE"</span>:
-    <span class="fn">print</span>(ch)
-
-<span class="com"># 输出：</span>
-<span class="com"># H</span>
-<span class="com"># O</span>
-<span class="com"># P</span>
-<span class="com"># E</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q1 · 遍历 <code class="inline">"Hi"</code> 输出几行？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">2 行（H 一行，i 一行）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q2 · 变量 ch 会变吗？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">每次循环取下一个字符（ch 会变化）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 概念 1 实战 字符统计 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">实战</div>
-      <h2>字符统计（找元音）</h2>
-      <p class="subtitle">输入字符串，统计元音数</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">找元音</div>
-<pre><code>s = <span class="fn">input</span>(<span class="str">"字符串?"</span>)
-count = <span class="num">0</span>
-<span class="kw">for</span> ch <span class="kw">in</span> s:
-    <span class="kw">if</span> ch <span class="kw">in</span> <span class="str">"aeiou"</span>:
-        count += <span class="num">1</span>
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"元音数：{count}"</span>)
-
-<span class="com"># 输入 hello → 输出 元音数：2（e, o）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q1 · "hello" 中有几个元音？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">2 个（e 和 o）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q2 · <code class="inline">if ch in "aeiou"</code> 什么意思？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">ch 是 a/e/i/o/u 中的任意一个（包含判断）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 概念 2 range() -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 2</div>
-      <h2>range() · <span class="highlight">三种写法</span></h2>
-      <p class="subtitle">左闭右开</p>
-    </div>
-    <div class="right">
-      <table>
-        <tr><th>写法</th><th>含义</th><th>输出</th></tr>
-        <tr><td><code class="inline">range(5)</code></td><td>0 到 4</td><td>0 1 2 3 4</td></tr>
-        <tr><td><code class="inline">range(2, 8)</code></td><td>2 到 7</td><td>2 3 4 5 6 7</td></tr>
-        <tr><td><code class="inline">range(0, 10, 2)</code></td><td>0 到 9 步长 2</td><td>0 2 4 6 8</td></tr>
-      </table>
-      <div class="practice">
-        <div class="label">range(2, 5)</div>
-<pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">2</span>, <span class="num">5</span>):
-    <span class="fn">print</span>(i)
-
-<span class="com"># 输出：2 / 3 / 4</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q1 · <code class="inline">range(5)</code> 输出哪些数字？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">0 1 2 3 4（5 个数，不含 5）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q2 · <code class="inline">range(2, 5)</code> 输出哪些数字？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">2 3 4（含 2，不含 5）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 概念 2 左闭右开 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">原理</div>
-      <h2>左闭右开 · <span class="highlight">关键原理</span></h2>
-      <p class="subtitle">终点不算</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">左闭右开可视化</div>
-<pre><code><span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">0</span>, <span class="num">5</span>)))
-<span class="com"># [0, 1, 2, 3, 4]  ← 含 0，不含 5</span>
-
-<span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">2</span>, <span class="num">5</span>)))
-<span class="com"># [2, 3, 4]      ← 含 2，不含 5</span>
-
-<span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">2</span>)))
-<span class="com"># [0, 2, 4, 6, 8] ← 步长 2，不含 10</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q1 · <code class="inline">range(5)</code> 包含 5 吗？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">不包含（左闭右开）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q2 · <code class="inline">range(1, 4)</code> 包含 1 和 4 吗？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">包含 1（左闭），不包含 4（右开）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q3 · <code class="inline">range(0, 10, 2)</code> 含 10 吗？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">不包含（含 0/2/4/6/8，右开）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 07 实战 1 1-100 累加 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 1</div>
-      <h2 style="margin:0; font-size:24px;">🔢 1-100 累加</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">range 基础</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">求 1+2+3+...+100 = ?<br>
-          提示：<code class="inline">range(1, 101)</code> 含 1 到 100<br>
-          预期：5050
-        </p>
-      </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>total = <span class="num">0</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
-    total += i
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"1+2+...+100 = {total}"</span>)</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <!-- 08 实战 2 累加 1+2+...+n -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 2</div>
-      <h2 style="margin:0; font-size:24px;">➕ 累加 1+2+...+n</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">自己写（不抄实战 1）</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">输入 n，求 1+2+...+n<br>
-          测试：<br>
-          n=5 → 15（1+2+3+4+5）<br>
-          n=10 → 55<br>
-          n=1 → 1
-        </p>
-      </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>n = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"n?"</span>))
-total = <span class="num">0</span>
-
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(___, ___):
-    total += i
-
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"1+...+{n} = {total}"</span>)</code></pre>
-      </div>
-    </div>
-    <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · <code class="inline">range(1, n+1)</code> 为何要写 n+1？______</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="check-a">因为 range 左闭右开，写 n+1 才能包含 n</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 09 实战 3 1-100 偶数和 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 3</div>
-      <h2 style="margin:0; font-size:24px;">🔘 1-100 偶数和</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">range 步长 2</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">求 1-100 中所有偶数的和：<br>
-          2 + 4 + 6 + ... + 100 = ?<br>
-          提示：<code class="inline">range(0, 101, 2)</code> 步长 2<br>
-          预期：2550
-        </p>
-      </div>
-      <div class="card success">
-        <h3 style="color:#047857;">答案骨架</h3>
-<pre><code>total = <span class="num">0</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">101</span>, <span class="num">2</span>):
-    total += i
-
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数和 = {total}"</span>)</code></pre>
-      </div>
-    </div>
-    <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · <code class="inline">range(0, 101, 2)</code> 最后一个数是？______</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="check-a">100（步长 2，含 0/2/.../100，右开不含 101）</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 10 Recap -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Recap</div>
-      <h2>今天学 2 件事</h2>
-      <p class="recap-next">下次学：list 列表</p>
-    </div>
-    <div class="right">
-      <div class="recap-grid">
-        <div class="recap-card card-blue">
-          <div class="recap-num">①</div>
-          <div class="recap-title">for 字符串</div>
-          <div class="recap-sub">一字一字</div>
-        </div>
-        <div class="recap-card card-red">
-          <div class="recap-num">②</div>
-          <div class="recap-title">range()</div>
-          <div class="recap-sub">左闭右开</div>
-        </div>
-        <div class="recap-card card-green">
-          <div class="recap-num">③</div>
-          <div class="recap-title">range 三种</div>
-          <div class="recap-sub">stop / a,b / a,b,c</div>
-        </div>
-        <div class="recap-card card-purple">
-          <div class="recap-num">④</div>
-          <div class="recap-title">累加 1-100</div>
-          <div class="recap-sub">range(1,101)</div>
-        </div>
-        <div class="recap-card card-orange">
-          <div class="recap-num">⑤</div>
-          <div class="recap-title">累加 1+...+n</div>
-          <div class="recap-sub">n+1 技巧</div>
-        </div>
-        <div class="recap-card card-teal">
-          <div class="recap-num">⑥</div>
-          <div class="recap-title">偶数和</div>
-          <div class="recap-sub">步长 2</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 11 作业 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">作业</div>
-      <h2 style="margin:0; font-size:24px;">📚 4 个必做</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">下节习题课讲评</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card success">
-        <h3 style="color:#047857;">必做 1 · 基础</h3>
-        <p style="font-size:16px;">① 填空：<code class="inline">for ch in "Hi"</code> 输出 ___ 行 ② 判断：range(5) 含 5 吗？③ 选择：range(2, 8) 等价于 ④ 填空：<code class="inline">range(0, 10, 2)</code> 输出 ___ ___ ___ ___ ___</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--blue);">
-        <h3 style="color:var(--blue);">必做 2 · range 预测</h3>
-        <p style="font-size:16px;">① <code class="inline">list(range(3))</code> = ______ ② <code class="inline">list(range(1, 4))</code> = ______ ③ <code class="inline">list(range(0, 10, 2))</code> = ______ ④ <code class="inline">list(range(5, 1, -1))</code> = ______</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--amber);">
-        <h3 style="color:var(--amber);">必做 3 · 字符统计</h3>
-        <p style="font-size:16px;">输入字符串，输出字符总数 + 元音数（a/e/i/o/u）。提示：用 for 遍历 + if 判断。测试："Hello" → 总 5，元 2。</p>
-      </div>
-      <div class="card" style="border-left:5px solid var(--teal);">
-        <h3 style="color:var(--teal);">必做 4 · 奇数和</h3>
-        <p style="font-size:16px;">求 1-100 中所有奇数的和：1 + 3 + 5 + ... + 99 = ? 提示：<code class="inline">range(1, 100, 2)</code> 步长 2。预期：2500。</p>
-      </div>
+      <div class="kicker">📌 Template</div>
+      <h1>待填充</h1>
+      <p class="subtitle">用 <code class="inline">_new_lesson.py</code> 自动生成</p>
+      <p style="margin-top:24px; padding:16px; background:rgba(245,158,11,.08); border-left:4px solid var(--amber); border-radius:8px; font-size:15px; line-height:1.7;">
+        用法：<br>
+        1. 准备 body 文件（<code class="inline">&lt;section&gt;...&lt;/section&gt;...</code>）<br>
+        2. 运行：<code class="inline">python _new_lesson.py 6 "list 列表" /tmp/l6_body.html 12</code><br>
+        3. 自动生成 L6.html
+      </p>
     </div>
   </section>
 
 </main>
 
 
-
 <div class="nav">
   <a class="home-link secondary" href="index.html">📚 目录</a>
   <button class="secondary" onclick="prev()">← 上页</button>
-  <span class="counter"><span id="cur">1</span> / <span id="total">11</span></span>
+  <span class="counter"><span id="cur">1</span> / <span id="total">12</span></span>
   <div class="progress-bar"><span id="bar"></span></div>
   <button onclick="next()">下页 →</button>
 </div>
