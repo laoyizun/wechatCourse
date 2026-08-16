@@ -500,23 +500,51 @@ pre {
 <body class="deck-page">
 <main class="deck" id="deck">
 
-  <!-- =========================================== -->
-  <!--  ⬇️  在此粘贴你的 Lx body（不包含 main 标签）  -->
-  <!--  ⬇️  占位提示：用 _new_lesson.py 脚本自动插入  -->
-  <!-- =========================================== -->
+  <!-- ============================================================ -->
+  <!--  📌 TEMPLATE 占位（_new_lesson.py 会自动替换此区）            -->
+  <!--  后续所有 Lx.html 都基于此模板                                -->
+  <!--  参考 L3-L6 现有格式，确保一致                                -->
+  <!-- ============================================================ -->
 
-  <!-- 占位：以下内容会被 Python 脚本替换 -->
+  <!-- ==== Cover 页（首页）==== -->
   <section class="slide title-slide active">
     <div class="left">
-      <div class="kicker">📌 Template</div>
-      <h1>待填充</h1>
-      <p class="subtitle">用 <code class="inline">_new_lesson.py</code> 自动生成</p>
+      <div class="kicker">📌 Template · Lx Cover</div>
+      <h1>让程序学会<span class="highlight">XXX</span></h1>
+      <p class="subtitle">概念名 · N 个概念</p>
       <p style="margin-top:24px; padding:16px; background:rgba(245,158,11,.08); border-left:4px solid var(--amber); border-radius:8px; font-size:15px; line-height:1.7;">
-        用法：<br>
+        <b>模板用法</b>：<br>
         1. 准备 body 文件（<code class="inline">&lt;section&gt;...&lt;/section&gt;...</code>）<br>
-        2. 运行：<code class="inline">python _new_lesson.py 6 "list 列表" /tmp/l6_body.html 12</code><br>
-        3. 自动生成 L6.html
+        2. 运行：<code class="inline">python _new_lesson.py N "标题" /tmp/lN_body.html TOTAL</code><br>
+        3. 自动生成 LN.html（含 title、main、body 全部）
       </p>
+    </div>
+  </section>
+
+  <!-- ==== 实战页（标准格式 · 参考 L3-L6）==== -->
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
+      <div class="kicker">实战 N</div>
+      <h2 style="margin:0; font-size:24px;">📋 题目</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">描述</p>
+    </div>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">题目</h3>
+        <p style="font-size:17px; margin-top:6px;">题目描述...</p>
+      </div>
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code><span class="com"># 答案骨架（含 ___ 填空）</span>
+<span class="kw">if</span> age ___ <span class="num">18</span>:
+    <span class="fn">print</span>(<span class="str">"成年"</span>)</code></pre>
+        <pre class="code-solution" style="display:none"><code><span class="com"># 完整答案（点击"参考答案"显示）</span>
+<span class="kw">if</span> age >= <span class="num">18</span>:
+    <span class="fn">print</span>(<span class="str">"成年"</span>)</code></pre>
+      </div>
     </div>
   </section>
 
