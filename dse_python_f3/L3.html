@@ -398,7 +398,12 @@ pre {
   list-style: none;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.answer-fold > summary::before {
+  content: '💡 参考代码';
+  flex: 1;
 }
 .answer-fold > summary::after {
   content: '点击显示';
