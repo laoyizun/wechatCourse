@@ -677,33 +677,76 @@ pre {
     </div>
   </section>
 
-  <!-- 06 概念 2 找错 -->
+  <!-- 06 概念 2 找错（3 道题）-->
   <section class="slide">
     <div class="left">
       <div class="kicker">找错</div>
-      <h2>if score <span style="color:var(--red);">&gt;</span> 50 哪里错？</h2>
-      <p class="subtitle">50 分刚好卡住</p>
+      <h2>3 道经典 if 错题</h2>
+      <p class="subtitle">看清错在哪、怎么改</p>
     </div>
     <div class="right">
+      <!-- 题 1: PY.5.1 a 反向分级 -->
       <div class="bug">
-        <div class="label">错</div>
-<pre><code>score = <span class="num">50</span>
-<span class="kw">if</span> score &gt; <span class="num">50</span>:
-    <span class="fn">print</span>(<span class="str">"及格"</span>)
+        <div class="label">题 1 · 反向分级</div>
+<pre><code><span class="kw">if</span> score &lt;= <span class="num">100</span>:
+    <span class="fn">print</span>(<span class="str">"Excellent"</span>)
+<span class="kw">elif</span> score &lt;= <span class="num">89</span>:
+    <span class="fn">print</span>(<span class="str">"Good"</span>)
+<span class="kw">elif</span> score &lt;= <span class="num">74</span>:
+    <span class="fn">print</span>(<span class="str">"OK"</span>)
+<span class="kw">elif</span> score &lt;= <span class="num">59</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"不及格"</span>)    <span class="com"># 50 分错走这里</span></code></div>
-      <div style="margin-top:14px;" class="practice">
-        <div class="label">对</div>
-<pre><code>score = <span class="num">50</span>
-<span class="kw">if</span> score &gt;= <span class="num">50</span>:        <span class="com"># 用 >=</span>
-    <span class="fn">print</span>(<span class="str">"及格"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"不及格"</span>)</code></div>
+    <span class="fn">print</span>(<span class="str">"Fail"</span>)          <span class="com"># 错：方向反了</span></code></div>
       <div class="check-q">
-        <div class="check-q-text">❓ Q · 49 分用错版会输出？______</div>
+        <div class="check-q-text">❓ Q1 · 为什么所有分数都会输出 Excellent？</div>
         <details>
           <summary>看答案</summary>
-          <div class="check-a">不及格（49 &lt; 50，走 else）</div>
+          <div class="check-a">第一个条件 score ≤ 100 太宽松，所有分都走第一个分支</div>
+        </details>
+      </div>
+
+      <!-- 题 2: PY.5.1 b 50 分错走 -->
+      <div class="bug" style="margin-top:14px;">
+        <div class="label">题 2 · 50 分丢档</div>
+<pre><code><span class="kw">if</span> score &gt; <span class="num">90</span>:
+    <span class="fn">print</span>(<span class="str">"Excellent"</span>)
+<span class="kw">elif</span> score &gt; <span class="num">75</span>:
+    <span class="fn">print</span>(<span class="str">"Good"</span>)
+<span class="kw">elif</span> score &gt; <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"OK"</span>)
+<span class="kw">elif</span> score &gt; <span class="num">50</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)
+<span class="kw">elif</span> score &lt; <span class="num">50</span>:
+    <span class="fn">print</span>(<span class="str">"Fail"</span>)          <span class="com"># 50 分哪都不走</span></code></div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q2 · 60 / 75 / 90 这些边界分会被正确分档吗？</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">不会！60/75/90 走"F"（用了 &gt; 而非 ≥，且没有 else 兜底）</div>
+        </details>
+      </div>
+
+      <!-- 题 3: 边界错 -->
+      <div style="margin-top:14px;" class="practice">
+        <div class="label">题 3 · 改对（示范）</div>
+<pre><code><span class="kw">if</span> score &lt; <span class="num">0</span> <span class="kw">or</span> score &gt; <span class="num">100</span>:
+    <span class="fn">print</span>(<span class="str">"无效"</span>)
+<span class="kw">elif</span> score &gt;= <span class="num">90</span>:        <span class="com"># 用 >=</span>
+    <span class="fn">print</span>(<span class="str">"Excellent"</span>)
+<span class="kw">elif</span> score &gt;= <span class="num">75</span>:
+    <span class="fn">print</span>(<span class="str">"Good"</span>)
+<span class="kw">elif</span> score &gt;= <span class="num">60</span>:
+    <span class="fn">print</span>(<span class="str">"OK"</span>)
+<span class="kw">elif</span> score &gt;= <span class="num">50</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Fail"</span>)</code></div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q3 · better if 修正了什么？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">① 先返错（&lt;0 或 &gt;100） ② 用 ≥ 不用 &gt; ③ 加 else 兜底 50 分</div>
         </details>
       </div>
     </div>
@@ -814,21 +857,33 @@ pre {
     </div>
   </section>
 
-  <!-- 09 实战 1 三数找最大 -->
+  <!-- 09 实战 1 嵌套 if (PY.5.1d) -->
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
       <div class="kicker">实战 1</div>
-      <h2 style="margin:0; font-size:24px;">🔢 三数找最大</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">用 if-elif 链</p>
+      <h2 style="margin:0; font-size:24px;">🎮 游戏评级（嵌套 if）</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">分数 + 时间 · 双重条件</p>
     </div>
     <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
       <div class="card">
         <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">输入 3 个数 a / b / c，输出最大的<br>
-          测试：<br>
-          (3, 5, 4) → 5<br>
-          (10, 10, 5) → 10<br>
-          (1, 2, 3) → 3
+        <p style="font-size:17px; margin-top:6px;">输入 score 和 time，输出评级：<br>
+          · score ≥ 100：<br>
+          　· time &lt; 20 → S<br>
+          　· time &lt; 30 → A<br>
+          　· 其他 → B<br>
+          · score ≥ 80 → C<br>
+          · 其他：<br>
+          　· time &lt; 10 → Impossible<br>
+          　· 其他 → F
+        </p>
+        <p style="font-size:14px; color:var(--muted); margin-top:10px;">测试 6 组：<br>
+          (120, 20) → ?<br>
+          (100, 15) → ?<br>
+          (105, 35) → ?<br>
+          (80, 5) → ?<br>
+          (50, 10) → ?<br>
+          (50, 5) → ?
         </p>
       </div>
       <div class="answer-fold">
@@ -836,27 +891,48 @@ pre {
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
-b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"b?"</span>))
-c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"c?"</span>))
+        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Score:"</span>))
+time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Time:"</span>))
 
-<span class="kw">if</span> a ___ b ___ a ___ c:
-    <span class="fn">print</span>(<span class="str">"最大 a"</span>, a)
-<span class="kw">elif</span> b ___ c:
-    <span class="fn">print</span>(<span class="str">"最大 b"</span>, b)
+<span class="kw">if</span> score ___ <span class="num">100</span>:
+    <span class="kw">if</span> time ___ <span class="num">20</span>:
+        <span class="fn">print</span>(<span class="str">"S"</span>)
+    <span class="kw">elif</span> time ___ <span class="num">30</span>:
+        <span class="fn">print</span>(<span class="str">"A"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">"B"</span>)
+<span class="kw">elif</span> score ___ <span class="num">80</span>:
+    <span class="fn">print</span>(<span class="str">"C"</span>)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"最大 c"</span>, c)</code></pre>
-        <pre class="code-solution" style="display:none"><code>a = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"a?"</span>))
-b = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"b?"</span>))
-c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"c?"</span>))
+    <span class="kw">if</span> time ___ <span class="num">10</span>:
+        <span class="fn">print</span>(<span class="str">"Impossible"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
+        <pre class="code-solution" style="display:none"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Score:"</span>))
+time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Time:"</span>))
 
-<span class="kw">if</span> a >= b <span class="kw">and</span> a >= c:
-    <span class="fn">print</span>(<span class="str">"最大 a"</span>, a)
-<span class="kw">elif</span> b >= c:
-    <span class="fn">print</span>(<span class="str">"最大 b"</span>, b)
+<span class="kw">if</span> score >= <span class="num">100</span>:
+    <span class="kw">if</span> time &lt; <span class="num">20</span>:
+        <span class="fn">print</span>(<span class="str">"S"</span>)
+    <span class="kw">elif</span> time &lt; <span class="num">30</span>:
+        <span class="fn">print</span>(<span class="str">"A"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">"B"</span>)
+<span class="kw">elif</span> score >= <span class="num">80</span>:
+    <span class="fn">print</span>(<span class="str">"C"</span>)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"最大 c"</span>, c)</code></pre>
+    <span class="kw">if</span> time &lt; <span class="num">10</span>:
+        <span class="fn">print</span>(<span class="str">"Impossible"</span>)
+    <span class="kw">else</span>:
+        <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
       </div>
+    </div>
+    <div class="check-q" style="margin-top:14px;">
+      <div class="check-q-text">❓ Q · 这题共用了 ______ 层缩进（外层 + 内层）？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="check-a">3 层缩进（外层 if + 内层 if + print 语句）</div>
+      </details>
     </div>
   </section>
 
@@ -951,57 +1027,58 @@ c = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">
     </div>
   </section>
 
-  <!-- 12 实战 4 综合应用 -->
+  <!-- 12 实战 4 PY.5.3 温室温度控制 -->
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
       <div class="kicker">实战 4 · 综合</div>
-      <h2 style="margin:0; font-size:24px;">🎯 综合应用</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">边界 + better if</p>
+      <h2 style="margin:0; font-size:24px;">🌡️ 温室温度控制</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">PY.5.3 · better if</p>
     </div>
     <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
       <div class="card">
         <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">输入年龄 + 是否会员(yes/no)：<br>
-          · &lt; 0 或 &gt; 150 → 错误<br>
-          · 0-12 → 儿童票<br>
-          · 13-17 + 会员 → 学生票<br>
-          · 13-17 + 非会员 → 儿童票<br>
-          · 18+ → 成人票<br>
-          边界测试：-1, 0, 12, 13, 17, 18, 150
+        <p style="font-size:17px; margin-top:6px;">Jim 设计的温室控制系统：<br>
+          输入温度（°C），输出控制：<br>
+          · ≥ 30 → Cooling On（制冷）<br>
+          · 20 ~ 29 → Normal（正常）<br>
+          · &lt; 20 → Heating On（加热）<br>
+          · &lt; -50 或 &gt; 100 → Sensor Error!
         </p>
+        <p style="font-size:14px; color:var(--muted); margin-top:10px;">边界测试：-51, -50, 19, 20, 29, 30, 100, 101</p>
       </div>
       <div class="answer-fold">
         <div class="answer-tabs">
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
+        <pre class="code-skeleton"><code>temp = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"温度?"</span>))
 
-<span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
-    <span class="fn">print</span>(<span class="str">"错误"</span>)
-<span class="kw">elif</span> age ___ <span class="num">12</span>:
-    <span class="fn">print</span>(<span class="str">"儿童票"</span>)
-<span class="kw">elif</span> age ___ <span class="num">17</span> ___ vip ___ <span class="str">"yes"</span>:
-    <span class="fn">print</span>(<span class="str">"学生票"</span>)
-<span class="kw">elif</span> age ___ <span class="num">17</span>:
-    <span class="fn">print</span>(<span class="str">"儿童票"</span>)
+<span class="kw">if</span> temp ___ <span class="num">-50</span> ___ temp ___ <span class="num">100</span>:
+    <span class="fn">print</span>(<span class="str">"Sensor Error!"</span>)
+<span class="kw">elif</span> temp ___ <span class="num">30</span>:
+    <span class="fn">print</span>(<span class="str">"Cooling On"</span>)
+<span class="kw">elif</span> temp ___ <span class="num">20</span>:
+    <span class="fn">print</span>(<span class="str">"Normal"</span>)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"成人票"</span>)</code></pre>
-        <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
-vip = <span class="fn">input</span>(<span class="str">"会员(yes/no)?"</span>)
+    <span class="fn">print</span>(<span class="str">"Heating On"</span>)</code></pre>
+        <pre class="code-solution" style="display:none"><code>temp = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"温度?"</span>))
 
-<span class="kw">if</span> age &lt; <span class="num">0</span> <span class="kw">or</span> age &gt; <span class="num">150</span>:
-    <span class="fn">print</span>(<span class="str">"错误"</span>)
-<span class="kw">elif</span> age &lt;= <span class="num">12</span>:
-    <span class="fn">print</span>(<span class="str">"儿童票"</span>)
-<span class="kw">elif</span> age &lt;= <span class="num">17</span> <span class="kw">and</span> vip == <span class="str">"yes"</span>:
-    <span class="fn">print</span>(<span class="str">"学生票"</span>)
-<span class="kw">elif</span> age &lt;= <span class="num">17</span>:
-    <span class="fn">print</span>(<span class="str">"儿童票"</span>)
+<span class="kw">if</span> temp &lt; <span class="num">-50</span> <span class="kw">or</span> temp &gt; <span class="num">100</span>:
+    <span class="fn">print</span>(<span class="str">"Sensor Error!"</span>)
+<span class="kw">elif</span> temp &gt;= <span class="num">30</span>:
+    <span class="fn">print</span>(<span class="str">"Cooling On"</span>)
+<span class="kw">elif</span> temp &gt;= <span class="num">20</span>:
+    <span class="fn">print</span>(<span class="str">"Normal"</span>)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"成人票"</span>)</code></pre>
+    <span class="fn">print</span>(<span class="str">"Heating On"</span>)</code></pre>
       </div>
+    </div>
+    <div class="check-q" style="margin-top:14px;">
+      <div class="check-q-text">❓ Q · 为什么先处理 Sensor Error 而不是最后？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="check-a">better if 原则：错误先返，主体逻辑保持扁平不嵌套</div>
+      </details>
     </div>
   </section>
 

@@ -651,12 +651,12 @@ count = <span class="num">0</span>
     </div>
   </section>
 
-  <!-- 06 概念 2 左闭右开 -->
+  <!-- 06 概念 2 左闭右开 + 倒序 -->
   <section class="slide">
     <div class="left">
       <div class="kicker">原理</div>
       <h2>左闭右开 · <span class="highlight">关键原理</span></h2>
-      <p class="subtitle">终点不算</p>
+      <p class="subtitle">终点不算 + 步长可为负</p>
     </div>
     <div class="right">
       <div class="practice">
@@ -669,6 +669,16 @@ count = <span class="num">0</span>
 
 <span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">2</span>)))
 <span class="com"># [0, 2, 4, 6, 8] ← 步长 2，不含 10</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div class="practice" style="margin-top:14px;">
+        <div class="label">倒序！步长 -1</div>
+<pre><code><span class="fn">print</span>(<span class="fn">list</span>(<span class="fn">range</span>(<span class="num">10</span>, <span class="num">0</span>, <span class="num">-1</span>)))
+<span class="com"># [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</span>
+<span class="com"># 倒数！从 10 到 1，不含 0</span>
+
+<span class="kw">for</span> k <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>, <span class="num">0</span>, <span class="num">-1</span>):
+    <span class="fn">print</span>(k, end=<span class="str">' '</span>)
+<span class="com"># 输出：5 4 3 2 1（倒数到 1，不含 0）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
       <div class="check-q">
         <div class="check-q-text">❓ Q1 · <code class="inline">range(5)</code> 包含 5 吗？______</div>
@@ -689,6 +699,13 @@ count = <span class="num">0</span>
         <details>
           <summary>看答案</summary>
           <div class="check-a">不包含（含 0/2/4/6/8，右开）</div>
+        </details>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q4 · <code class="inline">range(10, 0, -1)</code> 输出什么？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">[10, 9, 8, 7, 6, 5, 4, 3, 2, 1] · 含 10 不含 0</div>
         </details>
       </div>
     </div>
@@ -773,20 +790,21 @@ total = <span class="num">0</span>
     </div>
   </section>
 
-  <!-- 09 实战 3 1-100 偶数和 -->
+  <!-- 09 实战 3 for + if 组合（统计偶数）-->
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
       <div class="kicker">实战 3</div>
-      <h2 style="margin:0; font-size:24px;">🔘 1-100 偶数和</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">range 步长 2</p>
+      <h2 style="margin:0; font-size:24px;">🔘 1-100 偶数个数（for + if）</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">PY.6.1(h) · for + 条件筛选</p>
     </div>
     <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
       <div class="card">
         <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">求 1-100 中所有偶数的和：<br>
-          2 + 4 + 6 + ... + 100 = ?<br>
-          提示：<code class="inline">range(0, 101, 2)</code> 步长 2<br>
-          预期：2550
+        <p style="font-size:17px; margin-top:6px;">用 for + if 统计 1-100 中偶数个数：<br>
+          · 遍历 1-100<br>
+          · 用 <code class="inline">i % 2 == 0</code> 判定偶数<br>
+          · 计数器 <code class="inline">count += 1</code><br>
+          预期：50 个偶数
         </p>
       </div>
       <div class="answer-fold">
@@ -794,24 +812,35 @@ total = <span class="num">0</span>
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>total = <span class="num">0</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">101</span>, <span class="num">2</span>):
-    total += i
+        <pre class="code-skeleton"><code>count = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
+    <span class="kw">if</span> i ___ <span class="num">2</span> ___ <span class="num">0</span>:    <span class="com"># 偶数判断</span>
+        count ___ <span class="num">1</span>
 
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数和 = {total}"</span>)</code></pre>
-        <pre class="code-solution" style="display:none"><code>total = <span class="num">0</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">101</span>, <span class="num">2</span>):
-    total += i
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数个数 = {count}"</span>)</code></pre>
+        <pre class="code-solution" style="display:none"><code>count = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
+    <span class="kw">if</span> i % <span class="num">2</span> == <span class="num">0</span>:
+        count += <span class="num">1</span>
 
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数和 = {total}"</span>)</code></pre>
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数个数 = {count}"</span>)</code></pre>
       </div>
     </div>
     <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · <code class="inline">range(0, 101, 2)</code> 最后一个数是？______</div>
+      <div class="check-q-text">❓ Q · 为什么用 <code class="inline">i % 2 == 0</code> 判偶数？______</div>
       <details>
         <summary>看答案</summary>
-        <div class="check-a">100（步长 2，含 0/2/.../100，右开不含 101）</div>
+        <div class="check-a">偶数除以 2 余数为 0（4÷2=2 余 0，5÷2=2 余 1）</div>
       </details>
+    </div>
+    <div style="margin-top:14px;" class="practice">
+      <div class="label">扩展：1-100 奇数和</div>
+<pre><code><span class="com"># 改动一处：把 % 2 == 0 改成 % 2 != 0（奇数）</span>
+total = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">101</span>):
+    <span class="kw">if</span> i % <span class="num">2</span> != <span class="num">0</span>:        <span class="com"># 奇数</span>
+        total += i
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"奇数和 = {total}"</span>)  <span class="com"># 2500</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
     </div>
   </section>
 
