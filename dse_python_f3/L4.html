@@ -613,17 +613,19 @@ pre {
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
-<span class="kw">if</span> score ___ <span class="num">90</span>:
-    <span class="fn">print</span>(<span class="str">"A"</span>)
-<span class="kw">elif</span> score ___ <span class="num">80</span>:
-    <span class="fn">print</span>(<span class="str">"B"</span>)
-<span class="kw">elif</span> score ___ <span class="num">70</span>:
-    <span class="fn">print</span>(<span class="str">"C"</span>)
-<span class="kw">elif</span> score ___ <span class="num">60</span>:
-    <span class="fn">print</span>(<span class="str">"D"</span>)
+        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>())
+
+<span class="com"># 提示：4 个分支 + 1 个 else</span>
+<span class="kw">if</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
+    <span class="fn">print</span>(____)</code></pre>
         <pre class="code-solution" style="display:none"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
 <span class="kw">if</span> score >= <span class="num">90</span>:
     <span class="fn">print</span>(<span class="str">"A"</span>)
@@ -822,18 +824,19 @@ pre {
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
+        <pre class="code-skeleton"><code>age = <span class="fn">int</span>(<span class="fn">input</span>())
 
-<span class="kw">if</span> age ___ <span class="num">0</span> ___ age ___ <span class="num">150</span>:
-    <span class="fn">print</span>(<span class="str">"错误"</span>)
-<span class="kw">elif</span> age ___ <span class="num">12</span>:
-    <span class="fn">print</span>(<span class="str">"儿童"</span>)
-<span class="kw">elif</span> age ___ <span class="num">17</span>:
-    <span class="fn">print</span>(<span class="str">"青少年"</span>)
-<span class="kw">elif</span> age ___ <span class="num">59</span>:
-    <span class="fn">print</span>(<span class="str">"成人"</span>)
+<span class="com"># 提示：先返错，再分4 档（早返 better if）</span>
+<span class="kw">if</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"老人"</span>)</code></pre>
+    <span class="fn">print</span>(____)</code></pre>
         <pre class="code-solution" style="display:none"><code>age = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))
 
 <span class="kw">if</span> age &lt; <span class="num">0</span> <span class="kw">or</span> age &gt; <span class="num">150</span>:
@@ -891,23 +894,24 @@ pre {
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Score:"</span>))
-time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Time:"</span>))
+        <pre class="code-skeleton"><code>score = <span class="fn">int</span>(<span class="fn">input</span>())
+time = <span class="fn">int</span>(<span class="fn">input</span>())
 
-<span class="kw">if</span> score ___ <span class="num">100</span>:
-    <span class="kw">if</span> time ___ <span class="num">20</span>:
-        <span class="fn">print</span>(<span class="str">"S"</span>)
-    <span class="kw">elif</span> time ___ <span class="num">30</span>:
-        <span class="fn">print</span>(<span class="str">"A"</span>)
+<span class="com"># 提示：外层3 分支 + 内层 if-elif（嵌套）</span>
+<span class="kw">if</span> ____:
+    <span class="kw">if</span> ____:
+        <span class="fn">print</span>(____)
+    <span class="kw">elif</span> ____:
+        <span class="fn">print</span>(____)
     <span class="kw">else</span>:
-        <span class="fn">print</span>(<span class="str">"B"</span>)
-<span class="kw">elif</span> score ___ <span class="num">80</span>:
-    <span class="fn">print</span>(<span class="str">"C"</span>)
+        <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
 <span class="kw">else</span>:
-    <span class="kw">if</span> time ___ <span class="num">10</span>:
-        <span class="fn">print</span>(<span class="str">"Impossible"</span>)
+    <span class="kw">if</span> ____:
+        <span class="fn">print</span>(____)
     <span class="kw">else</span>:
-        <span class="fn">print</span>(<span class="str">"F"</span>)</code></pre>
+        <span class="fn">print</span>(____)</code></pre>
         <pre class="code-solution" style="display:none"><code>score = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Score:"</span>))
 time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"Time:"</span>))
 
@@ -960,17 +964,19 @@ time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
-<span class="kw">if</span> uv ___ <span class="num">11</span>:
-    <span class="fn">print</span>(<span class="str">"Extreme"</span>)
-<span class="kw">elif</span> uv ___ <span class="num">8</span>:
-    <span class="fn">print</span>(<span class="str">"Very High"</span>)
-<span class="kw">elif</span> uv ___ <span class="num">6</span>:
-    <span class="fn">print</span>(<span class="str">"High"</span>)
-<span class="kw">elif</span> uv ___ <span class="num">3</span>:
-    <span class="fn">print</span>(<span class="str">"Moderate"</span>)
+        <pre class="code-skeleton"><code>uv = <span class="fn">int</span>(<span class="fn">input</span>())
+
+<span class="com"># 提示：4 个分支 + 1 个 else（注意：阈值从大到小）</span>
+<span class="kw">if</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"Low"</span>)</code></pre>
+    <span class="fn">print</span>(____)</code></pre>
         <pre class="code-solution" style="display:none"><code>uv = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"UV?"</span>))
 <span class="kw">if</span> uv >= <span class="num">11</span>:
     <span class="fn">print</span>(<span class="str">"Extreme"</span>)
@@ -1009,13 +1015,15 @@ time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
-<span class="kw">if</span> bmi ___ <span class="num">18.5</span>:
-    <span class="fn">print</span>(<span class="str">"偏瘦"</span>)
-<span class="kw">elif</span> bmi ___ <span class="num">24</span>:
-    <span class="fn">print</span>(<span class="str">"正常"</span>)
+        <pre class="code-skeleton"><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>())
+
+<span class="com"># 提示：3 个分支（注意：偏瘦 &lt; 18.5）</span>
+<span class="kw">if</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"偏胖"</span>)</code></pre>
+    <span class="fn">print</span>(____)</code></pre>
         <pre class="code-solution" style="display:none"><code>bmi = <span class="fn">float</span>(<span class="fn">input</span>(<span class="str">"BMI?"</span>))
 <span class="kw">if</span> bmi &lt; <span class="num">18.5</span>:
     <span class="fn">print</span>(<span class="str">"偏瘦"</span>)
@@ -1051,16 +1059,17 @@ time = <span class="fn">int</span>(<span class="fn">input</span>(<span class="st
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>temp = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"温度?"</span>))
+        <pre class="code-skeleton"><code>temp = <span class="fn">int</span>(<span class="fn">input</span>())
 
-<span class="kw">if</span> temp ___ <span class="num">-50</span> ___ temp ___ <span class="num">100</span>:
-    <span class="fn">print</span>(<span class="str">"Sensor Error!"</span>)
-<span class="kw">elif</span> temp ___ <span class="num">30</span>:
-    <span class="fn">print</span>(<span class="str">"Cooling On"</span>)
-<span class="kw">elif</span> temp ___ <span class="num">20</span>:
-    <span class="fn">print</span>(<span class="str">"Normal"</span>)
+<span class="com"># 提示：先返错（用 or），再分 3 档</span>
+<span class="kw">if</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
+<span class="kw">elif</span> ____:
+    <span class="fn">print</span>(____)
 <span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"Heating On"</span>)</code></pre>
+    <span class="fn">print</span>(____)</code></pre>
         <pre class="code-solution" style="display:none"><code>temp = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"温度?"</span>))
 
 <span class="kw">if</span> temp &lt; <span class="num">-50</span> <span class="kw">or</span> temp &gt; <span class="num">100</span>:
