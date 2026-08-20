@@ -734,12 +734,13 @@ empty = []
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小李"</span>, <span class="str">"小华"</span>]
+        <pre class="code-skeleton"><code>____ = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小李"</span>, <span class="str">"小华"</span>]
 
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 1 个：{names[__]}"</span>)
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 3 个：{names[__]}"</span>)
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最后一个：{names[__]}"</span>)
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"总人数：{___}"</span>)</code></pre>
+<span class="com"># 提示：4 个 print</span>
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 1 个：{____[__]}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 3 个：{____[__]}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最后一个：{____[__]}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"总人数：{___(____)}"</span>)</code></pre>
         <pre class="code-solution" style="display:none"><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小李"</span>, <span class="str">"小华"</span>]
 
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"第 1 个：{names[<span class="num">0</span>]}"</span>)
@@ -772,11 +773,12 @@ empty = []
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>]
+        <pre class="code-skeleton"><code>____ = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>]
 
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最高分：{___}"</span>)
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最低分：{___}"</span>)
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"平均分：{___}"</span>)</code></pre>
+<span class="com"># 提示：max / min / sum / len</span>
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最高分：{___(____)}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"最低分：{___(____)}"</span>)
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"平均分：{___(____) / ___(____)}"</span>)</code></pre>
         <pre class="code-solution" style="display:none"><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>]
 
 <span class="fn">print</span>(<span class="fn">f</span><span class="str">"最高分：{<span class="fn">max</span>(scores)}"</span>)
@@ -809,19 +811,19 @@ empty = []
           <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
           <button class="answer-tab" data-mode="solution">参考答案</button>
         </div>
-        <pre class="code-skeleton"><code>s = <span class="fn">input</span>(<span class="str">"字符串?"</span>)
-vowels = [<span class="str">"a"</span>, <span class="str">"e"</span>, <span class="str">"i"</span>, <span class="str">"o"</span>, <span class="str">"u"</span>]
+        <pre class="code-skeleton"><code>s = <span class="fn">input</span>()
+____ = [<span class="str">"a"</span>, <span class="str">"e"</span>, <span class="str">"i"</span>, <span class="str">"o"</span>, <span class="str">"u"</span>]
 
-v_count = <span class="num">0</span>
-c_count = <span class="num">0</span>
+____ = <span class="num">0</span>
+____ = <span class="num">0</span>
 
-<span class="kw">for</span> ch <span class="kw">in</span> s:
-    <span class="kw">if</span> ch <span class="kw">in</span> vowels:
-        v_count += <span class="num">1</span>
+<span class="kw">for</span> ch <span class="kw">in</span> ____:
+    <span class="kw">if</span> ____ <span class="kw">in</span> ____:
+        ____ += <span class="num">1</span>
     <span class="kw">else</span>:
-        c_count += <span class="num">1</span>
+        ____ += <span class="num">1</span>
 
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"元音: {v_count}, 辅音: {c_count}"</span>)</code></pre>
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"元音: {____}, 辅音: {____}"</span>)</code></pre>
         <pre class="code-solution" style="display:none"><code>s = <span class="fn">input</span>(<span class="str">"字符串?"</span>)
 vowels = [<span class="str">"a"</span>, <span class="str">"e"</span>, <span class="str">"i"</span>, <span class="str">"o"</span>, <span class="str">"u"</span>]
 
