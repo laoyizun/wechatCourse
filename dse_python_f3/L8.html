@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L8 · 总复习 1 (单点填空+选择+改错) — Python</title>
+<title>L8 · list 进阶 — Python</title>
 <style>
 :root {
   --bg: #f3f7fb;
@@ -504,8 +504,8 @@ pre {
   <section class="slide title-slide active">
     <div class="left">
       <div class="kicker">Lesson 8</div>
-      <h1>总复习 1 · <span class="highlight">查缺补漏</span></h1>
-      <p class="subtitle">9 个知识点 + 填空 + 选择 + 改错</p>
+      <h1>list <span class="highlight">进阶</span></h1>
+      <p class="subtitle">5 个概念 · 修改 / 切片 / 增删 / 排序</p>
     </div>
   </section>
 
@@ -513,13 +513,13 @@ pre {
   <section class="slide">
     <div class="left">
       <div class="kicker">L7 回顾</div>
-      <h2>list 核心 3 件事</h2>
+      <h2>list 基础 4 件事</h2>
       <p class="subtitle">快速回忆</p>
     </div>
     <div class="right">
       <div class="check-q check-q-blue">
-        <div class="check-q-text">Q1 · 创建一个 list 含 3 个数字？______</div>
-        <details><summary>看答案</summary><div class="check-a">nums = [1, 2, 3]</div></details>
+        <div class="check-q-text">Q1 · 创建 list 用什么括号？______</div>
+        <details><summary>看答案</summary><div class="check-a">[]（方括号）</div></details>
       </div>
       <div class="check-q check-q-blue">
         <div class="check-q-text">Q2 · nums[0] 取到的是第几个？______</div>
@@ -529,302 +529,283 @@ pre {
         <div class="check-q-text">Q3 · nums[-1] 取到的是？______</div>
         <details><summary>看答案</summary><div class="check-a">最后一个元素</div></details>
       </div>
+      <div class="check-q check-q-blue">
+        <div class="check-q-text">Q4 · len(nums) 作用？______</div>
+        <details><summary>看答案</summary><div class="check-a">返回 list 长度（元素个数）</div></details>
+      </div>
     </div>
   </section>
 
-  <!-- 03 概念网络 L1-L7 -->
+  <!-- 03 概念 1 修改元素 -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">知识网络</div>
-      <h2>L1-L7 · 9 个知识点</h2>
-      <p class="subtitle">一图看清</p>
+      <div class="kicker">Concept 1</div>
+      <h2>修改元素</h2>
+      <p class="subtitle">用索引改值</p>
     </div>
     <div class="right">
-      <div class="recap-grid" style="grid-template-columns: repeat(3, 1fr);">
-        <div class="recap-card card-blue">
-          <h4>L1 · I/O + 变量</h4>
-          <p>print / input / 变量 / f-string</p>
-        </div>
-        <div class="recap-card card-amber">
-          <h4>L2 · 数据类型</h4>
-          <p>int / float / str / bool / 转换</p>
-        </div>
-        <div class="recap-card card-teal">
-          <h4>L3 · if + 逻辑</h4>
-          <p>比较 / if-else / and / or</p>
-        </div>
-        <div class="recap-card card-violet">
-          <h4>L4 · 多分支</h4>
-          <p>if-elif-else / 边界 / better if</p>
-        </div>
-        <div class="recap-card card-pink">
-          <h4>L5 · for</h4>
-          <p>for 遍历 / range(start, stop, step)</p>
-        </div>
-        <div class="recap-card card-cyan">
-          <h4>L6 · while</h4>
-          <p>while / 防死循环 / break / continue</p>
-        </div>
-        <div class="recap-card card-blue" style="grid-column: span 3;">
-          <h4>L7 · list</h4>
-          <p>list 创建 / 索引（正/负）/ len / for 遍历</p>
-        </div>
+      <div class="practice">
+        <div class="label">通过索引修改</div>
+<pre><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小华"</span>]
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小红', '小华']</span>
+
+names[____] = <span class="str">"小张"</span>      <span class="com"># 填空 1：改索引 1（小红 → 小张）</span>
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小张', '小华']</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q1 · 填空 1：把 "小红" 改成 "小张"，索引是？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">1（第 2 个元素，索引从 0 开始）</div>
+        </details>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q2 · names[10] = "新值" 会怎样？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">IndexError 报错（索引超出范围）</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 概念 2 切片 -->
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Concept 2</div>
+      <h2>切片</h2>
+      <p class="subtitle">list[start:stop:step]</p>
+    </div>
+    <div class="right">
+      <div class="practice">
+        <div class="label">切片（取一段）</div>
+<pre><code>nums = [<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>]
+
+<span class="fn">print</span>(nums[____:____])      <span class="com"># 填空：[20, 30]（索引 1 到 3）</span>
+<span class="fn">print</span>(nums[____:])          <span class="com"># 填空：[30, 40, 50]（索引 2 到末尾）</span>
+<span class="fn">print</span>(nums[:____])          <span class="com"># 填空：[10, 20]（开头到索引 2）</span>
+<span class="fn">print</span>(nums[::____])         <span class="com"># 填空：[10, 30, 50]（步长 2）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q1 · 填空 1（nums[1:3] 含 3 吗）？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">不含（左闭右开）</div>
+        </details>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q2 · nums[:] 是什么？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">整个 list 的拷贝（[10, 20, 30, 40, 50]）</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 概念 3 添加 append -->
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Concept 3</div>
+      <h2>添加 · append</h2>
+      <p class="subtitle">在末尾加一个</p>
+    </div>
+    <div class="right">
+      <div class="practice">
+        <div class="label">添加元素</div>
+<pre><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>]
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小红']</span>
+
+names.____(<span class="str">"小华"</span>)     <span class="com"># 填空 1：append</span>
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小红', '小华']</span>
+
+names.____(<span class="str">"小张"</span>)     <span class="com"># 填空 2：再 append</span>
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小红', '小华', '小张']</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div class="check-q">
+        <div class="check-q-text">❓ Q · append 加在哪？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">list 末尾（不能指定位置，要指定位置用 insert）</div>
+        </details>
+      </div>
+      <div class="practice" style="margin-top:14px;">
+        <div class="label">insert 指定位置</div>
+<pre><code>names = [<span class="str">"小明"</span>, <span class="str">"小华"</span>]
+names.____(<span class="num">1</span>, <span class="str">"小红"</span>)  <span class="com"># 填空 3：insert</span>
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小红', '小华']（插在第 1 个位置）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 概念 4 删除 -->
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Concept 4</div>
+      <h2>删除 · pop / remove</h2>
+      <p class="subtitle">两种删除方法</p>
+    </div>
+    <div class="right">
+      <div class="practice">
+        <div class="label">pop 按索引删</div>
+<pre><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小华"</span>]
+x = names.____(____)          <span class="com"># 填空 1+2：pop(1) 删除索引 1</span>
+<span class="fn">print</span>(x)                   <span class="com"># 小红（被删的）</span>
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小华']</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div style="margin-top:14px;" class="practice">
+        <div class="label">remove 按值删</div>
+<pre><code>names = [<span class="str">"小明"</span>, <span class="str">"小红"</span>, <span class="str">"小华"</span>]
+names.____(<span class="str">"小红"</span>)        <span class="com"># 填空 3：remove</span>
+<span class="fn">print</span>(names)               <span class="com"># ['小明', '小华']</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
       <div class="check-q" style="margin-top:14px;">
-        <div class="check-q-text">❓ Q · 你能把 9 个关键字（一个一个）列出来吗？______</div>
+        <div class="check-q-text">❓ Q · pop 和 remove 区别？______</div>
         <details>
           <summary>看答案</summary>
-          <div class="check-a">print / input / int / if / elif / for / while / break / list</div>
+          <div class="check-a">pop 按索引删（返回删的值），remove 按值删（不返回，只删第一个匹配的）</div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- 04 填空 L1-L2 -->
+  <!-- 07 概念 5 排序 -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">填空 1</div>
-      <h2>L1-L2 填空</h2>
-      <p class="subtitle">填变量 / 类型 / 函数</p>
+      <div class="kicker">Concept 5</div>
+      <h2>排序 · sort</h2>
+      <p class="subtitle">原地排序 / 不改原 list</p>
     </div>
     <div class="right">
       <div class="practice">
-        <div class="label">填空 1 · I/O</div>
-<pre><code><span class="fn">____</span>(<span class="str">"你好"</span>)            <span class="com"># 填空 1：屏幕输出函数</span>
-____ = <span class="fn">input</span>(<span class="str">"名字?"</span>)     <span class="com"># 填空 2：存到变量</span>
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"Hi, {____}"</span>)   <span class="com"># 填空 3：填变量名</span></code></pre>
+        <div class="label">sort 原地排序</div>
+<pre><code>nums = [<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>, <span class="num">9</span>, <span class="num">2</span>, <span class="num">6</span>]
+<span class="fn">print</span>(nums)               <span class="com"># [3, 1, 4, 1, 5, 9, 2, 6]</span>
+nums.____()                  <span class="com"># 填空 1：sort</span>
+<span class="fn">print</span>(nums)               <span class="com"># [1, 1, 2, 3, 4, 5, 6, 9]（已改）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 1 函数？填空 3 变量名？______</div>
+      <div style="margin-top:14px;" class="practice">
+        <div class="label">sorted 返回新 list</div>
+<pre><code>nums = [<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>]
+new = <span class="fn">____</span>(nums)           <span class="com"># 填空 2：sorted</span>
+<span class="fn">print</span>(new)                 <span class="com"># [1, 1, 3, 4, 5]</span>
+<span class="fn">print</span>(nums)                <span class="com"># [3, 1, 4, 1, 5]（原 list 不变）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
+      </div>
+      <div class="check-q" style="margin-top:14px;">
+        <div class="check-q-text">❓ Q · sort 和 sorted 区别？______</div>
         <details>
           <summary>看答案</summary>
-          <div class="check-a">① print ② name ③ name</div>
+          <div class="check-a">sort 原地改原 list（无返回），sorted 返回新 list（原 list 不变）</div>
         </details>
       </div>
       <div class="practice" style="margin-top:14px;">
-        <div class="label">填空 2 · 类型转换</div>
-<pre><code>age = <span class="fn">____</span>(<span class="fn">input</span>(<span class="str">"年龄?"</span>))  <span class="com"># 转 int</span>
-pi = <span class="fn">____</span>(<span class="str">"3.14"</span>)         <span class="com"># 转 float</span>
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"π = {pi:.____}"</span>)   <span class="com"># 填保留位数（1 或 2）</span></code></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 4-6？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">④ int ⑤ float ⑥ 2（保留 2 位小数）</div>
-        </details>
+        <div class="label">reverse 反转</div>
+<pre><code>nums = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+nums.____()                  <span class="com"># 填空 3：reverse</span>
+<span class="fn">print</span>(nums)                <span class="com"># [3, 2, 1]</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
       </div>
     </div>
   </section>
 
-  <!-- 05 填空 L3-L4 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">填空 2</div>
-      <h2>L3-L4 填空</h2>
-      <p class="subtitle">填比较运算符 / if / elif</p>
+  <!-- 08 实战 1 成绩录入 -->
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
+      <div class="kicker">实战 1</div>
+      <h2 style="margin:0; font-size:24px;">📊 成绩录入 + 排序</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">append + sort</p>
     </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">填空 1 · 比较运算符</div>
-<pre><code><span class="kw">if</span> age ____ <span class="num">18</span>:                  <span class="com"># 填空 1：>=</span>
-    <span class="fn">print</span>(<span class="str">"成年"</span>)
-<span class="kw">if</span> age ____ <span class="num">18</span>:                  <span class="com"># 填空 2：<</span>
-    <span class="fn">print</span>(<span class="str">"未成年"</span>)
-<span class="kw">if</span> age ____ <span class="num">18</span>:                  <span class="com"># 填空 3：==</span>
-    <span class="fn">print</span>(<span class="str">"正好18"</span>)</code></pre>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">题目</h3>
+        <p style="font-size:17px; margin-top:6px;">让用户输入 5 个分数，存入 list：<br>
+          · 用 append 存<br>
+          · 用 sort 排序<br>
+          · 最后输出 list<br>
+          <br>
+          测试输入：85, 92, 78, 95, 88<br>
+          预期输出：[78, 85, 88, 92, 95]
+        </p>
       </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 1-3？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">① >= ② < ③ ==（注意：= 是赋值，不是比较）</div>
-        </details>
-      </div>
-      <div class="practice" style="margin-top:14px;">
-        <div class="label">填空 2 · if-elif-else</div>
-<pre><code><span class="kw">if</span> score ____ <span class="num">90</span>:
-    <span class="fn">print</span>(<span class="str">"A"</span>)
-<span class="kw">____</span> score ____ <span class="num">80</span>:             <span class="com"># 填空 4 + 5</span>
-    <span class="fn">print</span>(<span class="str">"B"</span>)
-<span class="kw">____</span>:                          <span class="com"># 填空 6</span>
-    <span class="fn">print</span>(<span class="str">"C"</span>)</code></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 4-6？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">④ elif ⑤ >= ⑥ else</div>
-        </details>
-      </div>
-    </div>
-  </section>
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>____ = []
 
-  <!-- 06 填空 L5-L6 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">填空 3</div>
-      <h2>L5-L6 填空</h2>
-      <p class="subtitle">填 for / range / while</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">填空 1 · for + range</div>
-<pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(____):           <span class="com"># 填空 1：5</span>
-    <span class="fn">print</span>(i)                  <span class="com"># 0,1,2,3,4</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(____):           <span class="com"># 填空 1：5 次</span>
+    s = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+    ____.____(____)             <span class="com"># 填空 2 + 3：append(s)</span>
 
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, ____):       <span class="com"># 填空 2：11（1-10）</span>
-    <span class="fn">print</span>(i)
+____.____()                     <span class="com"># 填空 4：sort</span>
 
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">11</span>, ____):  <span class="com"># 填空 3：2</span>
-    <span class="fn">print</span>(i)                  <span class="com"># 0,2,4,6,8,10</span></code></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 1-3？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">① 5 ② 11（左闭右开，要 1-10 写 11）③ 2（步长）</div>
-        </details>
-      </div>
-      <div class="practice" style="margin-top:14px;">
-        <div class="label">填空 2 · while</div>
-<pre><code>i = <span class="num">1</span>
-<span class="kw">while</span> i ____ <span class="num">5</span>:                <span class="com"># 填空 4：<=</span>
-    <span class="fn">print</span>(i)
-    i ____ <span class="num">1</span>                  <span class="com"># 填空 5：+=（必须更新防死循环）</span></code></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 4-5？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">④ <= ⑤ +=（必须更新变量）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 07 填空 L7 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">填空 4</div>
-      <h2>L7 填空</h2>
-      <p class="subtitle">填 list / 索引</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">填空 1 · list 创建 + 索引</div>
-<pre><code>fruits = [<span class="str">"苹果"</span>, <span class="str">"香蕉"</span>, <span class="str">"樱桃"</span>]
-<span class="fn">print</span>(fruits[____])       <span class="com"># 填空 1：苹果（索引 0）</span>
-<span class="fn">print</span>(fruits[____])       <span class="com"># 填空 2：樱桃（索引 -1 或 2）</span>
-<span class="fn">print</span>(<span class="fn">____</span>(fruits))     <span class="com"># 填空 3：长度函数</span></code></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 1-3？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">① 0（不是 1）② -1 或 2 ③ len</div>
-        </details>
-      </div>
-      <div class="practice" style="margin-top:14px;">
-        <div class="label">填空 2 · for 遍历 list</div>
-<pre><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>]
-____ = <span class="num">0</span>                        <span class="com"># 填空 4：累加器</span>
-<span class="kw">for</span> s ____ scores:                <span class="com"># 填空 5：in</span>
-    ____ += s                      <span class="com"># 填空 6：累加</span>
-<span class="fn">print</span>(<span class="fn">sum</span>(scores) / <span class="fn">____</span>(scores))  <span class="com"># 填空 7：长度</span></code></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 填空 4-7？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">④ total ⑤ in ⑥ total ⑦ len</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 08 选择题 6 道 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">选择题</div>
-      <h2>6 道选择题</h2>
-      <p class="subtitle">选 A / B / C</p>
-    </div>
-    <div class="right">
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q1 · input() 返回的是？<br>
-        ① int ③ str ⑤ list</div>
-        <details><summary>看答案</summary><div class="check-a">② str（永远是字符串）</div></details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q2 · 5 / 2 等于？<br>
-        ① 2  ② 2.5  ③ 报错</div>
-        <details><summary>看答案</summary><div class="check-a">② 2.5（/ 永远返回 float）</div></details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q3 · range(1, 5) 含 5 吗？<br>
-        ① 含 ② 不含 ③ 看步长</div>
-        <details><summary>看答案</summary><div class="check-a">② 不含（左闭右开）</div></details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q4 · while True + break 用在？<br>
-        ① 已知次数 ② 未知次数 ③ 死循环</div>
-        <details><summary>看答案</summary><div class="check-a">② 未知次数（条件循环）</div></details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q5 · nums[0] 是 list 的？<br>
-        ① 第 1 个 ② 第 0 个 ③ 报错</div>
-        <details><summary>看答案</summary><div class="check-a">① 第 1 个（索引从 0 开始）</div></details>
-      </div>
-      <div class="check-q check-q-blue">
-        <div class="check-q-text">Q6 · 不写 break 的 while True 会？<br>
-        ① 正常结束 ② 死循环 ③ 报错</div>
-        <details><summary>看答案</summary><div class="check-a">② 死循环（条件永远为真）</div></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 09 改错题 4 道 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">改错</div>
-      <h2>4 道改错题</h2>
-      <p class="subtitle">找出 bug 并改对</p>
-    </div>
-    <div class="right">
-      <div class="bug">
-        <div class="label">错 1 · input 忘 int</div>
-<pre><code>age = <span class="fn">input</span>(<span class="str">"年龄?"</span>)
-<span class="kw">if</span> age &gt;= <span class="num">18</span>:                <span class="com"># 报错：字符串和数字不能比</span>
-    <span class="fn">print</span>(<span class="str">"成年"</span>)
+<span class="fn">print</span>(____)
 </code></pre>
-        <div style="margin-top:6px; font-size:14px; color:var(--muted);">改：age = int(input(...))</div>
-      </div>
-      <div class="bug" style="margin-top:14px;">
-        <div class="label">错 2 · 边界用错</div>
-<pre><code><span class="kw">if</span> score &gt; <span class="num">60</span>:                  <span class="com"># 60 分丢档</span>
-    <span class="fn">print</span>(<span class="str">"及格"</span>)
-<span class="kw">else</span>:
-    <span class="fn">print</span>(<span class="str">"不及格"</span>)
+        <pre class="code-solution" style="display:none"><code>scores = []
+
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
+    s = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"分数?"</span>))
+    scores.append(s)
+
+scores.sort()
+
+<span class="fn">print</span>(scores)
 </code></pre>
-        <div style="margin-top:6px; font-size:14px; color:var(--muted);">改：&gt; 改成 &gt;=</div>
       </div>
-      <div class="bug" style="margin-top:14px;">
-        <div class="label">错 3 · while 死循环</div>
-<pre><code>i = <span class="num">1</span>
-<span class="kw">while</span> i &lt;= <span class="num">5</span>:
-    <span class="fn">print</span>(i)
-    <span class="com"># 忘了 i += 1 → 死循环</span>
+    </div>
+  </section>
+
+  <!-- 09 实战 2 去重 -->
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
+      <div class="kicker">实战 2</div>
+      <h2 style="margin:0; font-size:24px;">🔍 数字去重</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">in 关键字 + append</p>
+    </div>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">题目</h3>
+        <p style="font-size:17px; margin-top:6px;">输入 5 个数字，输出**不重复**的 list：<br>
+          · 如果数字已存在，不加<br>
+          · 否则 append 到 result<br>
+          <br>
+          测试输入：1, 2, 2, 3, 1<br>
+          预期输出：[1, 2, 3]<br>
+          <br>
+          提示：if x not in result
+        </p>
+      </div>
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>____ = []
+
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
+    n = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"数字?"</span>))
+    <span class="kw">if</span> n ____ ____:               <span class="com"># 填空 1+2：not in result</span>
+        ____.____(____)             <span class="com"># 填空 3+4：append(n)</span>
+
+<span class="fn">print</span>(____)
 </code></pre>
-        <div style="margin-top:6px; font-size:14px; color:var(--muted);">改：加 i += 1</div>
-      </div>
-      <div class="bug" style="margin-top:14px;">
-        <div class="label">错 4 · list 索引错</div>
-<pre><code>names = [<span class="str">"A"</span>, <span class="str">"B"</span>, <span class="str">"C"</span>]
-<span class="fn">print</span>(names[<span class="num">1</span>])               <span class="com"># 错以为第 1 个</span>
+        <pre class="code-solution" style="display:none"><code>result = []
+
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
+    n = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"数字?"</span>))
+    <span class="kw">if</span> n <span class="kw">not</span> <span class="kw">in</span> result:
+        result.append(n)
+
+<span class="fn">print</span>(result)
 </code></pre>
-        <div style="margin-top:6px; font-size:14px; color:var(--muted);">改：names[0]（索引从 0 开始）</div>
       </div>
+    </div>
+    <div class="check-q" style="margin-top:14px;">
+      <div class="check-q-text">❓ Q · 为什么用 not in 而不是 not in [1]? ______</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="check-a">[] 空 list 永远返回 True（任何数都不在空 list 里），所以直接 not in result 即可</div>
+      </details>
     </div>
   </section>
 
@@ -832,40 +813,40 @@ ____ = <span class="num">0</span>                        <span class="com"># 填
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
       <div class="kicker">Recap + 作业</div>
-      <h2 style="margin:0; font-size:24px;">今天复习 · 9 个知识点 + 单点练习</h2>
+      <h2 style="margin:0; font-size:24px;">今天学 5 件事 · list 进阶</h2>
     </div>
     <div class="recap-grid" style="grid-template-columns: repeat(3, 1fr);">
       <div class="recap-card card-blue">
-        <h4>L1-L2</h4>
-        <p>input + int / float / f-string</p>
+        <h4>修改</h4>
+        <p>names[0] = "新值"</p>
       </div>
       <div class="recap-card card-amber">
-        <h4>L3-L4</h4>
-        <p>比较运算符 / if-elif-else</p>
+        <h4>切片</h4>
+        <p>list[start:stop:step]（左闭右开）</p>
       </div>
       <div class="recap-card card-teal">
-        <h4>L5-L6</h4>
-        <p>for-range / while / break</p>
+        <h4>增删</h4>
+        <p>append / insert / pop / remove</p>
       </div>
       <div class="recap-card card-violet">
-        <h4>L7</h4>
-        <p>list 索引 / 遍历</p>
+        <h4>排序</h4>
+        <p>sort（原地）/ sorted（新 list）</p>
       </div>
       <div class="recap-card card-pink">
-        <h4>填空</h4>
-        <p>24 个空（4 页 × 6 空）</p>
+        <h4>反转</h4>
+        <p>reverse / nums[::-1]</p>
       </div>
       <div class="recap-card card-cyan">
-        <h4>选择 + 改错</h4>
-        <p>6 道选择 + 4 道改错</p>
+        <h4>in 关键字</h4>
+        <p>if x in list / if x not in list</p>
       </div>
     </div>
     <div style="margin-top:18px;" class="card success">
       <h3 style="color:#047857;">作业（4 个必做）</h3>
-      <p style="font-size:15px; margin-top:6px;">必做 1：写一个包含 print、input、int、f-string 的小程序（输入姓名 + 年龄，输出一句话）<br>
-        必做 2：用 if-elif-else 写成绩分级（A/B/C/D/F），注意边界用 &gt;=<br>
-        必做 3：用 for + range 写 1-100 累加（变量名不要抄答案骨架）<br>
-        必做 4：创建一个 list 包含 5 个数字，输出第 3 个 + 最后一个 + 平均值
+      <p style="font-size:15px; margin-top:6px;">必做 1：输入 10 个数字，存入 list，找出最大 + 最小 + 平均（用 max/min/sum/len）<br>
+        必做 2：把 list = [3, 1, 4, 1, 5, 9, 2, 6] 排序后输出最大的 3 个（list[-3:]）<br>
+        必做 3：输入 5 个名字存 list，用 remove 删除指定名字，输出剩余 list<br>
+        必做 4：输入 5 个数字，去重 + 排序后输出（综合实战 1 + 2）
       </p>
     </div>
   </section>
