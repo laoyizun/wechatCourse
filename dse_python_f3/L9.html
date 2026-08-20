@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L6 · while循环 — Python</title>
+<title>L9 · 总复习 2 (L5-L7) — Python</title>
 <style>
 :root {
   --bg: #f3f7fb;
@@ -503,383 +503,321 @@ pre {
   <!-- 01 Cover -->
   <section class="slide title-slide active">
     <div class="left">
-      <div class="kicker">Lesson 6</div>
-      <h1>让程序<span class="highlight">循环到底</span></h1>
-      <p class="subtitle">while循环 · 4 个概念</p>
+      <div class="kicker">Lesson 9</div>
+      <h1>总复习 2 · <span class="highlight">L5-L7</span></h1>
+      <p class="subtitle">循环 + 列表 · 查缺补漏</p>
     </div>
   </section>
 
-  <!-- 02 L5 回顾 -->
+  <!-- 02 L8 回顾 -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">L5 回顾</div>
-      <h2>答 3 个问题</h2>
-      <p class="subtitle">60 秒回忆 · 点开看答案</p>
+      <div class="kicker">L8 回顾</div>
+      <h2>L1-L4 3 个易错点</h2>
+      <p class="subtitle">快速回忆</p>
     </div>
     <div class="right">
       <div class="check-q check-q-blue">
-        <div class="check-q-text">Q1 · for 循环遍历字符串的写法？______</div>
-        <details><summary>看答案</summary><div class="check-a">for ch in s:（s 是字符串变量）</div></details>
+        <div class="check-q-text">Q1 · input() 后为什么常要 int()？______</div>
+        <details><summary>看答案</summary><div class="check-a">input() 返回字符串，要做数学运算 / 比较要先 int() 转</div></details>
       </div>
       <div class="check-q check-q-blue">
-        <div class="check-q-text">Q2 · range(1, 5) 含 5 吗？______</div>
-        <details><summary>看答案</summary><div class="check-a">不含（左闭右开）</div></details>
+        <div class="check-q-text">Q2 · = 和 == 区别？______</div>
+        <details><summary>看答案</summary><div class="check-a">= 赋值，== 比较</div></details>
       </div>
       <div class="check-q check-q-blue">
-        <div class="check-q-text">Q3 · range(10, 0, -1) 倒数输出是？______</div>
-        <details><summary>看答案</summary><div class="check-a">[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</div></details>
+        <div class="check-q-text">Q3 · 边界值应该用 &gt; 还是 &gt;=？______</div>
+        <details><summary>看答案</summary><div class="check-a">&gt;=（避免边界丢档）</div></details>
       </div>
     </div>
   </section>
 
-  <!-- 03 Concept 1 while vs for -->
+  <!-- 03 概念 1 知识树 L5-L7 -->
   <section class="slide">
     <div class="left">
-      <div class="kicker">Concept 1</div>
-      <h2>while vs for</h2>
-      <p class="subtitle">什么时候用哪个？</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">for：已知次数</div>
-<pre><code><span class="com"># 已知循环 5 次</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>):
-    <span class="fn">print</span>(i)        <span class="com"># 0,1,2,3,4</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div style="margin-top:14px;" class="practice">
-        <div class="label">while：未知次数</div>
-<pre><code><span class="com"># 不知道循环几次，只知道条件</span>
-ans = <span class="str">""</span>
-<span class="kw">while</span> ans != <span class="str">"quit"</span>:
-    ans = <span class="fn">input</span>(<span class="str">"输入 quit 退出:"</span>)
-    <span class="fn">print</span>(<span class="str">"你说:"</span>, ans)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q1 · 遍历 1-100 用 for 还是 while？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">for（已知 100 次，for 更简单）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q2 · 让用户反复输入密码直到输对，用哪个？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">while（不知道用户要试几次）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 Concept 2 while 语法 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 2</div>
-      <h2>while 语法</h2>
-      <p class="subtitle">条件 + 缩进体</p>
-    </div>
-    <div class="right">
-      <div class="practice">
-        <div class="label">基本结构</div>
-<pre><code>k = <span class="num">1</span>
-<span class="kw">while</span> k &lt;= <span class="num">5</span>:              <span class="com"># 条件为真才执行</span>
-    <span class="fn">print</span>(k)              <span class="com"># 缩进体</span>
-    k = k + <span class="num">1</span>               <span class="com"># ⚠️ 必须更新！</span>
-<span class="fn">print</span>(<span class="str">"完成"</span>)             <span class="com"># 不缩进（循环外）</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q1 · 上面的 k 走过哪些值？______ → ______ → ______ → ______ → ______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">1 → 2 → 3 → 4 → 5（每轮 +1，到 6 时条件 k≤5 为假，退出）</div>
-        </details>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q2 · 缩进的作用是什么？______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">告诉 Python 哪些代码属于循环体（缩进的才算）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 05 Concept 3 防死循环 -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Concept 3</div>
-      <h2>防死循环</h2>
-      <p class="subtitle">⚠️ while 必须更新变量</p>
-    </div>
-    <div class="right">
-      <div class="bug">
-        <div class="label">❌ 死循环（永远跑）</div>
-<pre><code>k = <span class="num">1</span>
-<span class="kw">while</span> k &lt;= <span class="num">5</span>:
-    <span class="fn">print</span>(k)
-    <span class="com"># 忘了 k = k + 1</span>
-<span class="com"># k 永远是 1，永远 ≤5，永不退出！</span></code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div style="margin-top:14px;" class="practice">
-        <div class="label">✅ 正确</div>
-<pre><code>k = <span class="num">1</span>
-<span class="kw">while</span> k &lt;= <span class="num">5</span>:
-    <span class="fn">print</span>(k)
-    k = k + <span class="num">1</span>            <span class="com"># 必须有！</span>
-<span class="fn">print</span>(<span class="str">"完成"</span>)</code><div class="code-actions"><a class="run-btn" href="https://www.online-python.com/" target="_blank" rel="noopener">▶ Run</a><button class="copy-btn" type="button">📋 Copy</button></div></pre>
-      </div>
-      <div class="check-q">
-        <div class="check-q-text">❓ Q · 死循环怎么停？（除了 Ctrl+C）______</div>
-        <details>
-          <summary>看答案</summary>
-          <div class="check-a">在循环体里加更新变量代码（k += 1 / k += -1 等）</div>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 实战 1 倒计时 5 → 0 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 1</div>
-      <h2 style="margin:0; font-size:24px;">⏰ 倒计时 5 → 0</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">while + 变量递减</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">用 while 倒计时：<br>
-          5 → 4 → 3 → 2 → 1 → 0<br>
-          提示：k = 5 + while k &gt;= 0 + k = k - 1<br>
-          预期输出（每行一个）：<br>
-          5<br>
-          4<br>
-          3<br>
-          2<br>
-          1<br>
-          0
-        </p>
-      </div>
-      <div class="answer-fold">
-        <div class="answer-tabs">
-          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
-          <button class="answer-tab" data-mode="solution">参考答案</button>
-        </div>
-        <pre class="code-skeleton"><code>____ = <span class="num">5</span>
-
-<span class="kw">while</span> ____ &gt;= ____:
-    <span class="fn">print</span>(____)
-    ____ = ____ - ____
-</code></pre>
-        <pre class="code-solution" style="display:none"><code>k = <span class="num">5</span>
-
-<span class="kw">while</span> k &gt;= <span class="num">0</span>:
-    <span class="fn">print</span>(k)
-    k = k - <span class="num">1</span>
-</code></pre>
-      </div>
-    </div>
-    <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · k = k - 1 能写成什么更短的写法？______</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="check-a">k -= 1（减法简写，等价于 k = k - 1）</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 07 实战 2 while 累加 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 2</div>
-      <h2 style="margin:0; font-size:24px;">➕ 累加 1+2+...+n（while 版）</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">while + 累加器</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">输入 n，用 while 求 1+2+...+n：<br>
-          n=5 → 15<br>
-          n=10 → 55<br>
-          n=1 → 1<br>
-          提示：<br>
-          · i = 1, total = 0<br>
-          · while i &lt;= n: total += i, i += 1
-        </p>
-      </div>
-      <div class="answer-fold">
-        <div class="answer-tabs">
-          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
-          <button class="answer-tab" data-mode="solution">参考答案</button>
-        </div>
-        <pre class="code-skeleton"><code>n = <span class="fn">int</span>(<span class="fn">input</span>())
-
-____ = <span class="num">0</span>
-____ = <span class="num">1</span>
-
-<span class="kw">while</span> ____ &lt;= ____:
-    ____ += ____
-    ____ += <span class="num">1</span>
-
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"1+...+{n} = {____}"</span>)
-</code></pre>
-        <pre class="code-solution" style="display:none"><code>n = <span class="fn">int</span>(<span class="fn">input</span>())
-
-total = <span class="num">0</span>
-i = <span class="num">1</span>
-
-<span class="kw">while</span> i &lt;= n:
-    total += i
-    i += <span class="num">1</span>
-
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"1+...+{n} = {total}"</span>)
-</code></pre>
-      </div>
-    </div>
-    <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · 这段代码中 i 必须 +1 吗？否则？______</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="check-a">必须 +1，否则 i 永远 ≤ n，死循环</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 08 实战 3 break 用法 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 3</div>
-      <h2 style="margin:0; font-size:24px;">🛑 break 提前退出</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">用户输入 quit 就停</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">让用户反复输入，输入 quit 就停止：<br>
-          输入 hi → "你说: hi"<br>
-          输入 hello → "你说: hello"<br>
-          输入 quit → 停止<br>
-          提示：while True + break
-        </p>
-      </div>
-      <div class="answer-fold">
-        <div class="answer-tabs">
-          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
-          <button class="answer-tab" data-mode="solution">参考答案</button>
-        </div>
-        <pre class="code-skeleton"><code><span class="kw">while</span> ____:
-    ans = <span class="fn">input</span>(<span class="str">"输入 quit 退出:"</span>)
-    <span class="kw">if</span> ans == ____:
-        ____                <span class="com"># 退出循环</span>
-    <span class="fn">print</span>(<span class="str">"你说:"</span>, ans)
-
-<span class="fn">print</span>(<span class="str">"结束"</span>)
-</code></pre>
-        <pre class="code-solution" style="display:none"><code><span class="kw">while</span> <span class="kw">True</span>:
-    ans = <span class="fn">input</span>(<span class="str">"输入 quit 退出:"</span>)
-    <span class="kw">if</span> ans == <span class="str">"quit"</span>:
-        <span class="kw">break</span>
-    <span class="fn">print</span>(<span class="str">"你说:"</span>, ans)
-
-<span class="fn">print</span>(<span class="str">"结束"</span>)
-</code></pre>
-      </div>
-    </div>
-    <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · while True + break 是什么模式？______</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="check-a">死循环 + 中途退出的标准写法（条件不可知时常用）</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 09 实战 4 continue 用法 -->
-  <section class="slide wide">
-    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
-      <div class="kicker">实战 4</div>
-      <h2 style="margin:0; font-size:24px;">⏭️ continue 跳过本轮</h2>
-      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">continue 后跳到条件</p>
-    </div>
-    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-      <div class="card">
-        <h3 style="color:var(--blue);">题目</h3>
-        <p style="font-size:17px; margin-top:6px;">while 累加 1-10，跳过偶数：<br>
-          只加 1+3+5+7+9 = 25<br>
-          提示：i += 1<br>
-          思路：if i 是偶数，continue
-        </p>
-      </div>
-      <div class="answer-fold">
-        <div class="answer-tabs">
-          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
-          <button class="answer-tab" data-mode="solution">参考答案</button>
-        </div>
-        <pre class="code-skeleton"><code>total = <span class="num">0</span>
-i = <span class="num">1</span>
-
-<span class="kw">while</span> i &lt;= <span class="num">10</span>:
-    <span class="kw">if</span> i ___ <span class="num">2</span> == ____:
-        i += <span class="num">1</span>
-        ____                <span class="com"># 跳过本轮</span>
-    total += i
-    i += <span class="num">1</span>
-
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"奇数和 = {total}"</span>)
-</code></pre>
-        <pre class="code-solution" style="display:none"><code>total = <span class="num">0</span>
-i = <span class="num">1</span>
-
-<span class="kw">while</span> i &lt;= <span class="num">10</span>:
-    <span class="kw">if</span> i % <span class="num">2</span> == <span class="num">0</span>:
-        i += <span class="num">1</span>
-        <span class="kw">continue</span>
-    total += i
-    i += <span class="num">1</span>
-
-<span class="fn">print</span>(<span class="fn">f</span><span class="str">"奇数和 = {total}"</span>)
-</code></pre>
-      </div>
-    </div>
-    <div class="check-q" style="margin-top:14px;">
-      <div class="check-q-text">❓ Q · continue 后 i 不 +1 会怎样？______</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="check-a">i 不变，陷入死循环（continue 前要先 i += 1）</div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 10 Recap -->
-  <section class="slide">
-    <div class="left">
-      <div class="kicker">Recap</div>
-      <h2>今天学 4 件事</h2>
-      <p class="recap-next">下次：list 列表（原 L6 内容）</p>
+      <div class="kicker">知识树</div>
+      <h2>L5-L7 · 3 大主题</h2>
+      <p class="subtitle">循环 + 列表</p>
     </div>
     <div class="right">
       <div class="recap-grid">
         <div class="recap-card card-blue">
-          <h4>while vs for</h4>
-          <p>while 用于未知次数（条件循环），for 用于已知次数</p>
+          <h4>L5 · for + range</h4>
+          <p>for 遍历字符串 / range(start, stop, step) / 左闭右开</p>
         </div>
         <div class="recap-card card-amber">
-          <h4>语法</h4>
-          <p>while 条件: 缩进体（必须更新变量防死循环）</p>
+          <h4>L6 · while</h4>
+          <p>while 条件 / 防死循环 / break / continue</p>
         </div>
         <div class="recap-card card-teal">
-          <h4>break</h4>
-          <p>跳出循环（while True + break 是常见模式）</p>
+          <h4>L7 · list 列表</h4>
+          <p>list 创建 / 索引 / 负索引 / len / for 遍历</p>
+        </div>
+      </div>
+      <div class="check-q" style="margin-top:14px;">
+        <div class="check-q-text">❓ Q · for 和 while 选哪个？什么时候用 while？______</div>
+        <details>
+          <summary>看答案</summary>
+          <div class="check-a">已知次数用 for；未知次数 / 条件触发用 while</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 概念 2 for vs while 易错点 -->
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">易错点</div>
+      <h2>循环 4 个常错</h2>
+      <p class="subtitle">看清楚再写</p>
+    </div>
+    <div class="right">
+      <div class="bug" style="margin-bottom:14px;">
+        <div class="label">❌ 错 1：range(1, 10) 含 10 吗？</div>
+<pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">10</span>):
+    <span class="fn">print</span>(i)        <span class="com"># 1,2,3,4,5,6,7,8,9（不含10）</span></code></pre>
+      </div>
+      <div style="margin-bottom:14px;" class="practice">
+        <div class="label">✅ 对 1</div>
+<pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, <span class="num">11</span>):      <span class="com"># 改成 11</span>
+    <span class="fn">print</span>(i)        <span class="com"># 1,2,...,10</span></code></pre>
+      </div>
+      <div class="bug" style="margin-bottom:14px;">
+        <div class="label">❌ 错 2：while 忘更新</div>
+<pre><code>i = <span class="num">1</span>
+<span class="kw">while</span> i &lt;= <span class="num">5</span>:
+    <span class="fn">print</span>(i)
+    <span class="com"># 忘了 i += 1 → 死循环！</span></code></pre>
+      </div>
+      <div style="margin-bottom:14px;" class="practice">
+        <div class="label">✅ 对 2</div>
+<pre><code>i = <span class="num">1</span>
+<span class="kw">while</span> i &lt;= <span class="num">5</span>:
+    <span class="fn">print</span>(i)
+    i += <span class="num">1</span>             <span class="com"># 必须有！</span></code></pre>
+      </div>
+      <div class="bug" style="margin-bottom:14px;">
+        <div class="label">❌ 错 3：break 后忘 i += 1</div>
+<pre><code>i = <span class="num">0</span>
+<span class="kw">while</span> i &lt; <span class="num">10</span>:
+    <span class="kw">if</span> i == <span class="num">5</span>:
+        <span class="kw">break</span>
+    <span class="fn">print</span>(i)
+    <span class="com"># 忘了 i += 1 → 永远 i=5 break 循环</span></code></pre>
+      </div>
+      <div style="margin-bottom:14px;" class="practice">
+        <div class="label">✅ 对 3</div>
+<pre><code>i = <span class="num">0</span>
+<span class="kw">while</span> i &lt; <span class="num">10</span>:
+    <span class="kw">if</span> i == <span class="num">5</span>:
+        <span class="kw">break</span>
+    <span class="fn">print</span>(i)
+    i += <span class="num">1</span>             <span class="com"># 必须有！</span></code></pre>
+      </div>
+      <div class="bug">
+        <div class="label">❌ 错 4：列表索引从 0 开始</div>
+<pre><code>names = [<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>]
+<span class="fn">print</span>(names[<span class="num">1</span>])         <span class="com"># 错以为是第1个，其实是第2个 "b"</span></code></pre>
+      </div>
+      <div style="margin-top:14px;" class="practice">
+        <div class="label">✅ 对 4</div>
+<pre><code>names = [<span class="str">"a"</span>, <span class="str">"b"</span>, <span class="str">"c"</span>]
+<span class="fn">print</span>(names[<span class="num">0</span>])         <span class="com"># 第 1 个 "a"</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 实战 1 for 累加 -->
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
+      <div class="kicker">实战 1</div>
+      <h2 style="margin:0; font-size:24px;">📊 1-100 偶数和</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">L5 for + range 步长</p>
+    </div>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">题目</h3>
+        <p style="font-size:17px; margin-top:6px;">用 for 求 2+4+6+...+100：<br>
+          <br>
+          提示：<br>
+          · range(0, 101, 2) 是 0,2,4,...,100<br>
+          · 或 range(2, 101, 2) 是 2,4,...,100<br>
+          · 累加到 total<br>
+          <br>
+          预期：2550
+        </p>
+      </div>
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>____ = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(____, ____, ____):
+    ____ += ____
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数和 = {____}"</span>)
+</code></pre>
+        <pre class="code-solution" style="display:none"><code>total = <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">0</span>, <span class="num">101</span>, <span class="num">2</span>):
+    total += i
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"偶数和 = {total}"</span>)
+</code></pre>
+      </div>
+    </div>
+    <div class="check-q" style="margin-top:14px;">
+      <div class="check-q-text">❓ Q · 改成"奇数和"该怎么改？______</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="check-a">range(1, 101, 2) 或 range(1, 100, 2)</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 06 实战 2 while + break -->
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
+      <div class="kicker">实战 2</div>
+      <h2 style="margin:0; font-size:24px;">🔢 输入直到 0</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">L6 while + break</p>
+    </div>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">题目</h3>
+        <p style="font-size:17px; margin-top:6px;">让用户反复输入数字，累加到 total：<br>
+          · 输入 5 → total = 5<br>
+          · 输入 3 → total = 8<br>
+          · 输入 0 → 停止，输出"总和 = 8"<br>
+          <br>
+          提示：while True + if + break
+        </p>
+      </div>
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>____ = <span class="num">0</span>
+<span class="kw">while</span> ____:
+    n = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"数字(0 停止):"</span>))
+    <span class="kw">if</span> ____ == ____:
+        ____
+    ____ += ____
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"总和 = {____}"</span>)
+</code></pre>
+        <pre class="code-solution" style="display:none"><code>total = <span class="num">0</span>
+<span class="kw">while</span> <span class="kw">True</span>:
+    n = <span class="fn">int</span>(<span class="fn">input</span>(<span class="str">"数字(0 停止):"</span>))
+    <span class="kw">if</span> n == <span class="num">0</span>:
+        <span class="kw">break</span>
+    total += n
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"总和 = {total}"</span>)
+</code></pre>
+      </div>
+    </div>
+    <div class="check-q" style="margin-top:14px;">
+      <div class="check-q-text">❓ Q · 为什么用 while True 而不是 while n != ?：______</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="check-a">n 是循环里读入的变量，循环开始时 n 还不存在。所以用 while True + 内 if break</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 07 实战 3 list 操作 -->
+  <section class="slide wide">
+    <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
+      <div class="kicker">实战 3</div>
+      <h2 style="margin:0; font-size:24px;">📋 班级成绩统计</h2>
+      <p class="subtitle" style="margin:0; font-size:14px; color:var(--muted);">L7 list + L5 for + L2 数据类型</p>
+    </div>
+    <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+      <div class="card">
+        <h3 style="color:var(--blue);">题目</h3>
+        <p style="font-size:17px; margin-top:6px;">输入一个班级的成绩 list，求：<br>
+          · 平均分（保留 1 位小数）<br>
+          · 最高分<br>
+          · 最低分<br>
+          · 60 分以下人数<br>
+          <br>
+          测试：scores = [85, 92, 78, 95, 88, 55, 60]<br>
+          · 平均分 = 79.0<br>
+          · 最高 = 95<br>
+          · 最低 = 55<br>
+          · 60 分以下 = 1（仅 55）
+        </p>
+      </div>
+      <div class="answer-fold">
+        <div class="answer-tabs">
+          <button class="answer-tab active" data-mode="skeleton">答案骨架</button>
+          <button class="answer-tab" data-mode="solution">参考答案</button>
+        </div>
+        <pre class="code-skeleton"><code>____ = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>, <span class="num">55</span>, <span class="num">60</span>]
+
+avg = ____(____) / ____(____)
+mx = ____(____)
+mn = ____(____)
+
+fail = <span class="num">0</span>
+<span class="kw">for</span> s <span class="kw">in</span> ____:
+    <span class="kw">if</span> ____ &lt; ____:
+        fail ____ <span class="num">1</span>
+
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"平均分：{avg:.1f}, 最高：{____}, 最低：{____}, 不及格：{____}"</span>)
+</code></pre>
+        <pre class="code-solution" style="display:none"><code>scores = [<span class="num">85</span>, <span class="num">92</span>, <span class="num">78</span>, <span class="num">95</span>, <span class="num">88</span>, <span class="num">55</span>, <span class="num">60</span>]
+
+avg = <span class="fn">sum</span>(scores) / <span class="fn">len</span>(scores)
+mx = <span class="fn">max</span>(scores)
+mn = <span class="fn">min</span>(scores)
+
+fail = <span class="num">0</span>
+<span class="kw">for</span> s <span class="kw">in</span> scores:
+    <span class="kw">if</span> s &lt; <span class="num">60</span>:
+        fail += <span class="num">1</span>
+
+<span class="fn">print</span>(<span class="fn">f</span><span class="str">"平均分：{avg:.1f}, 最高：{mx}, 最低：{mn}, 不及格：{fail}"</span>)
+</code></pre>
+      </div>
+    </div>
+    <div class="check-q" style="margin-top:14px;">
+      <div class="check-q-text">❓ Q · {avg:.1f} 什么意思？______</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="check-a">保留 1 位小数（f-string 格式化）</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 08 Recap -->
+  <section class="slide">
+    <div class="left">
+      <div class="kicker">Recap</div>
+      <h2>今天复习 4 个易错点</h2>
+      <p class="recap-next">下次：L1-L9 全复习</p>
+    </div>
+    <div class="right">
+      <div class="recap-grid">
+        <div class="recap-card card-blue">
+          <h4>range(1, 10) 不含 10</h4>
+          <p>左闭右开，要 1-10 写 range(1, 11)</p>
+        </div>
+        <div class="recap-card card-amber">
+          <h4>while 必须更新</h4>
+          <p>循环体里要有 i += 1，否则死循环</p>
+        </div>
+        <div class="recap-card card-teal">
+          <h4>break 前先 i += 1</h4>
+          <p>否则 i 不变，死循环 break</p>
         </div>
         <div class="recap-card card-violet">
-          <h4>continue</h4>
-          <p>跳过本轮，直接进入下一轮条件判断</p>
+          <h4>索引从 0 开始</h4>
+          <p>names[0] 是第 1 个，不是 names[1]</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 11 作业 -->
+  <!-- 09 作业 -->
   <section class="slide wide">
     <div style="display:flex; align-items:center; gap:16px; padding-bottom:14px; margin-bottom:14px; border-bottom:2px solid var(--line);">
       <div class="kicker">作业</div>
@@ -887,24 +825,24 @@ i = <span class="num">1</span>
     </div>
     <div class="grid2" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
       <div class="card success">
-        <h3 style="color:#047857;">必做 1 · 基础</h3>
-        <p style="font-size:16px; margin-top:6px;">输入一个整数 n，用 while 输出 1 到 n（每行一个）</p>
-        <p style="font-size:14px; color:var(--muted); margin-top:6px;">提示：i = 1, while i &lt;= n, i += 1</p>
+        <h3 style="color:#047857;">必做 1 · L5</h3>
+        <p style="font-size:16px; margin-top:6px;">输入 n，用 for 求 1² + 2² + ... + n²（注意 i*i）</p>
+        <p style="font-size:14px; color:var(--muted); margin-top:6px;">测试：n=3 → 14（1+4+9）</p>
       </div>
       <div class="card" style="border-left:5px solid var(--blue);">
-        <h3 style="color:var(--blue);">必做 2 · 进阶</h3>
-        <p style="font-size:16px; margin-top:6px;">让用户反复输入数字，累加到 sum；输入 0 停止（用 break）</p>
-        <p style="font-size:14px; color:var(--muted); margin-top:6px;">测试：1, 2, 3, 0 → 输出"总和 = 6"</p>
+        <h3 style="color:var(--blue);">必做 2 · L6</h3>
+        <p style="font-size:16px; margin-top:6px;">让用户反复输入数字，求平均值；输入非数字（字符串）时停止</p>
+        <p style="font-size:14px; color:var(--muted); margin-top:6px;">提示：try-except（暂时不会就用 while True + break）</p>
       </div>
       <div class="card" style="border-left:5px solid var(--amber);">
-        <h3 style="color:var(--amber);">必做 3 · 进阶</h3>
-        <p style="font-size:16px; margin-top:6px;">while + continue：求 1-20 中所有 3 的倍数的和（3+6+9+...+18 = 63）</p>
-        <p style="font-size:14px; color:var(--muted); margin-top:6px;">提示：i % 3 != 0 时 continue</p>
+        <h3 style="color:var(--amber);">必做 3 · L7</h3>
+        <p style="font-size:16px; margin-top:6px;">给定 list = [10, 20, 30, 40, 50]，输出索引 2 的元素 + 最后一个元素 + 总和</p>
+        <p style="font-size:14px; color:var(--muted); margin-top:6px;">预期：30 / 50 / 150</p>
       </div>
       <div class="card" style="border-left:5px solid var(--teal);">
         <h3 style="color:var(--teal);">必做 4 · 综合</h3>
-        <p style="font-size:16px; margin-top:6px;">密码验证：让用户输入密码，最多 3 次机会；密码 = "python"。正确 →"登录成功"，3 次错 →"账号锁定"</p>
-        <p style="font-size:14px; color:var(--muted); margin-top:6px;">提示：while 计数器 + if + break</p>
+        <p style="font-size:16px; margin-top:6px;">输入一个数字 n，用 for 累加 1+2+...+n，输出结果。然后用 while 同样实现，对比两种写法</p>
+        <p style="font-size:14px; color:var(--muted); margin-top:6px;">测试：n=10 → 55</p>
       </div>
     </div>
   </section>
@@ -916,7 +854,7 @@ i = <span class="num">1</span>
 <div class="nav">
   <a class="home-link secondary" href="index.html">📚 目录</a>
   <button class="secondary" onclick="prev()">← 上页</button>
-  <span class="counter"><span id="cur">1</span> / <span id="total">11</span></span>
+  <span class="counter"><span id="cur">1</span> / <span id="total">9</span></span>
   <div class="progress-bar"><span id="bar"></span></div>
   <button onclick="next()">下页 →</button>
 </div>
