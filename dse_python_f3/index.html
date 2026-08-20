@@ -204,6 +204,12 @@ body::before {
   border-color: var(--blue);
 }
 
+/* ==== Code Highlight (记忆卡片代码块) ==== */
+.c-com { color: #7c8aa8; font-style: italic; }
+.c-str { color: #a5e88c; }
+.c-num { color: #ffb547; }
+.c-kw  { color: #ff9d72; font-weight: 700; }
+
 /* ==== Tab Content (主区内容) ==== */
 .tab-content {
   display: none;
@@ -471,6 +477,8 @@ body::before {
           <button class="lesson-btn" data-lesson="L4">L4 (4)</button>
           <button class="lesson-btn" data-lesson="L5">L5 (3)</button>
           <button class="lesson-btn" data-lesson="L6">L6 (3)</button>
+          <button class="lesson-btn" data-lesson="L7">L7 (5)</button>
+          <button class="lesson-btn" data-lesson="L8">L8 (6)</button>
         </div>
         <div class="course-grid" id="python-card-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));"></div>
         <div id="stats-bar" style="position:fixed; bottom:24px; right:24px; background:var(--ink); color:#fff; padding:10px 18px; border-radius:999px; font-size:13px; font-weight:800; box-shadow:0 12px 28px rgba(15,36,63,.25); display:none; z-index:100;">
@@ -820,26 +828,100 @@ const FLASHCARDS = [
   // L6
   { id:"L6-C01", lesson:"L6", type:"concept", title:"list 列表创建", term:"List Creation", question:"如何创建一个 list？list 可装混合类型吗？", fill:`list 用 ______ 包裹\n元素之间用 ______ 分隔\n可装混合类型吗？______`, answer:"[]（方括号）/ 逗号 / 可以", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nnums = [10, 20, 30]\nmixed = [1, "hi", True]\nempty = []`, warnings:["⭐ 元素之间必须是英文逗号 ,（不是中文，）","⭐ list 用 []，不是 {}（dict）或 ()（tuple）"] },
   { id:"L6-C02", lesson:"L6", type:"concept", title:"索引（正/负）", term:"List Indexing", question:"list 的索引从几开始？负索引是什么意思？", fill:`正索引从 ______ 开始\n负索引从 ______ 开始\n-1 是 ______`, answer:"0（不是 1）/-1（最后一个）", mnemonic:"", code:`fruits = ["apple", "banana", "cherry", "date"]\nprint(fruits[0])    # apple（第 1 个）\nprint(fruits[1])    # banana\nprint(fruits[-1])   # date（最后 1 个）\nprint(fruits[-2])   # cherry（倒数第 2 个）`, warnings:["⭐ 索引从 0 开始，不是 1","⭐ -1 是最后 1 个，-len 是第一个"] },
-  { id:"L6-C03", lesson:"L6", type:"killer", title:"杀手锏：for 遍历 list", term:"Iterate List", question:"如何用 for 循环遍历 list？", fill:`for x in ______:\n    ______`, answer:"list 名 / 操作 x", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nfor f in fruits:\n    print(f"我喜欢 {f}")\n\n# 输出：\n# 我喜欢 apple\n# 我喜欢 banana\n# 我喜欢 cherry`, warnings:["⭐ for + in + 冒号不能漏","⭐ 循环变量 f 可以改名"] }
+  { id:"L6-C03", lesson:"L6", type:"killer", title:"杀手锏：for 遍历 list", term:"Iterate List", question:"如何用 for 循环遍历 list？", fill:`for x in ______:\n    ______`, answer:"list 名 / 操作 x", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nfor f in fruits:\n    print(f"我喜欢 {f}")\n\n# 输出：\n# 我喜欢 apple\n# 我喜欢 banana\n# 我喜欢 cherry`, warnings:["⭐ for + in + 冒号不能漏","⭐ 循环变量 f 可以改名"] },
+// L7 · list 列表（基础）卡片
+{ id:"L7-C01", lesson:"L7", type:"concept", title:"list 列表创建", term:"List Creation", question:"如何创建一个 list？list 可装混合类型吗？", fill:"list 用 ______ 包裹\n元素之间用 ______ 分隔\n可装混合类型吗？______", answer:"[]（方括号）/ 逗号 / 可以", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nnums = [10, 20, 30]\nmixed = [1, "hi", True]\nempty = []`, warnings:["⭐ 元素之间必须是英文逗号 ,（不是中文，）","⭐ list 用 []，不是 {}（dict）或 ()（tuple）"] },
+{ id:"L7-C02", lesson:"L7", type:"concept", title:"索引（正/负）", term:"List Indexing", question:"list 的索引从几开始？负索引是什么意思？", fill:"正索引从 ______ 开始\n负索引从 ______ 开始\n-1 是 ______", answer:"0（不是 1）/-1（最后一个）", mnemonic:"", code:`fruits = ["apple", "banana", "cherry", "date"]\nprint(fruits[0])    # apple（第 1 个）\nprint(fruits[1])    # banana\nprint(fruits[-1])   # date（最后 1 个）\nprint(fruits[-2])   # cherry（倒数第 2 个）`, warnings:["⭐ 索引从 0 开始，不是 1","⭐ -1 是最后 1 个，-len 是第一个"] },
+{ id:"L7-C03", lesson:"L7", type:"killer", title:"杀手锏：for 遍历 list", term:"Iterate List", question:"如何用 for 循环遍历 list？", fill:"for x in ______:\n    ______", answer:"list 名 / 操作 x", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nfor f in fruits:\n    print(f"我喜欢 {f}")`, warnings:["⭐ for + in + 冒号不能漏","⭐ 循环变量 f 可以改名"] },
+{ id:"L7-C04", lesson:"L7", type:"concept", title:"len() 函数", term:"Length", question:"len() 函数对 list 做什么？", fill:"len([1,2,3]) = ______\nlen(\"Hello\") = ______\nlen([]) = ______", answer:"3 / 5 / 0", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nprint(len(fruits))  # 3\nprint(len("Hello")) # 5\nprint(len([]))      # 0（空 list）`, warnings:["⭐ len 是函数不是方法","⭐ 空 list 长度是 0"] },
+{ id:"L7-C05", lesson:"L7", type:"bug", title:"Bug：索引超界", term:"IndexError", question:"names[10] 会怎样？", fill:"names = [\"a\",\"b\",\"c\"]\nnames[10] → 报 ______ 错误", answer:"IndexError: list index out of range", mnemonic:"", code:`names = ["a", "b", "c"]\nprint(names[10])  # IndexError!`, warnings:["⭐ 索引超出范围报错"] },
+// L8 · list 列表（进阶）卡片
+{ id:"L8-C01", lesson:"L8", type:"concept", title:"修改元素", term:"Modify Element", question:"如何用索引修改 list 元素？", fill:"names = [\"a\",\"b\",\"c\"]\nnames[1] = \"x\" → names = ______", answer:'["a", "x", "c"]', mnemonic:"", code:`names = ["a", "b", "c"]\nnames[1] = "x"\nprint(names)  # ['a', 'x', 'c']`, warnings:["⭐ 修改元素不能超界"] },
+{ id:"L8-C02", lesson:"L8", type:"concept", title:"切片", term:"Slice", question:"list 切片 [start:stop:step] 是什么意思？", fill:"nums = [10,20,30,40,50]\nnums[1:3] = ______\nnums[::2] = ______", answer:"[20, 30]（左闭右开）/ [10, 30, 50]（步长 2）", mnemonic:"", code:`nums = [10, 20, 30, 40, 50]\nprint(nums[1:3])    # [20, 30]\nprint(nums[::2])    # [10, 30, 50]\nprint(nums[::-1])   # 反转 [50, 40, 30, 20, 10]`, warnings:["⭐ 切片左闭右开","⭐ [::2] 步长 2"] },
+{ id:"L8-C03", lesson:"L8", type:"concept", title:"append / insert", term:"Add Elements", question:"append 和 insert 区别？", fill:"append 加在 ______\ninsert 需要指定 ______", answer:"末尾 / 位置（索引）", mnemonic:"", code:`names = ["a", "b"]\nnames.append("c")\nnames.insert(1, "x")\nprint(names)  # ['a', 'x', 'b', 'c']`, warnings:["⭐ append 无返回值（None）","⭐ insert(位置, 元素) 参数顺序不能错"] },
+{ id:"L8-C04", lesson:"L8", type:"concept", title:"pop / remove", term:"Remove Elements", question:"pop 和 remove 区别？", fill:"pop 按 ______ 删（返回删的值）\nremove 按 ______ 删（删第一个匹配）", answer:"索引 / 值", mnemonic:"", code:`names = ["a", "b", "c", "b"]\nx = names.pop(1)   # 按索引 → 返回 "b"\nnames.remove("b")  # 按值 → 删第一个 "b"\nprint(names)  # ['a', 'c']`, warnings:["⭐ pop 不存在索引会报错","⭐ remove 只删第一个匹配"] },
+{ id:"L8-C05", lesson:"L8", type:"killer", title:"杀手锏：sort vs sorted", term:"Sort", question:"sort() 和 sorted() 区别？", fill:"sort ______ 改原 list（无返回）\nsorted ______ 改原 list（返回新 list）", answer:"原地 / 不", mnemonic:"", code:`nums = [3, 1, 4, 1, 5]\nnums.sort()\nprint(nums)  # [1, 1, 3, 4, 5]\n\nnums = [3, 1, 4, 1, 5]\nnew = sorted(nums)\nprint(new, nums)`, warnings:["⭐ nums = nums.sort() 会变 None","⭐ sorted() 不改原 list"] },
+{ id:"L8-C06", lesson:"L8", type:"bug", title:"Bug：append 返回 None", term:"Append Returns None", question:"names = names.append('x') 会怎样？", fill:"names = [\"a\"]\nnames = names.append(\"b\")\nprint(names) → ______", answer:"None（因为 append 返回 None）", mnemonic:"", code:`names = ["a"]\nnames = names.append("b")\nprint(names)  # None!`, warnings:["⭐ append() 无返回值","⭐ 别写 names = names.append()"] }
 ];
 
-// ===== 渲染记忆卡片 =====
+// ===== 渲染记忆卡片（带翻转）=====
+function escapeHTML(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlightCode(code) {
+  const tokens = [];
+  let escaped = escapeHTML(code);
+  // 1) 注释
+  escaped = escaped.replace(/(\#[^\n]*)/g, (m) => {
+    tokens.push(`<span class="c-com">${m}</span>`);
+    return `\x01T${tokens.length - 1}\x01`;
+  });
+  // 2) 字符串
+  escaped = escaped.replace(/(\"[^\"\n]*\"|\'[^\'\n]*\')/g, (m) => {
+    tokens.push(`<span class="c-str">${m}</span>`);
+    return `\x01T${tokens.length - 1}\x01`;
+  });
+  // 3) 数字
+  escaped = escaped.replace(/\b(\d+\.?\d*)\b/g, '<span class="c-num">$1</span>');
+  // 4) 关键字
+  escaped = escaped.replace(/\b(if|else|elif|for|while|break|continue|True|False|in|not|and|or|def|return|print|input|int|float|str|bool|range|len|max|min|sum)\b/g, '<span class="c-kw">$1</span>');
+  // 还原
+  escaped = escaped.replace(/\x01T(\d+)\x01/g, (_, i) => tokens[+i]);
+  return escaped;
+}
+
+let flippedCount = 0;
 let currentLesson = 'L1';
 const cardGrid = document.getElementById('python-card-grid');
+
 function renderCards() {
   const cards = FLASHCARDS.filter(c => c.lesson === currentLesson);
+  if (cards.length === 0) {
+    cardGrid.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:60px; color:var(--muted);">暂无卡片</div>';
+    return;
+  }
   cardGrid.innerHTML = cards.map(c => `
-    <div class="course-card flashcard" data-id="${c.id}" onclick="this.classList.toggle('flipped')">
-      <small>${c.lesson} · ${c.type}</small>
-      <h3>${c.title}</h3>
-      <p><strong>Q:</strong> ${c.question}</p>
-      <details><summary>看答案</summary>
-        <p><strong>A:</strong> ${c.answer}</p>
-        <p style="color:var(--muted); font-size:13px;">${c.mnemonic || ''}</p>
-      </details>
+    <div class="course-card flashcard" data-id="${c.id}" style="cursor:pointer; padding:0; perspective:1200px; overflow:visible;">
+      <div class="flashcard-inner" style="position:relative; width:100%; transition:transform 0.6s cubic-bezier(0.4,0,0.2,1); transform-style:preserve-3d; cursor:pointer; display:grid; grid-template-columns:1fr; grid-template-rows:1fr;">
+        <!-- 正面 -->
+        <div class="flashcard-face flashcard-front" style="grid-area:1 / 1; backface-visibility:hidden; -webkit-backface-visibility:hidden; padding:18px; display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:12px;">
+          <small style="display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(37,99,235,.1); color:var(--blue); font-weight:800; font-size:12px; margin-bottom:10px; width:fit-content;">${c.id} · ${c.type === 'killer' ? '杀手锏' : c.type === 'bug' ? 'Bug' : '概念'}</small>
+          <div style="display:inline-block; padding:3px 8px; background:rgba(37,99,235,.08); color:var(--blue); border-radius:4px; font-family:monospace; font-size:12px; margin-bottom:8px; width:fit-content;">${escapeHTML(c.term)}</div>
+          <h3 style="margin:0 0 8px; font-size:16px; color:var(--ink); line-height:1.5;">${escapeHTML(c.question)}</h3>
+          <div style="background:#fafbff; padding:10px 12px; border-radius:8px; font-family:monospace; font-size:13px; color:var(--text); border-left:3px solid var(--blue); white-space:pre-wrap; margin-bottom:10px;">${escapeHTML(c.fill)}</div>
+          <div style="margin-top:auto; padding-top:10px; text-align:center; font-size:11px; color:var(--muted); font-weight:800; letter-spacing:1px;">点击翻面 →</div>
+        </div>
+        <!-- 反面 -->
+        <div class="flashcard-face flashcard-back" style="grid-area:1 / 1; backface-visibility:hidden; -webkit-backface-visibility:hidden; transform:rotateY(180deg); padding:18px; display:flex; flex-direction:column; background:#f0fdf4; border:1px solid var(--green); border-radius:12px;">
+          <small style="display:inline-block; padding:4px 10px; border-radius:999px; background:rgba(22,163,74,.12); color:var(--green); font-weight:800; font-size:12px; margin-bottom:10px; width:fit-content;">答案 · ${c.id}</small>
+          <h3 style="margin:0 0 8px; font-size:16px; color:var(--ink); line-height:1.5;">${escapeHTML(c.title)}</h3>
+          <div style="font-size:14px; color:var(--text); margin:6px 0;"><strong>答：</strong>${escapeHTML(c.answer)}</div>
+          ${c.mnemonic && c.mnemonic.trim() ? `<div style="background:rgba(15,159,154,.08); border-left:3px solid var(--teal); padding:8px 10px; border-radius:6px; font-size:13px; color:var(--text); margin:6px 0;">💡 ${escapeHTML(c.mnemonic)}</div>` : ''}
+          <pre style="background:#0f243f; color:#edf6ff; padding:10px 12px; border-radius:6px; font-family:monospace; font-size:12px; line-height:1.6; margin:6px 0; overflow-x:auto; white-space:pre-wrap;">${highlightCode(c.code)}</pre>
+          ${c.warnings && c.warnings.length > 0 ? `<div style="background:rgba(220,38,38,.06); border-left:3px solid #dc2626; padding:6px 10px; border-radius:6px; font-size:12px; color:var(--text);">${c.warnings.map(w => `<span style="color:#dc2626; font-weight:900;">${escapeHTML(w)}</span>`).join('<br>')}</div>` : ''}
+          <div style="margin-top:auto; padding-top:6px; text-align:center; font-size:11px; color:var(--muted); font-weight:800; letter-spacing:1px;">← 点击翻回</div>
+        </div>
+      </div>
     </div>
   `).join('');
+
+  // 绑定翻转
+  cardGrid.querySelectorAll('.flashcard-inner').forEach(inner => {
+    inner.addEventListener('click', e => {
+      e.stopPropagation();
+      e.preventDefault();
+      const isFlipped = inner.style.transform && inner.style.transform.includes('180');
+      inner.style.transform = isFlipped ? '' : 'rotateY(180deg)';
+      if (!isFlipped) {
+        flippedCount++;
+        document.getElementById('flip-count').textContent = flippedCount;
+        document.getElementById('stats-bar').style.display = 'block';
+      }
+    });
+  });
 }
+
 renderCards();
 
 // 课次筛选
