@@ -701,33 +701,33 @@ age = <span class="num">14</span>
   // L6
   {
     id: 'L6',
-    title: 'L6 · list 列表（基础）',
+    title: 'L6 · while循环',
     subtitle: '4 个必做',
     description: '做完截图发老师，下节讲评。',
     items: [
       {
         level: '必做 1',
         color: 'success',
-        title: '基础（问答 + 选择 + 判断）',
-        content: '① 填空：list 用 ______ 包裹 ② 判断：<code class="inline">[1, "hi", True]</code> 合法吗？③ 选择：索引从几开始？④ 填空：<code class="inline">fruits[-1]</code> 是 ______'
+        title: 'while vs for（基础问答）',
+        content: '① 填空：已知次数用 ______，未知次数用 ______ ② 判断：<code class="inline">while True</code> 必须配合什么关键字退出？③ 选择：求 1+2+...+100 用 for 还是 while？④ 判断：<code class="inline">while i &lt; 5</code> 循环体忘写 i += 1 会怎样？'
       },
       {
         level: '必做 2',
         color: 'blue',
-        title: '索引预测',
-        content: 'fruits = ["a", "b", "c", "d", "e"]，求：① <code class="inline">fruits[0]</code> = ______ ② <code class="inline">fruits[2]</code> = ______ ③ <code class="inline">fruits[-1]</code> = ______ ④ <code class="inline">len(fruits)</code> = ______'
+        title: '倒计时（while 输出）',
+        content: '用 while 倒计时 5→0：<br>· k = 5<br>· while k &gt;= 0: print(k)<br>· k = k - 1<br>预期输出：5, 4, 3, 2, 1, 0（每行一个）'
       },
       {
         level: '必做 3',
         color: 'amber',
-        title: '字符分类（综合编程）',
-        content: '输入字符串，输出元音数 + 辅音数。提示：<code class="inline">vowels = ["a","e","i","o","u"]</code>，for 遍历 + if 判断。测试："Hello" → 元 2，辅 3。'
+        title: 'break 退出循环',
+        content: '让用户反复输入数字，累加到 sum；输入 0 停止（用 while True + break）。测试：1, 2, 3, 0 → 输出"总和 = 6"。'
       },
       {
         level: '必做 4',
         color: 'teal',
-        title: '班级成绩（应用场景）',
-        content: 'scores = [85, 92, 78, 95, 88]，输出最高分、最低分、平均分。提示：用 <code class="inline">max()</code> <code class="inline">min()</code> <code class="inline">sum()</code>。'
+        title: 'continue 跳过本轮',
+        content: 'while 累加 1-10 中的所有奇数（跳过偶数，用 continue）。提示：i % 2 == 0 时 continue，记得前先 i += 1。预期：1+3+5+7+9 = 25。'
       }
     ]
   }
@@ -825,10 +825,10 @@ const FLASHCARDS = [
   { id:"L5-C02", lesson:"L5", type:"concept", title:"range() 三种写法", term:"range() Three Forms", question:"range() 有哪 3 种写法？", fill:`range(5)        → 0 到______\nrange(2, 8)     → 2 到______\nrange(0, 10, 2) → 0 到 9，步长______`, answer:"4（含 0 不含 5）/ 7（含 2 不含 8）/ 2", mnemonic:"左闭右开 · 终点不算", code:`list(range(5))         # [0, 1, 2, 3, 4]\nlist(range(2, 8))      # [2, 3, 4, 5, 6, 7]\nlist(range(0, 10, 2))  # [0, 2, 4, 6, 8]`, warnings:["⭐ 左闭右开：含起点，不含终点","⭐ 步长不能为 0"] },
   { id:"L5-C03", lesson:"L5", type:"killer", title:"杀手锏：左闭右开", term:"Left-Closed Right-Open", question:"range(1, n+1) 为何要写 n+1？", fill:`range(1, n+1) 含 ______ 不含 ______\n要让 range 含 n，必须写 ______`, answer:"含 1 不含 n+1 / 写 n+1", mnemonic:"", code:`# 让 range 含 n（1 到 n）：\nfor i in range(1, n+1):\n    print(i)\n\n# 错误写法：range(1, n) 只到 n-1`, warnings:["⭐ 求 1+...+n 必须 range(1, n+1)","⭐ 终点不算"] },
 
-  // L6
-  { id:"L6-C01", lesson:"L6", type:"concept", title:"list 列表创建", term:"List Creation", question:"如何创建一个 list？list 可装混合类型吗？", fill:`list 用 ______ 包裹\n元素之间用 ______ 分隔\n可装混合类型吗？______`, answer:"[]（方括号）/ 逗号 / 可以", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nnums = [10, 20, 30]\nmixed = [1, "hi", True]\nempty = []`, warnings:["⭐ 元素之间必须是英文逗号 ,（不是中文，）","⭐ list 用 []，不是 {}（dict）或 ()（tuple）"] },
-  { id:"L6-C02", lesson:"L6", type:"concept", title:"索引（正/负）", term:"List Indexing", question:"list 的索引从几开始？负索引是什么意思？", fill:`正索引从 ______ 开始\n负索引从 ______ 开始\n-1 是 ______`, answer:"0（不是 1）/-1（最后一个）", mnemonic:"", code:`fruits = ["apple", "banana", "cherry", "date"]\nprint(fruits[0])    # apple（第 1 个）\nprint(fruits[1])    # banana\nprint(fruits[-1])   # date（最后 1 个）\nprint(fruits[-2])   # cherry（倒数第 2 个）`, warnings:["⭐ 索引从 0 开始，不是 1","⭐ -1 是最后 1 个，-len 是第一个"] },
-  { id:"L6-C03", lesson:"L6", type:"killer", title:"杀手锏：for 遍历 list", term:"Iterate List", question:"如何用 for 循环遍历 list？", fill:`for x in ______:\n    ______`, answer:"list 名 / 操作 x", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nfor f in fruits:\n    print(f"我喜欢 {f}")\n\n# 输出：\n# 我喜欢 apple\n# 我喜欢 banana\n# 我喜欢 cherry`, warnings:["⭐ for + in + 冒号不能漏","⭐ 循环变量 f 可以改名"] },
+  // L6 · while循环（与课程对应）
+  { id:"L6-C01", lesson:"L6", type:"concept", title:"while vs for 选哪个", term:"while vs for", question:"for 和 while 什么时候用哪个？", fill:"已知次数用 ______\n未知次数用 ______\n条件触发循环用 ______", answer:"for / while / while", mnemonic:"for 是按数跑，while 是按条件跑", code:`# for：已知次数\nfor i in range(5):\n    print(i)        # 0,1,2,3,4\n\n# while：未知次数\nans = ""\nwhile ans != "quit":\n    ans = input("> ")\n    print("你说:", ans)`, warnings:["⭐ 让用户输入密码直到输对 → while","⭐ 遍历 1-100 → for"] },
+  { id:"L6-C02", lesson:"L6", type:"bug", title:"Bug：while 死循环", term:"Infinite Loop", question:"while 循环忘更新变量会怎样？", fill:"i = 1\nwhile i <= 5:\n    print(i)\n    ______  # 忘了 i += 1", answer:"i 不变 → 死循环（永远跑）", mnemonic:"while 必须有更新变量的代码", code:`# ❌ 死循环\ni = 1\nwhile i <= 5:\n    print(i)\n    # 忘了 i += 1\n\n# ✅ 正确\ni = 1\nwhile i <= 5:\n    print(i)\n    i += 1            # 必须更新`, warnings:["⭐ i 不变 → 死循环","⭐ break 前也要 i += 1"] },
+  { id:"L6-C03", lesson:"L6", type:"killer", title:"杀手锏：break + continue", term:"break & continue", question:"break 和 continue 区别？", fill:"break → ______ 整个循环\ncontinue → ______ 本轮，进入下一轮", answer:"退出 / 跳过", mnemonic:"break 是出口，continue 是跳过", code:`# break：立即退出循环\nfor i in range(10):\n    if i == 5:\n        break           # 退出整个循环\n    print(i)            # 0,1,2,3,4\n\n# continue：跳过本轮\nfor i in range(10):\n    if i == 5:\n        continue        # 跳过本轮\n    print(i)            # 0,1,2,3,4,6,7,8,9`, warnings:["⭐ continue 前要先 i += 1（否则死循环）","⭐ break 后代码不再执行"] },
 // L7 · list 列表（基础）卡片
 { id:"L7-C01", lesson:"L7", type:"concept", title:"list 列表创建", term:"List Creation", question:"如何创建一个 list？list 可装混合类型吗？", fill:"list 用 ______ 包裹\n元素之间用 ______ 分隔\n可装混合类型吗？______", answer:"[]（方括号）/ 逗号 / 可以", mnemonic:"", code:`fruits = ["apple", "banana", "cherry"]\nnums = [10, 20, 30]\nmixed = [1, "hi", True]\nempty = []`, warnings:["⭐ 元素之间必须是英文逗号 ,（不是中文，）","⭐ list 用 []，不是 {}（dict）或 ()（tuple）"] },
 { id:"L7-C02", lesson:"L7", type:"concept", title:"索引（正/负）", term:"List Indexing", question:"list 的索引从几开始？负索引是什么意思？", fill:"正索引从 ______ 开始\n负索引从 ______ 开始\n-1 是 ______", answer:"0（不是 1）/-1（最后一个）", mnemonic:"", code:`fruits = ["apple", "banana", "cherry", "date"]\nprint(fruits[0])    # apple（第 1 个）\nprint(fruits[1])    # banana\nprint(fruits[-1])   # date（最后 1 个）\nprint(fruits[-2])   # cherry（倒数第 2 个）`, warnings:["⭐ 索引从 0 开始，不是 1","⭐ -1 是最后 1 个，-len 是第一个"] },
