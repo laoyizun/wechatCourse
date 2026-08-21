@@ -359,6 +359,77 @@ body::before {
   background: rgba(217, 119, 6, .12);
   color: var(--amber);
 }
+.status.success {
+  background: rgba(22, 163, 74, .12);
+  color: var(--green);
+}
+.status.blue {
+  background: rgba(37, 99, 235, .12);
+  color: var(--blue);
+}
+.status.amber {
+  background: rgba(217, 119, 6, .12);
+  color: var(--amber);
+}
+.status.teal {
+  background: rgba(15, 159, 154, .12);
+  color: var(--teal);
+}
+
+/* ==== 作业卡（可展开）==== */
+.hw-card { display: block; cursor: pointer; }
+.hw-card .hw-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.hw-card .hw-toggle {
+  font-size: 18px; color: var(--blue); font-weight: 900;
+  transition: transform .25s ease; flex-shrink: 0; line-height: 1;
+}
+.hw-card.open .hw-toggle { transform: rotate(45deg); }
+.hw-card .hw-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .35s ease, margin-top .35s ease, padding-top .35s ease;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0 solid var(--line);
+}
+.hw-card.open .hw-body {
+  max-height: 4000px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
+}
+.hw-item {
+  padding: 10px 12px; margin-bottom: 10px;
+  background: #fafbff; border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: 8px;
+}
+.hw-item:last-child { margin-bottom: 0; }
+.hw-item .hw-item-head {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.hw-item .hw-item-title { font-weight: 800; font-size: 14px; color: var(--ink); }
+.hw-item .hw-item-body { font-size: 13.5px; color: var(--text); line-height: 1.7; }
+.hw-item .hw-item-body code.inline {
+  background: #eef2ff; color: #4338ca;
+  padding: 1px 6px; border-radius: 4px;
+  font-family: monospace; font-size: 12.5px;
+}
+.hw-item .hw-item-body pre {
+  background: #0f243f; color: #edf6ff;
+  padding: 10px 12px; border-radius: 6px;
+  font-family: monospace; font-size: 12.5px; line-height: 1.65;
+  margin: 8px 0 0; overflow-x: auto; white-space: pre-wrap;
+}
+.hw-item .hw-item-body pre .com { color: #7aa2c8; font-style: italic; }
+.hw-item .hw-item-body pre .kw  { color: #c4b5fd; }
+.hw-item .hw-item-body pre .str { color: #86efac; }
+.hw-item .hw-item-body pre .num { color: #fbbf24; }
+.hw-item .hw-item-body pre .fn  { color: #7dd3fc; }
+.hw-item.color-success { border-left-color: var(--green); }
+.hw-item.color-blue    { border-left-color: var(--blue); }
+.hw-item.color-amber   { border-left-color: var(--amber); }
+.hw-item.color-teal    { border-left-color: var(--teal); }
 
 /* ==== Footer ==== */
 .footer-note {
@@ -448,7 +519,7 @@ body::before {
         <div class="section-header">
           <div class="section-title">
             <h2>📝 Python 作业汇总</h2>
-            <p>L1-L10 · 点击展开看必做题</p>
+            <p>L1-L10 · 点击卡片展开/收起必做题</p>
           </div>
         </div>
         <div class="course-grid" id="python-homework-grid">
@@ -782,18 +853,55 @@ age = <span class="num">14</span>
   }
 ];
 
-// ===== 渲染作业 =====
+// ===== 渲染作业（可展开）=====
 const homeworkGrid = document.getElementById("python-homework-grid");
-homeworkGrid.innerHTML = HOMEWORKS.map(hw => `
-  <a class="course-card" href="#" onclick="event.preventDefault();">
-    <small>${hw.id}</small>
-    <h3>${hw.title}</h3>
-    <p>${hw.description || ''}</p>
-    <div class="chips">
-      <span class="status open">${hw.subtitle}</span>
+function renderHomeworkItem(item) {
+  const codeBlock = item.code ? `<pre>${item.code}</pre>` : '';
+  const code2Block = item.code2 ? `<div style="margin-top:8px;">${item.code2}</div>` : '';
+  const code3Block = item.code3 ? `<pre>${item.code3}</pre>` : '';
+  return `
+    <div class="hw-item color-${item.color || 'blue'}">
+      <div class="hw-item-head">
+        <span class="status ${item.color || 'blue'}">${item.level}</span>
+        <span class="hw-item-title">${item.title}</span>
+      </div>
+      <div class="hw-item-body">
+        ${item.content}
+        ${codeBlock}
+        ${code2Block}
+        ${code3Block}
+      </div>
     </div>
-  </a>
-`).join('');
+  `;
+}
+function renderHomeworkCard(hw) {
+  return `
+    <div class="course-card hw-card" data-hw="${hw.id}">
+      <div class="hw-head">
+        <div style="flex:1; min-width:0;">
+          <small>${hw.id}</small>
+          <h3 style="margin:0 0 6px;">${hw.title}</h3>
+          <p style="margin:0 0 10px;">${hw.description || ''}</p>
+          <div class="chips">
+            <span class="status open">${hw.subtitle}</span>
+          </div>
+        </div>
+        <span class="hw-toggle" aria-hidden="true">+</span>
+      </div>
+      <div class="hw-body">
+        ${hw.items.map(renderHomeworkItem).join('')}
+      </div>
+    </div>
+  `;
+}
+homeworkGrid.innerHTML = HOMEWORKS.map(renderHomeworkCard).join('');
+
+// 点击卡片切换展开
+homeworkGrid.addEventListener('click', (e) => {
+  const card = e.target.closest('.hw-card');
+  if (!card) return;
+  card.classList.toggle('open');
+});
 const FLASHCARDS = [
   // L1
   { id:"L1-C01", lesson:"L1", type:"concept", title:"print 函数", term:"print: 打印 / 输出", question:"Python 里让数据输出到屏幕用哪个函数？", fill:"______(\"Hello\") 输出 Hello 到屏幕", answer:"print() 函数", mnemonic:"print: 把数据发送到标准输出（默认屏幕）", code:`print("Hello")     # 输出 Hello\nprint(2 + 3)       # 输出 5\nprint("a", "b")    # 输出 a b（逗号分隔）`, warnings:["⭐ 漏掉括号 print(\"Hello\") → SyntaxError","⭐ 漏掉引号 print(Hello) → NameError"] },
