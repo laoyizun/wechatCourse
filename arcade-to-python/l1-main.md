@@ -16,7 +16,7 @@
 - 在 MakeCode 游戏中看到变量的作用
 
 ~hint
-本节课共 5 个步骤。每一步都包含一个"代码展示"折叠区，点开可以看到本步要学的 Python 代码。
+本节课共 5 个步骤。每一步都会引导你在右栏代码里"动手写一行"。
 
 如果你在某些步骤卡住了，可以随时点开 hint 折叠区查看提示。
 hint~
@@ -50,6 +50,12 @@ hint~
 
 这句话的意思是：**创建一个叫 `life` 的变量，把数字 3 放进去**。
 
+**现在到右栏代码区动手写**：
+
+右栏代码区已经加载了一个"星际冒险"游戏。但有一段代码空着——就是你马上要写的。
+
+在右栏的代码里找到第一行 `life = ____`，把数字 `3` 填进去。
+
 ~hint
 注意！= 在 Python 里不是"等于"的意思，而是"把右边的东西放到左边"。
 
@@ -68,6 +74,10 @@ hint~
 
 `info.set_life(life)`
 
+**现在到右栏代码区继续动手**：
+
+在右栏代码里找到 `info.set_life(____)` 这一行，把变量名 `life` 填进去。
+
 ~hint
 现在我们做了两件事。
 
@@ -80,38 +90,68 @@ hint~
 
 ## Step 4
 
-**变量可以被改：撞到怪物掉血**
+**运行游戏试试看**
 
-游戏里，被撞一下生命值 -1。在 Python 里，我们**重新给变量赋值**就行：
+按"运行"按钮启动游戏。
 
-`life = life - 1`
+你应该能在屏幕右上角看到**生命值显示为 3**——这正是你写的 `life = 3` 和 `info.set_life(life)` 告诉游戏的。
 
-这句话的意思：**取出 life 当前的值，减 1，再放回 life 盒子里**。
+变量就是这么工作的：用一个名字存一个数字，然后游戏可以用这个数字。
 
 ~hint
-执行前 life 盒子里是 3。
+这一步没有新代码要写，只是让你体验一下变量的作用。
 
-执行 life = life - 1 时，先看右边的 life - 1，它是 3 - 1 = 2，再把 2 放进 life 盒子里。
-
-现在 life 盒子里是 2 了。
+如果你能看到生命值显示为 3，说明你已经成功地把"变量"用到了游戏里！
 hint~
 
 ## Step 5
 
-**举一反三：变量也用在分数上**
+**自己起一个变量名**
 
-`score` 是另一个常见变量，记录玩家分数：
+变量名不一定要叫 `life`——你可以用任何你想要的名字。
 
-```python
-score = 0
-score = score + 10
-```
+试着自己起一个变量名，比如：
+- `hp`（血量，常见游戏术语）
+- `power`（能量）
+- `shield`（护盾）
 
-吃到一颗金币，分数 +10。
+**现在到右栏代码区动手写**：
+
+在右栏代码里找到 `my_variable = ____` 这一行，把数字 10 填进去。这就是你自己定义的变量！
 
 ~hint
-对比一下。life = 3 和 score = 0 都是赋值（创建变量并放数字）。life = life - 1 和 score = score + 10 都是改值（取出旧值，计算，放回去）。只是运算符不同（- 和 +），写法完全一样。
+变量名命名的规则。
+
+可以用英文（推荐）、数字、下划线。不能以数字开头，不能用 Python 关键字（class、def、return 等）。
+
+对比一下。life = 3 和 my_variable = 10 都是赋值（创建变量并放数字）。只是名字不同，写法完全一样。
 hint~
+
+```python-template
+# =============================================
+# ✏️ 玩家可以修改的区域
+# =============================================
+life = ____
+info.set_life(____)
+my_variable = ____
+# =============================================
+
+myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer.set_stay_in_screen(True)
+controller.move_sprite(myPlayer, 100, 100)
+
+info.set_score(0)
+
+star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
+star.set_position(randint(0, 160), 0)
+star.set_velocity(0, 50)
+star.set_bounce_on_wall(True)
+
+def on_on_overlap(sprite, otherSprite):
+    info.change_score_by(1)
+    otherSprite.set_position(randint(0, 160), 0)
+sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
+```
 
 ## 完成 @showdialog
 
