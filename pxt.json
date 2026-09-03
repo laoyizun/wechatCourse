@@ -1,0 +1,25 @@
+{
+  "name": "arcade-to-python",
+  "version": "0.1.0",
+  "description": "Python 入门课程 - 从图形化编程迁移到文本编程",
+  "dependencies": {
+    "device": "*"
+  },
+  "files": [
+    "README.md",
+    "arcade-to-python/l1-main.md",
+    "arcade-to-python/l1-practice-1.md",
+    "arcade-to-python/l1-practice-2.md",
+    "arcade-to-python/l1-practice-3.md",
+    "arcade-to-python/l1-project.md"
+  ],
+  "public": true,
+  "targetVersions": {
+    "target": "2.0.63",
+    "targetId": "arcade"
+  },
+  "supportedTargets": [
+    "arcade"
+  ],
+  "preferredEditor": "tsprj"
+}
