@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>arcade->python 课程</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    padding: 40px 20px;
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .header h1 {
+    font-size: 48px;
+    color: #67217a;
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .section-title {
+    font-size: 24px;
+    color: #67217a;
+    margin: 40px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #67217a;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(103,33,122,0.2);
+  }
+  .card-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #67217a 0%, #b35b8e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+  .card-thumb.l1 { background: linear-gradient(135deg, #f3a21c 0%, #f8c961 100%); }
+  .card-thumb.l2 { background: linear-gradient(135deg, #72acc8 0%, #a4cce0 100%); }
+  .card-thumb.l3 { background: linear-gradient(135deg, #67217a 0%, #b35b8e 100%); }
+  .card-thumb.l4 { background: linear-gradient(135deg, #8a4ba0 0%, #b07ec0 100%); }
+  .card-thumb.l5 { background: linear-gradient(135deg, #e08c45 0%, #f0b58b 100%); }
+  .card-thumb.l6 { background: linear-gradient(135deg, #d36c2c 0%, #e89260 100%); }
+  .card-thumb.l7 { background: linear-gradient(135deg, #4caf50 0%, #81c784 100%); }
+  .card-thumb.l8 { background: linear-gradient(135deg, #e53935 0%, #ef5350 100%); }
+  .card-body { padding: 20px; }
+  .card-label {
+    display: inline-block;
+    background: #67217a;
+    color: white;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+  }
+  .footer {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #ddd;
+  }
+  .badge-new {
+    background: #f3a21c;
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>arcade-&gt;python</h1>
+    <p>Python 编程入门课程 - 从图形化编程迁移到文本编程。通过 8 节课掌握 Python 的 4 个核心概念：变量、运算符、if/else、循环，在"星际冒险"游戏项目中实践。</p>
+  </div>
+
+  <h2 class="section-title">课程目录</h2>
+  <div class="cards">
+
+    <a class="card" href="https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-main" target="_blank">
+      <div class="card-thumb l1">L1</div>
+      <div class="card-body">
+        <span class="card-label">L1 <span class="badge-new">NEW</span></span>
+        <div class="card-title">变量</div>
+        <div class="card-desc">认识 Python 变量，掌握定义变量和改值两个基本操作。在"星际冒险"游戏中应用 life 生命值。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l2">L2</div>
+      <div class="card-body">
+        <span class="card-label">L2</span>
+        <div class="card-title">运算符 <span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">Python 算术运算符（+、-、*、/、%），在"星际冒险"中加"大金币"5 倍分值。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l3">L3</div>
+      <div class="card-body">
+        <span class="card-label">L3</span>
+        <div class="card-title">条件判断（if/else）<span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">Python if/else 基础，根据条件执行不同代码。在"星际冒险"中加"吃到毒蘑菇掉血"。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l4">L4</div>
+      <div class="card-body">
+        <span class="card-label">L4</span>
+        <div class="card-title">条件判断深入 <span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">Python if/elif/else 多分支。在"星际冒险"中加"游戏结束判定"。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l5">L5</div>
+      <div class="card-body">
+        <span class="card-label">L5</span>
+        <div class="card-title">循环 while <span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">Python while 循环。在"星际冒险"中加"自动生成敌人"。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l6">L6</div>
+      <div class="card-body">
+        <span class="card-label">L6</span>
+        <div class="card-title">循环 for <span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">Python for 循环与 range。在"星际冒险"中加"循环生成 3 个金币"。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l7">L7</div>
+      <div class="card-body">
+        <span class="card-label">L7</span>
+        <div class="card-title">综合应用 <span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">综合应用前 6 节知识。</div>
+      </div>
+    </a>
+
+    <a class="card" href="#" style="opacity:0.5; pointer-events:none;">
+      <div class="card-thumb l8">L8</div>
+      <div class="card-body">
+        <span class="card-label">L8</span>
+        <div class="card-title">终项目 <span style="color:#999;font-size:12px;">（即将推出）</span></div>
+        <div class="card-desc">综合项目，把"星际冒险"完善为一个完整可玩的游戏。</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <p>课程部署在 <a href="https://github.com/laoyizun/wechatCourse/tree/main/arcade-to-python" style="color:#67217a;">GitHub</a>，通过 <a href="https://arcade.makecode.com" style="color:#67217a;">MakeCode Arcade</a> 渲染。</p>
+  </div>
+</div>
+</body>
+</html>
