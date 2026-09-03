@@ -8,7 +8,7 @@ Python 入门课程 - 从图形化编程迁移到文本编程。
 
 | 课程 | 链接 |
 |---|---|
-| L1 前段（5 步知识引入）| [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-main) |
+| L1 前段（5 步知识引入）| [打开](https://arcade.makecode.com/#tutorial:39257-91161-38762-03468) |
 | L1 独立练习 1：填空 | [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-practice-1) |
 | L1 独立练习 2：找错 | [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-practice-2) |
 | L1 独立练习 3：追代码 | [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-practice-3) |

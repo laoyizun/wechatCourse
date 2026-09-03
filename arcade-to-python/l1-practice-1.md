@@ -1,4 +1,4 @@
-# L1 独立练习 1 · 填空
+# L1 独立练习 1 · 改错
 
 ### @explicitHints true
 ### @preferredEditor python
@@ -7,60 +7,104 @@
 
 欢迎来到 L1 独立练习 1。
 
-本练习是"**填空**"——下面这段代码想让"游戏开始时分数为 0，每过一关 +100 分"。
-
-但是有一行**没写完**，请你填上。
+本练习是"改错"——右栏代码运行会报错，请你找出错误并修正。
 
 ~hint
 复习一下前段学的。
 
-变量赋值用 变量名 = 数字。
-
-改值用 变量名 = 变量名 + 数字。
+变量在使用前必须先定义（用 变量名 = 数字 给它一个值），否则会报错。
 hint~
 
 ## Step 1
 
-请在右侧的 Python 编辑器中，把下面这段代码补全：
-
-第 1 行：把 0 放进 score 这个盒子里
-第 2 行：把 score 盒子里的数字 + ____，再放回 score 盒子里
-第 3 行：把 score 盒子里的数字告诉给游戏
-
-```python
-score = 0
-score = score + ____
-info.set_score(score)
-```
+请在右侧的 Python 编辑器中运行代码，看看会发生什么。
 
 ~hint
-提示：每过一关 +100 分。空格处应该填什么数字？
+游戏会运行，但是分数好像没增加？或者会报错？
+
+仔细看代码里 info.change_score_by(score) 这一行——score 这个变量好像没有出现在等号左边。
 hint~
+
+请阅读右栏的代码，思考哪里出了问题。
 
 ## Step 2 @showdialog
 
-**参考答案**
+问题在哪？
 
-```python
-score = 0
-score = score + 100
-info.set_score(score)
-```
+代码里用了 score 这个变量，但是从头到尾没有给 score 赋过值（score = 数字）。
+
+Python 不允许"使用未定义的变量"——所以 info.change_score_by(score) 会报错。
 
 ~hint
-每过一关 +100 分，所以空格填 100。
+变量在 Python 里必须先定义、后使用。
 
-整个过程：先定义 score = 0，然后 score = score + 100（取出 0，加 100，放回 score），最后 info.set_score(score) 把当前值告诉游戏。
+如果想"每次吃到星星 +10 分"，你需要先写 score = 10，然后 info.change_score_by(score) 才会成功。
+hint~
 
-如果你填对了，恭喜你完成了填空练习！
+## Step 3
+
+请你修复这个错误——在右栏编辑器里加一行 score = 10（放在 info.set_score(0) 上面），让游戏每次吃到星星 +10 分。
+
+~hint
+修复要点：
+
+1. 找到 info.set_score(0) 这一行
+2. 在它上面加一行 score = 10
+3. info.change_score_by(score) 这一行不用改，它会每次自动加 10 分
+
+这样既学了"变量定义"，又让游戏更好玩。
+hint~
+
+## Step 4 @showdialog
+
+参考答案
+
+```python
+score = 10
+info.set_score(0)
+```
+
+info.change_score_by(score) 这行不用改。
+
+~hint
+现在吃到星星时，分数会 +10。
+
+变量的好处：只改一处，全局生效。把 score = 10 改成 score = 100，每次吃到的分数立刻变成 100。
 hint~
 
 ## 练习完成
 
-**完成练习 1 后，请点击下一步进入练习 2：找错。**
+完成练习 1 后，请点击下一步进入练习 2。
 
 ~hint
-找错是阅读能力的训练，比填空要求更高。
+你学到了：
 
-找错时要有耐心：逐行读、逐字查、思考每个错误的影响。
+1. 变量要先定义、后使用
+2. 改变量值会影响所有用变量的地方
 hint~
+
+```python-template
+# =============================================
+# ✏️ 玩家可以修改的区域
+# =============================================
+life = 3
+info.set_life(life)
+# =============================================
+
+myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer.set_stay_in_screen(True)
+controller.move_sprite(myPlayer, 100, 100)
+
+info.set_score(0)
+
+star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
+star.set_position(randint(0, 160), 0)
+star.set_velocity(0, 50)
+star.set_bounce_on_wall(True)
+
+def on_on_overlap(sprite, otherSprite):
+    info.change_score_by(score)
+    otherSprite.set_position(randint(0, 160), 0)
+sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
+```
+* 
