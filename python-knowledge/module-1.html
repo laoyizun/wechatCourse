@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模块一：变量</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-nav">← 返回首页</a>
+<div class="page-header">
+<div class="module-tag">模块一</div>
+<h1>变量</h1>
+<p>Python 变量定义、命名规则与值的修改</p>
+</div>
+<div class="content-card features-card">
+<div class="section-title">📋 变量定义 Definition</div>
+<ul class="feature-list">
+<li><strong>语法：</strong><code>变量名 = 值</code></li>
+<li><strong>变量名：</strong>标识符，用于引用变量。</li>
+<li><strong>等号 =：</strong>赋值符号，把右边的值赋给左边的变量。</li>
+<li><strong>值：</strong>变量存储的具体内容。</li>
+</ul>
+<div class="code-block">
+<pre># 基本写法
+name = value
+
+# 示例
+score = 0
+player_name = "Alice"
+is_ready = True</pre>
+</div>
+</div>
+<div class="content-card tree-card">
+<div class="section-title">🌳 命名规则 Naming Rules</div>
+<ul class="feature-list">
+<li><strong>组成字符：</strong>只能包含字母、数字和下划线。</li>
+<li><strong>首字符：</strong>不能以数字开头。</li>
+<li><strong>大小写：</strong>区分大小写，<code>life</code> 和 <code>Life</code> 是不同变量。</li>
+<li><strong>关键字：</strong>不能使用 Python 保留字（如 <code>if</code>、<code>for</code>、<code>class</code>）。</li>
+<li><strong>推荐风格：</strong>小写字母 + 下划线分隔多个单词（PEP 8）。</li>
+</ul>
+<div class="code-block">
+<pre># 合法
+score = 100
+star_speed = 50
+_private = "secret"
+name1 = "Bob"
+
+# 非法
+1score = 100         # 数字开头
+star-speed = 50      # 连字符
+if = 10              # 关键字
+my name = "Alice"    # 空格</pre>
+</div>
+</div>
+<div class="content-card logic-card">
+<div class="section-title">⚙️ 值的修改 Reassignment</div>
+<ul class="feature-list">
+<li><strong>重新赋值：</strong>对同一变量再次使用 <code>=</code>，新值覆盖旧值。</li>
+</ul>
+<div class="code-block">
+<pre>score = 0
+print(score)          # 0
+
+score = 100
+print(score)          # 100
+
+score = 50
+print(score)          # 50</pre>
+</div>
+</div>
+<div class="content-card logic-card">
+<div class="section-title">➕ 增加与减少 Increment / Decrement</div>
+<ul class="feature-list">
+<li><strong>复合赋值：</strong><code>x += n</code> 等价于 <code>x = x + n</code>。</li>
+<li><strong>减法赋值：</strong><code>x -= n</code> 等价于 <code>x = x - n</code>。</li>
+</ul>
+<div class="code-block">
+<pre>score = 0
+
+score = score + 10    # 加法：score = 10
+score += 20           # 等价写法：score = 30
+score -= 5            # 减法：score = 25
+
+life = 5
+damage = 1
+life -= damage        # life = 4</pre>
+</div>
+<p style="margin-top: 16px; color: var(--text-muted); font-size: 0.92em;">
+Python 没有 <code>++</code> 和 <code>--</code> 运算符。
+</p>
+</div>
+<div class="teacher-note">
+<div class="section-title">📌 老师注记</div>
+<ul class="feature-list">
+<li><strong>= 是赋值：</strong>Python 中 <code>=</code> 用于赋值；判断相等用 <code>==</code>。</li>
+<li><strong>无 ++ / --：</strong>Python 不支持 <code>x++</code>，必须用 <code>x += 1</code>。</li>
+<li><strong>关键字：</strong><code>if</code>、<code>for</code>、<code>while</code>、<code>class</code> 等保留字不能作为变量名。</li>
+<li><strong>易混字符：</strong>变量名 <code>l</code>（小写 L）与数字 <code>1</code>、<code>O</code> 与 <code>0</code> 视觉上接近，建议避开。</li>
+</ul>
+</div>
+</div>
+</body>
+</html>
