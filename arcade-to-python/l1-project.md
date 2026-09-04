@@ -344,29 +344,3 @@ hint~
 
 把这一节课的 4 个分享链接（5 个练习链接）收藏起来——以后忘了可以随时点开看。
 hint~
-
-```python-template
-# =============================================
-# ✏️ 玩家可以修改的区域（从这里开始动手）
-# =============================================
-
-# 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
-life = 3
-info.set_life(life)
-score = 0
-info.set_score(score)
-# =============================================
-
-star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
-
-def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(score)
-    otherSprite.set_position(randint(0, 160), 0)
-sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
-```
