@@ -13,6 +13,11 @@ Python 入门课程 - 从图形化编程迁移到文本编程。
 | L1 独立练习 2：变量名大小写（改错）| [打开](https://arcade.makecode.com/#tutorial:31613-09394-07372-71231) |
 | L1 独立练习 3：变量覆盖（改错）| [打开](https://arcade.makecode.com/#tutorial:62728-27512-44481-90035) |
 | L1 长项目（学以致用）| [打开](https://arcade.makecode.com/#tutorial:87219-57197-63606-06342) |
+| L2 前段（运算符）| [打开](https://arcade.makecode.com/#tutorial:06303-04792-61761-00285) |
+| L2 独立练习 1：超市收银（填空）| [打开](https://arcade.makecode.com/#tutorial:48562-37162-64534-43458) |
+| L2 独立练习 2：红包分配（填空）| [打开](https://arcade.makecode.com/#tutorial:16836-04961-92455-73183) |
+| L2 独立练习 3：国王金豆（填空）| [打开](https://arcade.makecode.com/#tutorial:29517-63486-12039-58457) |
+| L2 长项目：炸弹减半 | [打开](https://arcade.makecode.com/#tutorial:90039-40429-89484-29148) |
 
 ## 课程简介
 
@@ -22,6 +27,14 @@ Python 入门课程 - 从图形化编程迁移到文本编程。
 - 前段：知识引入（约 25-30 分钟）
 - 中段：3-5 个独立小练习（约 30-40 分钟）
 - 后段：长项目学以致用（约 20-30 分钟）
+
+## 自动化部署工具
+
+```bash
+# 自动生成 share URL（用 MakeCode 后端 API，无需浏览器）
+python3 arcade-to-python/tools-share.py \
+  l2-main.md l2-practice-1.md l2-practice-2.md l2-practice-3.md l2-project.md
+```
 
 ## 注意事项
 
