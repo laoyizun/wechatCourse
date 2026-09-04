@@ -9,9 +9,9 @@ Python 入门课程 - 从图形化编程迁移到文本编程。
 | 课程 | 链接 |
 |---|---|
 | L1 前段（5 步知识引入）| [打开](https://arcade.makecode.com/#tutorial:39257-91161-38762-03468) |
-| L1 独立练习 1：填空 | [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-practice-1) |
-| L1 独立练习 2：找错 | [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-practice-2) |
-| L1 独立练习 3：追代码 | [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-practice-3) |
+| L1 独立练习 1：变量未定义（改错）| [打开](https://arcade.makecode.com/#tutorial:06129-18719-75306-22500) |
+| L1 独立练习 2：变量名大小写（改错）| [打开](https://arcade.makecode.com/#tutorial:31613-09394-07372-71231) |
+| L1 独立练习 3：变量覆盖（改错）| [打开](https://arcade.makecode.com/#tutorial:62728-27512-44481-90035) |
 | L1 长项目（学以致用）| [打开](https://arcade.makecode.com/#tutorial:https://github.com/laoyizun/wechatCourse/arcade-to-python/l1-project) |
 
 ## 课程简介
