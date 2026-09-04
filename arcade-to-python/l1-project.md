@@ -22,7 +22,7 @@
 每一步都会有一个"任务"和"动手区"。动手区告诉你要在右栏编辑器里加哪一行/改哪一行。
 hint~
 
-## {2. 创建玩家 @showdialog}
+## {2. 创建玩家}
 
 第 1 步：创建玩家公主。
 
@@ -34,13 +34,13 @@ hint~
 
 请你先在右栏编辑器里完成以下两件事：
 
-1. 在顶部 `myPlayer = sprites.create(...)` 这一行创建一个公主 sprite
-2. 让玩家不会飞出屏幕（`myPlayer.set_stay_in_screen(True)`）
+1. 在顶部"# 玩家创建在这一行"下面创建一个公主 sprite
+2. 让玩家不会飞出屏幕（`set_stay_in_screen(True)`）
 
 ~hint
 动手区：
 
-找到右栏代码顶部"# 你修改的区域"注释下面的注释 `# 玩家创建在这一行`，在它下面写：
+找到右栏代码顶部"# 你修改的区域"注释下面的"# 玩家创建在这一行"，在它下面写：
 
 `myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)`
 
@@ -67,7 +67,7 @@ myPlayer.set_stay_in_screen(True)
 # =============================================
 ```
 
-## {3. 让玩家可以移动 @showdialog}
+## {3. 让玩家可以移动}
 
 第 2 步：让玩家用方向键移动。
 
@@ -84,7 +84,7 @@ hint~
 ~hint
 动手区：
 
-在"# 玩家创建"后面加一行：
+在"myPlayer.set_stay_in_screen(True)"后面加一行：
 
 `controller.move_sprite(myPlayer, 100, 100)`
 
@@ -105,7 +105,7 @@ controller.move_sprite(myPlayer, 100, 100)
 # =============================================
 ```
 
-## {4. 创建金币 @showdialog}
+## {4. 创建金币}
 
 第 3 步：创建金币让它从天上掉下来。
 
@@ -123,7 +123,7 @@ hint~
 ~hint
 动手区：
 
-在"# 玩家创建"区域后面写：
+在"# 玩家创建"区域后面写 4 行：
 
 `star = sprites.create(sprites.builtin.coin0, SpriteKind.food)`
 `star.set_position(randint(0, 160), 0)`
@@ -152,7 +152,7 @@ star.set_velocity(0, 50)
 star.set_bounce_on_wall(True)
 ```
 
-## {5. 加生命值（变量定义 + 引用）@showdialog}
+## {5. 加生命值（变量定义 + 引用）}
 
 第 4 步：用变量保存生命值。
 
@@ -167,7 +167,7 @@ hint~
 请你：
 
 1. 在"# 玩家创建"区域加一行 `life = 3`
-2. 在 info.set_life(...) 里用变量 life 代替数字 3
+2. 把 info.set_life(3) 这一行括号里的 3 改成 life
 
 ~hint
 动手区：
@@ -204,7 +204,7 @@ star.set_velocity(0, 50)
 star.set_bounce_on_wall(True)
 ```
 
-## {6. 加分数（变量定义 + 引用）@showdialog}
+## {6. 加分数（变量定义 + 引用）}
 
 第 5 步：用变量保存分数。
 
@@ -254,7 +254,7 @@ star.set_velocity(0, 50)
 star.set_bounce_on_wall(True)
 ```
 
-## {7. 撞星加分（变量改值）@showdialog}
+## {7. 撞星加分（变量改值）}
 
 第 6 步：让玩家撞到金币时分数 +1。
 
