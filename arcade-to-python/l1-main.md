@@ -78,7 +78,7 @@ info.set_life(life)
 my_variable = 0
 # ===========================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -128,7 +128,7 @@ info.set_life(life)
 my_variable = 0
 # ===========================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -168,7 +168,7 @@ info.set_life(life)
 my_variable = 0
 # ===========================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -216,7 +216,7 @@ info.set_life(life)
 my_variable = 10
 # ===========================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -259,7 +259,7 @@ info.set_life(____)
 my_variable = ____
 # ===========================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 

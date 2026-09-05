@@ -36,7 +36,7 @@ hint~
 第1步：创建玩家公主。
 
 ~hint
-背景知识（和 L1 一样）：sprites.create(sprites.castle.princess_front0, SpriteKind.player) 创建一个公主 sprite，标记为"玩家"。
+背景知识（和 L1 一样）：sprites.create(sprites.castle.princessFront0, SpriteKind.player) 创建一个公主 sprite，标记为"玩家"。
 
 set_stay_in_screen(True) 让玩家撞到屏幕边缘不会飞出。
 hint~
@@ -48,7 +48,7 @@ hint~
 
 找到"# 你修改的区域"下面的注释 "# 玩家创建在这一行"，在它下面写：
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 hint~
 
@@ -60,7 +60,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 # =============================================
 ```
@@ -99,7 +99,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)
@@ -113,7 +113,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 # =============================================
 
@@ -127,7 +127,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)
@@ -169,7 +169,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 life = 3
 info.set_life(life)
@@ -187,7 +187,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)
@@ -232,7 +232,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 life = 3
 info.set_life(life)
@@ -250,7 +250,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)
@@ -371,7 +371,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 life = 3
 info.set_life(life)
@@ -389,7 +389,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)

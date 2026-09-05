@@ -55,7 +55,7 @@ hint~
 score = 0
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -142,7 +142,7 @@ hint~
 score = 0
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -201,7 +201,7 @@ life = 3
 
 然后加 bomb：
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)
@@ -227,7 +227,7 @@ life = 3
 info.set_life(life)
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -241,7 +241,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)
@@ -294,7 +294,7 @@ life = 3
 info.set_life(life)
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -308,7 +308,7 @@ magic_star.set_position(randint(0, 160), 0)
 magic_star.set_velocity(0, 50)
 magic_star.set_bounce_on_wall(True)
 
-bomb = sprites.create(sprites.builtin.bomb0, SpriteKind.enemy)
+bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
 bomb.set_position(randint(0, 160), 0)
 bomb.set_velocity(0, 50)
 bomb.set_bounce_on_wall(True)

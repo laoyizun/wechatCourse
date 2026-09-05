@@ -42,7 +42,7 @@ hint~
 
 找到右栏代码顶部"# 你修改的区域"注释下面的"# 玩家创建在这一行"，在它下面写：
 
-`myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)`
+`myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)`
 
 然后写：
 
@@ -62,7 +62,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 # =============================================
 ```
@@ -99,7 +99,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 # =============================================
@@ -141,7 +141,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 # =============================================
@@ -191,7 +191,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 life = 3
@@ -239,7 +239,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 life = 3
@@ -294,7 +294,7 @@ hint~
 # =============================================
 
 # 玩家创建在这一行
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 life = 3

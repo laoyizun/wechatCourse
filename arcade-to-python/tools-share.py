@@ -3,13 +3,14 @@
 批量上传 tutorial markdown 并生成 share URL。
 
 用法：
-python3 batch_share.py file1.md file2.md ...
+python3 tools-share.py file1.md file2.md ...
 
 输出 JSON 包含所有 share URL。
 """
 import sys
 import json
-import requests
+import urllib.request
+import urllib.error
 
 API_URL = 'https://makecode.com/api/scripts'
 
@@ -40,38 +41,59 @@ def upload_markdown(md_path):
         "editor": "pyprj"
     }
 
-    resp = requests.post(API_URL, json=payload, headers={'Content-Type': 'application/json'})
+    req = urllib.request.Request(
+        API_URL,
+        data=json.dumps(payload).encode('utf-8'),
+        headers={'Content-Type': 'application/json'},
+        method='POST'
+    )
 
-    if resp.status_code == 200:
-        data = resp.json()
-        share_id = data.get('id')
-        if share_id:
-            return {
-                'file': md_path,
-                'name': name,
-                'success': True,
-                'share_id': share_id,
-                'share_url': f"https://arcade.makecode.com/#tutorial:{share_id}"
-            }
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+            share_id = data.get('id')
+            if share_id:
+                return {
+                    'file': md_path,
+                    'name': name,
+                    'success': True,
+                    'share_id': share_id,
+                    'share_url': f"https://arcade.makecode.com/#tutorial:{share_id}"
+                }
+    except urllib.error.HTTPError as e:
+        return {
+            'file': md_path,
+            'name': name,
+            'success': False,
+            'error': f'HTTP {e.code}',
+            'response': e.read().decode('utf-8', errors='replace')[:200]
+        }
+    except Exception as e:
+        return {
+            'file': md_path,
+            'name': name,
+            'success': False,
+            'error': str(e)
+        }
+
     return {
         'file': md_path,
         'name': name,
         'success': False,
-        'error': f'HTTP {resp.status_code}',
-        'response': resp.text[:200]
+        'error': 'no id in response'
     }
 
 if __name__ == '__main__':
     files = sys.argv[1:]
     if not files:
-        print("Usage: python3 batch_share.py file1.md file2.md ...")
+        print("Usage: python3 tools-share.py file1.md file2.md ...")
         sys.exit(1)
 
     results = [upload_markdown(f) for f in files]
 
     print(json.dumps(results, indent=2, ensure_ascii=False))
 
-    # 同时输出一个易读的表
+    # 易读的表
     print("\n=== Share URLs ===")
     for r in results:
         if r['success']:

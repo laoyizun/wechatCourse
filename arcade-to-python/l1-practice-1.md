@@ -33,7 +33,7 @@ hint~
 info.set_score(0)
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -84,7 +84,7 @@ score = 10
 info.set_score(0)
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
@@ -118,7 +118,7 @@ hint~
 info.set_score(0)
 # =============================================
 
-myPlayer = sprites.create(sprites.castle.princess_front0, SpriteKind.player)
+myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
 myPlayer.set_stay_in_screen(True)
 controller.move_sprite(myPlayer, 100, 100)
 
