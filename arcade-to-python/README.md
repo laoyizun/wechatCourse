@@ -13,11 +13,11 @@ Python 入门课程 - 从图形化编程迁移到文本编程。
 | L1 独立练习 2：变量名大小写（改错）| [打开](https://arcade.makecode.com/#tutorial:92802-00412-66180-91768) |
 | L1 独立练习 3：变量覆盖（改错）| [打开](https://arcade.makecode.com/#tutorial:24679-42530-15053-25447) |
 | L1 长项目（学以致用）| [打开](https://arcade.makecode.com/#tutorial:26594-91549-83619-04571) |
-| L2 前段（运算符）| [打开](https://arcade.makecode.com/#tutorial:72537-65471-74621-47036) |
-| L2 独立练习 1：超市收银（填空）| [打开](https://arcade.makecode.com/#tutorial:06168-92931-94399-20727) |
-| L2 独立练习 2：红包分配（填空）| [打开](https://arcade.makecode.com/#tutorial:05175-49834-83421-42757) |
-| L2 独立练习 3：国王金豆（填空）| [打开](https://arcade.makecode.com/#tutorial:71389-46945-25068-17649) |
-| L2 长项目：炸弹减半 | [打开](https://arcade.makecode.com/#tutorial:71741-49196-74543-77079) |
+| L2 前段（运算符）| [打开](https://arcade.makecode.com/#tutorial:15294-36349-57035-12569) |
+| L2 独立练习 1：超市收银（填空）| [打开](https://arcade.makecode.com/#tutorial:80649-43547-16757-47693) |
+| L2 独立练习 2：红包分配（填空）| [打开](https://arcade.makecode.com/#tutorial:69920-50868-70332-28583) |
+| L2 独立练习 3：国王金豆（填空）| [打开](https://arcade.makecode.com/#tutorial:97618-81658-37463-26606) |
+| L2 长项目：炸弹减半 | [打开](https://arcade.makecode.com/#tutorial:57645-69689-51321-83183) |
 
 ## 课程简介
 
