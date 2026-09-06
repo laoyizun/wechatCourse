@@ -23,7 +23,7 @@
 
 | ✅ 教学点 | ❌ 不是教学点 |
 |---|---|
-| `score = score + 10`（Python 语法）| `info.change_score_by(10)`（API 调用） |
+| `score = score + 10`（Python 语法）| `info.changeScoreBy(10)`（API 调用） |
 | `if score % 30 == 0:`（Python 语法）| 某个 MakeCode 块 |
 | `each = total // people`（Python 语法）| 某个游戏机制 |
 
@@ -63,7 +63,7 @@
 |---|---|
 | `score = "小明"`（在算分的地方）| Python 区分数字和字符串 |
 | `Score`（大写）| Python 区分大小写 |
-| `info.change_score_by(score)`（score 未定义）| 必须先定义后使用 |
+| `info.changeScoreBy(score)`（score 未定义）| 必须先定义后使用 |
 | `score = score * 1`（错写成 `*1`）| `*` 是乘，1 乘任何数是自己 |
 | `money / people`（期望整数结果）| `/` 是真除法，`//` 才是整除 |
 | `10 + 5 = 15`（条件用赋值而非比较）| `=` 是赋值，`==` 才是比较（**L3 学**）|
@@ -251,7 +251,7 @@ else:
 | @showdialog 用法 | **只在纯讲解/回顾步骤**用，动手步骤不用 |
 | hint 块 | **纯文本**，无 markdown 修饰、无 emoji、无行内代码 |
 | 注释风格 | `# 标题`、`# ============` 分隔线、✏️ 一个就够了 |
-| 变量命名 | snake_case（`myPlayer`、`info.set_life`） |
+| 变量命名 | snake_case（`myPlayer`、`info.setLife`） |
 | SpriteKind | 小写（`SpriteKind.player`、`SpriteKind.food`） |
 | 函数定义 | `def on_xxx(sprite, otherSprite):`（不用 `function`） |
 

@@ -64,7 +64,7 @@ reward = bean_per_kill ** kill_count
 # 🔒 NPC 判定区（不用看代码）
 # =============================================
 if reward == 8:
-    info.set_score(reward)
+    info.setScore(reward)
     game.show_long_text("国王：'击杀3 怪物，奖励8 个金豆！勇士受赏！'", 1)
 else:
     game.show_long_text("国王：'奖励算错了哦'", 1)
@@ -123,7 +123,7 @@ reward = bean_per_kill ** kill_count
 # 🔒 NPC 判定区（不用看代码）
 # =============================================
 if reward == 8:
-    info.set_score(reward)
+    info.setScore(reward)
     game.show_long_text("国王：'击杀3 怪物，奖励8 个金豆！勇士受赏！'", 1)
 else:
     game.show_long_text("国王：'奖励算错了哦'", 1)
@@ -157,7 +157,7 @@ reward = ____
 # 🔒 NPC 判定区（不用看代码）
 # =============================================
 if reward == 8:
-    info.set_score(reward)
+    info.setScore(reward)
     game.show_long_text("国王：'击杀3 怪物，奖励8 个金豆！勇士受赏！'", 1)
 else:
     game.show_long_text("国王：'奖励算错了哦'", 1)

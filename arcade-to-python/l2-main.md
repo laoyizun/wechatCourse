@@ -56,17 +56,17 @@ score = 0
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
     score = score + 1
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -103,9 +103,9 @@ hint~
 在"# 你修改的区域"下面加：
 
 magic_star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-magic_star.set_position(randint(0, 160), 0)
-magic_star.set_velocity(0, 50)
-magic_star.set_bounce_on_wall(True)
+magic_star.setPosition(randint(0, 160), 0)
+magic_star.setVelocity(0, 50)
+magic_star.setBounceOnWall(True)
 
 魔法金币和普通金币都是 SpriteKind.food，但需要分开的事件监听：
 
@@ -127,7 +127,7 @@ def on_on_overlap(sprite, otherSprite):
 
 def on_on_overlap_magic(sprite, otherSprite):
     score = score + 5
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap_magic)
 
 你只需要专注在 score = score + 5 这一行——这是 * 运算符的用法。
@@ -143,27 +143,27 @@ score = 0
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 magic_star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-magic_star.set_position(randint(0, 160), 0)
-magic_star.set_velocity(0, 50)
-magic_star.set_bounce_on_wall(True)
+magic_star.setPosition(randint(0, 160), 0)
+magic_star.setVelocity(0, 50)
+magic_star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
     score = score + 1
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 def on_on_overlap_magic(sprite, otherSprite):
     score = score + 5
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap_magic)
 ```
 
@@ -176,13 +176,13 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap_magic)
 
 扣血的写法：
 
-info.set_life(info.life() - 1)
+info.setLife(info.life() - 1)
 
 或者用变量 life：
 
 life = 3
 life = life - 1
-info.set_life(life)
+info.setLife(life)
 
 减号的核心：把数减小。
 hint~
@@ -202,15 +202,15 @@ life = 3
 然后加 bomb：
 
 bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
-bomb.set_position(randint(0, 160), 0)
-bomb.set_velocity(0, 50)
-bomb.set_bounce_on_wall(True)
+bomb.setPosition(randint(0, 160), 0)
+bomb.setVelocity(0, 50)
+bomb.setBounceOnWall(True)
 
 加事件：
 
 def on_on_overlap_bomb(sprite, otherSprite):
     life = life - 1
-    info.set_life(life)
+    info.setLife(life)
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap_bomb)
 
 注意：生命值用 life 变量存储，更灵活——以后改 life = 5 就是 5 条命。
@@ -224,41 +224,41 @@ hint~
 # =============================================
 score = 0
 life = 3
-info.set_life(life)
+info.setLife(life)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 magic_star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-magic_star.set_position(randint(0, 160), 0)
-magic_star.set_velocity(0, 50)
-magic_star.set_bounce_on_wall(True)
+magic_star.setPosition(randint(0, 160), 0)
+magic_star.setVelocity(0, 50)
+magic_star.setBounceOnWall(True)
 
 bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
-bomb.set_position(randint(0, 160), 0)
-bomb.set_velocity(0, 50)
-bomb.set_bounce_on_wall(True)
+bomb.setPosition(randint(0, 160), 0)
+bomb.setVelocity(0, 50)
+bomb.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
     score = score + 1
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 def on_on_overlap_magic(sprite, otherSprite):
     score = score + 5
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap_magic)
 
 def on_on_overlap_bomb(sprite, otherSprite):
     life = life - 1
-    info.set_life(life)
+    info.setLife(life)
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap_bomb)
 ```
 
@@ -291,40 +291,40 @@ hint~
 # =============================================
 score = 0
 life = 3
-info.set_life(life)
+info.setLife(life)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 magic_star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-magic_star.set_position(randint(0, 160), 0)
-magic_star.set_velocity(0, 50)
-magic_star.set_bounce_on_wall(True)
+magic_star.setPosition(randint(0, 160), 0)
+magic_star.setVelocity(0, 50)
+magic_star.setBounceOnWall(True)
 
 bomb = sprites.create(sprites.castle.rock0, SpriteKind.enemy)
-bomb.set_position(randint(0, 160), 0)
-bomb.set_velocity(0, 50)
-bomb.set_bounce_on_wall(True)
+bomb.setPosition(randint(0, 160), 0)
+bomb.setVelocity(0, 50)
+bomb.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
     score = score + 1
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 def on_on_overlap_magic(sprite, otherSprite):
     score = score + 5
-    otherSprite.set_position(randint(0, 160), 0)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap_magic)
 
 def on_on_overlap_bomb(sprite, otherSprite):
     life = life - 1
-    info.set_life(life)
+    info.setLife(life)
 sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap_bomb)
 ```

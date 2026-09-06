@@ -74,24 +74,24 @@ hint~
 ```python
 # ✏️ 你修改的区域
 life = 3
-info.set_life(life)
+info.setLife(life)
 my_variable = 0
 # ===========================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
-info.set_score(0)
+info.setScore(0)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(1)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(1)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -99,22 +99,22 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 **变量定义好了，但游戏还不知道。**
 
-MakeCode 有一个指令叫 `info.set_life`，它的作用是"把游戏里的生命值设成某个数字"。
+MakeCode 有一个指令叫 `info.setLife`，它的作用是"把游戏里的生命值设成某个数字"。
 
 我们把变量 `life` 传给它：
 
-`info.set_life(life)`
+`info.setLife(life)`
 
 ---
 
-- :mouse pointer: 在右栏代码里找到 `info.set_life(____)` 这一行，把变量名 `life` 填进去
+- :mouse pointer: 在右栏代码里找到 `info.setLife(____)` 这一行，把变量名 `life` 填进去
 
 ~hint
 现在我们做了两件事。
 
 第一件：life = 3 创建一个叫 life 的盒子，里面放数字 3。
 
-第二件：info.set_life(life) 把 life 盒子里的数字告诉给游戏。
+第二件：info.setLife(life) 把 life 盒子里的数字告诉给游戏。
 
 游戏看到 life 是 3，就把生命值显示成 3。
 hint~
@@ -124,24 +124,24 @@ hint~
 ```python
 # ✏️ 你修改的区域
 life = 3
-info.set_life(life)
+info.setLife(life)
 my_variable = 0
 # ===========================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
-info.set_score(0)
+info.setScore(0)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(1)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(1)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -149,7 +149,7 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 **按"运行"按钮启动游戏。**
 
-你应该能在屏幕右上角看到**生命值显示为 3**——这正是你写的 `life = 3` 和 `info.set_life(life)` 告诉游戏的。
+你应该能在屏幕右上角看到**生命值显示为 3**——这正是你写的 `life = 3` 和 `info.setLife(life)` 告诉游戏的。
 
 变量就是这么工作的：用一个名字存一个数字，然后游戏可以用这个数字。
 
@@ -164,24 +164,24 @@ hint~
 ```python
 # ✏️ 你修改的区域
 life = 3
-info.set_life(life)
+info.setLife(life)
 my_variable = 0
 # ===========================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
-info.set_score(0)
+info.setScore(0)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(1)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(1)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -212,24 +212,24 @@ hint~
 ```python
 # ✏️ 你修改的区域
 life = 3
-info.set_life(life)
+info.setLife(life)
 my_variable = 10
 # ===========================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
-info.set_score(0)
+info.setScore(0)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(1)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(1)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -255,23 +255,23 @@ hint~
 # ✏️ 你修改的区域
 # ===========================
 life = ____
-info.set_life(____)
+info.setLife(____)
 my_variable = ____
 # ===========================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
-info.set_score(0)
+info.setScore(0)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(1)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(1)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```

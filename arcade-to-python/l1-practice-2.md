@@ -33,21 +33,21 @@ hint~
 # ✏️ 你修改的区域
 # =============================================
 score = 1
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(Score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(Score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -55,9 +55,9 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 
 代码里 score 出现了好几次，但有一处的大小写跟别的不一样。
 
-顶部第 1 行写的是 score = 1（全小写）。第 2 行 info.set_score(score) 也用的小写。
+顶部第 1 行写的是 score = 1（全小写）。第 2 行 info.setScore(score) 也用的小写。
 
-但是 on_on_overlap 函数里写的是 info.change_score_by(Score)，括号里的 Score 首字母大写。
+但是 on_on_overlap 函数里写的是 info.changeScoreBy(Score)，括号里的 Score 首字母大写。
 
 Python 的规则：
 
@@ -77,13 +77,13 @@ hint~
 
 ## {4. 修复错误}
 
-请你修复这个错误——把 on_on_overlap 函数里 info.change_score_by(...) 这一行括号中的 Score 改成 score，让所有 score 大小写一致。
+请你修复这个错误——把 on_on_overlap 函数里 info.changeScoreBy(...) 这一行括号中的 Score 改成 score，让所有 score 大小写一致。
 
 ~hint
 修复要点：
 
 1. 在右栏编辑器里找到 on_on_overlap 函数
-2. 找到 info.change_score_by(...) 这一行
+2. 找到 info.changeScoreBy(...) 这一行
 3. 把括号里的 Score 改成 score
 4. 顶部 score = 1 不用改
 
@@ -97,27 +97,27 @@ hint~
 # ✏️ 你修改的区域
 # =============================================
 score = 1
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
 ## {5. 练习完成 @showdialog}
 
-参考答案：on_on_overlap 函数里 info.change_score_by(Score) 改成 info.change_score_by(score)。
+参考答案：on_on_overlap 函数里 info.changeScoreBy(Score) 改成 info.changeScoreBy(score)。
 
 ~hint
 现在撞星时分数 +1。
@@ -132,20 +132,20 @@ hint~
 # ✏️ 玩家可以修改的区域
 # =============================================
 score = 1
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(Score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(Score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```

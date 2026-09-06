@@ -35,22 +35,22 @@ hint~
 # ✏️ 你修改的区域
 # =============================================
 score = 1
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
     score = "小明"
-    info.change_score_by(score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -59,7 +59,7 @@ sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 代码里 score 出现了好几次：
 
 1. 顶部 score = 1（数字 1）
-2. on_on_overlap 里 info.change_score_by(score)
+2. on_on_overlap 里 info.changeScoreBy(score)
 3. on_on_overlap 里还藏了一行 score = "小明"（字符串！）
 
 Python 的规则：
@@ -68,7 +68,7 @@ Python 的规则：
 
 当代码运行到 score = "小明" 时，score 就从数字 1 变成了字符串"小明"。
 
-然后 info.change_score_by(score) 想把 score 当数字加进去，但 score 已经是字符串了——所以报错。
+然后 info.changeScoreBy(score) 想把 score 当数字加进去，但 score 已经是字符串了——所以报错。
 
 ~hint
 变量赋值就像给盒子换内容。
@@ -77,7 +77,7 @@ Python 的规则：
 
 第二次 score = "小明"，盒子里的 1 被拿走，换成了"小明"。
 
-第三行 change_score_by(score) 想把盒子里的东西加到分数上——但"小明"加不进去。
+第三行 changeScoreBy(score) 想把盒子里的东西加到分数上——但"小明"加不进去。
 hint~
 
 ## {4. 修复错误}
@@ -100,21 +100,21 @@ hint~
 # ✏️ 你修改的区域
 # =============================================
 score = 1
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -133,21 +133,21 @@ hint~
 # ✏️ 玩家可以修改的区域
 # =============================================
 score = 1
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
     score = "小明"
-    info.change_score_by(score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```

@@ -35,7 +35,7 @@ hint~
 请你先在右栏编辑器里完成以下两件事：
 
 1. 在顶部"# 玩家创建在这一行"下面创建一个公主 sprite
-2. 让玩家不会飞出屏幕（`set_stay_in_screen(True)`）
+2. 让玩家不会飞出屏幕（`setStayInScreen(True)`）
 
 ~hint
 动手区：
@@ -46,7 +46,7 @@ hint~
 
 然后写：
 
-`myPlayer.set_stay_in_screen(True)`
+`myPlayer.setStayInScreen(True)`
 
 这两行代码做了什么：
 
@@ -63,7 +63,7 @@ hint~
 
 # 玩家创建在这一行
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
+myPlayer.setStayInScreen(True)
 # =============================================
 ```
 
@@ -72,7 +72,7 @@ myPlayer.set_stay_in_screen(True)
 第 2 步：让玩家用方向键移动。
 
 ~hint
-背景知识：controller.move_sprite(sprite, vx, vy) 让玩家可以用方向键移动。
+背景知识：controller.moveSprite(sprite, vx, vy) 让玩家可以用方向键移动。
 
 - vx 是水平速度（100 表示每秒 100 像素）
 - vy 是垂直速度
@@ -84,9 +84,9 @@ hint~
 ~hint
 动手区：
 
-在"myPlayer.set_stay_in_screen(True)"后面加一行：
+在"myPlayer.setStayInScreen(True)"后面加一行：
 
-`controller.move_sprite(myPlayer, 100, 100)`
+`controller.moveSprite(myPlayer, 100, 100)`
 
 现在按方向键，玩家应该可以动了。
 hint~
@@ -100,8 +100,8 @@ hint~
 
 # 玩家创建在这一行
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 # =============================================
 ```
 
@@ -113,9 +113,9 @@ controller.move_sprite(myPlayer, 100, 100)
 背景知识：
 
 - sprites.create(sprites.builtin.coin0, SpriteKind.food)：创建一个金币 sprite，标记为"食物"
-- set_position(randint(0, 160), 0)：随机放在顶部（x 是 0-160 之间随机，y 是 0）
-- set_velocity(0, 50)：垂直方向速度 50（金币下落速度）
-- set_bounce_on_wall(True)：撞到墙会反弹
+- setPosition(randint(0, 160), 0)：随机放在顶部（x 是 0-160 之间随机，y 是 0）
+- setVelocity(0, 50)：垂直方向速度 50（金币下落速度）
+- setBounceOnWall(True)：撞到墙会反弹
 hint~
 
 请你创建一个金币，让它从屏幕顶部（随机 x）开始下落，下落速度 50，撞到墙会反弹。
@@ -126,9 +126,9 @@ hint~
 在"# 玩家创建"区域后面写 4 行：
 
 `star = sprites.create(sprites.builtin.coin0, SpriteKind.food)`
-`star.set_position(randint(0, 160), 0)`
-`star.set_velocity(0, 50)`
-`star.set_bounce_on_wall(True)`
+`star.setPosition(randint(0, 160), 0)`
+`star.setVelocity(0, 50)`
+`star.setBounceOnWall(True)`
 
 点 Run 看效果——金币应该从屏幕顶部出现并下落。
 hint~
@@ -142,14 +142,14 @@ hint~
 
 # 玩家创建在这一行
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 # =============================================
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 ```
 
 ## {5. 加生命值（变量定义 + 引用）}
@@ -159,26 +159,26 @@ star.set_bounce_on_wall(True)
 ~hint
 为什么要用变量？
 
-如果直接把数字 3 写进 info.set_life(3)，以后想改"5 条命"就要改两处。
+如果直接把数字 3 写进 info.setLife(3)，以后想改"5 条命"就要改两处。
 
-用变量 life = 3 → info.set_life(life)，以后改"5 条命"只改 1 处（life = 5）。这就是变量的好处。
+用变量 life = 3 → info.setLife(life)，以后改"5 条命"只改 1 处（life = 5）。这就是变量的好处。
 hint~
 
 请你：
 
 1. 在"# 玩家创建"区域加一行 `life = 3`
-2. 把 info.set_life(3) 这一行括号里的 3 改成 life
+2. 把 info.setLife(3) 这一行括号里的 3 改成 life
 
 ~hint
 动手区：
 
-在 controller.move_sprite(...) 后面加：
+在 controller.moveSprite(...) 后面加：
 
 `life = 3`
 
-然后找到 info.set_life(3) 这一行，把 3 改成 life：
+然后找到 info.setLife(3) 这一行，把 3 改成 life：
 
-`info.set_life(life)`
+`info.setLife(life)`
 
 现在游戏会有 3 条生命。改 life = 5 试试看生命值会变。
 hint~
@@ -192,16 +192,16 @@ hint~
 
 # 玩家创建在这一行
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 life = 3
-info.set_life(life)
+info.setLife(life)
 # =============================================
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 ```
 
 ## {6. 加分数（变量定义 + 引用）}
@@ -209,24 +209,24 @@ star.set_bounce_on_wall(True)
 第 5 步：用变量保存分数。
 
 ~hint
-跟生命值一样的思路——用 score = 0 → info.set_score(score)，以后改初始分数只改一处。
+跟生命值一样的思路——用 score = 0 → info.setScore(score)，以后改初始分数只改一处。
 hint~
 
 请你：
 
 1. 在"# 玩家创建"区域加一行 `score = 0`
-2. 把 info.set_score(0) 这一行的 0 改成 score
+2. 把 info.setScore(0) 这一行的 0 改成 score
 
 ~hint
 动手区：
 
-在 info.set_life(life) 后面加：
+在 info.setLife(life) 后面加：
 
 `score = 0`
 
-然后找到 info.set_score(0) 这一行，把 0 改成 score：
+然后找到 info.setScore(0) 这一行，把 0 改成 score：
 
-`info.set_score(score)`
+`info.setScore(score)`
 
 现在游戏从 0 分开始。改 score = 100 试试看初始分数会变。
 hint~
@@ -240,18 +240,18 @@ hint~
 
 # 玩家创建在这一行
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 life = 3
-info.set_life(life)
+info.setLife(life)
 score = 0
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 ```
 
 ## {7. 撞星加分（变量改值）}
@@ -267,23 +267,23 @@ hint~
 请你写一个 on_on_overlap 函数：
 
 - 当玩家撞到金币
-- info.change_score_by(score) 加分
+- info.changeScoreBy(score) 加分
 - 把金币移到屏幕顶部的新位置
 
 ~hint
 动手区：
 
-在 star.set_bounce_on_wall(True) 后面写：
+在 star.setBounceOnWall(True) 后面写：
 
 `def on_on_overlap(sprite, otherSprite):`
-`    info.change_score_by(score)`
-`    otherSprite.set_position(randint(0, 160), 0)`
+`    info.changeScoreBy(score)`
+`    otherSprite.setPosition(randint(0, 160), 0)`
 
 然后再写：
 
 `sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)`
 
-注意：change_score_by(score) 用的是变量 score，所以如果改 score = 5，每次撞星就 +5 分。这就是"只改一处"的威力。
+注意：changeScoreBy(score) 用的是变量 score，所以如果改 score = 5，每次撞星就 +5 分。这就是"只改一处"的威力。
 hint~
 
 #### ~ tutorialhint
@@ -295,22 +295,22 @@ hint~
 
 # 玩家创建在这一行
 myPlayer = sprites.create(sprites.castle.princessFront0, SpriteKind.player)
-myPlayer.set_stay_in_screen(True)
-controller.move_sprite(myPlayer, 100, 100)
+myPlayer.setStayInScreen(True)
+controller.moveSprite(myPlayer, 100, 100)
 life = 3
-info.set_life(life)
+info.setLife(life)
 score = 0
-info.set_score(score)
+info.setScore(score)
 # =============================================
 
 star = sprites.create(sprites.builtin.coin0, SpriteKind.food)
-star.set_position(randint(0, 160), 0)
-star.set_velocity(0, 50)
-star.set_bounce_on_wall(True)
+star.setPosition(randint(0, 160), 0)
+star.setVelocity(0, 50)
+star.setBounceOnWall(True)
 
 def on_on_overlap(sprite, otherSprite):
-    info.change_score_by(score)
-    otherSprite.set_position(randint(0, 160), 0)
+    info.changeScoreBy(score)
+    otherSprite.setPosition(randint(0, 160), 0)
 sprites.on_overlap(SpriteKind.player, SpriteKind.food, on_on_overlap)
 ```
 
@@ -336,7 +336,7 @@ hint~
 这一节你真正掌握的 3 个能力：
 
 1. 变量定义：用 `life = 3`、`score = 0` 把数字存起来
-2. 变量引用：用 `info.set_life(life)`、`info.set_score(score)` 把变量值传出去
+2. 变量引用：用 `info.setLife(life)`、`info.setScore(score)` 把变量值传出去
 3. 变量改值：`score = 5` 之后，所有用到 score 的地方都会自动用新值
 
 ~hint

@@ -8,16 +8,16 @@ Python 入门课程 - 从图形化编程迁移到文本编程。
 
 | 课程 | 链接 |
 |---|---|
-| L1 前段（5 步知识引入）| [打开](https://arcade.makecode.com/#tutorial:71771-77314-23145-59042) |
-| L1 独立练习 1：变量未定义（改错）| [打开](https://arcade.makecode.com/#tutorial:23190-86813-52429-95567) |
-| L1 独立练习 2：变量名大小写（改错）| [打开](https://arcade.makecode.com/#tutorial:92802-00412-66180-91768) |
-| L1 独立练习 3：变量覆盖（改错）| [打开](https://arcade.makecode.com/#tutorial:24679-42530-15053-25447) |
-| L1 长项目（学以致用）| [打开](https://arcade.makecode.com/#tutorial:26594-91549-83619-04571) |
-| L2 前段（运算符）| [打开](https://arcade.makecode.com/#tutorial:15294-36349-57035-12569) |
-| L2 独立练习 1：超市收银（填空）| [打开](https://arcade.makecode.com/#tutorial:80649-43547-16757-47693) |
-| L2 独立练习 2：红包分配（填空）| [打开](https://arcade.makecode.com/#tutorial:69920-50868-70332-28583) |
-| L2 独立练习 3：国王金豆（填空）| [打开](https://arcade.makecode.com/#tutorial:97618-81658-37463-26606) |
-| L2 长项目：炸弹减半 | [打开](https://arcade.makecode.com/#tutorial:57645-69689-51321-83183) |
+| L1 前段（5 步知识引入）| [打开](https://arcade.makecode.com/#tutorial:78610-82752-51824-91461) |
+| L1 独立练习 1：变量未定义（改错）| [打开](https://arcade.makecode.com/#tutorial:22018-16870-46318-69052) |
+| L1 独立练习 2：变量名大小写（改错）| [打开](https://arcade.makecode.com/#tutorial:13070-75141-42283-94681) |
+| L1 独立练习 3：变量覆盖（改错）| [打开](https://arcade.makecode.com/#tutorial:26534-76576-99981-72291) |
+| L1 长项目（学以致用）| [打开](https://arcade.makecode.com/#tutorial:46740-73771-88426-36189) |
+| L2 前段（运算符）| [打开](https://arcade.makecode.com/#tutorial:04784-18418-22909-44907) |
+| L2 独立练习 1：超市收银（填空）| [打开](https://arcade.makecode.com/#tutorial:66477-11997-81965-90718) |
+| L2 独立练习 2：红包分配（填空）| [打开](https://arcade.makecode.com/#tutorial:24868-85705-53759-09462) |
+| L2 独立练习 3：国王金豆（填空）| [打开](https://arcade.makecode.com/#tutorial:69534-01363-38214-69432) |
+| L2 长项目：炸弹减半 | [打开](https://arcade.makecode.com/#tutorial:07458-76960-05653-67681) |
 
 ## 课程简介
 
