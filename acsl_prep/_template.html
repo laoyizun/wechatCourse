@@ -172,6 +172,33 @@ code.inline {
   white-space: nowrap;
 }
 
+/* 英文术语标注 */
+.en-tag {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 10px;
+  font-family: "Inter", "JetBrains Mono", "SF Mono", Consolas, monospace;
+  font-size: 0.78em;
+  font-weight: 700;
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, .08);
+  border: 1px solid rgba(37, 99, 235, .24);
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+}
+/* 大号英文（h1 / h2 副标） */
+h1 .en-tag, h2 .en-tag {
+  margin-left: 12px;
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+/* chip 上的英文 */
+.chip .en-tag {
+  margin: 0;
+  font-size: 0.78em;
+}
+
 table { width: 100%; border-collapse: collapse; font-size: 19px; line-height: 1.55; margin: 14px 0; }
 th { text-align: left; font-size: 14px; color: #25415f; font-weight: 800;
      padding: 12px 14px; border-bottom: 2px solid var(--line); background: var(--panel-soft); }

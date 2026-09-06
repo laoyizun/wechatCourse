@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L1 · 数字系统完整版 — ACSL 备赛</title>
+<title>L1 · 数字系统完整版 · Computer Number Systems — ACSL 备赛</title>
 <style>
 :root {
   --bg: #faf7f2;
@@ -170,6 +170,33 @@ code.inline {
   font-size: 0.92em; color: #6d28d9;
   font-weight: 700;
   white-space: nowrap;
+}
+
+/* 英文术语标注 */
+.en-tag {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 10px;
+  font-family: "Inter", "JetBrains Mono", "SF Mono", Consolas, monospace;
+  font-size: 0.78em;
+  font-weight: 700;
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, .08);
+  border: 1px solid rgba(37, 99, 235, .24);
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+}
+/* 大号英文（h1 / h2 副标） */
+h1 .en-tag, h2 .en-tag {
+  margin-left: 12px;
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+/* chip 上的英文 */
+.chip .en-tag {
+  margin: 0;
+  font-size: 0.78em;
 }
 
 table { width: 100%; border-collapse: collapse; font-size: 19px; line-height: 1.55; margin: 14px 0; }
@@ -412,9 +439,8 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <main class="deck" id="deck">
 
   <!-- ============================================================ -->
-<!--  L1 · 数字系统完整版 body · 共 20 页                         -->
-<!--  注意：本文件只含 <section>...</section>...，不含 main        -->
-<!--  由 _new_lesson.py 自动嵌入模板                               -->
+<!--  L1 · 数字系统完整版 body · v1.1（含英文术语标注）             -->
+<!--  注：CSS 新增 .en-term 样式用于术语英文标注                    -->
 <!-- ============================================================ -->
 
 <!-- 01 · Cover -->
@@ -422,16 +448,16 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
   <div class="left">
     <div class="kicker">Lesson 1 · 第 1 周</div>
     <h1>计算机<span class="highlight">数字系统</span>完整版</h1>
-    <p class="subtitle">二进制 · 八进制 · 十六进制 · 互转 · 加法 · 补码</p>
+    <p class="subtitle">Computer Number Systems · 二进制 · 八进制 · 十六进制 · 互转 · 加法 · 补码</p>
     <div class="chips" style="margin-top:18px;">
-      <span class="chip purple">二进制</span>
-      <span class="chip amber">八进制</span>
-      <span class="chip green">十六进制</span>
-      <span class="chip blue">互转</span>
-      <span class="chip teal">补码</span>
+      <span class="chip purple">Binary 二进制</span>
+      <span class="chip amber">Octal 八进制</span>
+      <span class="chip green">Hexadecimal 十六进制</span>
+      <span class="chip blue">Conversion 互转</span>
+      <span class="chip teal">Two's Complement 补码</span>
     </div>
     <p style="margin-top:32px; font-size:14px; color:var(--muted);">
-      ACSL 初级组 · 第一轮考点 · 9 月 7 日 - 9 月 13 日
+      ACSL Junior Division · 第一轮考点 · 9 月 7 日 - 9 月 13 日
     </p>
   </div>
 </section>
@@ -439,25 +465,25 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 02 · ACSL 是什么（开课介绍）-->
 <section class="slide title-slide">
   <div class="left">
-    <div class="kicker amber">📖 开课介绍</div>
-    <h1>ACSL 是什么？</h1>
+    <div class="kicker amber">📖 开课介绍 · Introduction</div>
+    <h1>ACSL 是什么？<span class="muted" style="font-size:32px; font-weight:600;">What is ACSL?</span></h1>
     <p class="subtitle">American Computer Science League · 美国计算机科学联盟</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px; max-width:880px;">
       <div class="card" style="border-left:6px solid var(--purple);">
-        <h3 style="color:var(--purple);">🎯 比赛性质</h3>
-        <p style="font-size:17px;">全球性计算机科学竞赛，1978 年开始，每年 8000+ 学生参与。覆盖计算机科学理论 + 编程实战。</p>
+        <h3 style="color:var(--purple);">🎯 比赛性质 · What</h3>
+        <p style="font-size:17px;">全球性计算机科学竞赛，1978 年开始，每年 8000+ 学生参与。<br><span class="en-tag">Global CS contest, since 1978, 8000+ students yearly</span></p>
       </div>
       <div class="card" style="border-left:6px solid var(--amber);">
-        <h3 style="color:var(--amber);">📝 比赛形式</h3>
-        <p style="font-size:17px;">每轮 = 30 分钟笔试（6 道选择题）+ 72 小时编程题（团队 3 人合作）。</p>
+        <h3 style="color:var(--amber);">📝 比赛形式 · Format</h3>
+        <p style="font-size:17px;">每轮 = 30 分钟笔试（6 道选择题）+ 72 小时编程题（团队 3 人）。<br><span class="en-tag">30-min Short Problems (6 questions) + 72-hour Programming Problem (team of 3)</span></p>
       </div>
       <div class="card" style="border-left:6px solid var(--green);">
-        <h3 style="color:var(--green);">🏆 我们的组别</h3>
-        <p style="font-size:17px;">Junior Division（初级组）：面向初一 - 初三学生。本课程 12 个主题全部针对初级组。</p>
+        <h3 style="color:var(--green);">🏆 组别 · Division</h3>
+        <p style="font-size:17px;">Junior Division（初级组）：面向初一 - 初三。<br><span class="en-tag">Junior Division: grades 7-9</span></p>
       </div>
       <div class="card" style="border-left:6px solid var(--blue);">
-        <h3 style="color:var(--blue);">📅 本赛季时间</h3>
-        <p style="font-size:17px; margin-bottom:6px;">第一轮：2026-12-13（资格轮）<br>第二轮：2027-02-13<br>第三轮：2027-03-13<br>第四轮：2027-04-17</p>
+        <h3 style="color:var(--blue);">📅 时间 · Schedule</h3>
+        <p style="font-size:17px; margin-bottom:6px;">第一轮 Contest 1: 2026-12-13<br>第二轮 Contest 2: 2027-02-13<br>第三轮 Contest 3: 2027-03-13<br>第四轮 Contest 4: 2027-04-17</p>
       </div>
     </div>
   </div>
@@ -466,55 +492,56 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 03 · 18 周路线图 -->
 <section class="slide wide">
   <div class="head">
-    <div class="kicker">📍 课程地图</div>
+    <div class="kicker">📍 课程地图 · Course Map</div>
     <h2>18 周路线图 · 12 个主题</h2>
     <p class="subtitle">每一周的教学主题安排 · 与 ACSL 四轮考试对齐</p>
   </div>
   <table style="margin-top:16px;">
     <tr>
-      <th>周次</th><th>日期</th><th>主题</th><th>对应 ACSL 轮次</th>
+      <th>周次 Week</th><th>日期 Date</th><th>主题 Topic（中 / English）</th><th>对应 ACSL 轮次</th>
     </tr>
-    <tr><td><b>L1</b></td><td>9.7 - 9.13</td><td>📘 数字系统完整版</td><td>第一轮</td></tr>
-    <tr><td><b>L2</b></td><td>9.14 - 9.20</td><td>📘 递归函数</td><td>第一轮</td></tr>
-    <tr><td><b>L3</b></td><td>9.21 - 9.27</td><td>📘 程序是怎么运行的（完整版）</td><td>第 1-4 轮分散</td></tr>
-    <tr><td><b>L4-5</b></td><td>9.28 - 10.11</td><td>📝 第一轮真题 + 模拟考</td><td>第一轮冲刺</td></tr>
-    <tr><td><b>L6-9</b></td><td>10.12 - 11.8</td><td>📘 前缀后缀 + 比特位 + 模拟考</td><td>第二轮</td></tr>
-    <tr><td><b>L10-13</b></td><td>11.9 - 12.13</td><td>📝 真题冲刺 + <b style="color:var(--red);">12.13 第一轮正式</b></td><td>第一轮考试</td></tr>
-    <tr><td><b>L14-16</b></td><td>12.14 - 1.3</td><td>📘 布尔代数 + 数据结构 + 真题</td><td>第三轮</td></tr>
-    <tr><td><b>L17-18</b></td><td>1.4 - 1.17</td><td>📘 图论 + 数字电路</td><td>第四轮</td></tr>
+    <tr><td><b>L1</b></td><td>9.7 - 9.13</td><td>📘 数字系统 / <b>Computer Number Systems</b></td><td>Contest 1</td></tr>
+    <tr><td><b>L2</b></td><td>9.14 - 9.20</td><td>📘 递归函数 / <b>Recursive Functions</b></td><td>Contest 1</td></tr>
+    <tr><td><b>L3</b></td><td>9.21 - 9.27</td><td>📘 程序是怎么运行的 / <b>What Does This Program Do?</b></td><td>Contest 1-4</td></tr>
+    <tr><td><b>L4-5</b></td><td>9.28 - 10.11</td><td>📝 Contest 1 真题 + 模拟考</td><td>Contest 1 冲刺</td></tr>
+    <tr><td><b>L6-9</b></td><td>10.12 - 11.8</td><td>📘 前缀后缀 / <b>Prefix/Infix/Postfix</b> + 比特位 / <b>Bit-String Flicking</b></td><td>Contest 2</td></tr>
+    <tr><td><b>L10-13</b></td><td>11.9 - 12.13</td><td>📝 真题冲刺 + <b style="color:var(--red);">12.13 Contest 1 正式</b></td><td>Contest 1 考试</td></tr>
+    <tr><td><b>L14-16</b></td><td>12.14 - 1.3</td><td>📘 布尔代数 / <b>Boolean Algebra</b> + 数据结构 / <b>Data Structures</b></td><td>Contest 3</td></tr>
+    <tr><td><b>L17-18</b></td><td>1.4 - 1.17</td><td>📘 图论 / <b>Graph Theory</b> + 数字电路 / <b>Digital Electronics</b></td><td>Contest 4</td></tr>
   </table>
 </section>
 
 <!-- 04 · 课堂节奏 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">⏰ 课堂节奏</div>
+    <div class="kicker">⏰ 课堂节奏 · Class Schedule</div>
     <h2>1.5 小时怎么用？</h2>
-    <p class="subtitle">每周固定结构，养成习惯</p>
+    <p class="subtitle">每周固定结构，养成习惯 · Fixed weekly structure</p>
   </div>
   <div class="right">
     <div class="flow">
       <div class="step">
         <div class="num">0:00 - 0:10</div>
-        <div class="ttl">回顾</div>
-        <div class="desc">上周小测（5 道）</div>
+        <div class="ttl">回顾 Review</div>
+        <div class="desc">上周小测（5 道）Quiz</div>
       </div>
       <div class="arrow">→</div>
       <div class="step">
         <div class="num">0:15 - 0:55</div>
-        <div class="ttl">教学</div>
-        <div class="desc">新概念 + 例题</div>
+        <div class="ttl">教学 Teach</div>
+        <div class="desc">新概念 + 例题 Concepts</div>
       </div>
       <div class="arrow">→</div>
       <div class="step">
         <div class="num">1:05 - 1:30</div>
-        <div class="ttl">实战</div>
-        <div class="desc">ACSL 真题训练</div>
+        <div class="ttl">实战 Practice</div>
+        <div class="desc">ACSL 真题训练 Past papers</div>
       </div>
     </div>
     <div class="metaphor" style="margin-top:20px;">
       <span class="emo">💡</span>
-      <b>课后作业</b>：OJ 编程题（已发第一周作业）+ ACSL Wiki 样题 5 道。课堂专注知识，编程留课后。
+      <b>课后作业 Homework</b>：OJ 编程题（已发第一周作业）+ ACSL Wiki 样题 5 道。<br>
+      课堂专注知识 Focus on concepts in class · 编程留课后 Programming at home
     </div>
   </div>
 </section>
@@ -523,25 +550,26 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <section class="slide">
   <div class="left">
     <div class="kicker">Concept 1</div>
-    <h2>什么是<span class="highlight">进制</span>？</h2>
-    <p class="subtitle">进制 = 数位 + 基数 + 进位规则</p>
+    <h2>什么是<span class="highlight">进制</span>？<br><span class="muted" style="font-size:30px; font-weight:600;">What is a Base?</span></h2>
+    <p class="subtitle">进制 = 数位 + 基数 + 进位规则<br><span class="en-tag">Base = digit positions + radix + carry rules</span></p>
   </div>
   <div class="right">
     <div class="metaphor">
       <span class="emo">🧮</span>
-      <b>日常例子</b>：我们用的十进制，是因为我们有 10 个手指（0-9 共 10 个符号）。如果只有 2 个手指，就用二进制。
+      <b>日常例子</b>：我们用的十进制，是因为我们有 10 个手指。<br>
+      <span class="en-tag">Decimal = base 10 because we have 10 fingers.</span>
     </div>
     <div class="card" style="margin-top:14px;">
-      <h3>进制的三要素</h3>
+      <h3>进制的三要素 · 3 components of a base</h3>
       <ul style="margin:8px 0; padding-left:24px; font-size:18px; line-height:1.8;">
-        <li><b>数位</b>：每个位置的"位值"</li>
-        <li><b>基数</b>：用多少个符号（十进制 = 10 个）</li>
-        <li><b>进位规则</b>：什么时候向左进一位</li>
+        <li><b>数位 Digit position</b>：每个位置的"位值"</li>
+        <li><b>基数 Radix / Base</b>：用多少个符号（十进制 = 10 个）<br><span class="en-tag">Radix = number of symbols (decimal uses 10)</span></li>
+        <li><b>进位规则 Carry rule</b>：什么时候向左进一位</li>
       </ul>
     </div>
     <div class="practice">
       <div class="label">🎯 ACSL 考点</div>
-      <p style="margin:6px 0;">数字系统题常考：进制互转、补码表示、二进制加法。计算机底层只认二进制，其他进制都是为了人看着方便。</p>
+      <p style="margin:6px 0;">数字系统题常考：进制互转 (conversion)、补码表示 (two's complement)、二进制加法 (binary addition)。</p>
     </div>
   </div>
 </section>
@@ -550,22 +578,22 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <section class="slide">
   <div class="left">
     <div class="kicker">Concept 2</div>
-    <h2>二进制 · <span class="highlight">0 和 1</span></h2>
-    <p class="subtitle">只有两个符号，逢 2 进 1</p>
+    <h2>二进制 · <span class="highlight">0 和 1</span><br><span class="muted" style="font-size:30px; font-weight:600;">Binary = base 2</span></h2>
+    <p class="subtitle">只有两个符号，逢 2 进 1<br><span class="en-tag">Two symbols only (0, 1). "2" causes a carry.</span></p>
   </div>
   <div class="right">
     <div class="card">
-      <h3>二进制规则</h3>
+      <h3>二进制规则 · Binary rules</h3>
       <ul style="margin:8px 0; padding-left:24px; font-size:18px; line-height:1.8;">
-        <li>只有 <b>0</b> 和 <b>1</b> 两个符号</li>
-        <li>每位权重：<code class="inline">2^n</code>（从右往左，n = 0,1,2,3...）</li>
-        <li>逢 <b>2 进 1</b>（1+1 = 10）</li>
+        <li>只有 <b>0</b> 和 <b>1</b> 两个符号 · Two symbols: 0 and 1</li>
+        <li>每位权重：<code class="inline">2^n</code>（从右往左，n = 0,1,2,3...）<br><span class="en-tag">Each bit's weight = 2ⁿ (right to left, n = 0,1,2,...)</span></li>
+        <li>逢 <b>2 进 1</b>（1+1 = 10）· Carry at 2</li>
       </ul>
     </div>
     <div class="card" style="margin-top:14px;">
-      <h3>前 16 个数对照</h3>
+      <h3>前 16 个数对照 · First 16 numbers</h3>
       <table>
-        <tr><th>十进制</th><th>二进制</th><th>十进制</th><th>二进制</th></tr>
+        <tr><th>Decimal</th><th>Binary</th><th>Decimal</th><th>Binary</th></tr>
         <tr><td>0</td><td><code class="inline">0000</code></td><td>8</td><td><code class="inline">1000</code></td></tr>
         <tr><td>1</td><td><code class="inline">0001</code></td><td>9</td><td><code class="inline">1001</code></td></tr>
         <tr><td>2</td><td><code class="inline">0010</code></td><td>10</td><td><code class="inline">1010</code></td></tr>
@@ -575,6 +603,7 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
         <tr><td>6</td><td><code class="inline">0110</code></td><td>14</td><td><code class="inline">1110</code></td></tr>
         <tr><td>7</td><td><code class="inline">0111</code></td><td>15</td><td><code class="inline">1111</code></td></tr>
       </table>
+      <p style="font-size:13px; color:var(--muted); margin-top:8px;">💡 必须记住前 16 个！ACSL 常考 · Memorize the first 16.</p>
     </div>
   </div>
 </section>
@@ -582,32 +611,32 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 07 · 十进制转二进制（除2取余）-->
 <section class="slide">
   <div class="left">
-    <div class="kicker">Concept 3</div>
+    <div class="kicker">Concept 3 · Decimal → Binary</div>
     <h2>十转二 · <span class="highlight">除 2 取余</span></h2>
-    <p class="subtitle">核心方法：除 2，余数倒着读</p>
+    <p class="subtitle">核心方法：除 2，余数倒着读<br><span class="en-tag">Divide by 2, read remainders <b>bottom-up</b></span></p>
   </div>
   <div class="right">
     <div class="card">
-      <h3>步骤（以 13 为例）</h3>
-      <pre><code>13 ÷ 2 = <b>6</b> ... <b>1</b>   ↑  倒着读余数
+      <h3>步骤（以 13 为例 · e.g. 13）</h3>
+      <pre><code>13 ÷ 2 = <b>6</b> ... <b>1</b>   ↑  bottom-up
  6 ÷ 2 = <b>3</b> ... <b>0</b>   │
  3 ÷ 2 = <b>1</b> ... <b>1</b>   │
  1 ÷ 2 = <b>0</b> ... <b>1</b>   │
 
-所以 13₁₀ = <b>1101₂</b></code></pre>
+So 13₁₀ = <b>1101₂</b></code></pre>
     </div>
     <div class="practice" style="margin-top:14px;">
-      <div class="label">🎯 三步走</div>
+      <div class="label">🎯 Three steps</div>
       <ol>
-        <li>原数除 2，记下商和余数</li>
-        <li>用商继续除 2，直到商为 0</li>
-        <li><b>余数从下往上读</b>，就是二进制</li>
+        <li>原数除 2，记下商和余数 · Divide by 2, record quotient & remainder</li>
+        <li>用商继续除 2，直到商为 0 · Repeat until quotient = 0</li>
+        <li><b>余数从下往上读</b>，就是二进制 · Read remainders <b>bottom-up</b></li>
       </ol>
     </div>
     <div class="check-q">
-      <div class="check-q-text">❓ Q1 · 十进制 <b>25</b> 转二进制 = <code class="inline">______</code></div>
+      <div class="check-q-text">❓ Q1 · Convert decimal <b>25</b> to binary = <code class="inline">______</code></div>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">25 = 11001₂
 25÷2=12...1
 12÷2=6...0
@@ -622,32 +651,32 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 08 · 二进制转十进制（按权展开）-->
 <section class="slide">
   <div class="left">
-    <div class="kicker">Concept 4</div>
+    <div class="kicker">Concept 4 · Binary → Decimal</div>
     <h2>二转十 · <span class="highlight">按权展开</span></h2>
-    <p class="subtitle">每位 = 数字 × 2 的位次方</p>
+    <p class="subtitle">每位 = 数字 × 2 的位次方<br><span class="en-tag">Each bit = digit × 2ⁿ (n = position index)</span></p>
   </div>
   <div class="right">
     <div class="card">
-      <h3>步骤（以 1011₂ 为例）</h3>
-      <pre><code>位次：  <b>3</b>   <b>2</b>   <b>1</b>   <b>0</b>
-数字：   1    0    1    1
-权重：  2³   2²   2¹   2⁰
-       8  +  0  +  2  +  1  = <b>11</b>
+      <h3>步骤（以 1011₂ 为例 · e.g. 1011₂）</h3>
+      <pre><code>position:  <b>3</b>   <b>2</b>   <b>1</b>   <b>0</b>
+digit:      1    0    1    1
+weight:    2³   2²   2¹   2⁰
+          8  +  0  +  2  +  1  = <b>11</b>
 
-所以 1011₂ = <b>11₁₀</b></code></pre>
+So 1011₂ = <b>11₁₀</b></code></pre>
     </div>
     <div class="practice" style="margin-top:14px;">
-      <div class="label">🎯 三步走</div>
+      <div class="label">🎯 Three steps</div>
       <ol>
-        <li>从右往左给每位编号（0、1、2、3...）</li>
-        <li>每位 = <b>数字 × 2<sup>位次</sup></b></li>
-        <li>全部加起来 = 十进制结果</li>
+        <li>从右往左给每位编号（0、1、2、3...）· Number positions right to left</li>
+        <li>每位 = <b>数字 × 2<sup>位次</sup></b> · digit × 2ⁿ</li>
+        <li>全部加起来 = 十进制结果 · Sum all</li>
       </ol>
     </div>
     <div class="check-q">
-      <div class="check-q-text">❓ Q2 · 二进制 <b>11010</b> 转十进制 = <code class="inline">______</code></div>
+      <div class="check-q-text">❓ Q2 · Convert binary <b>11010</b> to decimal = <code class="inline">______</code></div>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">26
 1×2⁴ + 1×2³ + 0×2² + 1×2¹ + 0×2⁰
 = 16 + 8 + 0 + 2 + 0 = 26</div>
@@ -659,33 +688,33 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 09 · 实战 1：进制互转 5 道 -->
 <section class="slide wide compact">
   <div class="head">
-    <div class="kicker">实战 1 · 进制互转</div>
-    <h2>手算 5 道 · <span class="highlight">5 分钟</span></h2>
-    <p class="subtitle">课堂限时练习 · 自己做完后对答案</p>
+    <div class="kicker">实战 1 · Practice 1 · 进制互转 Conversion</div>
+    <h2>手算 5 道 · <span class="highlight">5 分钟 5 min</span></h2>
+    <p class="subtitle">课堂限时练习 · In-class timed practice · 自己做完后对答案</p>
   </div>
   <div class="grid2" style="margin-top:14px;">
     <div class="card">
-      <h3 style="color:var(--purple);">题 1</h3>
-      <p style="font-size:17px; margin-top:6px;">十进制 <b>42</b> 转二进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--purple);">题 1 · Q1</h3>
+      <p style="font-size:17px; margin-top:6px;">十进制 <b>42</b> 转二进制 / Convert 42₁₀ to binary = <code class="inline">______</code></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--purple);">题 2</h3>
-      <p style="font-size:17px; margin-top:6px;">十进制 <b>200</b> 转二进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--purple);">题 2 · Q2</h3>
+      <p style="font-size:17px; margin-top:6px;">十进制 <b>200</b> 转二进制 / Convert 200₁₀ to binary = <code class="inline">______</code></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--purple);">题 3</h3>
-      <p style="font-size:17px; margin-top:6px;">二进制 <b>11111111</b> 转十进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--purple);">题 3 · Q3</h3>
+      <p style="font-size:17px; margin-top:6px;">二进制 <b>11111111</b> 转十进制 / Convert 11111111₂ to decimal = <code class="inline">______</code></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--purple);">题 4</h3>
-      <p style="font-size:17px; margin-top:6px;">二进制 <b>10110101</b> 转十进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--purple);">题 4 · Q4</h3>
+      <p style="font-size:17px; margin-top:6px;">二进制 <b>10110101</b> 转十进制 / Convert 10110101₂ to decimal = <code class="inline">______</code></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--purple);">题 5</h3>
-      <p style="font-size:17px; margin-top:6px;">十进制 <b>128</b> 转二进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--purple);">题 5 · Q5</h3>
+      <p style="font-size:17px; margin-top:6px;">十进制 <b>128</b> 转二进制 / Convert 128₁₀ to binary = <code class="inline">______</code></p>
     </div>
     <div class="card" style="background:rgba(124,58,237,.04); border-color:rgba(124,58,237,.3);">
-      <h3 style="color:var(--purple);">答案</h3>
+      <h3 style="color:var(--purple);">答案 · Answers</h3>
       <p style="font-size:14px; line-height:1.7; margin-top:6px; color:var(--muted);">
         1. 42 = <b>101010₂</b><br>
         2. 200 = <b>11001000₂</b><br>
@@ -701,27 +730,27 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <section class="slide">
   <div class="left">
     <div class="kicker">Concept 5</div>
-    <h2>为什么需要<span class="highlight">八进制和十六进制</span>？</h2>
-    <p class="subtitle">二进制太长 → 缩写表示</p>
+    <h2>为什么需要<span class="highlight">八进制和十六进制</span>？<br><span class="muted" style="font-size:24px; font-weight:600;">Octal & Hexadecimal?</span></h2>
+    <p class="subtitle">二进制太长 → 缩写表示 Shorthand for binary</p>
   </div>
   <div class="right">
     <div class="bug">
-      <div class="label">⚠️ 问题</div>
-      <p style="font-size:17px;">二进制写起来太长：255 = <code class="inline">11111111</code>（8 位）。写一堆 1、0 太容易看错。</p>
+      <div class="label">⚠️ Problem</div>
+      <p style="font-size:17px;">二进制写起来太长：255 = <code class="inline">11111111</code>（8 位）。写一堆 1、0 太容易看错。<br><span class="en-tag">Binary is too long for humans. 255 = 11111111 (8 bits). Easy to misread.</span></p>
     </div>
     <div class="practice" style="margin-top:14px;">
-      <div class="label">✅ 解决方案</div>
+      <div class="label">✅ Solution</div>
       <ul style="margin:8px 0; padding-left:24px; font-size:18px; line-height:1.8;">
-        <li><b>八进制</b>：每 <b>3 位</b>二进制合成 1 位（0-7）</li>
-        <li><b>十六进制</b>：每 <b>4 位</b>二进制合成 1 位（0-9, A-F）</li>
-        <li>十六进制最常用（颜色码、内存地址都是它）</li>
+        <li><b>八进制 Octal</b>：每 <b>3 位</b>二进制合成 1 位（0-7）<br><span class="en-tag">Octal = base 8, group 3 bits</span></li>
+        <li><b>十六进制 Hexadecimal (Hex)</b>：每 <b>4 位</b>二进制合成 1 位（0-9, A-F）<br><span class="en-tag">Hex = base 16, group 4 bits (uses A-F for 10-15)</span></li>
+        <li>十六进制最常用（颜色码、内存地址都是它）<br><span class="en-tag">Hex is most common (color codes, memory addresses)</span></li>
       </ul>
     </div>
     <div class="card" style="margin-top:14px;">
-      <h3>十六进制的 16 个符号</h3>
+      <h3>十六进制的 16 个符号 · 16 Hex symbols</h3>
       <p style="font-size:17px; font-family:'JetBrains Mono',monospace;">
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F<br>
-        <span style="color:var(--muted); font-size:14px;">A=10, B=11, C=12, D=13, E=14, F=15</span>
+        <span style="color:var(--muted); font-size:14px;">A=10, B=11, C=12, D=13, E=14, F=15 · 必须记住！</span>
       </p>
     </div>
   </div>
@@ -730,38 +759,38 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 11 · 二进制 ↔ 八进制 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">Concept 6</div>
+    <div class="kicker">Concept 6 · Binary ↔ Octal</div>
     <h2>二进制 ↔ <span class="highlight">八进制</span></h2>
-    <p class="subtitle">每 3 位一组 → 1 位八进制</p>
+    <p class="subtitle">每 3 位一组 → 1 位八进制<br><span class="en-tag">Group <b>3 bits</b> from the right</span></p>
   </div>
   <div class="right">
     <div class="card">
       <h3>二 → 八（以 1101011₂ 为例）</h3>
-      <pre><code>从右往左每 3 位一组：
+      <pre><code>Group from the right:
  1 101 011
  ↑
- 不够补 0
+ pad with 0
  ↓
 001 101 011
  1   5   3
 
-结果：<b>153₈</b></code></pre>
+Result: <b>153₈</b></code></pre>
     </div>
     <div class="card" style="margin-top:14px;">
       <h3>八 → 二（以 327₈ 为例）</h3>
-      <pre><code>每位展开成 3 位二进制：
+      <pre><code>Expand each digit to 3 bits:
  3     2     7
  ↓     ↓     ↓
 011   010   111
 
-结果：<b>011010111₂</b> = 11010111₂</code></pre>
+Result: <b>011010111₂</b> = 11010111₂</code></pre>
     </div>
     <div class="check-q">
-      <div class="check-q-text">❓ Q3 · 二进制 <b>1011010</b> 转八进制 = <code class="inline">______</code></div>
+      <div class="check-q-text">❓ Q3 · Convert binary <b>1011010</b> to octal = <code class="inline">______</code></div>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">132₈
-分组：001 011 010 = 1 3 2</div>
+Groups: 001 011 010 = 1 3 2</div>
       </details>
     </div>
   </div>
@@ -770,35 +799,35 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 12 · 二进制 ↔ 十六进制 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">Concept 7</div>
+    <div class="kicker">Concept 7 · Binary ↔ Hex</div>
     <h2>二进制 ↔ <span class="highlight">十六进制</span></h2>
-    <p class="subtitle">每 4 位一组 → 1 位十六进制</p>
+    <p class="subtitle">每 4 位一组 → 1 位十六进制<br><span class="en-tag">Group <b>4 bits</b> from the right</span></p>
   </div>
   <div class="right">
     <div class="card">
       <h3>二 → 十六（以 11010110₂ 为例）</h3>
-      <pre><code>从右往左每 4 位一组：
+      <pre><code>Group from the right:
 1101 0110
  ↓     ↓
   D     6
 
-结果：<b>D6₁₆</b></code></pre>
+Result: <b>D6₁₆</b></code></pre>
     </div>
     <div class="card" style="margin-top:14px;">
       <h3>十六 → 二（以 AB7₁₆ 为例）</h3>
-      <pre><code>每位展开成 4 位二进制：
+      <pre><code>Expand each digit to 4 bits:
   A     B     7
  ↓     ↓     ↓
 1010  1011  0111
 
-结果：<b>101010110111₂</b></code></pre>
+Result: <b>101010110111₂</b></code></pre>
     </div>
     <div class="check-q">
-      <div class="check-q-text">❓ Q4 · 二进制 <b>111100001111</b> 转十六进制 = <code class="inline">______</code></div>
+      <div class="check-q-text">❓ Q4 · Convert binary <b>111100001111</b> to hex = <code class="inline">______</code></div>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">F0F₁₆
-分组：1111 0000 1111 = F 0 F</div>
+Groups: 1111 0000 1111 = F 0 F</div>
       </details>
     </div>
   </div>
@@ -807,37 +836,37 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 13 · 二进制加法 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">Concept 8</div>
-    <h2>二进制<span class="highlight">加法</span></h2>
-    <p class="subtitle">逢 2 进 1 · 进位是关键</p>
+    <div class="kicker">Concept 8 · Binary Addition</div>
+    <h2>二进制<span class="highlight">加法</span> Addition</h2>
+    <p class="subtitle">逢 2 进 1 · 进位是关键<br><span class="en-tag">Carry at 2 · watch the carry chain!</span></p>
   </div>
   <div class="right">
     <div class="card">
-      <h3>计算 1011₂ + 1101₂</h3>
+      <h3>计算 1011₂ + 1101₂ · e.g. 1011₂ + 1101₂</h3>
       <pre><code>  1 0 1 1   (11)
 + 1 1 0 1   (13)
 ---------
-右起第 1 位：1+1 = <b>0</b>，进 1
-第 2 位：1+0+1(进位) = <b>0</b>，进 1
-第 3 位：0+1+1(进位) = <b>0</b>，进 1
-第 4 位：1+1+1(进位) = <b>1</b>，进 1
-第 5 位：进位 <b>1</b>
+bit 0: 1+1 = <b>0</b>, carry 1
+bit 1: 1+0+1 = <b>0</b>, carry 1
+bit 2: 0+1+1 = <b>0</b>, carry 1
+bit 3: 1+1+1 = <b>1</b>, carry 1
+bit 4: carry <b>1</b>
 
-结果：<b>11000₂</b> = 24</code></pre>
+Result: <b>11000₂</b> = 24</code></pre>
     </div>
     <div class="practice" style="margin-top:14px;">
-      <div class="label">🎯 加法规则（4 条）</div>
+      <div class="label">🎯 Addition rules (4 cases)</div>
       <ol>
-        <li>0 + 0 = 0，不进位</li>
-        <li>0 + 1 = 1，不进位</li>
-        <li>1 + 1 = 0，进 1 位</li>
-        <li>1 + 1 + 1 = 1，进 1 位</li>
+        <li>0 + 0 = 0, no carry</li>
+        <li>0 + 1 = 1, no carry</li>
+        <li>1 + 1 = 0, carry 1</li>
+        <li>1 + 1 + 1 = 1, carry 1</li>
       </ol>
     </div>
     <div class="check-q">
-      <div class="check-q-text">❓ Q5 · 二进制 <b>111 + 101</b> = <code class="inline">______</code></div>
+      <div class="check-q-text">❓ Q5 · Compute <b>111₂ + 101₂</b> = <code class="inline">______</code></div>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">1100₂
 111 = 7
 101 = 5
@@ -850,29 +879,29 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 14 · 补码表示 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">Concept 9</div>
-    <h2>补码表示<span class="highlight">负数</span></h2>
-    <p class="subtitle">计算机怎么记负数？</p>
+    <div class="kicker">Concept 9 · Two's Complement</div>
+    <h2>补码表示<span class="highlight">负数</span><br><span class="muted" style="font-size:28px; font-weight:600;">Two's Complement for Negatives</span></h2>
+    <p class="subtitle">计算机怎么记负数？<br><span class="en-tag">How computers represent negative numbers</span></p>
   </div>
   <div class="right">
     <div class="card">
       <h3>补码规则（以 8 位为例）</h3>
       <ul style="margin:8px 0; padding-left:24px; font-size:18px; line-height:1.8;">
-        <li>最高位是<b>符号位</b>：0 = 正，1 = 负</li>
-        <li>求负数补码：取反 + 1</li>
+        <li>最高位是<b>符号位 sign bit</b>：0 = 正，1 = 负<br><span class="en-tag">Leading bit: 0 = positive, 1 = negative</span></li>
+        <li>求负数补码：<b>取反 + 1</b> (invert + 1)<br><span class="en-tag">Negate: flip bits + 1</span></li>
         <li>-1 = <code class="inline">11111111</code>（8 位）</li>
         <li>-128 = <code class="inline">10000000</code>（最小的负数）</li>
       </ul>
     </div>
     <div class="card" style="margin-top:14px;">
-      <h3>例：求 -5 的 8 位补码</h3>
+      <h3>例：求 -5 的 8 位补码 · e.g. -5 in 8-bit</h3>
       <pre><code>1. +5 = 00000101
-2. 取反：11111010
-4. +1：<b>11111011</b> = -5</code></pre>
+2. invert: 11111010
+3. +1: <b>11111011</b> = -5</code></pre>
     </div>
     <div class="practice" style="margin-top:14px;">
-      <div class="label">🎯 ACSL 题型</div>
-      <p style="font-size:17px;">"这个 8 位二进制数 <code class="inline">11110110</code> 在补码表示下代表 ______"（答：-10）</p>
+      <div class="label">🎯 ACSL question style</div>
+      <p style="font-size:17px;">"What is the decimal value of the 8-bit two's complement number <code class="inline">11110110</code>?"（答：-10）</p>
     </div>
   </div>
 </section>
@@ -880,34 +909,34 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 15 · 实战 2：综合进制转换 -->
 <section class="slide wide compact">
   <div class="head">
-    <div class="kicker">实战 2 · 综合练习</div>
-    <h2>混搭 4 道 · <span class="highlight">8 分钟</span></h2>
-    <p class="subtitle">不只考互转，还考加法和补码</p>
+    <div class="kicker">实战 2 · Practice 2 · 综合练习 Mixed</div>
+    <h2>混搭 4 道 · <span class="highlight">8 分钟 8 min</span></h2>
+    <p class="subtitle">不只考互转，还考加法和补码 · Conversion + addition + two's complement</p>
   </div>
   <div class="grid2" style="margin-top:14px;">
     <div class="card">
-      <h3 style="color:var(--amber);">题 1</h3>
-      <p style="font-size:17px; margin-top:6px;">二进制 <b>1111</b> + <b>1</b> = <code class="inline">______</code></p>
+      <h3 style="color:var(--amber);">题 1 · Q1</h3>
+      <p style="font-size:17px; margin-top:6px;">二进制 <b>1111</b> + <b>1</b> = <code class="inline">______</code><br><span style="color:var(--muted); font-size:13px;">Add binary 1111 + 1</span></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--amber);">题 2</h3>
-      <p style="font-size:17px; margin-top:6px;">十进制 <b>300</b> 转十六进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--amber);">题 2 · Q2</h3>
+      <p style="font-size:17px; margin-top:6px;">十进制 <b>300</b> 转十六进制 / 300₁₀ → hex = <code class="inline">______</code></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--amber);">题 3</h3>
-      <p style="font-size:17px; margin-top:6px;">十六进制 <b>AB</b> 转二进制 = <code class="inline">______</code></p>
+      <h3 style="color:var(--amber);">题 3 · Q3</h3>
+      <p style="font-size:17px; margin-top:6px;">十六进制 <b>AB</b> 转二进制 / AB₁₆ → binary = <code class="inline">______</code></p>
     </div>
     <div class="card">
-      <h3 style="color:var(--amber);">题 4</h3>
-      <p style="font-size:17px; margin-top:6px;">二进制 <b>10010110</b> 在 8 位补码下代表 ______</p>
+      <h3 style="color:var(--amber);">题 4 · Q4</h3>
+      <p style="font-size:17px; margin-top:6px;">二进制 <b>10010110</b> 在 8 位补码下代表 ______<br><span style="color:var(--muted); font-size:13px;">8-bit two's complement of 10010110 = ?</span></p>
     </div>
     <div class="card" style="background:rgba(217,119,6,.06); border-color:rgba(217,119,6,.3); grid-column:span 2;">
-      <h3 style="color:var(--amber);">答案</h3>
+      <h3 style="color:var(--amber);">答案 · Answers</h3>
       <p style="font-size:14px; line-height:1.7; margin-top:6px; color:var(--muted);">
-        1. 1111 + 1 = <b>10000₂</b>（逢二进一）<br>
+        1. 1111 + 1 = <b>10000₂</b>（逢二进一 · carry at 2）<br>
         2. 300 = <b>12C₁₆</b>（先转二进制 100101100，再 4 位一组 0001 0010 1100 = 12C）<br>
         3. AB₁₆ = <b>10101011₂</b>（A=1010, B=1011）<br>
-        4. 10010110（首位 1 是负数）= 取反+1 = 01101010 = 106，所以是 <b>-106</b>
+        4. 10010110（首位 1 是负数 negative）= 取反+1 = 01101010 = 106，所以是 <b>-106</b>
       </p>
     </div>
   </div>
@@ -916,27 +945,27 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 16 · ACSL Wiki 样题 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">ACSL Wiki 样题</div>
-    <h2>两道<span class="highlight">真题风格</span>题</h2>
-    <p class="subtitle">模仿 ACSL 笔试的出题风格</p>
+    <div class="kicker">ACSL Wiki Sample · Past Paper Style</div>
+    <h2>两道<span class="highlight">真题风格</span>题<br><span class="muted" style="font-size:24px; font-weight:600;">Past Paper Format</span></h2>
+    <p class="subtitle">模仿 ACSL 笔试的出题风格 · ACSL official format</p>
   </div>
   <div class="right">
     <div class="card">
-      <h3>样题 1（数字系统）</h3>
-      <p style="font-size:17px; margin-top:6px;">问：八进制数 327₈ 等于十进制数 ______</p>
+      <h3>Sample 1 · Number Systems</h3>
+      <p style="font-size:17px; margin-top:6px;">Q: Convert the octal number <b>327₈</b> to decimal.<br><span style="color:var(--muted);">八进制数 327₈ 等于十进制数 ______</span></p>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">3×64 + 2×8 + 7×1 = 192 + 16 + 7 = <b>215₁₀</b></div>
       </details>
     </div>
     <div class="card" style="margin-top:14px;">
-      <h3>样题 2（数字系统）</h3>
-      <p style="font-size:17px; margin-top:6px;">问：十进制数 -13 用 8 位补码表示 = <code class="inline">______</code></p>
+      <h3>Sample 2 · Two's Complement</h3>
+      <p style="font-size:17px; margin-top:6px;">Q: What is the 8-bit two's complement representation of <b>-13</b>?<br><span style="color:var(--muted);">十进制数 -13 用 8 位补码表示 = </span><code class="inline">______</code></p>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">
           1. +13 = 00001101<br>
-          2. 取反 = 11110010<br>
+          2. invert = 11110010<br>
           3. +1 = <b>11110011₂</b>
         </div>
       </details>
@@ -944,114 +973,113 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
   </div>
 </section>
 
-<!-- 17 · 本周概念 recap -->
+<!-- 17 · 本周概念 recap（中英对照）-->
 <section class="slide wide">
   <div class="head">
-    <div class="kicker">📋 本周概念回顾</div>
-    <h2>6 个核心概念 · 必须掌握</h2>
-    <p class="subtitle">这周学了 9 个，但 6 个是 ACSL 高频考点</p>
+    <div class="kicker">📋 本周概念回顾 · Week Recap</div>
+    <h2>6 个核心概念 · <span class="muted" style="font-size:24px; font-weight:600;">6 Key Concepts</span></h2>
+    <p class="subtitle">这周学了 9 个，但 6 个是 ACSL 高频考点 · The 6 most-tested</p>
   </div>
   <div class="recap-grid">
     <div class="recap-card card-purple">
       <div class="recap-num">01</div>
-      <div class="recap-title">十转二</div>
-      <div class="recap-sub">除 2 取余，余数倒读</div>
+      <div class="recap-title">十转二 Decimal→Binary</div>
+      <div class="recap-sub">除 2 取余，余数倒读 · Divide by 2, read bottom-up</div>
     </div>
     <div class="recap-card card-amber">
       <div class="recap-num">02</div>
-      <div class="recap-title">二转十</div>
-      <div class="recap-sub">按权展开，每位 × 2ⁿ</div>
+      <div class="recap-title">二转十 Binary→Decimal</div>
+      <div class="recap-sub">按权展开，每位 × 2ⁿ · Each bit × 2ⁿ, then sum</div>
     </div>
     <div class="recap-card card-green">
       <div class="recap-num">03</div>
-      <div class="recap-title">二 ↔ 八</div>
-      <div class="recap-sub">每 3 位一组</div>
+      <div class="recap-title">二 ↔ 八 Binary ↔ Octal</div>
+      <div class="recap-sub">每 3 位一组 · Group 3 bits</div>
     </div>
     <div class="recap-card card-blue">
       <div class="recap-num">04</div>
-      <div class="recap-title">二 ↔ 十六</div>
-      <div class="recap-sub">每 4 位一组（A-F）</div>
+      <div class="recap-title">二 ↔ 十六 Binary ↔ Hex</div>
+      <div class="recap-sub">每 4 位一组（A-F）· Group 4 bits</div>
     </div>
     <div class="recap-card card-red">
       <div class="recap-num">05</div>
-      <div class="recap-title">二进制加法</div>
-      <div class="recap-sub">逢 2 进 1，注意进位链</div>
+      <div class="recap-title">二进制加法 Binary Addition</div>
+      <div class="recap-sub">逢 2 进 1，注意进位链 · Carry at 2</div>
     </div>
     <div class="recap-card card-teal">
       <div class="recap-num">06</div>
-      <div class="recap-title">补码负数</div>
-      <div class="recap-sub">取反 + 1，最高位是符号</div>
+      <div class="recap-title">补码负数 Two's Complement</div>
+      <div class="recap-sub">取反 + 1，最高位是符号 · Invert + 1</div>
     </div>
   </div>
-  <p class="recap-next">📍 下周：L2 · 递归函数 · 9 月 14 日 - 9 月 20 日</p>
+  <p class="recap-next">📍 下周 Next: L2 · 递归函数 Recursive Functions · 9 月 14 日 - 9 月 20 日</p>
 </section>
 
 <!-- 18 · 课后作业 -->
 <section class="slide">
   <div class="left">
-    <div class="kicker">📝 课后作业</div>
+    <div class="kicker">📝 课后作业 · Homework</div>
     <h2>这周要做的<span class="highlight">事</span></h2>
-    <p class="subtitle">课堂禁 AI，课后适度使用</p>
+    <p class="subtitle">课堂禁 AI，课后适度使用 · No AI in class, light AI use for homework</p>
   </div>
   <div class="right">
     <div class="practice">
-      <div class="label">🖥️ OJ 编程作业（已发）</div>
-      <p style="margin:6px 0;">Cubicbird OJ · <b>第一周作业</b></p>
+      <div class="label">🖥️ OJ 编程作业 · Programming</div>
+      <p style="margin:6px 0;">Cubicbird OJ · <b>第一周作业 Assignment 1</b></p>
       <ul style="padding-left:24px; line-height:1.8;">
-        <li>10 道题，覆盖输入输出、循环、条件、字符串、函数、模拟</li>
-        <li>1.5 小时以内完成</li>
-        <li><b>课堂禁用 AI</b>，课后可用 AI 检查但不能 AI 生成</li>
+        <li>10 道题，1.5 小时以内完成 · 10 problems, finish in 1.5h</li>
+        <li><b>课堂禁用 AI</b> No AI in class，<b>课后可用</b> AI 检查 only for checking</li>
       </ul>
     </div>
     <div class="card" style="margin-top:14px;">
-      <h3>📚 ACSL Wiki 样题</h3>
-      <p style="font-size:17px; margin-top:6px;">在 <a href="https://categories.acsl.org/wiki/index.php?title=Computer_Number_Systems" target="_blank" style="color:var(--purple); font-weight:700;">ACSL Wiki · Computer Number Systems</a> 做 <b>5 道</b>样题</p>
-      <p style="font-size:14px; color:var(--muted); margin-top:6px;">重点：进制互转 + 补码表示</p>
+      <h3>📚 ACSL Wiki 样题 · Wiki practice</h3>
+      <p style="font-size:17px; margin-top:6px;">在 <a href="https://categories.acsl.org/wiki/index.php?title=Computer_Number_Systems" target="_blank" style="color:var(--purple); font-weight:700;">ACSL Wiki · Computer Number Systems</a> 做 <b>5 道</b>样题 do 5 samples</p>
+      <p style="font-size:14px; color:var(--muted); margin-top:6px;">重点 Focus：进制互转 conversion + 补码表示 two's complement</p>
     </div>
     <div class="bug" style="margin-top:14px;">
-      <div class="label">⚠️ 不要做的事</div>
+      <div class="label">⚠️ Don'ts</div>
       <ul style="padding-left:24px; line-height:1.8;">
-        <li>不要做新题（保持简单，先消化这周）</li>
-        <li>不要用 AI 直接生成答案（必须自己算）</li>
+        <li>不要做新题 No new problems（保持简单，先消化这周）</li>
+        <li>不要用 AI 直接生成答案 No AI generation（必须自己算 calculate by hand）</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- 19 · 记忆卡片 -->
+<!-- 19 · 记忆卡片（中英对照）-->
 <section class="slide">
   <div class="left">
-    <div class="kicker">📇 记忆卡片</div>
-    <h2>本周 <span class="highlight">闪卡</span></h2>
-    <p class="subtitle">点击翻转，自我检测</p>
+    <div class="kicker">📇 记忆卡片 · Flashcards</div>
+    <h2>本周 <span class="highlight">闪卡</span> Flashcards</h2>
+    <p class="subtitle">点击翻转 Flip · 自我检测 Self-check</p>
   </div>
   <div class="right">
     <div class="check-q check-q-blue">
-      <div class="check-q-text">📇 <b>C01 · 二进制权重</b><br>二进制数从右往左，每位的权重是 2 的几次方？</div>
+      <div class="check-q-text">📇 <b>C01 · Binary weights</b><br>二进制数从右往左，每位的权重是 2 的几次方？<br><span style="color:var(--muted); font-size:14px;">In binary, each bit's weight (right to left) is 2 to what power?</span></div>
       <details>
-        <summary>看答案</summary>
-        <div class="check-a">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
+        <summary>Show answer</summary>
+        <div class="check-a">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>Rightmost bit's weight = 2⁰ = 1</div>
       </details>
     </div>
     <div class="check-q check-q-blue">
-      <div class="check-q-text">📇 <b>C02 · 十六进制符号</b><br>十六进制的 16 个符号是哪些？（A=?, B=?, C=?）</div>
+      <div class="check-q-text">📇 <b>C02 · Hex symbols</b><br>十六进制的 16 个符号是哪些？A、B、C = 多少？<br><span style="color:var(--muted); font-size:14px;">16 hex symbols? A, B, C = ?</span></div>
       <details>
-        <summary>看答案</summary>
+        <summary>Show answer</summary>
         <div class="check-a">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
       </details>
     </div>
     <div class="check-q check-q-blue">
-      <div class="check-q-text">📇 <b>C03 · 补码三步走</b><br>求负数的补码表示，3 个步骤是什么？</div>
+      <div class="check-q-text">📇 <b>C03 · Two's complement 3 steps</b><br>求负数补码的 3 个步骤？<br><span style="color:var(--muted); font-size:14px;">3 steps to get two's complement of a negative?</span></div>
       <details>
-        <summary>看答案</summary>
-        <div class="check-a">1. 写出正数的二进制<br>2. 取反（0变1，1变0）<br>3. 加 1</div>
+        <summary>Show answer</summary>
+        <div class="check-a">1. Write positive number in binary 写出正数<br>2. Invert (flip 0↔1) 取反<br>3. Add 1 加1</div>
       </details>
     </div>
     <div class="check-q check-q-blue">
-      <div class="check-q-text">📇 <b>C04 · ACSL 第一轮考什么</b><br>ACSL 初级组第一轮的 3 个主题是？</div>
+      <div class="check-q-text">📇 <b>C04 · ACSL Contest 1 topics</b><br>ACSL 初级组第一轮的 3 个主题？<br><span style="color:var(--muted); font-size:14px;">ACSL Junior Contest 1 covers which 3 topics?</span></div>
       <details>
-        <summary>看答案</summary>
-        <div class="check-a">1. 计算机数字系统（本周）<br>2. 递归函数（下周）<br>3. 程序是怎么运行的（分支）</div>
+        <summary>Show answer</summary>
+        <div class="check-a">1. <b>Computer Number Systems</b> 计算机数字系统（本周）<br>2. <b>Recursive Functions</b> 递归函数（下周 L2）<br>3. <b>What Does This Program Do? (Branching)</b> 程序追踪-分支</div>
       </details>
     </div>
   </div>
@@ -1060,22 +1088,28 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
 <!-- 20 · 收尾 + 下周预告 -->
 <section class="slide title-slide">
   <div class="left">
-    <div class="kicker">📍 下周预告</div>
-    <h1>L2 · <span class="highlight">递归函数</span></h1>
-    <p class="subtitle">9 月 14 日 - 9 月 20 日</p>
-    <div class="metaphor" style="margin-top:32px; max-width:720px; text-align:left;">
+    <div class="kicker">📍 下周预告 · Next Week</div>
+    <h1>L2 · <span class="highlight">递归函数</span><br><span class="muted" style="font-size:42px; font-weight:600;">Recursive Functions</span></h1>
+    <p class="subtitle">9 月 14 日 - 9 月 20 日 · Sep 14 - 20</p>
+    <div class="metaphor" style="margin-top:32px; max-width:820px; text-align:left;">
       <span class="emo">🔁</span>
-      <b>递归</b>：函数自己调用自己。听起来很奇怪，但是用画调用树的方法就变得很清晰。下周你会学到递归三要素、手算递归值、判断递归调用次数——这是 ACSL 第一轮的第二个主题。
+      <b>递归 Recursion</b>：函数自己调用自己 A function calling itself。<br>
+      听起来很奇怪 but 用画调用树 drawing the recursion tree 的方法就变得很清晰。<br><br>
+      下周你会学到 You'll learn：<br>
+      · 递归三要素 3 elements of recursion<br>
+      · 手算递归值 calculate recursive values by hand<br>
+      · 判断递归调用次数 count recursion calls<br>
+      这是 ACSL 第一轮的第二个主题 This is Contest 1's 2nd topic.
     </div>
     <div style="margin-top:32px;">
       <div class="chips">
-        <span class="chip purple">📘 递归概念</span>
-        <span class="chip amber">📘 调用树</span>
-        <span class="chip green">📘 手算递归</span>
+        <span class="chip purple">📘 递归概念 Concept</span>
+        <span class="chip amber">📘 调用树 Call Tree</span>
+        <span class="chip green">📘 手算递归 By Hand</span>
       </div>
     </div>
     <p style="margin-top:48px; font-size:14px; color:var(--muted);">
-      ⭐ 做完 OJ 作业后，把错题截给老师 · 下节课讲评
+      ⭐ 做完 OJ 作业后，把错题截给老师 Submit screenshots after OJ homework · 下节课讲评 reviewed next class
     </p>
   </div>
 </section>
