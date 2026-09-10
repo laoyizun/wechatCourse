@@ -494,11 +494,21 @@ code.inline {
         <p style="font-size:13px; color:var(--muted);">重点：手算递归值 · 画调用树 · 多分支陷阱</p>
 
         <h4>🌳 调用树手绘练习 · 3 道</h4>
-        <ul>
-          <li>fact(6) 调用树</li>
-          <li>hanoi(3) 调用树</li>
-          <li>f(x,y) = f(x-y, y-1) + 2 调用树</li>
-        </ul>
+        <p style="font-size:13px; color:var(--muted);">每题先看递归定义，再画调用树，最后回填求值</p>
+        <ol style="font-size:13px; line-height:1.7; padding-left:24px;">
+          <li>
+            <b>fact(6) 调用树</b><br>
+            <code class="inline" style="font-size:12px;">fact(n) = n × fact(n-1) (n&gt;1)，fact(1) = 1</code>
+          </li>
+          <li>
+            <b>hanoi(3) 调用树</b><br>
+            <code class="inline" style="font-size:12px;">hanoi(n) = 2 × hanoi(n-1) + 1 (n&gt;1)，hanoi(1) = 1</code>
+          </li>
+          <li>
+            <b>f(8, 3) 调用树（双变量追踪）</b><br>
+            <code class="inline" style="font-size:12px;">f(x, y) = f(x-y, y-1) + 2 (x&gt;y)，f(x, y) = x + y (otherwise)</code>
+          </li>
+        </ol>
       </div>
     </details>
 

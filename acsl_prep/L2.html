@@ -1196,11 +1196,21 @@ f(9) = 8 + 2 = <b>10</b></pre>
     </div>
     <div class="card" style="margin-top:12px; border-left:4px solid var(--green);">
       <h3 style="color:var(--green);">🌳 调用树手绘 · 3 道</h3>
-      <ul style="font-size:15px; line-height:1.7; padding-left:20px;">
-        <li>fact(6) 调用树</li>
-        <li>hanoi(3) 调用树</li>
-        <li>f(x,y) = f(x-y, y-1) + 2 调用树</li>
-      </ul>
+      <p style="font-size:13px; color:var(--muted); margin-top:-4px;">每题先看递归定义，再画调用树，最后回填求值</p>
+      <ol style="font-size:14px; line-height:1.7; padding-left:20px;">
+        <li>
+          <b>fact(6) 调用树</b><br>
+          <code style="font-size:13px;">fact(n) = n × fact(n-1)  (n &gt; 1)，fact(1) = 1</code>
+        </li>
+        <li>
+          <b>hanoi(3) 调用树</b><br>
+          <code style="font-size:13px;">hanoi(n) = 2 × hanoi(n-1) + 1  (n &gt; 1)，hanoi(1) = 1</code>
+        </li>
+        <li>
+          <b>f(8, 3) 调用树（双变量追踪）</b><br>
+          <code style="font-size:13px;">f(x, y) = f(x-y, y-1) + 2  (x &gt; y)，f(x, y) = x + y  (otherwise)</code>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
