@@ -253,92 +253,90 @@ details.hw-flip .hw-body p {
   line-height: 1.7;
 }
 
-/* ===== 闪卡 3D 翻牌（仿 dse_python_f3） ===== */
-.flashcard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
+/* ===== 闪卡（保留原版紫橙渐变 + 翻牌特效） ===== */
 .flashcard {
-  perspective: 1200px;
-  cursor: pointer;
-  min-height: 180px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  margin-bottom: 0;
-}
-.flashcard-inner {
   position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 180px;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
-}
-.flashcard.flipped .flashcard-inner {
-  transform: rotateY(180deg);
-}
-.flashcard-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, .04), rgba(217, 119, 6, .04));
+  border: 1px solid rgba(124, 58, 237, .22);
   border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
+  margin-bottom: 12px;
+  transition: transform .25s ease, box-shadow .25s ease;
+  perspective: 1200px;
 }
-.flashcard-front {
-  background: var(--panel);
-  border: 1px solid var(--line);
-}
-.flashcard-back {
-  background: #f0fdf4;
-  border: 1px solid #16a34a;
-  transform: rotateY(180deg);
+.flashcard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(124, 58, 237, .18);
 }
 .flashcard .fc-tag {
   display: inline-block;
   font-size: 12px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   border-radius: 999px;
   background: rgba(124, 58, 237, .12);
   color: #6d28d9;
+  margin-bottom: 8px;
   font-weight: 800;
-  width: fit-content;
-  margin-bottom: 10px;
-}
-.flashcard-back .fc-tag {
-  background: rgba(22, 163, 74, .15);
-  color: #15803d;
 }
 .flashcard .fc-q {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text);
-  line-height: 1.55;
-  margin-bottom: 12px;
-}
-.flashcard .fc-a {
-  font-size: 13px;
-  color: var(--text);
+  margin-bottom: 10px;
   line-height: 1.6;
+}
+.flashcard details summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6d28d9;
+  list-style: none;
+}
+.flashcard details summary::-webkit-details-marker { display: none; }
+.flashcard details summary::before { content: '▸  '; }
+.flashcard details[open] summary::before { content: '▾  '; }
+.flashcard details[open] summary { margin-bottom: 8px; }
+.flashcard details .fc-a {
+  padding: 10px 14px;
+  background: rgba(22, 163, 74, .08);
+  border-radius: 6px;
   font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  color: #047857;
+  line-height: 1.6;
 }
-.flashcard .fc-hint {
-  margin-top: auto;
-  padding-top: 10px;
-  text-align: center;
-  font-size: 11px;
+/* 翻牌小图标（右上角，悬停可见） */
+.flashcard .fc-flip-hint {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 12px;
   color: var(--muted);
-  font-weight: 800;
-  letter-spacing: 1px;
+  background: rgba(255, 255, 255, .7);
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight: 600;
 }
-.flashcard-back .fc-hint { color: #15803d; }
+.flashcard .fc-inner {
+  transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .fc-inner {
+  transform: rotateY(180deg);
+}
+.flashcard .fc-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flashcard .fc-back {
+  display: none;
+}
+.flashcard.flipped .fc-front { display: none; }
+.flashcard.flipped .fc-back {
+  display: block;
+  transform: rotateY(180deg);
+}
 
 /* ===== Footer ===== */
 .footer {
@@ -392,7 +390,7 @@ code.inline {
         <div class="lesson-meta">
           <span class="meta-chip purple">9.7 - 9.13</span>
           <span class="meta-chip amber">第一轮</span>
-          <span class="meta-chip green">已开放 · 22 页</span>
+          <span class="meta-chip green">已开放</span>
         </div>
       </a>
 
@@ -400,11 +398,11 @@ code.inline {
       <a class="lesson-card" href="L2.html">
         <div class="lesson-num">L2</div>
         <h3>递归函数</h3>
-        <p>递归概念 · 调用树 · 手算递归值 · 调用次数 · Fibonacci · 汉诺塔</p>
+        <p>递归概念 · 调用树 · 手算递归值 · 调用次数 · Fibonacci</p>
         <div class="lesson-meta">
           <span class="meta-chip purple">9.14 - 9.20</span>
-          <span class="meta-chip amber">第二轮</span>
-          <span class="meta-chip green">已开放 · 22 页</span>
+          <span class="meta-chip amber">第一轮</span>
+          <span class="meta-chip green">已开放</span>
         </div>
       </a>
 
@@ -517,14 +515,13 @@ code.inline {
       </div>
     </details>
 
-    <details class="hw-flip" open>
+    <details class="hw-flip">
       <summary>L2 · 递归函数</summary>
       <div class="hw-body">
         <p style="color:var(--muted); font-size:14px;">截止日期：2026-09-30 23:59 · OJ 平台已分配给学生</p>
 
         <h4>🖥️ OJ 编程作业</h4>
-        <p>Cubicbird OJ · <b>作业 ID：待老师填写</b></p>
-        <p>3 道题：</p>
+        <p>Cubicbird OJ · 3 道题：</p>
         <ul>
           <li><code class="inline">1114</code> Fibonacci · 经典递归入门</li>
           <li><code class="inline">1115</code> 三项递推 · 模仿 ACSL Recursive Functions 题型</li>
@@ -555,176 +552,188 @@ code.inline {
   <!-- ===== Tab 3: 记忆卡片 ===== -->
   <div class="tab-content" id="tab-flashcards">
     <h2 class="section-title">📇 记忆卡片</h2>
-    <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转（3D 翻牌） · L1-L2 已开放</p>
+    <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1-L2 已开放</p>
 
-    <div class="flashcard-grid">
-
-      <!-- L1-C01 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L1-C01 · 概念</div>
-            <div class="fc-q">二进制中，从右往左每位权重是 2 的几次方？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L1-C01</div>
+    <!-- L1 -->
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C01 · 概念</div>
+          <div class="fc-q">二进制中，从右往左每位权重是 2 的几次方？</div>
+          <details>
+            <summary>看答案</summary>
             <div class="fc-a">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L1-C01</div>
+          <div class="fc-a">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
         </div>
       </div>
+    </div>
 
-      <!-- L1-C02 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L1-C02 · 概念</div>
-            <div class="fc-q">十六进制的 16 个符号是哪些？A、B、C 分别等于十进制的多少？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L1-C02</div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C02 · 概念</div>
+          <div class="fc-q">十六进制的 16 个符号是哪些？A、B、C 分别等于十进制的多少？</div>
+          <details>
+            <summary>看答案</summary>
             <div class="fc-a">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L1-C02</div>
+          <div class="fc-a">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
         </div>
       </div>
+    </div>
 
-      <!-- L1-C03 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L1-C03 · 概念</div>
-            <div class="fc-q">求负数补码的 3 个步骤是什么？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L1-C03</div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C03 · 概念</div>
+          <div class="fc-q">求负数补码的 3 个步骤是什么？</div>
+          <details>
+            <summary>看答案</summary>
             <div class="fc-a">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L1-C03</div>
+          <div class="fc-a">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
         </div>
       </div>
+    </div>
 
-      <!-- L1-C04 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L1-C04 · 概念</div>
-            <div class="fc-q">二进制加法 1 + 1 = ？逢 2 进 1 怎么理解？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L1-C04</div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C04 · 概念</div>
+          <div class="fc-q">二进制加法 1 + 1 = ？逢 2 进 1 怎么理解？</div>
+          <details>
+            <summary>看答案</summary>
             <div class="fc-a">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L1-C04</div>
+          <div class="fc-a">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
         </div>
       </div>
+    </div>
 
-      <!-- L1-C05 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L1-C05 · 概念</div>
-            <div class="fc-q">二进制 ↔ 八进制、十六进制，每几位合成一位？十进制转二进制的关键是什么？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L1-C05</div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C05 · 概念</div>
+          <div class="fc-q">二进制 ↔ 八进制、十六进制，每几位合成一位？十进制转二进制的关键是什么？</div>
+          <details>
+            <summary>看答案</summary>
             <div class="fc-a">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L1-C05</div>
+          <div class="fc-a">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
         </div>
       </div>
+    </div>
 
-      <!-- L2-C01 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L2-C01 · 概念</div>
-            <div class="fc-q">所有递归都必须包含的 3 个要素是什么？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L2-C01</div>
-            <div class="fc-a">1. <b>终止条件</b> Base case：什么时候停<br>
-        2. <b>自己调自己</b> Self-call：函数调自己<br>
-        3. <b>规模缩小</b> Shrinking：参数趋近 base case</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+    <!-- L2 -->
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C01 · 概念</div>
+          <div class="fc-q">递归的两个必备要素是什么？缺一会怎样？</div>
+          <details>
+            <summary>看答案</summary>
+            <div class="fc-a">1. <b>基例（base case）</b>：递归的出口<br>2. <b>递推式（recursive case）</b>：把问题拆成更小的自己<br>· 缺基例 → 无限递归 → 栈溢出</div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L2-C01</div>
+          <div class="fc-a">1. <b>基例（base case）</b>：递归的出口<br>2. <b>递推式（recursive case）</b>：把问题拆成更小的自己<br>· 缺基例 → 无限递归 → 栈溢出</div>
         </div>
       </div>
+    </div>
 
-      <!-- L2-C02 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L2-C02 · 概念</div>
-            <div class="fc-q">手算递归的两阶段流程是什么？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L2-C02</div>
-            <div class="fc-a"><b>先向下追到底</b>（不计算值，只写递归调用）<br>
-        → <b>再向上回填</b>（从 base case 一格格向上算）</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C02 · 概念</div>
+          <div class="fc-q">fact(4) 的调用树是怎样的？返回值是什么？</div>
+          <details>
+            <summary>看答案</summary>
+            <div class="fc-a">fact(4)=4×fact(3)=4×3×fact(2)=4×3×2×fact(1)=4×3×2×1×1=<b>24</b></div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L2-C02</div>
+          <div class="fc-a">fact(4)=4×fact(3)=4×3×fact(2)=4×3×2×fact(1)=4×3×2×1×1=<b>24</b></div>
         </div>
       </div>
+    </div>
 
-      <!-- L2-C03 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L2-C03 · 概念</div>
-            <div class="fc-q">Base case 写错了会发生什么？写不出 base case 会怎样？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L2-C03</div>
-            <div class="fc-a">Base case <b>写错</b> → 永远进不去终止条件 = 死循环<br>
-        Base case <b>缺失</b> → 同样死循环 / 栈溢出</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C03 · 概念</div>
+          <div class="fc-q">Fibonacci 递归的致命弱点是什么？时间复杂度？</div>
+          <details>
+            <summary>看答案</summary>
+            <div class="fc-a"><b>重叠子问题（overlapping subproblems）</b><br>· 同一层 fib(3) 被算 2 次，fib(2) 被算 3 次<br>· 时间复杂度 <b>O(2ⁿ)</b>，n=40 就很慢<br>· 解决：记忆化搜索 / DP</div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L2-C03</div>
+          <div class="fc-a"><b>重叠子问题（overlapping subproblems）</b><br>· 同一层 fib(3) 被算 2 次，fib(2) 被算 3 次<br>· 时间复杂度 <b>O(2ⁿ)</b>，n=40 就很慢<br>· 解决：记忆化搜索 / DP</div>
         </div>
       </div>
+    </div>
 
-      <!-- L2-C04 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L2-C04 · 概念</div>
-            <div class="fc-q">调用树有哪 3 个部分？画调用树有什么用？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L2-C04</div>
-            <div class="fc-a"><b>根</b> = 最上层调用 · <b>叶</b> = base case · <b>分支</b> = 递归调用<br>
-        画调用树 = 看清楚结构 + 避免漏算 + 加快速度</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C04 · 概念</div>
+          <div class="fc-q">fib(6) 等于多少？用调用树说明 fib(3) 被算了多少次？</div>
+          <details>
+            <summary>看答案</summary>
+            <div class="fc-a">fib(6) = <b>8</b><br>序列：0, 1, 1, 2, 3, 5, 8, 13, ...<br>fib(3) 在 fib(6) 的调用树中被算 <b>2 次</b></div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L2-C04</div>
+          <div class="fc-a">fib(6) = <b>8</b><br>序列：0, 1, 1, 2, 3, 5, 8, 13, ...<br>fib(3) 在 fib(6) 的调用树中被算 <b>2 次</b></div>
         </div>
       </div>
+    </div>
 
-      <!-- L2-C05 -->
-      <div class="flashcard" onclick="this.classList.toggle('flipped')">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            <div class="fc-tag">L2-C05 · 概念</div>
-            <div class="fc-q">双变量递归 f(x, y) 手算时，最容易出什么错？</div>
-            <div class="fc-hint">点击翻面 →</div>
-          </div>
-          <div class="flashcard-face flashcard-back">
-            <div class="fc-tag">答案 · L2-C05</div>
-            <div class="fc-a">最容易<b>只追踪 x</b>而忘了 y 也在变！<br>
-        正确做法：在纸上<b>同时</b>写 (x, y) 两个值</div>
-            <div class="fc-hint">← 点击翻回</div>
-          </div>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C05 · 概念</div>
+          <div class="fc-q">汉诺塔 H(n) = 2 × H(n-1) + 1 的通项公式？H(6) = ?</div>
+          <details>
+            <summary>看答案</summary>
+            <div class="fc-a">通项：<b>H(n) = 2ⁿ − 1</b><br>H(1)=1, H(2)=3, H(3)=7, H(4)=15, H(5)=31, H(6)=<b>63</b></div>
+          </details>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">答案 · L2-C05</div>
+          <div class="fc-a">通项：<b>H(n) = 2ⁿ − 1</b><br>H(1)=1, H(2)=3, H(3)=7, H(4)=15, H(5)=31, H(6)=<b>63</b></div>
         </div>
       </div>
-
     </div>
 
     <p style="text-align:center; color:var(--muted); font-size:14px; margin-top:24px;">
