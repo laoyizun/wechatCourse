@@ -307,14 +307,14 @@ details.hw-flip .hw-body p {
   position: relative;
   perspective: 1200px;
   margin-bottom: 0;
-  min-height: 150px;
+  min-height: 220px;
   cursor: pointer;
 }
 .flashcard.hidden { display: none; }
 .flashcard .fc-inner {
   position: relative;
   width: 100%;
-  min-height: 140px;
+  min-height: 220px;
   transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
 }
@@ -326,20 +326,54 @@ details.hw-flip .hw-body p {
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  padding: 16px 20px;
+  padding: 14px 18px;
   background: linear-gradient(135deg, rgba(124, 58, 237, .04), rgba(217, 119, 6, .04));
   border: 1px solid rgba(124, 58, 237, .22);
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, .04);
   transition: box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
 }
 .flashcard:hover .fc-face {
   box-shadow: 0 18px 40px rgba(124, 58, 237, .18);
 }
 .flashcard .fc-front {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+}
+.flashcard .fc-back {
+  justify-content: flex-start;
+}
+/* 知识讲解区 · 卡片内部可滚动 */
+.flashcard .fc-explain {
+  margin-top: 6px;
+  padding: 10px 12px;
+  background: rgba(22, 163, 74, .08);
+  border-left: 3px solid #16a34a;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+  font-family: "PingFang SC", "HarmonyOS Sans", Inter, sans-serif;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(22, 163, 74, .4) transparent;
+}
+.flashcard .fc-explain::-webkit-scrollbar { width: 5px; }
+.flashcard .fc-explain::-webkit-scrollbar-thumb {
+  background: rgba(22, 163, 74, .35);
+  border-radius: 3px;
+}
+.flashcard .fc-explain b { color: var(--green-deep); }
+.flashcard .fc-explain code {
+  background: rgba(124, 58, 237, .1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--purple-deep);
+  font-weight: 700;
 }
 .flashcard .fc-back {
   transform: rotateY(180deg);
@@ -653,6 +687,11 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C01</div>
           <div class="fc-q" style="color:#047857;">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
+          <div class="fc-explain"><b>位权（Place Value）</b>就是每一位代表的数值大小。<br>
+· 从右往左数：第 1 位权重 <code>2⁰=1</code>，第 2 位 <code>2¹=2</code>，第 3 位 <code>2²=4</code>……<br>
+· 第 <code>n</code> 位权重 = <code>2ⁿ⁻¹</code>（从右数起）<br>
+· 例：<code>1011₂</code> = 1×8 + 0×4 + 1×2 + 1×1 = <b>11</b><br>
+· <b>口诀</b>：从右往左，权重依次是 1、2、4、8、16、32……</div>
         </div>
       </div>
     </div>
@@ -667,6 +706,12 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C02</div>
           <div class="fc-q" style="color:#047857;">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
+          <div class="fc-explain"><b>十六进制（Hexadecimal）</b>用 16 个符号表示一个数。<br>
+· 数字 0-9 表示 0-9，字母 A-F 表示 10-15<br>
+· <code>A=10, B=11, C=12, D=13, E=14, F=15</code><br>
+· 1 位十六进制 = 4 位二进制，所以常用作二进制缩写<br>
+· 例：<code>2A₁₆</code> = 2×16 + 10 = <b>42</b><br>
+· <b>记忆</b>：F 是 15 = 二进制 <code>1111</code>（全 1），所以 F + 1 = 16 = 进位</div>
         </div>
       </div>
     </div>
@@ -681,6 +726,11 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C03</div>
           <div class="fc-q" style="color:#047857;">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
+          <div class="fc-explain"><b>补码（Two's Complement）</b>是计算机表示负数的方法。<br>
+· <b>步骤</b>：正数二进制 → 全部位取反（0↔1）→ 加 1<br>
+· 例：求 <code>-5</code>：+5 = <code>0000 0101</code> → 取反 <code>1111 1010</code> → 加 1 = <code>1111 1011</code><br>
+· <b>为什么</b>：补码让加法器可以无差别处理正负数，且 <code>0</code> 只有一种表示<br>
+· <b>8 位补码范围</b>：<code>-128 ~ +127</code>（公式 <code>-2ⁿ⁻¹ ~ 2ⁿ⁻¹-1</code>）</div>
         </div>
       </div>
     </div>
@@ -695,6 +745,12 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C04</div>
           <div class="fc-q" style="color:#047857;">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
+          <div class="fc-explain"><b>二进制加法</b>和十进制一样，只是"逢 2 进 1"。<br>
+· <b>单条规则</b>：<code>1 + 1 = 0</code>，并向左<b>进 1 位</b><br>
+· <code>1 + 1 + 1 = 11</code>（本位写 1，进位 1）<br>
+· <b>竖式加法</b>：从右往左逐位相加，处理好进位<br>
+· 例：<code>1011 + 1101</code> = <code>11000</code>（十进制 11 + 13 = 24）<br>
+· <b>口诀</b>：一位一位加，记下进位，往左传</div>
         </div>
       </div>
     </div>
@@ -709,6 +765,14 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C05</div>
           <div class="fc-q" style="color:#047857;">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
+          <div class="fc-explain"><b>进制转换的三大口诀</b>：<br>
+· <b>十进制 → 二进制</b>：除 2 取余，<b>余数倒着读</b>（13 → 1101）<br>
+· <b>二进制 → 十进制</b>：每位 × <code>2ⁿ</code>，全部相加<br>
+· <b>二进制 ↔ 八进制</b>：每 <b>3 位</b>一组（从右往左，不够补 0）<br>
+· <b>二进制 ↔ 十六进制</b>：每 <b>4 位</b>一组<br>
+· 例：<code>11010110₂</code> = <code>11 010 110</code> = <code>326₈</code><br>
+· <b>速算技巧</b>：记住 <code>2¹⁰ = 1024</code>，<code>2⁸ = 256</code>，<code>2⁴ = 16</code></div>
+        
         </div>
       </div>
     </div>
@@ -723,6 +787,13 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C01</div>
           <div class="fc-q" style="color:#047857;">1. <b>终止条件</b> Base case：什么时候停<br>2. <b>自己调自己</b> Self-call：函数调自己<br>3. <b>规模缩小</b> Shrinking：参数趋近 base case</div>
+          <div class="fc-explain"><b>递归（Recursion）</b>三要素缺一不可：<br>
+· <b>基例 / Base case</b>：递归的"出口"，告诉函数什么时候停止调用自己<br>
+· <b>递归调用 / Recursive call</b>：函数内部调用自己<br>
+· <b>参数缩小 / Shrinking</b>：每次递归调用参数都比上次更接近基例<br>
+· 例：<code>fact(0)=1</code> 是基例；<code>fact(n)=n×fact(n-1)</code> 是递归调用 + 参数缩小<br>
+· <b>缺基例 = 死循环</b>，最终栈溢出（Stack Overflow）</div>
+        
         </div>
       </div>
     </div>
@@ -737,6 +808,12 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C02</div>
           <div class="fc-q" style="color:#047857;"><b>先向下追到底</b>（不计算值，只写递归调用）<br>→ <b>再向上回填</b>（从 base case 一格格向上算）</div>
+          <div class="fc-explain"><b>手算递归的标准流程</b>（两阶段）：<br>
+· <b>第一阶段 · 向下追到底</b>：从 <code>f(n)</code> 开始，不断展开 <code>f(n-1)</code>、<code>f(n-2)</code>... 直到碰到基例<br>
+· <b>第二阶段 · 向上回填</b>：从基例的值开始，一格格向上算回去<br>
+· <b>不要混着算</b>：先完整画出调用树结构，再回填数值<br>
+· 例：<code>fact(3)</code> 先展开 → <code>3 × fact(2)</code> → <code>3 × 2 × fact(1)</code> → <code>3 × 2 × 1 × 1</code> = <b>6</b></div>
+        
         </div>
       </div>
     </div>
@@ -751,6 +828,12 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C03</div>
           <div class="fc-q" style="color:#047857;">Base case <b>写错</b> → 永远进不去终止条件 = 死循环<br>Base case <b>缺失</b> → 同样死循环 / 栈溢出</div>
+          <div class="fc-explain"><b>Base case 写错 = 灾难</b>，两种常见情况：<br>
+· <b>条件写错</b>（如 <code>fib(1)=0</code> 写成 0 而不是 1）→ 后续所有值全错位<br>
+· <b>Base case 缺失</b>（忘了写终止条件）→ 无限递归 → 栈溢出<br>
+· <b>预防方法</b>：写完递归函数后，先口算 <code>f(0)</code> 和 <code>f(1)</code>，对得上再往下算<br>
+· <b>调试技巧</b>：在递归调用前 <code>print(n)</code> 看实际执行顺序</div>
+        
         </div>
       </div>
     </div>
@@ -765,6 +848,15 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C04</div>
           <div class="fc-q" style="color:#047857;"><b>根</b> = 最上层调用 · <b>叶</b> = base case · <b>分支</b> = 递归调用<br>画调用树 = 看清楚结构 + 避免漏算 + 加快速度</div>
+          <div class="fc-explain"><b>调用树（Call Tree）</b>是把递归展开成树状图。<br>
+· <b>根（Root）</b>：最上层的初始调用，如 <code>f(5)</code><br>
+· <b>叶（Leaves）</b>：所有到达基例的节点<br>
+· <b>分支（Branches）</b>：中间的递归调用<br>
+· <b>画调用树的作用</b>：<br>
+&nbsp;&nbsp;1. 看清楚递归结构（几层？几路？）<br>
+&nbsp;&nbsp;2. 避免漏算（Fibonacci 重叠子问题）<br>
+&nbsp;&nbsp;3. 加快速度（一眼看出哪里是重复计算）</div>
+        
         </div>
       </div>
     </div>
@@ -779,6 +871,13 @@ code.inline {
         <div class="fc-face fc-back">
           <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C05</div>
           <div class="fc-q" style="color:#047857;">最容易<b>只追踪 x</b>而忘了 y 也在变！<br>正确做法：在纸上<b>同时</b>写 (x, y) 两个值</div>
+          <div class="fc-explain"><b>双变量递归 f(x, y)</b> 是 ACSL 常见题型。<br>
+· <b>最易错点</b>：只追踪 x 变化，忘了 y 也在变！<br>
+· <b>正确做法</b>：在纸上<b>同时</b>写 (x, y) 两个值，例如 <code>(7, 3) → (6, 2) → ...</code><br>
+· 例：<code>f(x,y) = f(x-1, y) + f(x, y-1)</code>（路径计数）<br>
+· <b>画调用树技巧</b>：每个节点标 <code>(x, y)</code> 两个值<br>
+· <b>练习</b>：ACSL Wiki "Two Variables" 类题目</div>
+        
         </div>
       </div>
     </div>
