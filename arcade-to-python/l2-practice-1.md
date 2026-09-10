@@ -19,7 +19,7 @@
 - 汉堡 8 元 × 2 个 = 16 元
 - 总价 = 9 + 16 = 25 元
 
-用 Python 写：total_price = strawberry_price * strawberry_count + burger_price * burger_count
+用 Python 写：4 个变量 + 一个表达式（用乘号和加号）。
 
 运算顺序：先乘后加（Python 默认的运算优先级）
 hint~
@@ -29,12 +29,12 @@ hint~
 请在右栏编辑器里完成总价的计算。
 
 ~hint
-你已经看到：
+你已经看到（4 个变量已写好）：
 
-strawberry_price = 3
-burger_price = 8
-strawberry_count = 3
-burger_count = 2
+- 草莓价（数字）
+- 汉堡价（数字）
+- 草莓数（数字）
+- 汉堡数（数字）
 
 总价 = 草莓价 × 草莓数 + 汉堡价 × 汉堡数
 
@@ -47,11 +47,11 @@ hint~
 # =============================================
 # ✏️ 你修改的区域
 # =============================================
-strawberry_price = 3
-burger_price = 8
-strawberry_count = 3
-burger_count = 2
-total_price = strawberry_price * strawberry_count + burger_price * burger_count
+strawberry_price: number = 3
+burger_price: number = 8
+strawberry_count: number = 3
+burger_count: number = 2
+total_price: number = strawberry_price * strawberry_count + burger_price * burger_count
 # =============================================
 
 # =============================================
@@ -69,9 +69,7 @@ else:
 代码里有 4 个变量：两个是价格（strawberry_price、burger_price），两个是数量（strawberry_count、burger_count）。
 
 ~hint
-总价公式：
-
-total_price = strawberry_price * strawberry_count + burger_price * burger_count
+总价公式（用乘号和加号）：
 
 拆开看：
 
@@ -89,13 +87,9 @@ hint~
 ~hint
 动手区：
 
-在右栏编辑器找到：
+在右栏编辑器找到空着的 total_price 那一行。
 
-total_price = ____
-
-把它改成：
-
-total_price = strawberry_price * strawberry_count + burger_price * burger_count
+把它改成完整的计算表达式（用乘号和加号）。
 
 然后点 Run 看游戏反应——售货员会告诉你对不对。
 hint~
@@ -106,11 +100,11 @@ hint~
 # =============================================
 # ✏️ 你修改的区域
 # =============================================
-strawberry_price = 3
-burger_price = 8
-strawberry_count = 3
-burger_count = 2
-total_price = strawberry_price * strawberry_count + burger_price * burger_count
+strawberry_price: number = 3
+burger_price: number = 8
+strawberry_count: number = 3
+burger_count: number = 2
+total_price: number = strawberry_price * strawberry_count + burger_price * burger_count
 # =============================================
 
 # =============================================
@@ -125,7 +119,7 @@ else:
 
 ## {5. 练习完成 @showdialog}
 
-参考答案：total_price = strawberry_price * strawberry_count + burger_price * burger_count
+参考答案：用乘号和加号把 4 个变量组合起来。
 
 ~hint
 运算符组合：+ 和 * 在一个表达式里同时用，Python 会先算 * 再算 +。
@@ -137,11 +131,11 @@ hint~
 # =============================================
 # ✏️ 你修改的区域
 # =============================================
-strawberry_price = 3
-burger_price = 8
-strawberry_count = 3
-burger_count = 2
-total_price = ____
+strawberry_price: number = 3
+burger_price: number = 8
+strawberry_count: number = 3
+burger_count: number = 2
+total_price: number = ____
 # =============================================
 
 # =============================================

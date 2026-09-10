@@ -31,15 +31,15 @@ hint~
 请在右栏编辑器里完成分配。
 
 ~hint
-已有：
+已有（2 个变量已写好）：
 
-total_money = 100
-people = 4
+- 总钱数（数字）
+- 人数（数字）
 
 你要填：
 
-each = ____ # 每人分到多少
-leftover = ____ # 还剩多少
+- each = ____ # 每人分到多少
+- leftover = ____ # 还剩多少
 
 算出来填进去。
 hint~
@@ -50,10 +50,10 @@ hint~
 # =============================================
 # ✏️ 你修改的区域
 # =============================================
-total_money = 100
-people = 4
-each = total_money // people
-leftover = total_money % people
+total_money: number = 100
+people: number = 4
+each: number = total_money // people
+leftover: number = total_money % people
 # =============================================
 
 # =============================================
@@ -91,15 +91,9 @@ hint~
 ~hint
 动手区：
 
-在右栏编辑器找到：
+在右栏编辑器找到两个空着的行：each 和 leftover。
 
-each = ____
-leftover = ____
-
-改成：
-
-each = total_money // people
-leftover = total_money % people
+把它们分别改成对应的算式（用整除号 // 和取余号 %）。
 
 然后点 Run 看收银员说什么。
 hint~
@@ -110,10 +104,10 @@ hint~
 # =============================================
 # ✏️ 你修改的区域
 # =============================================
-total_money = 100
-people = 4
-each = total_money // people
-leftover = total_money % people
+total_money: number = 100
+people: number = 4
+each: number = total_money // people
+leftover: number = total_money % people
 # =============================================
 
 # =============================================
@@ -146,10 +140,10 @@ hint~
 # =============================================
 # ✏️ 你修改的区域
 # =============================================
-total_money = 100
-people = 4
-each = ____
-leftover = ____
+total_money: number = 100
+people: number = 4
+each: number = ____
+leftover: number = ____
 # =============================================
 
 # =============================================
