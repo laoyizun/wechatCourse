@@ -339,7 +339,7 @@ code.inline {
   <!-- ===== Tab 1: 课程目录 ===== -->
   <div class="tab-content active" id="tab-lessons">
     <h2 class="section-title">📘 课程目录</h2>
-    <p class="section-sub">点击进入单节课 · L1 已开放，其余 L2-L18 待备课中</p>
+    <p class="section-sub">点击进入单节课 · L1-L2 已开放，其余 L3-L18 待备课中</p>
 
     <div class="lesson-grid">
 
@@ -355,17 +355,17 @@ code.inline {
         </div>
       </a>
 
-      <!-- L2 · 备课中 -->
-      <div class="lesson-card disabled">
+      <!-- L2 · 已开放 -->
+      <a class="lesson-card" href="L2.html">
         <div class="lesson-num">L2</div>
         <h3>递归函数</h3>
-        <p>递归概念 · 调用树 · 手算递归值 · 调用次数</p>
+        <p>递归概念 · 调用树 · 手算递归值 · 4 个 ACSL Wiki 真题</p>
         <div class="lesson-meta">
           <span class="meta-chip purple">9.14 - 9.20</span>
           <span class="meta-chip amber">第一轮</span>
-          <span class="meta-chip gray">备课中</span>
+          <span class="meta-chip green">已开放 · 22 页</span>
         </div>
-      </div>
+      </a>
 
       <!-- L3 · 备课中 -->
       <div class="lesson-card disabled">
@@ -476,8 +476,34 @@ code.inline {
       </div>
     </details>
 
+    <details class="hw-flip" open>
+      <summary>L2 · 递归函数</summary>
+      <div class="hw-body">
+        <p style="color:var(--muted); font-size:14px;">截止日期：下节课前完成（每周 1 节课）</p>
+
+        <h4>🖥️ OJ 递归编程 · 3 道</h4>
+        <ul>
+          <li><code class="inline">1110</code> 分解质因数 · ★★（在 OJ 递归训练计划）</li>
+          <li><code class="inline">1114</code> 上台阶 · ★★</li>
+          <li><code class="inline">618</code> 汉诺塔 · ★★★</li>
+        </ul>
+        <p style="margin-top:8px;"><b>要求</b>：课堂禁 AI · 课后可用 AI 检查但不能 AI 生成</p>
+
+        <h4>📚 ACSL Wiki 递归题 · 5 道</h4>
+        <p>在 <a href="http://www.categories.acsl.org/wiki/index.php?title=Recursive_Functions" target="_blank">ACSL Wiki · Recursive Functions</a> 做 <b>5 道</b>样题</p>
+        <p style="font-size:13px; color:var(--muted);">重点：手算递归值 · 画调用树 · 多分支陷阱</p>
+
+        <h4>🌳 调用树手绘练习 · 3 道</h4>
+        <ul>
+          <li>fact(6) 调用树</li>
+          <li>hanoi(3) 调用树</li>
+          <li>f(x,y) = f(x-y, y-1) + 2 调用树</li>
+        </ul>
+      </div>
+    </details>
+
     <details class="hw-flip">
-      <summary>L2-L18 · 后续作业</summary>
+      <summary>L3-L18 · 后续作业</summary>
       <div class="hw-body">
         <p style="color:var(--muted);">每周作业将在对应 PPT 的"课后作业"页发布。</p>
         <p>每周固定结构：</p>
@@ -493,7 +519,7 @@ code.inline {
   <!-- ===== Tab 3: 记忆卡片 ===== -->
   <div class="tab-content" id="tab-flashcards">
     <h2 class="section-title">📇 记忆卡片</h2>
-    <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1 已开放</p>
+    <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1-L2 已开放</p>
 
     <div class="flashcard">
       <div class="fc-tag">L1-C01 · 概念</div>
@@ -540,8 +566,59 @@ code.inline {
       </details>
     </div>
 
+    <div class="flashcard">
+      <div class="fc-tag">L2-C01 · 概念</div>
+      <div class="fc-q">所有递归都必须包含的 3 个要素是什么？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="fc-a">1. <b>终止条件</b> Base case：什么时候停<br>
+        2. <b>自己调自己</b> Self-call：函数调自己<br>
+        3. <b>规模缩小</b> Shrinking：参数趋近 base case</div>
+      </details>
+    </div>
+
+    <div class="flashcard">
+      <div class="fc-tag">L2-C02 · 概念</div>
+      <div class="fc-q">手算递归的两阶段流程是什么？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="fc-a"><b>先向下追到底</b>（不计算值，只写递归调用）<br>
+        → <b>再向上回填</b>（从 base case 一格格向上算）</div>
+      </details>
+    </div>
+
+    <div class="flashcard">
+      <div class="fc-tag">L2-C03 · 概念</div>
+      <div class="fc-q">Base case 写错了会发生什么？写不出 base case 会怎样？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="fc-a">Base case <b>写错</b> → 永远进不去终止条件 = 死循环<br>
+        Base case <b>缺失</b> → 同样死循环 / 栈溢出</div>
+      </details>
+    </div>
+
+    <div class="flashcard">
+      <div class="fc-tag">L2-C04 · 概念</div>
+      <div class="fc-q">调用树有哪 3 个部分？画调用树有什么用？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="fc-a"><b>根</b> = 最上层调用 · <b>叶</b> = base case · <b>分支</b> = 递归调用<br>
+        画调用树 = 看清楚结构 + 避免漏算 + 加快速度</div>
+      </details>
+    </div>
+
+    <div class="flashcard">
+      <div class="fc-tag">L2-C05 · 概念</div>
+      <div class="fc-q">双变量递归 f(x, y) 手算时，最容易出什么错？</div>
+      <details>
+        <summary>看答案</summary>
+        <div class="fc-a">最容易<b>只追踪 x</b>而忘了 y 也在变！<br>
+        正确做法：在纸上<b>同时</b>写 (x, y) 两个值</div>
+      </details>
+    </div>
+
     <p style="text-align:center; color:var(--muted); font-size:14px; margin-top:24px;">
-      💡 L2-L18 的记忆卡片将在对应课程完成后开放
+      💡 L3-L18 的记忆卡片将在对应课程完成后开放
     </p>
   </div>
 
