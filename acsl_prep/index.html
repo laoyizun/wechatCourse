@@ -253,14 +253,64 @@ details.hw-flip .hw-body p {
   line-height: 1.7;
 }
 
+/* ===== 闪卡筛选标签 ===== */
+.fc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+.fc-tab {
+  display: inline-flex; align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid rgba(124, 58, 237, .22);
+  color: var(--purple-deep);
+  font-size: 14px; font-weight: 800;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-family: inherit;
+}
+.fc-tab:hover { background: rgba(124, 58, 237, .08); }
+.fc-tab.active {
+  background: linear-gradient(135deg, rgba(124, 58, 237, .12), rgba(217, 119, 6, .12));
+  color: var(--purple-deep);
+  border-color: rgba(124, 58, 237, .5);
+  box-shadow: 0 2px 6px rgba(124, 58, 237, .15);
+}
+.fc-tab .count {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(124, 58, 237, .12);
+  color: var(--purple-deep);
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+
+/* ===== 闪卡网格 ===== */
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .flashcard-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
 /* ===== 闪卡 · 3D 翻牌 ===== */
 .flashcard {
   position: relative;
   perspective: 1200px;
-  margin-bottom: 12px;
-  min-height: 140px;
+  margin-bottom: 0;
+  min-height: 150px;
   cursor: pointer;
 }
+.flashcard.hidden { display: none; }
 .flashcard .fc-inner {
   position: relative;
   width: 100%;
@@ -585,7 +635,15 @@ code.inline {
     <h2 class="section-title">📇 记忆卡片</h2>
     <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1-L2 已开放</p>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="fc-tabs">
+      <button class="fc-tab active" data-filter="all">全部 <span class="count">10</span></button>
+      <button class="fc-tab" data-filter="L1">L1 进制 <span class="count">5</span></button>
+      <button class="fc-tab" data-filter="L2">L2 递归 <span class="count">5</span></button>
+    </div>
+
+    <div class="flashcard-grid">
+
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -599,7 +657,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -613,7 +671,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -627,7 +685,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -641,7 +699,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -655,7 +713,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -669,7 +727,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -683,7 +741,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -697,7 +755,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -711,7 +769,7 @@ code.inline {
       </div>
     </div>
 
-    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
       <span class="fc-flip-hint">点击翻面 ↻</span>
       <div class="fc-inner">
         <div class="fc-face fc-front">
@@ -724,6 +782,8 @@ code.inline {
         </div>
       </div>
     </div>
+
+    </div><!-- /flashcard-grid -->
 
     <p style="text-align:center; color:var(--muted); font-size:14px; margin-top:24px;">
       💡 L3-L18 的记忆卡片将在对应课程完成后开放
@@ -745,6 +805,22 @@ code.inline {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById('tab-' + target).classList.add('active');
+    });
+  });
+
+  // 闪卡按课程筛选
+  document.querySelectorAll('.fc-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.fc-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.flashcard').forEach(card => {
+        if (filter === 'all' || card.dataset.lesson === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
     });
   });
 </script>
