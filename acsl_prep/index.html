@@ -253,18 +253,67 @@ details.hw-flip .hw-body p {
   line-height: 1.7;
 }
 
-/* ===== 闪卡 ===== */
+/* ===== 闪卡 · 3D 翻牌 ===== */
 .flashcard {
+  position: relative;
+  perspective: 1200px;
+  margin-bottom: 12px;
+  min-height: 140px;
+  cursor: pointer;
+}
+.flashcard .fc-inner {
+  position: relative;
+  width: 100%;
+  min-height: 140px;
+  transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .fc-inner {
+  transform: rotateY(180deg);
+}
+.flashcard .fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   padding: 16px 20px;
   background: linear-gradient(135deg, rgba(124, 58, 237, .04), rgba(217, 119, 6, .04));
   border: 1px solid rgba(124, 58, 237, .22);
   border-radius: 12px;
-  margin-bottom: 12px;
-  transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .04);
+  transition: box-shadow .2s ease;
 }
-.flashcard:hover {
-  transform: translateY(-2px);
+.flashcard:hover .fc-face {
   box-shadow: 0 18px 40px rgba(124, 58, 237, .18);
+}
+.flashcard .fc-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flashcard .fc-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, rgba(22, 163, 74, .08), rgba(124, 58, 237, .04));
+  border-color: rgba(22, 163, 74, .35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flashcard .fc-flip-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, .85);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+  z-index: 5;
+}
+.flashcard.flipped .fc-flip-hint {
+  display: none;
 }
 .flashcard .fc-tag {
   display: inline-block;
@@ -536,100 +585,144 @@ code.inline {
     <h2 class="section-title">📇 记忆卡片</h2>
     <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1-L2 已开放</p>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C01 · 概念</div>
-      <div class="fc-q">二进制中，从右往左每位权重是 2 的几次方？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C01 · 概念</div>
+          <div class="fc-q">二进制中，从右往左每位权重是 2 的几次方？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C01</div>
+          <div class="fc-q" style="color:#047857;">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C02 · 概念</div>
-      <div class="fc-q">十六进制的 16 个符号是哪些？A、B、C 分别等于十进制的多少？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C02 · 概念</div>
+          <div class="fc-q">十六进制的 16 个符号是哪些？A、B、C 分别等于十进制的多少？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C02</div>
+          <div class="fc-q" style="color:#047857;">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C03 · 概念</div>
-      <div class="fc-q">求负数补码的 3 个步骤是什么？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C03 · 概念</div>
+          <div class="fc-q">求负数补码的 3 个步骤是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C03</div>
+          <div class="fc-q" style="color:#047857;">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C04 · 概念</div>
-      <div class="fc-q">二进制加法 1 + 1 = ？逢 2 进 1 怎么理解？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C04 · 概念</div>
+          <div class="fc-q">二进制加法 1 + 1 = ？逢 2 进 1 怎么理解？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C04</div>
+          <div class="fc-q" style="color:#047857;">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C05 · 概念</div>
-      <div class="fc-q">二进制 ↔ 八进制、十六进制，每几位合成一位？十进制转二进制的关键是什么？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C05 · 概念</div>
+          <div class="fc-q">二进制 ↔ 八进制、十六进制，每几位合成一位？十进制转二进制的关键是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C05</div>
+          <div class="fc-q" style="color:#047857;">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L2-C01 · 概念</div>
-      <div class="fc-q">所有递归都必须包含的 3 个要素是什么？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">1. <b>终止条件</b> Base case：什么时候停<br>
-        2. <b>自己调自己</b> Self-call：函数调自己<br>
-        3. <b>规模缩小</b> Shrinking：参数趋近 base case</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C01 · 概念</div>
+          <div class="fc-q">所有递归都必须包含的 3 个要素是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C01</div>
+          <div class="fc-q" style="color:#047857;">1. <b>终止条件</b> Base case：什么时候停<br>2. <b>自己调自己</b> Self-call：函数调自己<br>3. <b>规模缩小</b> Shrinking：参数趋近 base case</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L2-C02 · 概念</div>
-      <div class="fc-q">手算递归的两阶段流程是什么？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a"><b>先向下追到底</b>（不计算值，只写递归调用）<br>
-        → <b>再向上回填</b>（从 base case 一格格向上算）</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C02 · 概念</div>
+          <div class="fc-q">手算递归的两阶段流程是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C02</div>
+          <div class="fc-q" style="color:#047857;"><b>先向下追到底</b>（不计算值，只写递归调用）<br>→ <b>再向上回填</b>（从 base case 一格格向上算）</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L2-C03 · 概念</div>
-      <div class="fc-q">Base case 写错了会发生什么？写不出 base case 会怎样？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">Base case <b>写错</b> → 永远进不去终止条件 = 死循环<br>
-        Base case <b>缺失</b> → 同样死循环 / 栈溢出</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C03 · 概念</div>
+          <div class="fc-q">Base case 写错了会发生什么？写不出 base case 会怎样？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C03</div>
+          <div class="fc-q" style="color:#047857;">Base case <b>写错</b> → 永远进不去终止条件 = 死循环<br>Base case <b>缺失</b> → 同样死循环 / 栈溢出</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L2-C04 · 概念</div>
-      <div class="fc-q">调用树有哪 3 个部分？画调用树有什么用？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a"><b>根</b> = 最上层调用 · <b>叶</b> = base case · <b>分支</b> = 递归调用<br>
-        画调用树 = 看清楚结构 + 避免漏算 + 加快速度</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C04 · 概念</div>
+          <div class="fc-q">调用树有哪 3 个部分？画调用树有什么用？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C04</div>
+          <div class="fc-q" style="color:#047857;"><b>根</b> = 最上层调用 · <b>叶</b> = base case · <b>分支</b> = 递归调用<br>画调用树 = 看清楚结构 + 避免漏算 + 加快速度</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L2-C05 · 概念</div>
-      <div class="fc-q">双变量递归 f(x, y) 手算时，最容易出什么错？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">最容易<b>只追踪 x</b>而忘了 y 也在变！<br>
-        正确做法：在纸上<b>同时</b>写 (x, y) 两个值</div>
-      </details>
+    <div class="flashcard" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C05 · 概念</div>
+          <div class="fc-q">双变量递归 f(x, y) 手算时，最容易出什么错？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C05</div>
+          <div class="fc-q" style="color:#047857;">最容易<b>只追踪 x</b>而忘了 y 也在变！<br>正确做法：在纸上<b>同时</b>写 (x, y) 两个值</div>
+        </div>
+      </div>
     </div>
 
     <p style="text-align:center; color:var(--muted); font-size:14px; margin-top:24px;">

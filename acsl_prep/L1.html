@@ -747,7 +747,103 @@ So 1011₂ = <b>11₁₀</b></code></pre>
         4. 10110101₂ = <b>181</b><br>
         5. 128 = <b>10000000₂</b>
       </p>
+      <p style="font-size:13px; line-height:1.7; margin-top:8px; color:var(--amber-deep);">
+        → 详细计算过程见下一页
+      </p>
     </div>
+  </div>
+</section>
+
+<!-- 09.5 · 实战 1 详解：完整计算过程 -->
+<section class="slide wide compact">
+  <div class="head">
+    <div class="kicker">实战 1 详解 · Practice 1 Walkthrough</div>
+    <h2>5 道题 · <span class="highlight">完整计算过程</span></h2>
+    <p class="subtitle">每一步都展示除 2 取余 / 按权展开 · 看清楚怎么算的</p>
+  </div>
+  <div class="grid2" style="margin-top:14px;">
+
+    <div class="card">
+      <h3 style="color:var(--purple);">题 1 · 42₁₀ → binary</h3>
+      <pre style="font-size:14px;"><code><b>方法：除 2 取余，余数倒读</b>
+
+42 ÷ 2 = 21 ... <b>0</b>   ↑
+21 ÷ 2 = 10 ... <b>1</b>   │
+10 ÷ 2 =  5 ... <b>0</b>   │
+ 5 ÷ 2 =  2 ... <b>1</b>   │
+ 2 ÷ 2 =  1 ... <b>0</b>   │
+ 1 ÷ 2 =  0 ... <b>1</b>   ← bottom
+
+∴ 42₁₀ = <b>101010₂</b>  ✓</code></pre>
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--purple);">题 2 · 200₁₀ → binary</h3>
+      <pre style="font-size:14px;"><code><b>方法：除 2 取余，余数倒读</b>
+
+200 ÷ 2 = 100 ... <b>0</b>   ↑
+100 ÷ 2 =  50 ... <b>0</b>   │
+ 50 ÷ 2 =  25 ... <b>0</b>   │
+ 25 ÷ 2 =  12 ... <b>1</b>   │
+ 12 ÷ 2 =   6 ... <b>0</b>   │
+  6 ÷ 2 =   3 ... <b>0</b>   │
+  3 ÷ 2 =   1 ... <b>1</b>   │
+  1 ÷ 2 =   0 ... <b>1</b>   ← bottom
+
+∴ 200₁₀ = <b>11001000₂</b>  ✓</code></pre>
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--purple);">题 3 · 11111111₂ → decimal</h3>
+      <pre style="font-size:14px;"><code><b>方法：按权展开，每位 × 2ⁿ</b>
+
+position: <b>7</b> <b>6</b> <b>5</b> <b>4</b> <b>3</b> <b>2</b> <b>1</b> <b>0</b>
+digit:     1   1   1   1   1   1   1   1
+weight:  128  64  32  16   8   4   2   1
+
+128 + 64 + 32 + 16 + 8 + 4 + 2 + 1
+= 255  ✓</code></pre>
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--purple);">题 4 · 10110101₂ → decimal</h3>
+      <pre style="font-size:14px;"><code><b>方法：按权展开，每位 × 2ⁿ</b>
+
+position: <b>7</b> <b>6</b> <b>5</b> <b>4</b> <b>3</b> <b>2</b> <b>1</b> <b>0</b>
+digit:     1   0   1   1   0   1   0   1
+weight:  128   0  32  16   0   4   0   1
+
+128 + 0 + 32 + 16 + 0 + 4 + 0 + 1
+= <b>181</b>  ✓</code></pre>
+    </div>
+
+    <div class="card">
+      <h3 style="color:var(--purple);">题 5 · 128₁₀ → binary</h3>
+      <pre style="font-size:14px;"><code><b>方法：除 2 取余，余数倒读</b>
+
+128 ÷ 2 = 64 ... <b>0</b>   ↑
+ 64 ÷ 2 = 32 ... <b>0</b>   │
+ 32 ÷ 2 = 16 ... <b>0</b>   │
+ 16 ÷ 2 =  8 ... <b>0</b>   │
+  8 ÷ 2 =  4 ... <b>0</b>   │
+  4 ÷ 2 =  2 ... <b>0</b>   │
+  2 ÷ 2 =  1 ... <b>0</b>   │
+  1 ÷ 2 =  0 ... <b>1</b>   ← bottom
+
+∴ 128₁₀ = <b>10000000₂</b>  ✓
+<b>tip：</b>128 = 2⁷，所以是 1 后面 7 个 0</code></pre>
+    </div>
+
+    <div class="card" style="background:rgba(22,163,74,.06); border-color:rgba(22,163,74,.3);">
+      <h3 style="color:var(--green-deep);">💡 套路总结</h3>
+      <p style="font-size:14px; line-height:1.7; color:var(--text);">
+        · <b>十转二</b>：除 2 取余，余数<b>从下往上读</b><br>
+        · <b>二转十</b>：每位 × 2 的位次方，<b>全部加起来</b><br>
+        · <b>技巧</b>：2ⁿ = 1 后面 n 个 0（如 2⁷ = 128 = 10000000）<br>
+        · <b>练习量</b>：要做到 0-255 任意十进制 ↔ 二进制都能 30 秒内口算
+      </p>
+    </div>
+
   </div>
 </section>
 

@@ -1196,11 +1196,31 @@ f(9) = 8 + 2 = <b>10</b></pre>
     </div>
     <div class="card" style="margin-top:12px; border-left:4px solid var(--green);">
       <h3 style="color:var(--green);">🌳 调用树手绘 · 3 道</h3>
-      <ul style="font-size:15px; line-height:1.7; padding-left:20px;">
-        <li>fact(6) 调用树</li>
-        <li>hanoi(3) 调用树</li>
-        <li>f(x,y) = f(x-y, y-1) + 2 调用树</li>
-      </ul>
+      <p style="font-size:14px; color:var(--muted); margin:6px 0 10px;">每道题先看递归定义，再画调用树，最后回填求值</p>
+
+      <div style="margin-bottom:14px; padding:10px 14px; background:rgba(124,58,237,.06); border-radius:8px;">
+        <div style="font-weight:800; color:var(--purple-deep); margin-bottom:4px;">题 1 · fact(6) 调用树</div>
+        <code class="inline" style="font-size:13px; display:block; line-height:1.7;">
+          fact(0) = 1<br>
+          fact(n) = n × fact(n-1)   (n ≥ 1)
+        </code>
+      </div>
+
+      <div style="margin-bottom:14px; padding:10px 14px; background:rgba(124,58,237,.06); border-radius:8px;">
+        <div style="font-weight:800; color:var(--purple-deep); margin-bottom:4px;">题 2 · hanoi(3) 调用树</div>
+        <code class="inline" style="font-size:13px; display:block; line-height:1.7;">
+          hanoi(1) = 1<br>
+          hanoi(n) = 2 × hanoi(n-1) + 1   (n ≥ 2)
+        </code>
+      </div>
+
+      <div style="margin-bottom:14px; padding:10px 14px; background:rgba(124,58,237,.06); border-radius:8px;">
+        <div style="font-weight:800; color:var(--purple-deep); margin-bottom:4px;">题 3 · fib(6) 调用树（斐波那契数列）</div>
+        <code class="inline" style="font-size:13px; display:block; line-height:1.7;">
+          fib(0) = 0,  fib(1) = 1<br>
+          fib(n) = fib(n-1) + fib(n-2)   (n ≥ 2)
+        </code>
+      </div>
     </div>
   </div>
 </section>
