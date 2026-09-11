@@ -521,7 +521,7 @@ pre .num, code .num { display: inline; min-width: 0; height: auto; background: n
       <h3 style="color:var(--blue);">阶段 3 · 11.9-12.13</h3>
       <p style="font-size:14px; line-height:1.7; color:var(--muted);">
         L8-L9 第一轮冲刺<br>
-        <b>L10</b> 第一轮考试 12.13（14:00-16:40 共 160 min）<br>
+        <b>L10</b> 第一轮考试 12.13<br>
         L11 第三轮准备
       </p>
     </div>
@@ -1181,11 +1181,11 @@ f(9) = 8 + 2 = <b>10</b></pre>
     <div class="card" style="border-left:4px solid var(--purple);">
       <h3 style="color:var(--purple);">🖥️ OJ 递归编程 · 3 道</h3>
       <ul style="font-size:15px; line-height:1.7; padding-left:20px;">
-        <li><b>1114</b> 上台阶 · ★ · 雏鸟班 f(n) = f(n-1) + f(n-2)（斐波那契入门）</li>
-        <li><b>1115</b> 上台阶 - 鹦鹉班 · ★★ · 三项递推 f(n) = f(n-1) + f(n-2) + f(n-3)</li>
-        <li><b>1121</b> 涂色游戏 · ★★★ · DFS 递归 + 连通区域填色</li>
+        <li>1110 分解质因数 · ★★</li>
+        <li>1114 上台阶 · ★★</li>
+        <li>618 汉诺塔 · ★★★</li>
       </ul>
-      <p style="font-size:13px; color:var(--muted); margin-top:6px;">OJ 上 <span class="highlight">禁用 AI</span>，自己写自己调试 · 3 道题难度递增</p>
+      <p style="font-size:13px; color:var(--muted); margin-top:6px;">OJ 上 <span class="highlight">禁用 AI</span>，自己写自己调试</p>
     </div>
     <div class="card" style="margin-top:12px; border-left:4px solid var(--amber);">
       <h3 style="color:var(--amber);">📝 ACSL Wiki 递归题 · 5 道</h3>
@@ -1196,21 +1196,31 @@ f(9) = 8 + 2 = <b>10</b></pre>
     </div>
     <div class="card" style="margin-top:12px; border-left:4px solid var(--green);">
       <h3 style="color:var(--green);">🌳 调用树手绘 · 3 道</h3>
-      <p style="font-size:13px; color:var(--muted); margin-top:-4px;">每题先看递归定义，再画调用树，最后回填求值</p>
-      <ol style="font-size:14px; line-height:1.7; padding-left:20px;">
-        <li>
-          <b>fact(6) 调用树</b><br>
-          <code style="font-size:13px;">fact(n) = n × fact(n-1)  (n &gt; 1)，fact(1) = 1</code>
-        </li>
-        <li>
-          <b>hanoi(3) 调用树</b><br>
-          <code style="font-size:13px;">hanoi(n) = 2 × hanoi(n-1) + 1  (n &gt; 1)，hanoi(1) = 1</code>
-        </li>
-        <li>
-          <b>fib(6) 调用树（斐波那契数列）</b><br>
-          <code style="font-size:13px;">fib(n) = fib(n-1) + fib(n-2)  (n &gt; 2)，fib(1) = 1, fib(2) = 1</code>
-        </li>
-      </ol>
+      <p style="font-size:14px; color:var(--muted); margin:6px 0 10px;">每道题先看递归定义，再画调用树，最后回填求值</p>
+
+      <div style="margin-bottom:14px; padding:10px 14px; background:rgba(124,58,237,.06); border-radius:8px;">
+        <div style="font-weight:800; color:var(--purple-deep); margin-bottom:4px;">题 1 · fact(6) 调用树</div>
+        <code class="inline" style="font-size:13px; display:block; line-height:1.7;">
+          fact(0) = 1<br>
+          fact(n) = n × fact(n-1)   (n ≥ 1)
+        </code>
+      </div>
+
+      <div style="margin-bottom:14px; padding:10px 14px; background:rgba(124,58,237,.06); border-radius:8px;">
+        <div style="font-weight:800; color:var(--purple-deep); margin-bottom:4px;">题 2 · hanoi(3) 调用树</div>
+        <code class="inline" style="font-size:13px; display:block; line-height:1.7;">
+          hanoi(1) = 1<br>
+          hanoi(n) = 2 × hanoi(n-1) + 1   (n ≥ 2)
+        </code>
+      </div>
+
+      <div style="margin-bottom:14px; padding:10px 14px; background:rgba(124,58,237,.06); border-radius:8px;">
+        <div style="font-weight:800; color:var(--purple-deep); margin-bottom:4px;">题 3 · fib(6) 调用树（斐波那契数列）</div>
+        <code class="inline" style="font-size:13px; display:block; line-height:1.7;">
+          fib(0) = 0,  fib(1) = 1<br>
+          fib(n) = fib(n-1) + fib(n-2)   (n ≥ 2)
+        </code>
+      </div>
     </div>
   </div>
 </section>

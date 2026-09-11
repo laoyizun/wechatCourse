@@ -253,13 +253,151 @@ details.hw-flip .hw-body p {
   line-height: 1.7;
 }
 
-/* ===== 闪卡 ===== */
+/* ===== 闪卡筛选标签 ===== */
+.fc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+.fc-tab {
+  display: inline-flex; align-items: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid rgba(124, 58, 237, .22);
+  color: var(--purple-deep);
+  font-size: 14px; font-weight: 800;
+  cursor: pointer;
+  transition: all .15s ease;
+  font-family: inherit;
+}
+.fc-tab:hover { background: rgba(124, 58, 237, .08); }
+.fc-tab.active {
+  background: linear-gradient(135deg, rgba(124, 58, 237, .12), rgba(217, 119, 6, .12));
+  color: var(--purple-deep);
+  border-color: rgba(124, 58, 237, .5);
+  box-shadow: 0 2px 6px rgba(124, 58, 237, .15);
+}
+.fc-tab .count {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(124, 58, 237, .12);
+  color: var(--purple-deep);
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+
+/* ===== 闪卡网格 ===== */
+.flashcard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+@media (max-width: 900px) {
+  .flashcard-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .flashcard-grid { grid-template-columns: 1fr; }
+}
+
+/* ===== 闪卡 · 3D 翻牌 ===== */
 .flashcard {
-  padding: 16px 20px;
+  position: relative;
+  perspective: 1200px;
+  margin-bottom: 0;
+  min-height: 220px;
+  cursor: pointer;
+}
+.flashcard.hidden { display: none; }
+.flashcard .fc-inner {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transition: transform .6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.flashcard.flipped .fc-inner {
+  transform: rotateY(180deg);
+}
+.flashcard .fc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  padding: 14px 18px;
   background: linear-gradient(135deg, rgba(124, 58, 237, .04), rgba(217, 119, 6, .04));
   border: 1px solid rgba(124, 58, 237, .22);
   border-radius: 12px;
-  margin-bottom: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .04);
+  transition: box-shadow .2s ease;
+  display: flex;
+  flex-direction: column;
+}
+.flashcard:hover .fc-face {
+  box-shadow: 0 18px 40px rgba(124, 58, 237, .18);
+}
+.flashcard .fc-front {
+  justify-content: flex-start;
+}
+.flashcard .fc-back {
+  justify-content: flex-start;
+}
+/* 知识讲解区 · 卡片内部可滚动 */
+.flashcard .fc-explain {
+  margin-top: 6px;
+  padding: 10px 12px;
+  background: rgba(22, 163, 74, .08);
+  border-left: 3px solid #16a34a;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+  font-family: "PingFang SC", "HarmonyOS Sans", Inter, sans-serif;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(22, 163, 74, .4) transparent;
+}
+.flashcard .fc-explain::-webkit-scrollbar { width: 5px; }
+.flashcard .fc-explain::-webkit-scrollbar-thumb {
+  background: rgba(22, 163, 74, .35);
+  border-radius: 3px;
+}
+.flashcard .fc-explain b { color: var(--green-deep); }
+.flashcard .fc-explain code {
+  background: rgba(124, 58, 237, .1);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--purple-deep);
+  font-weight: 700;
+}
+.flashcard .fc-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, rgba(22, 163, 74, .08), rgba(124, 58, 237, .04));
+  border-color: rgba(22, 163, 74, .35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flashcard .fc-flip-hint {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  font-size: 12px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, .85);
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-weight: 600;
+  z-index: 5;
+}
+.flashcard.flipped .fc-flip-hint {
+  display: none;
 }
 .flashcard .fc-tag {
   display: inline-block;
@@ -339,7 +477,7 @@ code.inline {
   <!-- ===== Tab 1: 课程目录 ===== -->
   <div class="tab-content active" id="tab-lessons">
     <h2 class="section-title">📘 课程目录</h2>
-    <p class="section-sub">点击进入单节课 · L1 已开放，其余 L2-L18 待备课中</p>
+    <p class="section-sub">点击进入单节课 · L1-L2 已开放，其余 L3-L18 待备课中</p>
 
     <div class="lesson-grid">
 
@@ -355,17 +493,17 @@ code.inline {
         </div>
       </a>
 
-      <!-- L2 · 备课中 -->
-      <div class="lesson-card disabled">
+      <!-- L2 · 已开放 -->
+      <a class="lesson-card" href="L2.html">
         <div class="lesson-num">L2</div>
         <h3>递归函数</h3>
-        <p>递归概念 · 调用树 · 手算递归值 · 调用次数</p>
+        <p>递归概念 · 调用树 · 手算递归值 · 4 个 ACSL Wiki 真题</p>
         <div class="lesson-meta">
           <span class="meta-chip purple">9.14 - 9.20</span>
           <span class="meta-chip amber">第一轮</span>
-          <span class="meta-chip gray">备课中</span>
+          <span class="meta-chip green">已开放 · 22 页</span>
         </div>
-      </div>
+      </a>
 
       <!-- L3 · 备课中 -->
       <div class="lesson-card disabled">
@@ -407,7 +545,7 @@ code.inline {
       <div class="lesson-card disabled">
         <div class="lesson-num">L10-13</div>
         <h3>真题冲刺 + 第一轮正式</h3>
-        <p>高频错题 · 易错点专题 · 12.13 正式考试</p>
+        <p>高频错题 · 易错点专题 · 12.13（周日 14:00-16:40 共 160 min）正式考试</p>
         <div class="lesson-meta">
           <span class="meta-chip purple">11.9 - 12.13</span>
           <span class="meta-chip amber">第一轮考试</span>
@@ -476,8 +614,44 @@ code.inline {
       </div>
     </details>
 
+    <details class="hw-flip" open>
+      <summary>L2 · 递归函数</summary>
+      <div class="hw-body">
+        <p style="color:var(--muted); font-size:14px;">截止日期：下节课前完成（每周 1 节课）</p>
+
+        <h4>🖥️ OJ 递归编程 · 3 道</h4>
+        <ul>
+          <li><code class="inline">1114</code> 上台阶 · ★ · 雏鸟班 f(n)=f(n-1)+f(n-2)（斐波那契入门）</li>
+          <li><code class="inline">1115</code> 上台阶 - 鹦鹉班 · ★★ · 三项递推 f(n)=f(n-1)+f(n-2)+f(n-3)</li>
+          <li><code class="inline">1121</code> 涂色游戏 · ★★★ · DFS 递归 + 连通区域填色</li>
+        </ul>
+        <p style="margin-top:8px;"><b>要求</b>：课堂禁 AI · 课后可用 AI 检查但不能 AI 生成 · 难度递增</p>
+
+        <h4>📚 ACSL Wiki 递归题 · 5 道</h4>
+        <p>在 <a href="http://www.categories.acsl.org/wiki/index.php?title=Recursive_Functions" target="_blank">ACSL Wiki · Recursive Functions</a> 做 <b>5 道</b>样题</p>
+        <p style="font-size:13px; color:var(--muted);">重点：手算递归值 · 画调用树 · 多分支陷阱</p>
+
+        <h4>🌳 调用树手绘练习 · 3 道</h4>
+        <p style="font-size:13px; color:var(--muted);">每题先看递归定义，再画调用树，最后回填求值</p>
+        <ol style="font-size:13px; line-height:1.7; padding-left:24px;">
+          <li>
+            <b>fact(6) 调用树</b><br>
+            <code class="inline" style="font-size:12px;">fact(n) = n × fact(n-1) (n&gt;1)，fact(1) = 1</code>
+          </li>
+          <li>
+            <b>hanoi(3) 调用树</b><br>
+            <code class="inline" style="font-size:12px;">hanoi(n) = 2 × hanoi(n-1) + 1 (n&gt;1)，hanoi(1) = 1</code>
+          </li>
+          <li>
+            <b>fib(6) 调用树（斐波那契数列）</b><br>
+            <code class="inline" style="font-size:12px;">fib(n) = fib(n-1) + fib(n-2) (n&gt;2)，fib(1) = 1, fib(2) = 1</code>
+          </li>
+        </ol>
+      </div>
+    </details>
+
     <details class="hw-flip">
-      <summary>L2-L18 · 后续作业</summary>
+      <summary>L3-L18 · 后续作业</summary>
       <div class="hw-body">
         <p style="color:var(--muted);">每周作业将在对应 PPT 的"课后作业"页发布。</p>
         <p>每周固定结构：</p>
@@ -493,55 +667,225 @@ code.inline {
   <!-- ===== Tab 3: 记忆卡片 ===== -->
   <div class="tab-content" id="tab-flashcards">
     <h2 class="section-title">📇 记忆卡片</h2>
-    <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1 已开放</p>
+    <p class="section-sub">正面题目、反面答案 · 点击卡片可翻转 · L1-L2 已开放</p>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C01 · 概念</div>
-      <div class="fc-q">二进制中，从右往左每位权重是 2 的几次方？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
-      </details>
+    <div class="fc-tabs">
+      <button class="fc-tab active" data-filter="all">全部 <span class="count">10</span></button>
+      <button class="fc-tab" data-filter="L1">L1 进制 <span class="count">5</span></button>
+      <button class="fc-tab" data-filter="L2">L2 递归 <span class="count">5</span></button>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C02 · 概念</div>
-      <div class="fc-q">十六进制的 16 个符号是哪些？A、B、C 分别等于十进制的多少？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
-      </details>
+    <div class="flashcard-grid">
+
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C01 · 概念</div>
+          <div class="fc-q">二进制中，从右往左每位权重是 2 的几次方？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C01</div>
+          <div class="fc-q" style="color:#047857;">2⁰, 2¹, 2², 2³, ..., 2ⁿ<br>最右边那位权重是 2⁰ = 1</div>
+          <div class="fc-explain"><b>位权（Place Value）</b>就是每一位代表的数值大小。<br>
+· 从右往左数：第 1 位权重 <code>2⁰=1</code>，第 2 位 <code>2¹=2</code>，第 3 位 <code>2²=4</code>……<br>
+· 第 <code>n</code> 位权重 = <code>2ⁿ⁻¹</code>（从右数起）<br>
+· 例：<code>1011₂</code> = 1×8 + 0×4 + 1×2 + 1×1 = <b>11</b><br>
+· <b>口诀</b>：从右往左，权重依次是 1、2、4、8、16、32……</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C03 · 概念</div>
-      <div class="fc-q">求负数补码的 3 个步骤是什么？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
-      </details>
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C02 · 概念</div>
+          <div class="fc-q">十六进制的 16 个符号是哪些？A、B、C 分别等于十进制的多少？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C02</div>
+          <div class="fc-q" style="color:#047857;">0-9, A, B, C, D, E, F<br>A=10, B=11, C=12, D=13, E=14, F=15</div>
+          <div class="fc-explain"><b>十六进制（Hexadecimal）</b>用 16 个符号表示一个数。<br>
+· 数字 0-9 表示 0-9，字母 A-F 表示 10-15<br>
+· <code>A=10, B=11, C=12, D=13, E=14, F=15</code><br>
+· 1 位十六进制 = 4 位二进制，所以常用作二进制缩写<br>
+· 例：<code>2A₁₆</code> = 2×16 + 10 = <b>42</b><br>
+· <b>记忆</b>：F 是 15 = 二进制 <code>1111</code>（全 1），所以 F + 1 = 16 = 进位</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C04 · 概念</div>
-      <div class="fc-q">二进制加法 1 + 1 = ？逢 2 进 1 怎么理解？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
-      </details>
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C03 · 概念</div>
+          <div class="fc-q">求负数补码的 3 个步骤是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C03</div>
+          <div class="fc-q" style="color:#047857;">1. 写出正数的二进制<br>2. 取反（0 变 1，1 变 0）<br>3. 加 1</div>
+          <div class="fc-explain"><b>补码（Two's Complement）</b>是计算机表示负数的方法。<br>
+· <b>步骤</b>：正数二进制 → 全部位取反（0↔1）→ 加 1<br>
+· 例：求 <code>-5</code>：+5 = <code>0000 0101</code> → 取反 <code>1111 1010</code> → 加 1 = <code>1111 1011</code><br>
+· <b>为什么</b>：补码让加法器可以无差别处理正负数，且 <code>0</code> 只有一种表示<br>
+· <b>8 位补码范围</b>：<code>-128 ~ +127</code>（公式 <code>-2ⁿ⁻¹ ~ 2ⁿ⁻¹-1</code>）</div>
+        </div>
+      </div>
     </div>
 
-    <div class="flashcard">
-      <div class="fc-tag">L1-C05 · 概念</div>
-      <div class="fc-q">二进制 ↔ 八进制、十六进制，每几位合成一位？十进制转二进制的关键是什么？</div>
-      <details>
-        <summary>看答案</summary>
-        <div class="fc-a">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
-      </details>
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C04 · 概念</div>
+          <div class="fc-q">二进制加法 1 + 1 = ？逢 2 进 1 怎么理解？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C04</div>
+          <div class="fc-q" style="color:#047857;">1 + 1 = 0，进位 1<br>"逢 2 进 1"：当某位结果达到 2 时，向左进 1 位</div>
+          <div class="fc-explain"><b>二进制加法</b>和十进制一样，只是"逢 2 进 1"。<br>
+· <b>单条规则</b>：<code>1 + 1 = 0</code>，并向左<b>进 1 位</b><br>
+· <code>1 + 1 + 1 = 11</code>（本位写 1，进位 1）<br>
+· <b>竖式加法</b>：从右往左逐位相加，处理好进位<br>
+· 例：<code>1011 + 1101</code> = <code>11000</code>（十进制 11 + 13 = 24）<br>
+· <b>口诀</b>：一位一位加，记下进位，往左传</div>
+        </div>
+      </div>
     </div>
+
+    <div class="flashcard" data-lesson="L1" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L1-C05 · 概念</div>
+          <div class="fc-q">二进制 ↔ 八进制、十六进制，每几位合成一位？十进制转二进制的关键是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L1-C05</div>
+          <div class="fc-q" style="color:#047857;">· 二进制 ↔ 八进制：每 <b>3 位</b>一组<br>· 二进制 ↔ 十六进制：每 <b>4 位</b>一组<br>· 十进制转二进制：除 2 取余，<b>余数倒读</b></div>
+          <div class="fc-explain"><b>进制转换的三大口诀</b>：<br>
+· <b>十进制 → 二进制</b>：除 2 取余，<b>余数倒着读</b>（13 → 1101）<br>
+· <b>二进制 → 十进制</b>：每位 × <code>2ⁿ</code>，全部相加<br>
+· <b>二进制 ↔ 八进制</b>：每 <b>3 位</b>一组（从右往左，不够补 0）<br>
+· <b>二进制 ↔ 十六进制</b>：每 <b>4 位</b>一组<br>
+· 例：<code>11010110₂</code> = <code>11 010 110</code> = <code>326₈</code><br>
+· <b>速算技巧</b>：记住 <code>2¹⁰ = 1024</code>，<code>2⁸ = 256</code>，<code>2⁴ = 16</code></div>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C01 · 概念</div>
+          <div class="fc-q">所有递归都必须包含的 3 个要素是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C01</div>
+          <div class="fc-q" style="color:#047857;">1. <b>终止条件</b> Base case：什么时候停<br>2. <b>自己调自己</b> Self-call：函数调自己<br>3. <b>规模缩小</b> Shrinking：参数趋近 base case</div>
+          <div class="fc-explain"><b>递归（Recursion）</b>三要素缺一不可：<br>
+· <b>基例 / Base case</b>：递归的"出口"，告诉函数什么时候停止调用自己<br>
+· <b>递归调用 / Recursive call</b>：函数内部调用自己<br>
+· <b>参数缩小 / Shrinking</b>：每次递归调用参数都比上次更接近基例<br>
+· 例：<code>fact(0)=1</code> 是基例；<code>fact(n)=n×fact(n-1)</code> 是递归调用 + 参数缩小<br>
+· <b>缺基例 = 死循环</b>，最终栈溢出（Stack Overflow）</div>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C02 · 概念</div>
+          <div class="fc-q">手算递归的两阶段流程是什么？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C02</div>
+          <div class="fc-q" style="color:#047857;"><b>先向下追到底</b>（不计算值，只写递归调用）<br>→ <b>再向上回填</b>（从 base case 一格格向上算）</div>
+          <div class="fc-explain"><b>手算递归的标准流程</b>（两阶段）：<br>
+· <b>第一阶段 · 向下追到底</b>：从 <code>f(n)</code> 开始，不断展开 <code>f(n-1)</code>、<code>f(n-2)</code>... 直到碰到基例<br>
+· <b>第二阶段 · 向上回填</b>：从基例的值开始，一格格向上算回去<br>
+· <b>不要混着算</b>：先完整画出调用树结构，再回填数值<br>
+· 例：<code>fact(3)</code> 先展开 → <code>3 × fact(2)</code> → <code>3 × 2 × fact(1)</code> → <code>3 × 2 × 1 × 1</code> = <b>6</b></div>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C03 · 概念</div>
+          <div class="fc-q">Base case 写错了会发生什么？写不出 base case 会怎样？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C03</div>
+          <div class="fc-q" style="color:#047857;">Base case <b>写错</b> → 永远进不去终止条件 = 死循环<br>Base case <b>缺失</b> → 同样死循环 / 栈溢出</div>
+          <div class="fc-explain"><b>Base case 写错 = 灾难</b>，两种常见情况：<br>
+· <b>条件写错</b>（如 <code>fib(1)=0</code> 写成 0 而不是 1）→ 后续所有值全错位<br>
+· <b>Base case 缺失</b>（忘了写终止条件）→ 无限递归 → 栈溢出<br>
+· <b>预防方法</b>：写完递归函数后，先口算 <code>f(0)</code> 和 <code>f(1)</code>，对得上再往下算<br>
+· <b>调试技巧</b>：在递归调用前 <code>print(n)</code> 看实际执行顺序</div>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C04 · 概念</div>
+          <div class="fc-q">调用树有哪 3 个部分？画调用树有什么用？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C04</div>
+          <div class="fc-q" style="color:#047857;"><b>根</b> = 最上层调用 · <b>叶</b> = base case · <b>分支</b> = 递归调用<br>画调用树 = 看清楚结构 + 避免漏算 + 加快速度</div>
+          <div class="fc-explain"><b>调用树（Call Tree）</b>是把递归展开成树状图。<br>
+· <b>根（Root）</b>：最上层的初始调用，如 <code>f(5)</code><br>
+· <b>叶（Leaves）</b>：所有到达基例的节点<br>
+· <b>分支（Branches）</b>：中间的递归调用<br>
+· <b>画调用树的作用</b>：<br>
+&nbsp;&nbsp;1. 看清楚递归结构（几层？几路？）<br>
+&nbsp;&nbsp;2. 避免漏算（Fibonacci 重叠子问题）<br>
+&nbsp;&nbsp;3. 加快速度（一眼看出哪里是重复计算）</div>
+        
+        </div>
+      </div>
+    </div>
+
+    <div class="flashcard" data-lesson="L2" onclick="this.classList.toggle('flipped')">
+      <span class="fc-flip-hint">点击翻面 ↻</span>
+      <div class="fc-inner">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">L2-C05 · 概念</div>
+          <div class="fc-q">双变量递归 f(x, y) 手算时，最容易出什么错？</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" style="background:rgba(22,163,74,.12); color:#047857;">答案 · L2-C05</div>
+          <div class="fc-q" style="color:#047857;">最容易<b>只追踪 x</b>而忘了 y 也在变！<br>正确做法：在纸上<b>同时</b>写 (x, y) 两个值</div>
+          <div class="fc-explain"><b>双变量递归 f(x, y)</b> 是 ACSL 常见题型。<br>
+· <b>最易错点</b>：只追踪 x 变化，忘了 y 也在变！<br>
+· <b>正确做法</b>：在纸上<b>同时</b>写 (x, y) 两个值，例如 <code>(7, 3) → (6, 2) → ...</code><br>
+· 例：<code>f(x,y) = f(x-1, y) + f(x, y-1)</code>（路径计数）<br>
+· <b>画调用树技巧</b>：每个节点标 <code>(x, y)</code> 两个值<br>
+· <b>练习</b>：ACSL Wiki "Two Variables" 类题目</div>
+        
+        </div>
+      </div>
+    </div>
+
+    </div><!-- /flashcard-grid -->
 
     <p style="text-align:center; color:var(--muted); font-size:14px; margin-top:24px;">
-      💡 L2-L18 的记忆卡片将在对应课程完成后开放
+      💡 L3-L18 的记忆卡片将在对应课程完成后开放
     </p>
   </div>
 
@@ -560,6 +904,22 @@ code.inline {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById('tab-' + target).classList.add('active');
+    });
+  });
+
+  // 闪卡按课程筛选
+  document.querySelectorAll('.fc-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.fc-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.flashcard').forEach(card => {
+        if (filter === 'all' || card.dataset.lesson === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
     });
   });
 </script>
