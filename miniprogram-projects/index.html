@@ -1067,6 +1067,373 @@
             height: 24px;
             color: #667eea;
         }
+        /* ============ 左侧固定视窗(目标/要求 + TodoList) ============ */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            left: 16px;
+            bottom: 24px;
+            z-index: 200;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar-toggle:active { transform: scale(0.95); }
+        .goal-sidebar {
+            position: sticky;
+            top: 88px;
+            width: 340px;
+            min-width: 340px;
+            max-height: calc(100vh - 120px);
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            overflow: hidden;
+        }
+        .goal-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .goal-sidebar-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .goal-sidebar-title .badge {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .goal-sidebar-title .badge.intro { background: var(--intro); }
+        .goal-sidebar-title .badge.tool { background: var(--tool); }
+        .goal-sidebar-title .badge.social { background: var(--social); }
+        .goal-sidebar-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+        .goal-sidebar-close {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 8px;
+        }
+        .goal-sidebar-close:hover { background: var(--bg); }
+        .goal-progress {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+        .goal-progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .goal-progress-count {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .goal-progress-count .done { color: var(--intro); }
+        .goal-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .goal-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--intro), #34D399);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .goal-sidebar-body {
+            overflow-y: auto;
+            flex: 1;
+            margin: 0 -8px;
+            padding: 0 8px;
+            scrollbar-width: thin;
+        }
+        .goal-sidebar-body::-webkit-scrollbar { width: 4px; }
+        .goal-sidebar-body::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }
+        .goal-section {
+            margin-bottom: 16px;
+        }
+        .goal-section:last-child { margin-bottom: 0; }
+        .goal-section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .goal-section-title .icon { font-size: 1rem; }
+        .goal-question-list {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+        }
+        .goal-question-list-title {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        .goal-question-list ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .goal-question-list li {
+            font-size: 0.82rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+        .goal-todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .goal-todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--bg);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+        .goal-todo-item:hover { background: #E2E8F0; }
+        .goal-todo-item.done { background: #ECFDF5; }
+        .goal-todo-check {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 6px;
+            border: 2px solid #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+        .goal-todo-item:hover .goal-todo-check { border-color: var(--intro); }
+        .goal-todo-item.done .goal-todo-check {
+            background: var(--intro);
+            border-color: var(--intro);
+        }
+        .goal-todo-check svg {
+            width: 14px;
+            height: 14px;
+            color: white;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s ease;
+        }
+        .goal-todo-item.done .goal-todo-check svg { opacity: 1; transform: scale(1); }
+        .goal-todo-content { flex: 1; }
+        .goal-todo-label {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 2px;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        }
+        .goal-todo-text {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+        .goal-todo-item.done .goal-todo-text {
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            text-decoration-color: #94A3B8;
+            text-decoration-thickness: 1px;
+        }
+        .goal-prompt-tip {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.82rem;
+            color: #92400E;
+            line-height: 1.7;
+            margin-top: 6px;
+        }
+        .goal-prompt-tip .label {
+            font-weight: 700;
+            color: #78350F;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .goal-prompt-template {
+            background: white;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            color: #1E293B;
+            line-height: 1.9;
+            border: 1px dashed #FBBF24;
+            margin-bottom: 8px;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            word-break: break-word;
+        }
+        .goal-prompt-slot {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.22);
+            border-bottom: 1.5px dashed #D97706;
+            border-radius: 2px;
+            padding: 0 3px;
+            color: #78350F;
+            font-weight: 600;
+            margin: 0 1px;
+            cursor: help;
+            position: relative;
+            transition: background 0.15s;
+        }
+        .goal-prompt-slot:hover { background: rgba(251, 191, 36, 0.45); }
+        .goal-prompt-slot:hover::after {
+            content: attr(data-hint);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1E293B;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 400;
+            white-space: pre;
+            z-index: 10;
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        }
+        .goal-prompt-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .goal-prompt-copy {
+            background: #92400E;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+        .goal-prompt-copy:hover { background: #78350F; }
+        .goal-prompt-copy.copied { background: var(--intro); }
+        .goal-prompt-hint-text {
+            font-size: 0.72rem;
+            color: #92400E;
+            opacity: 0.85;
+            margin-left: auto;
+        }
+        .goal-reset-btn {
+            background: transparent;
+            border: 1px solid #E2E8F0;
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .goal-reset-btn:hover {
+            background: var(--bg);
+            border-color: #CBD5E1;
+            color: var(--text);
+        }
+        .projects-with-sidebar {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        .projects-with-sidebar .projects-main { flex: 1; min-width: 0; }
+        .projects-with-sidebar .projects-container { max-width: none; padding: 0; margin: 0; }
+        /* 移动端适配 */
+        @media (max-width: 960px) {
+            .projects-with-sidebar {
+                flex-direction: column;
+                padding: 24px 20px;
+            }
+            .goal-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+                max-height: 100vh;
+                border-radius: 0;
+                z-index: 300;
+                transform: translateY(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 20px;
+            }
+            .goal-sidebar.mobile-open { transform: translateY(0); }
+            .goal-sidebar-close { display: block; }
+            .sidebar-toggle { display: flex; }
+            .goal-sidebar-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.5);
+                z-index: 290;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease;
+            }
+            .goal-sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+        }
     </style>
 </head>
 <body>
@@ -1138,15 +1505,62 @@
             </h1>
         </div>
 
-        <div class="projects-container">
-            <div id="categoryIntro" class="category-intro intro">
-                <h3>介绍类项目简介</h3>
-                <p>这类项目适合作为入门练习，主要学习界面布局、图片展示、文字排版等基础技能。</p>
-            </div>
+        <div class="projects-with-sidebar">
+            <aside class="goal-sidebar" id="goalSidebar">
+                <div class="goal-sidebar-header">
+                    <div>
+                        <div class="goal-sidebar-title">
+                            <span class="badge" id="sidebarBadge"></span>
+                            <span id="sidebarTitleText">本类目标 & 要求</span>
+                        </div>
+                        <div class="goal-sidebar-subtitle" id="sidebarLearningGoal"></div>
+                    </div>
+                    <button class="goal-sidebar-close" id="sidebarClose" aria-label="关闭">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="goal-progress">
+                    <div class="goal-progress-row">
+                        <span>完成进度</span>
+                        <span class="goal-progress-count"><span class="done" id="goalDoneCount">0</span> / <span id="goalTotalCount">0</span></span>
+                    </div>
+                    <div class="goal-progress-bar">
+                        <div class="goal-progress-fill" id="goalProgressFill"></div>
+                    </div>
+                </div>
+                <div class="goal-sidebar-body" id="goalSidebarBody">
+                    <!-- 动态渲染:开始前思考的问题 / 基本目标 / 进阶目标 / Prompt 建议 -->
+                </div>
+                <button class="goal-reset-btn" id="goalResetBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9c-2.5 0-4.8 1-6.5 2.6L3 8"/><path d="M3 3v5h5"/>
+                    </svg>
+                    重置本类进度
+                </button>
+            </aside>
+            <div class="goal-sidebar-overlay" id="goalSidebarOverlay"></div>
 
-            <div id="projectList" class="project-list">
+            <div class="projects-main">
+                <div class="projects-container">
+                    <div id="categoryIntro" class="category-intro intro">
+                        <h3>介绍类项目简介</h3>
+                        <p>这类项目适合作为入门练习，主要学习界面布局、图片展示、文字排版等基础技能。</p>
+                    </div>
+
+                    <div id="projectList" class="project-list">
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- 移动端浮动按钮 -->
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="查看目标">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+        </button>
     </div>
 
     <script>
@@ -1321,6 +1735,7 @@
 
             document.getElementById('home').classList.remove('active');
             document.getElementById('projects').classList.add('active');
+            renderGoalSidebar(category);
         }
 
         function generatePreview(type, category) {
@@ -1682,6 +2097,297 @@
             document.getElementById('projects').classList.remove('active');
             document.getElementById('home').classList.add('active');
         }
+
+        /* ============ 左侧固定视窗:目标 / 要求 + TodoList ============ */
+        const goalData = {
+            intro: {
+                badge: 'intro',
+                learningGoal: '把"我想展示什么"翻译成清晰的产品需求,练习验收 AI 做出的页面。',
+                questions: [
+                    '给谁看?他们打开 3 秒内应该先看到什么?',
+                    '这个介绍页想让人记住的"那一点"是什么?(一句话能说清吗?)',
+                    '首页要分几个区块?每个区块放什么、各自承担什么信息?'
+                ],
+                basic: [
+                    { id: 'B1', text: '用一段话写清"谁 / 展示什么 / 想让人记住那一点",作为项目说明' },
+                    { id: 'B2', text: '画出首页的信息分区草稿,≥3 个区块,标注每个区块的内容' },
+                    { id: 'B3', text: '列出首页要展示的真实数据清单 ≥6 条(同学、景点、奖项等)' },
+                    { id: 'B4', text: '验收 AI 的产出,把 ≥3 处不满意的地方反馈给 AI,迭代到满意' },
+                    { id: 'B5', text: '详情页要有"返回首页"入口,且视觉风格与首页一致' }
+                ],
+                advanced: [
+                    { id: 'A1', text: '设计一个"故事感"的详情页:让点开的人愿意多停留 10 秒' },
+                    { id: 'A2', text: '统一配色 + 字体 + 留白节奏,让 5 个项目看起来"一家人"' },
+                    { id: 'A3', text: '设计一个"收藏"按钮,位置 / 颜色 / 动效都要有理由(30 字说明)' },
+                    { id: 'A4', text: '在导航栏颜色 / 标题上做品牌识别,让人一眼认出"这是你的项目"' }
+                ],
+                prompt: {
+                    template: '做一个《项目名》介绍页:配色 + 整体风格,顶部放 头部展示什么,中部 主体内容如何组织,底部 放什么信息。风格 你想要什么气质 (例:安静 / 活泼 / 治愈),不要什么,信息密度 密 / 中 / 稀,其它想让 AI 知道的事。',
+                    slots: [
+                        { key: '项目名', hint: '填你想做的项目,例:班级群像、家庭相册、学校介绍' },
+                        { key: '配色 + 整体风格', hint: '填 2-4 个视觉词,例:米白底 + 圆角卡片 / 雾蓝 + 极简线条' },
+                        { key: '头部展示什么', hint: '填最重要的那一眼信息,例:头像 + 姓名 / 大标题 + 一句话' },
+                        { key: '主体内容如何组织', hint: '填分块方式,例:按 5 个兴趣分组 / 按时间线 / 按主题' },
+                        { key: '放什么信息', hint: '填尾段功能,例:联系方式 / 行动按钮 / 引用金句' },
+                        { key: '气质', hint: '选一个形容词,决定整体观感' },
+                        { key: '不要什么', hint: '填 1-3 个明确禁区,例:不用 emoji / 不要深色模式 / 不要花哨背景' },
+                        { key: '信息密度', hint: '让 AI 知道页面留白节奏' },
+                        { key: '其它想让 AI 知道的事', hint: '可填,可空;例:目标用户是谁 / 必须出现的元素' }
+                    ]
+                }
+            },
+            tool: {
+                badge: 'tool',
+                learningGoal: '把"我的生活痛点"拆成 AI 能执行的产品需求,做出愿意每天打开的工具。',
+                questions: [
+                    '谁会在什么场景下用这个工具?他们想完成的"那一件事"是什么?',
+                    '这个工具如果只能保留 3 个功能,是哪 3 个?(忍住不做的功能更重要)',
+                    '用户第一次打开看到空屏幕时,应该被引导做什么?'
+                ],
+                basic: [
+                    { id: 'B1', text: '写一份用户故事:谁、什么场景、要完成什么(≤3 句话)' },
+                    { id: 'B2', text: '列出 3 条核心数据字段,写清每条字段长什么样、约束是什么' },
+                    { id: 'B3', text: '想清楚 3 个最关键操作:新增 / 完成 / 删除,每步在屏幕上如何呈现' },
+                    { id: 'B4', text: '自己当用户试用一遍,把 ≥2 处不顺手的地方反馈给 AI 改掉' },
+                    { id: 'B5', text: '关闭再打开,数据依然存在(这是工具类的基础信任)' }
+                ],
+                advanced: [
+                    { id: 'A1', text: '设计一个空状态文案:第一次打开时屏幕上写什么引导用户' },
+                    { id: 'A2', text: '给数据加搜索 / 分类筛选,并想清楚"为什么不加筛选就找不到"' },
+                    { id: 'A3', text: '设计统计视图(本周花了多少 / 完成率),让数字会"讲故事"' },
+                    { id: 'A4', text: '设计一个温和的提醒机制:什么时间提醒、提醒什么、怎么不烦' },
+                    { id: 'A5', text: '设计分享卡片:别人看到会不会想点开用?(写 30 字说明)' }
+                ],
+                prompt: {
+                    template: '做一个《工具名》:首页长什么样 (最核心 1-2 个元素),核心操作流程 (新增 → 完成 → 删除,每步在屏幕上如何呈现)。配色 主色 + 辅助色,组件风格 圆角卡片 / 极简线条 / 拟物 / 其它,只用文字还是要有图标,要不要深色模式,其它特殊要求。',
+                    slots: [
+                        { key: '工具名', hint: '填工具的名字,例:记账小本、TODO 待办、单词本' },
+                        { key: '首页核心元素', hint: '填最重要的一两个东西,例:当日账单列表 / 一行输入框 / 卡片网格' },
+                        { key: '核心操作流程', hint: '按顺序填:触发 → 输入 → 确认 → 完成 → 删除,每步在屏幕上长什么样' },
+                        { key: '配色', hint: '填 2-3 个色,例:米白 + 墨绿 / 雾蓝 + 暖橙' },
+                        { key: '组件风格', hint: '决定按钮 / 卡片 / 列表长什么样' },
+                        { key: '图标 vs 文字', hint: '让 AI 知道风格倾向,例:只用文字不靠图标 / 简单线性图标' },
+                        { key: '要不要深色模式', hint: '写要或不要,给明确指令' },
+                        { key: '其它特殊要求', hint: '可填,可空;例:必须能滑动操作 / 数据要持久化' }
+                    ]
+                }
+            },
+            social: {
+                badge: 'social',
+                learningGoal: '设计"好玩"的反馈机制,做出让人"想再玩一次"的小程序。',
+                questions: [
+                    '谁会玩这个?他们在什么心情、什么时间段玩?',
+                    '核心循环是几步?每一步玩家心里在期待什么?',
+                    '失败 / 卡关时,怎么让玩家不烦躁、想再来一次?'
+                ],
+                basic: [
+                    { id: 'B1', text: '用 3 句话说清楚玩法:谁玩、做什么动作、怎么算赢 / 完成' },
+                    { id: 'B2', text: '想清楚核心循环 ≥3 步(翻牌 → 配对 → 计分 → 结束)' },
+                    { id: 'B3', text: '列出 3 种反馈场景:成功 / 失败 / 鼓励,各对应一句文案 + 一个动效描述' },
+                    { id: 'B4', text: '试玩 3 次,把"卡在哪里、不想继续玩"的瞬间记下来反馈给 AI' },
+                    { id: 'B5', text: '关闭再打开,历史最高分 / 已收集列表依然在' }
+                ],
+                advanced: [
+                    { id: 'A1', text: '给核心动作加动画描述:翻牌 0.4 秒,右侧翻转 180 度,失败变灰 0.2 秒' },
+                    { id: 'A2', text: '设计难度切换:简单 / 普通 / 困难 分别改什么(步数 / 时间 / 提示)' },
+                    { id: 'A3', text: '设计一个可被分享的瞬间(破纪录 / 抽到稀有卡),让别人也想试' },
+                    { id: 'A4', text: '设计历史最高分 / 已收集的展示方式,让用户有"积累感"' },
+                    { id: 'A5', text: '加上震动 / 音效的时机说明:什么时候震、什么声、为什么这里需要' }
+                ],
+                prompt: {
+                    template: '做一个《游戏 / 互动名》:玩法一句话说清,核心循环几步 每步玩家做什么动作,3 种反馈 (成功 / 失败 / 鼓励 各一句文案 + 一个动效描述)。配色 主色 + 辅助色,整体节奏 快 / 中 / 慢,要不要加音效或震动,其它特殊要求。',
+                    slots: [
+                        { key: '游戏名', hint: '填游戏的名字,例:记忆翻牌、抽卡收集、宠物养成' },
+                        { key: '玩法一句话', hint: '用一句话说清:谁玩、做什么、怎么算赢' },
+                        { key: '核心循环几步', hint: '按顺序列每一步,例:翻牌 → 配对 → 计分 → 结束' },
+                        { key: '3 种反馈', hint: '每种各一句文案 + 一个动效描述;例:成功"配对了!"+ 卡片轻微放大' },
+                        { key: '配色', hint: '填 2-3 个色,例:暖米 + 雾蓝 / 糖果粉 + 薄荷绿' },
+                        { key: '整体节奏', hint: '决定动效速度和关卡递进,快节奏容易刺激、慢节奏容易治愈' },
+                        { key: '要不要加音效或震动', hint: '给明确指令,例:失败时轻震 0.1 秒 / 翻牌有清脆音效' },
+                        { key: '其它特殊要求', hint: '可填,可空;例:要有难度切换 / 要能分享给好友' }
+                    ]
+                }
+            }
+        };
+
+        const CHECK_KEY_PREFIX = 'mp-checklist-';
+        let currentCategory = null;
+
+        function loadChecklist(category) {
+            try {
+                const raw = localStorage.getItem(CHECK_KEY_PREFIX + category);
+                if (raw) return JSON.parse(raw);
+            } catch (e) { /* ignore */ }
+            const data = goalData[category];
+            const fresh = { basic: data.basic.map(() => false), advanced: data.advanced.map(() => false) };
+            saveChecklist(category, fresh);
+            return fresh;
+        }
+
+        function saveChecklist(category, state) {
+            try { localStorage.setItem(CHECK_KEY_PREFIX + category, JSON.stringify(state)); } catch (e) { /* ignore */ }
+        }
+
+        function renderGoalSidebar(category) {
+            currentCategory = category;
+            const data = goalData[category];
+            if (!data) return;
+            const state = loadChecklist(category);
+
+            document.getElementById('sidebarBadge').className = 'badge ' + data.badge;
+            document.getElementById('sidebarLearningGoal').textContent = data.learningGoal;
+
+            const body = document.getElementById('goalSidebarBody');
+            let html = '';
+
+            html += '<div class="goal-question-list">';
+            html += '<div class="goal-question-list-title">开始前思考的问题</div>';
+            html += '<ol>';
+            data.questions.forEach(q => { html += '<li>' + escapeHtml(q) + '</li>'; });
+            html += '</ol></div>';
+
+            html += '<div class="goal-section">';
+            html += '<div class="goal-section-title"><span class="icon">✅</span>基本目标 <span style="font-weight:400;color:var(--text-secondary);font-size:0.75rem;">(必做)</span></div>';
+            html += '<ul class="goal-todo-list" data-group="basic">';
+            data.basic.forEach((item, idx) => {
+                const done = state.basic[idx];
+                html += '<li class="goal-todo-item' + (done ? ' done' : '') + '" data-group="basic" data-idx="' + idx + '">';
+                html += '<div class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>';
+                html += '<div class="goal-todo-content"><div class="goal-todo-label">' + item.id + '</div><div class="goal-todo-text">' + escapeHtml(item.text) + '</div></div>';
+                html += '</li>';
+            });
+            html += '</ul></div>';
+
+            html += '<div class="goal-section">';
+            html += '<div class="goal-section-title"><span class="icon">🚀</span>进阶目标 <span style="font-weight:400;color:var(--text-secondary);font-size:0.75rem;">(选做)</span></div>';
+            html += '<ul class="goal-todo-list" data-group="advanced">';
+            data.advanced.forEach((item, idx) => {
+                const done = state.advanced[idx];
+                html += '<li class="goal-todo-item' + (done ? ' done' : '') + '" data-group="advanced" data-idx="' + idx + '">';
+                html += '<div class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>';
+                html += '<div class="goal-todo-content"><div class="goal-todo-label">' + item.id + '</div><div class="goal-todo-text">' + escapeHtml(item.text) + '</div></div>';
+                html += '</li>';
+            });
+            html += '</ul></div>';
+
+            html += renderPromptTemplate(data.prompt);
+
+            body.innerHTML = html;
+            updateProgress();
+            bindTodoClicks();
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+        }
+
+        function renderPromptTemplate(prompt) {
+            // 渲染挖空模板 + 复制按钮
+            // template 里每段 key 文本会被替换为带悬停提示的 span
+            let tpl = escapeHtml(prompt.template);
+            // 按 slot 在 template 中出现的字符串顺序逐个替换
+            prompt.slots.forEach(s => {
+                const placeholder = s.key;
+                const escapedPlaceholder = escapeHtml(placeholder);
+                const spanHtml = `<span class="goal-prompt-slot" data-hint="${escapeHtml(s.hint)}">${escapeHtml(s.key)}</span>`;
+                tpl = tpl.split(escapedPlaceholder).join(spanHtml);
+            });
+            // 复制时:保留原 key 文本(不带 span),方便学生直接粘贴后填
+            const copyText = prompt.template;
+            return `
+                <div class="goal-prompt-tip">
+                    <span class="label">💬 Prompt 建议(挖空模板 · 自己填)</span>
+                    <div class="goal-prompt-template">${tpl}</div>
+                    <div class="goal-prompt-actions">
+                        <button class="goal-prompt-copy" data-copy="${escapeHtml(copyText)}">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            复制模板(含挖空)
+                        </button>
+                        <span class="goal-prompt-hint-text">悬停淡黄处看填什么</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function copyPromptTemplate(btn) {
+            const text = btn.getAttribute('data-copy');
+            // 把 [xxx] 解码回原文,方便学生直接粘贴后填
+            const decoded = text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+            const fallback = () => {
+                const ta = document.createElement('textarea');
+                ta.value = decoded;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(ta);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(decoded).catch(fallback);
+            } else {
+                fallback();
+            }
+            btn.classList.add('copied');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 已复制';
+            setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1600);
+        }
+
+        function updateProgress() {
+            if (!currentCategory) return;
+            const state = loadChecklist(currentCategory);
+            const total = state.basic.length + state.advanced.length;
+            const done = state.basic.filter(Boolean).length + state.advanced.filter(Boolean).length;
+            document.getElementById('goalDoneCount').textContent = done;
+            document.getElementById('goalTotalCount').textContent = total;
+            const pct = total === 0 ? 0 : Math.round(done / total * 100);
+            document.getElementById('goalProgressFill').style.width = pct + '%';
+        }
+
+        function bindTodoClicks() {
+            document.querySelectorAll('.goal-todo-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const group = el.getAttribute('data-group');
+                    const idx = parseInt(el.getAttribute('data-idx'), 10);
+                    const state = loadChecklist(currentCategory);
+                    state[group][idx] = !state[group][idx];
+                    saveChecklist(currentCategory, state);
+                    el.classList.toggle('done', state[group][idx]);
+                    updateProgress();
+                });
+            });
+            // 复制模板按钮
+            document.querySelectorAll('.goal-prompt-copy').forEach(btn => {
+                btn.addEventListener('click', () => copyPromptTemplate(btn));
+            });
+        }
+
+        function resetChecklist() {
+            if (!currentCategory) return;
+            if (!confirm('确定要重置本类所有勾选进度吗?')) return;
+            const data = goalData[currentCategory];
+            const fresh = { basic: data.basic.map(() => false), advanced: data.advanced.map(() => false) };
+            saveChecklist(currentCategory, fresh);
+            renderGoalSidebar(currentCategory);
+        }
+
+        function toggleMobileSidebar(open) {
+            const sb = document.getElementById('goalSidebar');
+            const ov = document.getElementById('goalSidebarOverlay');
+            if (open) { sb.classList.add('mobile-open'); ov.classList.add('active'); }
+            else { sb.classList.remove('mobile-open'); ov.classList.remove('active'); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('goalResetBtn').addEventListener('click', resetChecklist);
+            document.getElementById('sidebarToggle').addEventListener('click', () => toggleMobileSidebar(true));
+            document.getElementById('sidebarClose').addEventListener('click', () => toggleMobileSidebar(false));
+            document.getElementById('goalSidebarOverlay').addEventListener('click', () => toggleMobileSidebar(false));
+        });
     </script>
 
 <style>
