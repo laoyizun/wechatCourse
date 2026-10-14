@@ -1285,106 +1285,180 @@
             text-decoration-color: #94A3B8;
             text-decoration-thickness: 1px;
         }
-        /* ============ 角色故事卡(顶部) ============ */
-        .goal-story {
+        /* ============ 角色故事区(主内容区顶部 · 可折叠 · 含配图位) ============ */
+        .story-block {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
             position: relative;
-            background: linear-gradient(135deg, #FFF7ED, #FEF3C7);
-            border-radius: 14px;
-            padding: 14px 14px 14px 16px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            box-shadow: inset 4px 0 0 var(--intro);
         }
-        .goal-story.intro { box-shadow: inset 4px 0 0 var(--intro); }
-        .goal-story.tool { box-shadow: inset 4px 0 0 var(--tool); }
-        .goal-story.social { box-shadow: inset 4px 0 0 var(--social); }
-        .goal-story-avatar {
-            width: 52px;
-            height: 52px;
-            min-width: 52px;
+        .story-block.intro { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), inset 4px 0 0 var(--intro); }
+        .story-block.tool { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), inset 4px 0 0 var(--tool); }
+        .story-block.social { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), inset 4px 0 0 var(--social); }
+        .story-block-toggle {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.85);
+            border: 1px solid #E2E8F0;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: all 0.2s;
+        }
+        .story-block-toggle:hover { background: white; color: var(--text); }
+        .story-block-toggle svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+        }
+        .story-block.collapsed .story-block-toggle svg { transform: rotate(180deg); }
+        .story-block-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 50px 16px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .story-block-avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: white;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
-        .goal-story.intro .goal-story-avatar { background: linear-gradient(135deg, #10B981, #34D399); }
-        .goal-story.tool .goal-story-avatar { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
-        .goal-story.social .goal-story-avatar { background: linear-gradient(135deg, #EC4899, #F472B6); }
-        .goal-story-content { flex: 1; min-width: 0; }
-        .goal-story-name {
-            font-size: 0.78rem;
-            color: #92400E;
+        .story-block.intro .story-block-avatar { background: linear-gradient(135deg, #10B981, #34D399); }
+        .story-block.tool .story-block-avatar { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+        .story-block.social .story-block-avatar { background: linear-gradient(135deg, #EC4899, #F472B6); }
+        .story-block-titles { flex: 1; min-width: 0; }
+        .story-block-tag {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
             font-weight: 600;
             margin-bottom: 2px;
+            letter-spacing: 0.3px;
         }
-        .goal-story-title {
-            font-size: 0.95rem;
+        .story-block-title {
+            font-size: 1.15rem;
             font-weight: 700;
-            color: #78350F;
-            margin-bottom: 6px;
+            color: var(--text);
         }
-        .goal-story-scene {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #422006;
-            margin-bottom: 8px;
+        .story-block-body {
+            padding: 0 20px 20px;
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 20px;
+            align-items: start;
         }
-        .goal-story-question {
-            font-size: 0.85rem;
+        .story-block.collapsed .story-block-body { display: none; }
+        .story-block-text { min-width: 0; }
+        .story-block-scene {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+        .story-block-question {
+            font-size: 0.95rem;
             line-height: 1.6;
             color: #B45309;
             font-style: italic;
-            font-weight: 500;
-            background: rgba(255,255,255,0.5);
-            border-radius: 8px;
-            padding: 6px 10px;
-            margin-bottom: 8px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
         }
-        .goal-story-answer {
-            background: rgba(255,255,255,0.6);
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: #78350F;
+        .story-block-answer {
+            background: var(--bg);
+            border-radius: 12px;
+            font-size: 0.88rem;
+            color: var(--text);
         }
-        .goal-story-answer summary {
+        .story-block-answer summary {
             cursor: pointer;
-            padding: 5px 10px;
+            padding: 8px 14px;
             font-weight: 600;
             user-select: none;
             list-style: none;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
+            color: var(--text);
         }
-        .goal-story-answer summary::-webkit-details-marker { display: none; }
-        .goal-story-answer summary::before {
+        .story-block-answer summary::-webkit-details-marker { display: none; }
+        .story-block-answer summary::before {
             content: '💡';
-            font-size: 0.85rem;
+            font-size: 1rem;
         }
-        .goal-story-answer[open] summary::before { content: '📖'; }
-        .goal-story-answer-body {
-            padding: 0 10px 8px;
-            line-height: 1.6;
+        .story-block-answer[open] summary::before { content: '📖'; }
+        .story-block-answer-body {
+            padding: 0 14px 12px;
+            line-height: 1.7;
         }
-        .goal-story-answer-body ul {
-            padding-left: 18px;
+        .story-block-answer-body ul {
+            padding-left: 20px;
             margin: 4px 0 0;
         }
-        .goal-story-answer-body li {
-            margin-bottom: 3px;
+        .story-block-answer-body li {
+            margin-bottom: 4px;
         }
-        .goal-story-empty {
+        .story-block-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 14px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F1F5F9, #E2E8F0);
+            border: 1.5px dashed #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
             font-size: 0.85rem;
-            color: #92400E;
-            opacity: 0.7;
+            text-align: center;
+            padding: 12px;
+        }
+        .story-block-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .story-block-image-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.75;
+        }
+        .story-block-image-hint .icon { font-size: 1.6rem; }
+        .story-block-empty {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
             font-style: italic;
             text-align: center;
-            padding: 4px 0;
+            padding: 20px;
+        }
+        @media (max-width: 720px) {
+            .story-block-body {
+                grid-template-columns: 1fr;
+            }
+            .story-block-image { order: -1; }
         }
         .goal-prompt-tip {
             background: linear-gradient(135deg, #FEF3C7, #FDE68A);
@@ -1645,6 +1719,10 @@
 
             <div class="projects-main">
                 <div class="projects-container">
+                    <div id="storyBlock" class="story-block">
+                        <!-- 故事区:由 renderStoryArea() 动态渲染 -->
+                    </div>
+
                     <div id="categoryIntro" class="category-intro intro">
                         <h3>介绍类项目简介</h3>
                         <p>这类项目适合作为入门练习，主要学习界面布局、图片展示、文字排版等基础技能。</p>
@@ -1836,6 +1914,7 @@
 
             document.getElementById('home').classList.remove('active');
             document.getElementById('projects').classList.add('active');
+            renderStoryArea(category);
             renderGoalSidebar(category);
         }
 
@@ -2207,6 +2286,7 @@
                     character: '小方',
                     avatarInitial: '方',
                     title: '小方的开学第一天',
+                    image: '',
                     scene: '开学第一天,班主任让大家轮流上讲台自我介绍。我站在讲台上,脑子里一片空白,说了句"我叫小方,今年 X 岁"就下来了。下课后,班里同学从我身边走过,没有人叫得出我的名字。我难过了一整天。',
                     question: '如果当时手里有一个"个人名片"小程序,第一眼想让别人记住你什么?',
                     answer: '<ul><li>名字 + 昵称 + 怎么称呼我</li><li>3 个关于我的有趣事实(爱好 / 怪癖 / 经历)</li><li>我的头像或代表色,让人一眼认出来</li><li>联系方式或班级,方便同学找我玩</li></ul>'
@@ -2251,6 +2331,7 @@
                     character: '小方',
                     avatarInitial: '方',
                     title: '小方要送妈妈生日礼物',
+                    image: '',
                     scene: '妈妈下个月生日,我想用自己的零花钱买礼物。但每次零花钱一到手,买了零食就忘了还剩多少。月底打开存钱罐一看——空的。妈妈的礼物一次都没存下来。我把这件事写在了日记里。',
                     question: '30 天内每天存一点,怎么才能真的存下来,又不会被"忘了还剩多少"打败?',
                     answer: '<ul><li>每天记录收入和支出(买了什么、花了多少)</li><li>看到"目标金额"还差多少,越接近越有动力</li><li>存钱罐画面随金额"长出来",有视觉反馈</li><li>周末自动小结:这周花了多少、距离礼物还差多少</li></ul>'
@@ -2295,6 +2376,7 @@
                     character: '小方',
                     avatarInitial: '方',
                     title: '小方要请同学来家里玩',
+                    image: '',
                     scene: '这周六我想请 3 个好朋友来家里玩,但大家都有补习班,时间老对不上。群里发消息问"周六下午行吗",过了 3 小时才有人回,还有人没看到。我要做一个邀请函——上面有清晰的时间、地址、还要让大家投票决定一起玩什么游戏。',
                     question: '如果让你做一个"邀请函"小程序,怎么让收到的人 5 秒内看懂、又忍不住回复?',
                     answer: '<ul><li>顶部大字写"我是小方,邀请你来我家玩",配上时间地点</li><li>3-4 个游戏卡片让大家投票,票高的那个就玩</li><li>倒计时:距离周六还有 X 天 X 小时,制造期待感</li><li>回复 / 拒绝 一键点完,小方能实时看到谁还没回</li></ul>'
@@ -2365,9 +2447,6 @@
             const body = document.getElementById('goalSidebarBody');
             let html = '';
 
-            // 故事卡(顶部)
-            html += renderStoryCard(data);
-
             html += '<div class="goal-question-list">';
             html += '<div class="goal-question-list-title">开始前思考的问题</div>';
             html += '<ol>';
@@ -2409,27 +2488,64 @@
             return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
         }
 
-        function renderStoryCard(data) {
-            // 顶部角色故事卡:头像 + 场景 + 提问 + 折叠答案
+        function renderStoryArea(category) {
+            // 渲染到主内容区顶部:可折叠的故事区,含配图位
+            const container = document.getElementById('storyBlock');
+            const data = goalData[category];
+            if (!container || !data) return;
             const story = data.story;
             if (!story) {
-                return '<div class="goal-story ' + data.badge + '"><div class="goal-story-content"><div class="goal-story-empty">(本类故事待定)</div></div></div>';
+                container.innerHTML = '<div class="story-block ' + data.badge + '"><div class="story-block-empty">(本类故事待定)</div></div>';
+                return;
             }
             const answerHtml = story.answer
-                ? '<details class="goal-story-answer"><summary>想看参考思路?(点击展开)</summary><div class="goal-story-answer-body">' + story.answer + '</div></details>'
+                ? '<details class="story-block-answer"><summary>想看参考思路?(点击展开)</summary><div class="story-block-answer-body">' + story.answer + '</div></details>'
                 : '';
-            return `
-                <div class="goal-story ${data.badge}">
-                    <div class="goal-story-avatar">${escapeHtml(story.avatarInitial || story.character.charAt(0))}</div>
-                    <div class="goal-story-content">
-                        <div class="goal-story-name">主角:${escapeHtml(story.character)}</div>
-                        <div class="goal-story-title">${escapeHtml(story.title)}</div>
-                        <div class="goal-story-scene">${escapeHtml(story.scene)}</div>
-                        <div class="goal-story-question">${escapeHtml(story.question)}</div>
-                        ${answerHtml}
+            const imageHtml = story.image
+                ? '<div class="story-block-image"><img src="' + escapeHtml(story.image) + '" alt="' + escapeHtml(story.title) + '配图"></div>'
+                : '<div class="story-block-image"><div class="story-block-image-hint"><div class="icon">🖼️</div><div>配图位</div><div style="font-size:0.75rem;opacity:0.7">(可放置场景插画)</div></div></div>';
+            container.innerHTML = `
+                <div class="story-block ${data.badge}" id="storyBlockInner">
+                    <button class="story-block-toggle" id="storyBlockToggle" aria-label="折叠故事区" title="折叠/展开">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div class="story-block-header" id="storyBlockHeader">
+                        <div class="story-block-avatar">${escapeHtml(story.avatarInitial || story.character.charAt(0))}</div>
+                        <div class="story-block-titles">
+                            <div class="story-block-tag">主角:${escapeHtml(story.character)}</div>
+                            <div class="story-block-title">${escapeHtml(story.title)}</div>
+                        </div>
+                    </div>
+                    <div class="story-block-body">
+                        <div class="story-block-text">
+                            <div class="story-block-scene">${escapeHtml(story.scene)}</div>
+                            <div class="story-block-question">💡 ${escapeHtml(story.question)}</div>
+                            ${answerHtml}
+                        </div>
+                        ${imageHtml}
                     </div>
                 </div>
             `;
+            // 绑定折叠交互
+            const block = document.getElementById('storyBlockInner');
+            const toggle = document.getElementById('storyBlockToggle');
+            const header = document.getElementById('storyBlockHeader');
+            const STORAGE_KEY = 'mp-story-collapsed-' + category;
+            // 恢复折叠状态
+            try {
+                if (localStorage.getItem(STORAGE_KEY) === '1') block.classList.add('collapsed');
+            } catch (e) { /* ignore */ }
+            const onToggle = () => {
+                block.classList.toggle('collapsed');
+                try {
+                    if (block.classList.contains('collapsed')) localStorage.setItem(STORAGE_KEY, '1');
+                    else localStorage.removeItem(STORAGE_KEY);
+                } catch (e) { /* ignore */ }
+            };
+            toggle.addEventListener('click', (e) => { e.stopPropagation(); onToggle(); });
+            header.addEventListener('click', onToggle);
         }
 
         function renderPromptTemplate(prompt) {
