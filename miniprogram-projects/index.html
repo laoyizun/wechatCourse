@@ -1226,19 +1226,33 @@
             gap: 8px;
         }
         .goal-todo-item {
+            background: var(--bg);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            user-select: none;
+            list-style: none;
+            margin-bottom: 4px;
+        }
+        .goal-todo-item:hover { background: #E2E8F0; }
+        .goal-todo-item.done { background: #ECFDF5; }
+        .goal-todo-label-wrap {
             display: flex;
             align-items: flex-start;
             gap: 10px;
             padding: 10px 12px;
-            background: var(--bg);
-            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            user-select: none;
+            margin: 0;
         }
-        .goal-todo-item:hover { background: #E2E8F0; }
-        .goal-todo-item.done { background: #ECFDF5; }
-        .goal-todo-check {
+        /* 真正起作用的 checkbox input,Trae 扩展不会画线框 */
+        .goal-todo-check[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+        }
+        /* 视觉上的方框(span 模拟) */
+        span.goal-todo-check {
             width: 20px;
             height: 20px;
             min-width: 20px;
@@ -1251,12 +1265,12 @@
             transition: all 0.2s ease;
             background: white;
         }
-        .goal-todo-item:hover .goal-todo-check { border-color: var(--intro); }
-        .goal-todo-item.done .goal-todo-check {
+        .goal-todo-item:hover span.goal-todo-check { border-color: var(--intro); }
+        .goal-todo-item.done span.goal-todo-check {
             background: var(--intro);
             border-color: var(--intro);
         }
-        .goal-todo-check svg {
+        span.goal-todo-check svg {
             width: 14px;
             height: 14px;
             color: white;
@@ -1264,9 +1278,10 @@
             transform: scale(0.5);
             transition: all 0.2s ease;
         }
-        .goal-todo-item.done .goal-todo-check svg { opacity: 1; transform: scale(1); }
-        .goal-todo-content { flex: 1; }
+        .goal-todo-item.done span.goal-todo-check svg { opacity: 1; transform: scale(1); }
+        .goal-todo-content { flex: 1; display: block; }
         .goal-todo-label {
+            display: block;
             font-size: 0.82rem;
             color: var(--text-secondary);
             font-weight: 600;
@@ -1274,6 +1289,7 @@
             font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
         }
         .goal-todo-text {
+            display: block;
             font-size: 0.88rem;
             color: var(--text);
             line-height: 1.5;
@@ -2458,9 +2474,13 @@
             html += '<ul class="goal-todo-list" data-group="basic">';
             data.basic.forEach((item, idx) => {
                 const done = state.basic[idx];
+                // 用 label+checkbox 替代 div,避开 Trae 扩展的"选择元素"框
                 html += '<li class="goal-todo-item' + (done ? ' done' : '') + '" data-group="basic" data-idx="' + idx + '">';
-                html += '<div class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>';
-                html += '<div class="goal-todo-content"><div class="goal-todo-label">' + item.id + '</div><div class="goal-todo-text">' + escapeHtml(item.text) + '</div></div>';
+                html += '<label class="goal-todo-label-wrap">';
+                html += '<input type="checkbox" class="goal-todo-check"' + (done ? ' checked' : '') + ' data-todo-input>';
+                html += '<span class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>';
+                html += '<span class="goal-todo-content"><span class="goal-todo-label">' + item.id + '</span><span class="goal-todo-text">' + escapeHtml(item.text) + '</span></span>';
+                html += '</label>';
                 html += '</li>';
             });
             html += '</ul></div>';
@@ -2471,8 +2491,11 @@
             data.advanced.forEach((item, idx) => {
                 const done = state.advanced[idx];
                 html += '<li class="goal-todo-item' + (done ? ' done' : '') + '" data-group="advanced" data-idx="' + idx + '">';
-                html += '<div class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>';
-                html += '<div class="goal-todo-content"><div class="goal-todo-label">' + item.id + '</div><div class="goal-todo-text">' + escapeHtml(item.text) + '</div></div>';
+                html += '<label class="goal-todo-label-wrap">';
+                html += '<input type="checkbox" class="goal-todo-check"' + (done ? ' checked' : '') + ' data-todo-input>';
+                html += '<span class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>';
+                html += '<span class="goal-todo-content"><span class="goal-todo-label">' + item.id + '</span><span class="goal-todo-text">' + escapeHtml(item.text) + '</span></span>';
+                html += '</label>';
                 html += '</li>';
             });
             html += '</ul></div>';
@@ -2616,14 +2639,16 @@
         }
 
         function bindTodoClicks() {
-            document.querySelectorAll('.goal-todo-item').forEach(el => {
-                el.addEventListener('click', () => {
-                    const group = el.getAttribute('data-group');
-                    const idx = parseInt(el.getAttribute('data-idx'), 10);
+            // 用真正的 <input type=checkbox> + change 事件,避开 div click,Trae 扩展不画线框
+            document.querySelectorAll('.goal-todo-item input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    const item = cb.closest('.goal-todo-item');
+                    const group = item.getAttribute('data-group');
+                    const idx = parseInt(item.getAttribute('data-idx'), 10);
                     const state = loadChecklist(currentCategory);
-                    state[group][idx] = !state[group][idx];
+                    state[group][idx] = cb.checked;
                     saveChecklist(currentCategory, state);
-                    el.classList.toggle('done', state[group][idx]);
+                    item.classList.toggle('done', cb.checked);
                     updateProgress();
                 });
             });
