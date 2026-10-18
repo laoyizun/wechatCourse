@@ -1,0 +1,4355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小程序项目实践 - 从入门到精通</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366F1;
+            --intro: #10B981;
+            --tool: #F59E0B;
+            --social: #EC4899;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+        }
+
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* 首页样式 */
+        .home-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        .home-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            margin-bottom: 16px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 32px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid transparent;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+        }
+
+        .category-card.intro::before { background: var(--intro); }
+        .category-card.tool::before { background: var(--tool); }
+        .category-card.social::before { background: var(--social); }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .category-card.intro:hover { border-color: var(--intro); }
+        .category-card.tool:hover { border-color: var(--tool); }
+        .category-card.social:hover { border-color: var(--social); }
+
+        .category-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .category-card.intro .category-icon { background: linear-gradient(135deg, #10B981, #34D399); }
+        .category-card.tool .category-icon { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+        .category-card.social .category-icon { background: linear-gradient(135deg, #EC4899, #F472B6); }
+
+        .category-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .category-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-count {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .category-card.intro .project-count { background: #D1FAE5; color: #059669; }
+        .category-card.tool .project-count { background: #FEF3C7; color: #D97706; }
+        .category-card.social .project-count { background: #FCE7F3; color: #DB2777; }
+
+        .footer-hint {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+        }
+
+        /* 项目列表页样式 */
+        .projects-page {
+            min-height: 100vh;
+            background: var(--bg);
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: none;
+            background: var(--bg);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            margin-right: 16px;
+        }
+
+        .back-btn:hover {
+            background: #E2E8F0;
+            transform: scale(1.05);
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            color: var(--text);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-title .badge {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .page-title .badge.intro { background: var(--intro); }
+        .page-title .badge.tool { background: var(--tool); }
+        .page-title .badge.social { background: var(--social); }
+
+        .projects-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .category-intro {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-left: 5px solid;
+        }
+
+        .category-intro.intro { border-color: var(--intro); }
+        .category-intro.tool { border-color: var(--tool); }
+        .category-intro.social { border-color: var(--social); }
+
+        .category-intro h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .category-intro p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-name .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .project-name .tag.easy { background: #D1FAE5; color: #059669; }
+        .project-name .tag.medium { background: #FEF3C7; color: #D97706; }
+        .project-name .tag.hard { background: #FCE7F3; color: #DB2777; }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .project-preview {
+            width: 180px;
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 预览图样式 - 模拟小程序界面 */
+        .preview-screen {
+            width: 100%;
+            height: 100%;
+            background: #F3F4F6;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .preview-header {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+            padding: 0 12px;
+        }
+
+        .preview-screen.intro .preview-header { background: linear-gradient(135deg, var(--intro), #34D399); }
+        .preview-screen.tool .preview-header { background: linear-gradient(135deg, var(--tool), #FBBF24); }
+        .preview-screen.social .preview-header { background: linear-gradient(135deg, var(--social), #F472B6); }
+
+        .preview-content {
+            flex: 1;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow: hidden;
+        }
+
+        /* 电子名片预览 */
+        .preview-card-demo {
+            background: white;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .preview-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .preview-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .preview-info-row {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+
+        .preview-info-row:nth-child(3) { width: 80%; margin: 0 auto 8px; }
+        .preview-info-row:nth-child(4) { width: 60%; margin: 0 auto 12px; }
+        .preview-info-row:nth-child(5) { width: 70%; }
+        .preview-info-row:nth-child(6) { width: 50%; }
+
+        /* 学校介绍预览 */
+        .preview-school-demo {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .preview-school-img {
+            height: 80px;
+            background: linear-gradient(135deg, #10B981, #34D399);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .preview-school-info {
+            padding: 12px;
+        }
+
+        .preview-school-info .row { height: 6px; background: #E5E7EB; border-radius: 3px; margin-bottom: 6px; }
+        .preview-school-info .row:nth-child(1) { width: 90%; }
+        .preview-school-info .row:nth-child(2) { width: 75%; }
+        .preview-school-info .row:nth-child(3) { width: 85%; margin-bottom: 0; }
+
+        /* 家庭相册预览 */
+        .preview-album-demo {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .preview-album-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .preview-album-item:nth-child(2) { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+        .preview-album-item:nth-child(3) { background: linear-gradient(135deg, #EC4899, #F472B6); }
+        .preview-album-item:nth-child(4) { background: linear-gradient(135deg, #10B981, #34D399); }
+
+        /* TODO预览 */
+        .preview-todo-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .preview-todo-item {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-todo-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #10B981;
+            flex-shrink: 0;
+        }
+
+        .preview-todo-check.done {
+            background: #10B981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-todo-check.done::after {
+            content: '';
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg) translate(-1px, -1px);
+        }
+
+        .preview-todo-text {
+            flex: 1;
+        }
+
+        .preview-todo-line {
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+        }
+
+        .preview-todo-item.done .preview-todo-line {
+            background: #D1FAE5;
+        }
+
+        .preview-todo-line:nth-child(2) { width: 70%; }
+        .preview-todo-item.done .preview-todo-line { width: 50%; }
+
+        /* 记账本预览 */
+        .preview-account-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .preview-account-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .preview-account-total {
+            font-weight: 700;
+            font-size: 16px;
+            color: #059669;
+        }
+
+        .preview-account-month {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        .preview-account-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .preview-account-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-account-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            background: #FEF3C7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .preview-account-detail {
+            flex: 1;
+        }
+
+        .preview-account-row {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 3px;
+            margin-bottom: 4px;
+        }
+
+        .preview-account-row:nth-child(1) { width: 60%; }
+        .preview-account-row:nth-child(2) { width: 40%; height: 4px; }
+
+        .preview-account-amount {
+            font-weight: 600;
+            font-size: 12px;
+            color: #059669;
+        }
+
+        .preview-account-amount.expense { color: #EF4444; }
+
+        /* 单词本预览 */
+        .preview-word-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .preview-word-main {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .preview-word-phonetic {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .preview-word-meaning {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .preview-word-btn {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 11px;
+        }
+
+        /* 游戏预览 */
+        .preview-game-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .preview-game-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--social);
+            margin-bottom: 8px;
+        }
+
+        .preview-game-hint {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .preview-game-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--social), #F472B6);
+            color: white;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* 宠物预览 */
+        .preview-pet-demo {
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F4FF 100%);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .preview-pet-avatar {
+            width: 80px;
+            height: 80px;
+            background: #FEF3C7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .preview-pet-status {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .preview-pet-stat {
+            text-align: center;
+        }
+
+        .preview-pet-stat-icon {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .preview-pet-stat-bar {
+            width: 24px;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+        }
+
+        /* 心愿单预览 */
+        .preview-wish-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .preview-wish-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .preview-wish-item:last-child { border-bottom: none; }
+
+        .preview-wish-star {
+            width: 20px;
+            height: 20px;
+            color: #F59E0B;
+        }
+
+        .preview-wish-text {
+            flex: 1;
+        }
+
+        .preview-wish-row {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 3px;
+            margin-bottom: 4px;
+        }
+
+        .preview-wish-row:nth-child(1) { width: 80%; }
+        .preview-wish-row:nth-child(2) { width: 50%; height: 4px; }
+
+        .preview-wish-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 4px;
+            border: 2px solid #10B981;
+        }
+
+        /* 课程表预览 */
+        .preview-schedule-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .preview-schedule-day {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .preview-schedule-label {
+            width: 32px;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .preview-schedule-courses {
+            display: flex;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .preview-schedule-course {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        /* 天气预览 */
+        .preview-weather-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .preview-weather-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .preview-weather-icon {
+            font-size: 36px;
+        }
+
+        .preview-weather-temp {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--tool);
+        }
+
+        .preview-weather-info {
+            margin-bottom: 12px;
+        }
+
+        .preview-weather-row {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+
+        .preview-weather-row:nth-child(1) { width: 80%; margin: 0 auto 6px; }
+        .preview-weather-row:nth-child(2) { width: 60%; margin: 0 auto 6px; }
+        .preview-weather-row:nth-child(3) { width: 70%; margin: 0 auto; }
+
+        .preview-weather-tip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px;
+            background: #FEF3C7;
+            border-radius: 8px;
+        }
+
+        .preview-weather-tip-icon {
+            font-size: 16px;
+        }
+
+        .preview-weather-tip-text {
+            font-size: 11px;
+            color: #92400E;
+            font-weight: 500;
+        }
+
+        /* 涂鸦日记预览 */
+        .preview-diary-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .preview-diary-date {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .preview-diary-canvas {
+            background: #FEF9C3;
+            border-radius: 8px;
+            height: 80px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preview-diary-drawing {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .preview-diary-sun {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            font-size: 24px;
+        }
+
+        .preview-diary-cloud {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 18px;
+        }
+
+        .preview-diary-content {
+            padding: 0 4px;
+        }
+
+        .preview-diary-row {
+            height: 6px;
+            background: #E5E7EB;
+            border-radius: 3px;
+            margin-bottom: 6px;
+        }
+
+        /* 便签墙预览 */
+        .preview-wall-demo {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .preview-wall-note {
+            border-radius: 6px;
+            padding: 10px 8px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .preview-wall-text {
+            font-size: 11px;
+            font-weight: 600;
+            color: #374151;
+            text-align: center;
+        }
+
+        /* 投票预览 */
+        .preview-vote-demo {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .preview-vote-question {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .preview-vote-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .preview-vote-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-vote-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            width: 50px;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text);
+            flex-shrink: 0;
+        }
+
+        .preview-vote-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--social);
+        }
+
+        .preview-vote-bar-container {
+            flex: 1;
+            height: 12px;
+            background: #E5E7EB;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .preview-vote-bar {
+            height: 100%;
+            background: linear-gradient(135deg, var(--social), #F472B6);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .preview-vote-percent {
+            width: 32px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--social);
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .preview-vote-total {
+            text-align: center;
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+
+        /* 响应式 */
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .category-card {
+                padding: 24px;
+            }
+
+            .project-card {
+                flex-direction: column;
+            }
+
+            .project-preview {
+                width: 100%;
+                height: 200px;
+            }
+        }
+
+        /* 动画 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card {
+            animation: slideIn 0.4s ease-out forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.15s; }
+        .project-card:nth-child(3) { animation-delay: 0.2s; }
+        .project-card:nth-child(4) { animation-delay: 0.25s; }
+        .project-card:nth-child(5) { animation-delay: 0.3s; }
+        .project-card:nth-child(6) { animation-delay: 0.35s; }
+
+        /* 返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .back-btn:active {
+            transform: scale(0.95);
+        }
+        .back-btn svg {
+            width: 24px;
+            height: 24px;
+            color: #667eea;
+        }
+        /* ============ 左侧固定视窗(目标/要求 + TodoList) ============ */
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            left: 16px;
+            bottom: 24px;
+            z-index: 200;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar-toggle:active { transform: scale(0.95); }
+        .goal-sidebar {
+            position: sticky;
+            top: 88px;
+            width: 340px;
+            min-width: 340px;
+            max-height: calc(100vh - 120px);
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            overflow: hidden;
+        }
+        .goal-sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .goal-sidebar-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .goal-sidebar-title .badge {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .goal-sidebar-title .badge.intro { background: var(--intro); }
+        .goal-sidebar-title .badge.tool { background: var(--tool); }
+        .goal-sidebar-title .badge.social { background: var(--social); }
+        .goal-sidebar-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+        .goal-sidebar-close {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 8px;
+        }
+        .goal-sidebar-close:hover { background: var(--bg); }
+        .goal-progress {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+        .goal-progress-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .goal-progress-count {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .goal-progress-count .done { color: var(--intro); }
+        .goal-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .goal-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--intro), #34D399);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .goal-sidebar-body {
+            overflow-y: auto;
+            flex: 1;
+            margin: 0 -8px;
+            padding: 0 8px;
+            scrollbar-width: thin;
+        }
+        .goal-sidebar-body::-webkit-scrollbar { width: 4px; }
+        .goal-sidebar-body::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 2px; }
+        .goal-section {
+            margin-bottom: 16px;
+        }
+        .goal-section:last-child { margin-bottom: 0; }
+        .goal-section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .goal-section-title .icon { font-size: 1rem; }
+        .goal-question-list {
+            background: #F1F5F9;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+        }
+        .goal-question-list-title {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        .goal-question-list ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .goal-question-list li {
+            font-size: 0.82rem;
+            color: var(--text);
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+        .goal-todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .goal-todo-item {
+            background: var(--bg);
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            user-select: none;
+            list-style: none;
+            margin-bottom: 4px;
+        }
+        .goal-todo-item:hover { background: #E2E8F0; }
+        .goal-todo-item.done { background: #ECFDF5; }
+        .goal-todo-label-wrap {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            cursor: pointer;
+            margin: 0;
+        }
+        /* 真正起作用的 checkbox input,Trae 扩展不会画线框 */
+        .goal-todo-check[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+        }
+        /* 视觉上的方框(span 模拟) */
+        span.goal-todo-check {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            border-radius: 6px;
+            border: 2px solid #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+        .goal-todo-item:hover span.goal-todo-check { border-color: var(--intro); }
+        .goal-todo-item.done span.goal-todo-check {
+            background: var(--intro);
+            border-color: var(--intro);
+        }
+        span.goal-todo-check svg {
+            width: 14px;
+            height: 14px;
+            color: white;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s ease;
+        }
+        .goal-todo-item.done span.goal-todo-check svg { opacity: 1; transform: scale(1); }
+        .goal-todo-content { flex: 1; display: block; }
+        .goal-todo-label {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 2px;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        }
+        .goal-todo-text {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.5;
+            transition: all 0.2s ease;
+        }
+        .goal-todo-item.done .goal-todo-text {
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            text-decoration-color: #94A3B8;
+            text-decoration-thickness: 1px;
+        }
+        /* ============ 角色故事区(主内容区顶部 · 可折叠 · 含配图位) ============ */
+        .story-block {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .story-block.intro { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), inset 4px 0 0 var(--intro); }
+        .story-block.tool { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), inset 4px 0 0 var(--tool); }
+        .story-block.social { box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08), inset 4px 0 0 var(--social); }
+        .story-block-toggle {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255,255,255,0.85);
+            border: 1px solid #E2E8F0;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: all 0.2s;
+        }
+        .story-block-toggle:hover { background: white; color: var(--text); }
+        .story-block-toggle svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+        }
+        .story-block.collapsed .story-block-toggle svg { transform: rotate(180deg); }
+        .story-block-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 50px 16px 20px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .story-block-avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .story-block.intro .story-block-avatar { background: linear-gradient(135deg, #10B981, #34D399); }
+        .story-block.tool .story-block-avatar { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
+        .story-block.social .story-block-avatar { background: linear-gradient(135deg, #EC4899, #F472B6); }
+        .story-block-titles { flex: 1; min-width: 0; }
+        .story-block-tag {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 2px;
+            letter-spacing: 0.3px;
+        }
+        .story-block-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .story-block-body {
+            padding: 0 20px 20px;
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 20px;
+            align-items: start;
+        }
+        .story-block.collapsed .story-block-body { display: none; }
+        .story-block-text { min-width: 0; }
+        .story-block-scene {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin-bottom: 14px;
+        }
+        .story-block-question {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #B45309;
+            font-style: italic;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 12px;
+        }
+        .story-block-answer {
+            background: var(--bg);
+            border-radius: 12px;
+            font-size: 0.88rem;
+            color: var(--text);
+        }
+        .story-block-answer summary {
+            cursor: pointer;
+            padding: 8px 14px;
+            font-weight: 600;
+            user-select: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text);
+        }
+        .story-block-answer summary::-webkit-details-marker { display: none; }
+        .story-block-answer summary::before {
+            content: '💡';
+            font-size: 1rem;
+        }
+        .story-block-answer[open] summary::before { content: '📖'; }
+        .story-block-answer-body {
+            padding: 0 14px 12px;
+            line-height: 1.7;
+        }
+        .story-block-answer-body ul {
+            padding-left: 20px;
+            margin: 4px 0 0;
+        }
+        .story-block-answer-body li {
+            margin-bottom: 4px;
+        }
+        .story-block-image {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 14px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F1F5F9, #E2E8F0);
+            border: 1.5px dashed #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 12px;
+        }
+        .story-block-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .story-block-image-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.75;
+        }
+        .story-block-image-hint .icon { font-size: 1.6rem; }
+        .story-block-empty {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+        @media (max-width: 720px) {
+            .story-block-body {
+                grid-template-columns: 1fr;
+            }
+            .story-block-image { order: -1; }
+        }
+        .goal-prompt-tip {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-size: 0.82rem;
+            color: #92400E;
+            line-height: 1.7;
+            margin-top: 6px;
+        }
+        .goal-prompt-tip .label {
+            font-weight: 700;
+            color: #78350F;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .goal-prompt-template {
+            background: white;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.82rem;
+            color: #1E293B;
+            line-height: 1.9;
+            border: 1px dashed #FBBF24;
+            margin-bottom: 8px;
+            font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            word-break: break-word;
+        }
+        .goal-prompt-slot {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.22);
+            border-bottom: 1.5px dashed #D97706;
+            border-radius: 2px;
+            padding: 0 3px;
+            color: #78350F;
+            font-weight: 600;
+            margin: 0 1px;
+            cursor: help;
+            position: relative;
+            transition: background 0.15s;
+        }
+        .goal-prompt-slot:hover { background: rgba(251, 191, 36, 0.45); }
+        .goal-prompt-slot:hover::after {
+            content: attr(data-hint);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1E293B;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 400;
+            white-space: pre;
+            z-index: 10;
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        }
+        .goal-prompt-actions {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .goal-prompt-copy {
+            background: #92400E;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+        .goal-prompt-copy:hover { background: #78350F; }
+        .goal-prompt-copy.copied { background: var(--intro); }
+        .goal-prompt-hint-text {
+            font-size: 0.72rem;
+            color: #92400E;
+            opacity: 0.85;
+            margin-left: auto;
+        }
+        .goal-reset-btn {
+            background: transparent;
+            border: 1px solid #E2E8F0;
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .goal-reset-btn:hover {
+            background: var(--bg);
+            border-color: #CBD5E1;
+            color: var(--text);
+        }
+        .projects-with-sidebar {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        .projects-with-sidebar .projects-main { flex: 1; min-width: 0; }
+        .projects-with-sidebar .projects-container { max-width: none; padding: 0; margin: 0; }
+        /* 移动端适配 */
+        @media (max-width: 960px) {
+            .projects-with-sidebar {
+                flex-direction: column;
+                padding: 24px 20px;
+            }
+            .goal-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                min-width: 0;
+                max-width: none;
+                max-height: 100vh;
+                border-radius: 0;
+                z-index: 300;
+                transform: translateY(100%);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 20px;
+            }
+            .goal-sidebar.mobile-open { transform: translateY(0); }
+            .goal-sidebar-close { display: block; }
+            .sidebar-toggle { display: flex; }
+            .goal-sidebar-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.5);
+                z-index: 290;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease;
+            }
+            .goal-sidebar-overlay.active { opacity: 1; pointer-events: auto; }
+        }
+        /* ============ 顶部 top-bar + 分类 Tab ============ */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: white;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .back-home {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.92rem;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .back-home:hover { background: #F1F5F9; color: var(--text); }
+        .top-bar-title {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+        .top-bar-spacer { flex: 1; }
+        .cat-tabs {
+            position: sticky;
+            top: 49px;
+            z-index: 99;
+            background: white;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 8px 20px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        .cat-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            background: #F1F5F9;
+            color: var(--text-secondary);
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .cat-tab:hover { background: #E2E8F0; }
+        .cat-tab.active {
+            background: white;
+            color: var(--text);
+        }
+        .cat-tab.intro.active { border-color: var(--intro); color: #047857; }
+        .cat-tab.tool.active { border-color: var(--tool); color: #B45309; }
+        .cat-tab.social.active { border-color: var(--social); color: #BE185D; }
+        .cat-tab-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            display: inline-block;
+        }
+        .cat-tab.intro .cat-tab-dot { background: var(--intro); }
+        .cat-tab.tool .cat-tab-dot { background: var(--tool); }
+        .cat-tab.social .cat-tab-dot { background: var(--social); }
+        .cat-tab-count {
+            background: rgba(0,0,0,0.06);
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .cat-tab.active .cat-tab-count {
+            background: currentColor;
+            color: white;
+        }
+        .cat-tab.active .cat-tab-count { color: white; }
+        .cat-tab.intro.active .cat-tab-count { background: var(--intro); }
+        .cat-tab.tool.active .cat-tab-count { background: var(--tool); }
+        .cat-tab.social.active .cat-tab-count { background: var(--social); }
+        @media (max-width: 640px) {
+            .top-bar { padding: 10px 14px; }
+            .cat-tabs { padding: 8px 14px; top: 45px; }
+            .cat-tab { padding: 6px 12px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <a class="back-home" href="index.html" title="返回课程首页">← 首页</a>
+        <span class="top-bar-title">小程序分类</span>
+        <span class="top-bar-spacer"></span>
+        <a class="back-home" href="scenarios.html" title="看故事">📖 场景分析</a>
+    </header>
+    <!-- 三个分类 Tab -->
+    <nav class="cat-tabs" id="catTabs">
+        <button class="cat-tab intro" data-cat="intro" type="button">
+            <span class="cat-tab-dot"></span>介绍类 <span class="cat-tab-count">5</span>
+        </button>
+        <button class="cat-tab tool" data-cat="tool" type="button">
+            <span class="cat-tab-dot"></span>效率工具 <span class="cat-tab-count">6</span>
+        </button>
+        <button class="cat-tab social" data-cat="social" type="button">
+            <span class="cat-tab-dot"></span>社交创意 <span class="cat-tab-count">6</span>
+        </button>
+    </nav>
+    <!-- 项目列表页 -->
+    <div id="projects" class="page projects-page active">
+        <div class="projects-with-sidebar">
+            <aside class="goal-sidebar" id="goalSidebar">
+                <div class="goal-sidebar-header">
+                    <div>
+                        <div class="goal-sidebar-title">
+                            <span class="badge" id="sidebarBadge"></span>
+                            <span id="sidebarTitleText">本类目标 & 要求</span>
+                        </div>
+                        <div class="goal-sidebar-subtitle" id="sidebarLearningGoal"></div>
+                    </div>
+                    <button class="goal-sidebar-close" id="sidebarClose" aria-label="关闭">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="goal-progress">
+                    <div class="goal-progress-row">
+                        <span>完成进度</span>
+                        <span class="goal-progress-count"><span class="done" id="goalDoneCount">0</span> / <span id="goalTotalCount">0</span></span>
+                    </div>
+                    <div class="goal-progress-bar">
+                        <div class="goal-progress-fill" id="goalProgressFill"></div>
+                    </div>
+                </div>
+                <div class="goal-sidebar-body" id="goalSidebarBody">
+                    <!-- 动态渲染:开始前思考的问题 / 基本目标 / 进阶目标 / Prompt 建议 -->
+                </div>
+                <button class="goal-reset-btn" id="goalResetBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 12a9 9 0 1 0 9-9c-2.5 0-4.8 1-6.5 2.6L3 8"/><path d="M3 3v5h5"/>
+                    </svg>
+                    重置本类进度
+                </button>
+            </aside>
+            <div class="goal-sidebar-overlay" id="goalSidebarOverlay"></div>
+
+            <div class="projects-main">
+                <div class="projects-container">
+                    <div id="storyBlock" class="story-block">
+                        <!-- 故事区:由 renderStoryArea() 动态渲染 -->
+                    </div>
+
+                    <div id="categoryIntro" class="category-intro intro">
+                        <h3>介绍类项目简介</h3>
+                        <p>这类项目适合作为入门练习，主要学习界面布局、图片展示、文字排版等基础技能。</p>
+                    </div>
+
+                    <div id="projectList" class="project-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 移动端浮动按钮 -->
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="查看目标">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const projectData = {
+            intro: {
+                title: '介绍类项目',
+                badge: 'intro',
+                intro: '这类项目适合作为入门练习，主要学习界面布局、图片展示、文字排版等基础技能。',
+                projects: [
+                    {
+                        name: '我的电子名片',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '制作一张展示个人信息的小卡片，包含姓名、班级、爱好、联系方式等内容。',
+                        preview: 'card'
+                    },
+                    {
+                        name: '我的学校介绍',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '为学校制作一个介绍页面，展示校园环境、师资力量、办学特色等内容。',
+                        preview: 'school'
+                    },
+                    {
+                        name: '我的家庭相册',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '创建一个照片墙应用，展示家庭成员和美好回忆，支持照片分类浏览。',
+                        preview: 'album'
+                    },
+                    {
+                        name: '我的兴趣小站',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '展示个人爱好和特长，如绘画作品、音乐收藏、运动记录等。',
+                        preview: 'card'
+                    },
+                    {
+                        name: '我的好朋友档案',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '记录好朋友的联系方式、生日、兴趣爱好等信息，做一个友谊纪念册。',
+                        preview: 'card'
+                    }
+                ]
+            },
+            tool: {
+                title: '效率工具类',
+                badge: 'tool',
+                intro: '这类项目加入了数据存储和交互逻辑，适合学习本地存储、条件判断等技能。',
+                projects: [
+                    {
+                        name: 'TODO待办清单',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '添加、完成、删除待办事项，养成良好的时间管理习惯。',
+                        preview: 'todo'
+                    },
+                    {
+                        name: '零花钱记账本',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '记录日常收支，统计每月消费，培养理财意识。',
+                        preview: 'account'
+                    },
+                    {
+                        name: '单词学习本',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '背诵和测验英语单词，支持生词本和错题回顾功能。',
+                        preview: 'word'
+                    },
+                    {
+                        name: '课程表小助手',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '制作一个课程表应用，支持按周查看每天的课程安排。',
+                        preview: 'schedule'
+                    },
+                    {
+                        name: '天气提醒管家',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '查询天气情况，提供穿衣建议和出行提醒。',
+                        preview: 'weather'
+                    },
+                    {
+                        name: '习惯打卡表',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '记录每日习惯养成情况，如运动、阅读、早起等。',
+                        preview: 'todo'
+                    }
+                ]
+            },
+            social: {
+                title: '社交创意类',
+                badge: 'social',
+                intro: '这类项目注重趣味性和互动性，适合学习动画效果、游戏逻辑和用户交互。',
+                projects: [
+                    {
+                        name: '猜数字游戏',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '电脑随机生成数字，玩家猜测大小，体验简单的游戏逻辑。',
+                        preview: 'game'
+                    },
+                    {
+                        name: '我的电子宠物',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '养一只虚拟宠物，喂食、玩耍、清洁，体验养成类游戏的制作。',
+                        preview: 'pet'
+                    },
+                    {
+                        name: '心愿收集箱',
+                        tag: '入门',
+                        difficulty: 'easy',
+                        desc: '记录自己的愿望清单，管理心愿的完成状态。',
+                        preview: 'wish'
+                    },
+                    {
+                        name: '涂鸦日记本',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '用图画和文字记录每天的心情和故事，发挥创意和想象力。',
+                        preview: 'diary'
+                    },
+                    {
+                        name: '班级投票器',
+                        tag: '进阶',
+                        difficulty: 'medium',
+                        desc: '快速创建投票，收集和统计同学们的意见。',
+                        preview: 'vote'
+                    },
+                    {
+                        name: '秘密便签墙',
+                        tag: '挑战',
+                        difficulty: 'hard',
+                        desc: '一个匿名留言墙，可以写下悄悄话或鼓励的话语。',
+                        preview: 'wall'
+                    }
+                ]
+            }
+        };
+
+        function showProjects(category) {
+            const data = projectData[category];
+
+            const introEl = document.getElementById('categoryIntro');
+            introEl.className = 'category-intro ' + data.badge;
+            introEl.innerHTML = `<h3>${data.title}简介</h3><p>${data.intro}</p>`;
+
+            const listEl = document.getElementById('projectList');
+            listEl.innerHTML = data.projects.map(project => `
+                <div class="project-card">
+                    <div class="project-info">
+                        <div class="project-name">
+                            ${project.name}
+                            <span class="tag ${project.difficulty}">${project.tag}</span>
+                        </div>
+                        <p class="project-desc">${project.desc}</p>
+                    </div>
+                    <div class="project-preview">
+                        ${generatePreview(project.preview, data.badge)}
+                    </div>
+                </div>
+            `).join('');
+
+            renderStoryArea(category);
+            renderGoalSidebar(category);
+            // 同步 Tab 高亮
+            document.querySelectorAll('.cat-tab').forEach(t => {
+                t.classList.toggle('active', t.getAttribute('data-cat') === category);
+            });
+            currentCategory = category;
+            // 滚到内容区
+            document.getElementById('categoryIntro')?.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+
+        function generatePreview(type, category) {
+            const previewClass = category;
+
+            const previews = {
+                card: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">个人名片</div>
+                        <div class="preview-content">
+                            <div class="preview-card-demo">
+                                <div class="preview-avatar">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                </div>
+                                <div class="preview-name">王小明</div>
+                                <div class="preview-info-row"></div>
+                                <div class="preview-info-row"></div>
+                                <div class="preview-info-row"></div>
+                                <div class="preview-info-row"></div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                school: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">学校介绍</div>
+                        <div class="preview-content">
+                            <div class="preview-school-demo">
+                                <div class="preview-school-img">
+                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 21h18M3 7v14M21 7v14M6 11h4M6 15h4M14 11h4M14 15h4M12 3v4M9 3h6l3 4"></path>
+                                    </svg>
+                                </div>
+                                <div class="preview-school-info">
+                                    <div class="row"></div>
+                                    <div class="row"></div>
+                                    <div class="row"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                album: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">家庭相册</div>
+                        <div class="preview-content">
+                            <div class="preview-album-demo">
+                                <div class="preview-album-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="preview-album-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="preview-album-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="preview-album-item">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                        <polyline points="21 15 16 10 5 21"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                todo: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">待办清单</div>
+                        <div class="preview-content">
+                            <div class="preview-todo-demo">
+                                <div class="preview-todo-item done">
+                                    <div class="preview-todo-check done"></div>
+                                    <div class="preview-todo-text">
+                                        <div class="preview-todo-line"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-todo-item">
+                                    <div class="preview-todo-check"></div>
+                                    <div class="preview-todo-text">
+                                        <div class="preview-todo-line"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-todo-item">
+                                    <div class="preview-todo-check"></div>
+                                    <div class="preview-todo-text">
+                                        <div class="preview-todo-line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                account: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">记账本</div>
+                        <div class="preview-content">
+                            <div class="preview-account-demo">
+                                <div class="preview-account-header">
+                                    <span class="preview-account-total">¥328.50</span>
+                                    <span class="preview-account-month">本月结余</span>
+                                </div>
+                                <div class="preview-account-list">
+                                    <div class="preview-account-item">
+                                        <div class="preview-account-icon">🍔</div>
+                                        <div class="preview-account-detail">
+                                            <div class="preview-account-row"></div>
+                                            <div class="preview-account-row"></div>
+                                        </div>
+                                        <span class="preview-account-amount expense">-15</span>
+                                    </div>
+                                    <div class="preview-account-item">
+                                        <div class="preview-account-icon">📚</div>
+                                        <div class="preview-account-detail">
+                                            <div class="preview-account-row"></div>
+                                            <div class="preview-account-row"></div>
+                                        </div>
+                                        <span class="preview-account-amount">+50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                word: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">单词本</div>
+                        <div class="preview-content">
+                            <div class="preview-word-demo">
+                                <div class="preview-word-main">Apple</div>
+                                <div class="preview-word-phonetic">/ˈæpl/</div>
+                                <div class="preview-word-meaning">n. 苹果</div>
+                                <div class="preview-word-btn">查看详解</div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                game: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">猜数字</div>
+                        <div class="preview-content">
+                            <div class="preview-game-demo">
+                                <div class="preview-game-number">?</div>
+                                <div class="preview-game-hint">猜猜这个数字是几？</div>
+                                <div class="preview-game-btn">开始游戏</div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                pet: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">电子宠物</div>
+                        <div class="preview-content">
+                            <div class="preview-pet-demo">
+                                <div class="preview-pet-avatar">🐱</div>
+                                <div class="preview-pet-status">
+                                    <div class="preview-pet-stat">
+                                        <div class="preview-pet-stat-icon">🍖</div>
+                                        <div class="preview-pet-stat-bar" style="width: 70%; background: #FEF3C7;"></div>
+                                    </div>
+                                    <div class="preview-pet-stat">
+                                        <div class="preview-pet-stat-icon">😊</div>
+                                        <div class="preview-pet-stat-bar" style="width: 85%; background: #FCE7F3;"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-game-btn" style="font-size: 11px; padding: 6px 16px;">喂食</div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                wish: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">心愿单</div>
+                        <div class="preview-content">
+                            <div class="preview-wish-demo">
+                                <div class="preview-wish-item">
+                                    <svg class="preview-wish-star" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <div class="preview-wish-text">
+                                        <div class="preview-wish-row"></div>
+                                        <div class="preview-wish-row"></div>
+                                    </div>
+                                    <div class="preview-wish-check"></div>
+                                </div>
+                                <div class="preview-wish-item">
+                                    <svg class="preview-wish-star" viewBox="0 0 24 24" fill="currentColor">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    <div class="preview-wish-text">
+                                        <div class="preview-wish-row"></div>
+                                        <div class="preview-wish-row"></div>
+                                    </div>
+                                    <div class="preview-wish-check"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                schedule: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">课程表</div>
+                        <div class="preview-content">
+                            <div class="preview-schedule-demo">
+                                <div class="preview-schedule-day">
+                                    <span class="preview-schedule-label">周一</span>
+                                    <div class="preview-schedule-courses">
+                                        <div class="preview-schedule-course" style="background: #DBEAFE;">语文</div>
+                                        <div class="preview-schedule-course" style="background: #FEE2E2;">数学</div>
+                                    </div>
+                                </div>
+                                <div class="preview-schedule-day">
+                                    <span class="preview-schedule-label">周二</span>
+                                    <div class="preview-schedule-courses">
+                                        <div class="preview-schedule-course" style="background: #D1FAE5;">英语</div>
+                                        <div class="preview-schedule-course" style="background: #FEF3C7;">科学</div>
+                                    </div>
+                                </div>
+                                <div class="preview-schedule-day">
+                                    <span class="preview-schedule-label">周三</span>
+                                    <div class="preview-schedule-courses">
+                                        <div class="preview-schedule-course" style="background: #FCE7F3;">美术</div>
+                                        <div class="preview-schedule-course" style="background: #E0E7FF;">体育</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                weather: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">天气</div>
+                        <div class="preview-content">
+                            <div class="preview-weather-demo">
+                                <div class="preview-weather-main">
+                                    <div class="preview-weather-icon">☀️</div>
+                                    <div class="preview-weather-temp">24°</div>
+                                </div>
+                                <div class="preview-weather-info">
+                                    <div class="preview-weather-row"></div>
+                                    <div class="preview-weather-row"></div>
+                                    <div class="preview-weather-row"></div>
+                                </div>
+                                <div class="preview-weather-tip">
+                                    <div class="preview-weather-tip-icon">👕</div>
+                                    <div class="preview-weather-tip-text">建议穿薄外套</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                diary: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">日记本</div>
+                        <div class="preview-content">
+                            <div class="preview-diary-demo">
+                                <div class="preview-diary-date">2024年3月15日 晴</div>
+                                <div class="preview-diary-canvas">
+                                    <div class="preview-diary-drawing">
+                                        <div class="preview-diary-sun">☀️</div>
+                                        <div class="preview-diary-cloud">☁️</div>
+                                    </div>
+                                </div>
+                                <div class="preview-diary-content">
+                                    <div class="preview-diary-row"></div>
+                                    <div class="preview-diary-row"></div>
+                                    <div class="preview-diary-row" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                wall: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">便签墙</div>
+                        <div class="preview-content">
+                            <div class="preview-wall-demo">
+                                <div class="preview-wall-note" style="background: #FEF3C7; transform: rotate(-3deg);">
+                                    <div class="preview-wall-text">加油！</div>
+                                </div>
+                                <div class="preview-wall-note" style="background: #FCE7F3; transform: rotate(2deg);">
+                                    <div class="preview-wall-text">你最棒</div>
+                                </div>
+                                <div class="preview-wall-note" style="background: #D1FAE5; transform: rotate(-1deg);">
+                                    <div class="preview-wall-text">坚持哦</div>
+                                </div>
+                                <div class="preview-wall-note" style="background: #DBEAFE; transform: rotate(3deg);">
+                                    <div class="preview-wall-text">一起努力</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                vote: `
+                    <div class="preview-screen ${previewClass}">
+                        <div class="preview-header">投票</div>
+                        <div class="preview-content">
+                            <div class="preview-vote-demo">
+                                <div class="preview-vote-question">你最喜欢哪个运动？</div>
+                                <div class="preview-vote-options">
+                                    <div class="preview-vote-option">
+                                        <div class="preview-vote-label">
+                                            <span class="preview-vote-dot"></span>
+                                            篮球
+                                        </div>
+                                        <div class="preview-vote-bar-container">
+                                            <div class="preview-vote-bar" style="width: 45%;"></div>
+                                        </div>
+                                        <span class="preview-vote-percent">45%</span>
+                                    </div>
+                                    <div class="preview-vote-option">
+                                        <div class="preview-vote-label">
+                                            <span class="preview-vote-dot"></span>
+                                            足球
+                                        </div>
+                                        <div class="preview-vote-bar-container">
+                                            <div class="preview-vote-bar" style="width: 30%;"></div>
+                                        </div>
+                                        <span class="preview-vote-percent">30%</span>
+                                    </div>
+                                    <div class="preview-vote-option">
+                                        <div class="preview-vote-label">
+                                            <span class="preview-vote-dot"></span>
+                                            游泳
+                                        </div>
+                                        <div class="preview-vote-bar-container">
+                                            <div class="preview-vote-bar" style="width: 25%;"></div>
+                                        </div>
+                                        <span class="preview-vote-percent">25%</span>
+                                    </div>
+                                </div>
+                                <div class="preview-vote-total">共25人投票</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            };
+
+            return previews[type] || previews.card;
+        }
+
+        // 三个 Tab 按钮点击 → 切分类
+        document.querySelectorAll('.cat-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const cat = btn.getAttribute('data-cat');
+                if (cat && projectData[cat]) showProjects(cat);
+            });
+        });
+
+        /* ============ 左侧固定视窗:目标 / 要求 + TodoList ============ */
+        const goalData = {
+            intro: {
+                badge: 'intro',
+                story: {
+                    character: '小方',
+                    avatarInitial: '方',
+                    title: '小方的开学第一天',
+                    image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956194996.png',
+                    scene: '开学第一天,班主任让大家轮流上讲台自我介绍。我站在讲台上,脑子里一片空白,说了句"我叫小方,今年 X 岁"就下来了。下课后,班里同学从我身边走过,没有人叫得出我的名字。我难过了一整天。',
+                    question: '如果当时手里有一个"个人名片"小程序,第一眼想让别人记住你什么?',
+                    answer: '<ul><li>名字 + 昵称 + 怎么称呼我</li><li>3 个关于我的有趣事实(爱好 / 怪癖 / 经历)</li><li>我的头像或代表色,让人一眼认出来</li><li>联系方式或班级,方便同学找我玩</li></ul>'
+                },
+                learningGoal: '把"我想展示什么"翻译成清晰的产品需求,练习验收 AI 做出的页面。',
+                questions: [
+                    '给谁看?他们打开 3 秒内应该先看到什么?',
+                    '这个介绍页想让人记住的"那一点"是什么?(一句话能说清吗?)',
+                    '首页要分几个区块?每个区块放什么、各自承担什么信息?'
+                ],
+                basic: [
+                    { id: 'B1', text: '用一段话写清"谁 / 展示什么 / 想让人记住那一点",作为项目说明' },
+                    { id: 'B2', text: '画出首页的信息分区草稿,≥3 个区块,标注每个区块的内容' },
+                    { id: 'B3', text: '列出首页要展示的真实数据清单 ≥6 条(同学、景点、奖项等)' },
+                    { id: 'B4', text: '验收 AI 的产出,把 ≥3 处不满意的地方反馈给 AI,迭代到满意' },
+                    { id: 'B5', text: '详情页要有"返回首页"入口,且视觉风格与首页一致' }
+                ],
+                advanced: [
+                    { id: 'A1', text: '设计一个"故事感"的详情页:让点开的人愿意多停留 10 秒' },
+                    { id: 'A2', text: '统一配色 + 字体 + 留白节奏,让 5 个项目看起来"一家人"' },
+                    { id: 'A3', text: '设计一个"收藏"按钮,位置 / 颜色 / 动效都要有理由(30 字说明)' },
+                    { id: 'A4', text: '在导航栏颜色 / 标题上做品牌识别,让人一眼认出"这是你的项目"' }
+                ],
+                prompt: {
+                    template: '做一个《项目名》介绍页:配色 + 整体风格,顶部放 头部展示什么,中部 主体内容如何组织,底部 放什么信息。风格 你想要什么气质 (例:安静 / 活泼 / 治愈),不要什么,信息密度 密 / 中 / 稀,其它想让 AI 知道的事。',
+                    slots: [
+                        { key: '项目名', hint: '填你想做的项目,例:班级群像、家庭相册、学校介绍' },
+                        { key: '配色 + 整体风格', hint: '填 2-4 个视觉词,例:米白底 + 圆角卡片 / 雾蓝 + 极简线条' },
+                        { key: '头部展示什么', hint: '填最重要的那一眼信息,例:头像 + 姓名 / 大标题 + 一句话' },
+                        { key: '主体内容如何组织', hint: '填分块方式,例:按 5 个兴趣分组 / 按时间线 / 按主题' },
+                        { key: '放什么信息', hint: '填尾段功能,例:联系方式 / 行动按钮 / 引用金句' },
+                        { key: '气质', hint: '选一个形容词,决定整体观感' },
+                        { key: '不要什么', hint: '填 1-3 个明确禁区,例:不用 emoji / 不要深色模式 / 不要花哨背景' },
+                        { key: '信息密度', hint: '让 AI 知道页面留白节奏' },
+                        { key: '其它想让 AI 知道的事', hint: '可填,可空;例:目标用户是谁 / 必须出现的元素' }
+                    ]
+                }
+            },
+            tool: {
+                badge: 'tool',
+                story: {
+                    character: '小方',
+                    avatarInitial: '方',
+                    title: '小方要送妈妈生日礼物',
+                    image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956086568.png',
+                    scene: '妈妈下个月生日,我想用自己的零花钱买礼物。但每次零花钱一到手,买了零食就忘了还剩多少。月底打开存钱罐一看——空的。妈妈的礼物一次都没存下来。我把这件事写在了日记里。',
+                    question: '30 天内每天存一点,怎么才能真的存下来,又不会被"忘了还剩多少"打败?',
+                    answer: '<ul><li>每天记录收入和支出(买了什么、花了多少)</li><li>看到"目标金额"还差多少,越接近越有动力</li><li>存钱罐画面随金额"长出来",有视觉反馈</li><li>周末自动小结:这周花了多少、距离礼物还差多少</li></ul>'
+                },
+                learningGoal: '把"我的生活痛点"拆成 AI 能执行的产品需求,做出愿意每天打开的工具。',
+                questions: [
+                    '谁会在什么场景下用这个工具?他们想完成的"那一件事"是什么?',
+                    '这个工具如果只能保留 3 个功能,是哪 3 个?(忍住不做的功能更重要)',
+                    '用户第一次打开看到空屏幕时,应该被引导做什么?'
+                ],
+                basic: [
+                    { id: 'B1', text: '写一份用户故事:谁、什么场景、要完成什么(≤3 句话)' },
+                    { id: 'B2', text: '列出 3 条核心数据字段,写清每条字段长什么样、约束是什么' },
+                    { id: 'B3', text: '想清楚 3 个最关键操作:新增 / 完成 / 删除,每步在屏幕上如何呈现' },
+                    { id: 'B4', text: '自己当用户试用一遍,把 ≥2 处不顺手的地方反馈给 AI 改掉' },
+                    { id: 'B5', text: '关闭再打开,数据依然存在(这是工具类的基础信任)' }
+                ],
+                advanced: [
+                    { id: 'A1', text: '设计一个空状态文案:第一次打开时屏幕上写什么引导用户' },
+                    { id: 'A2', text: '给数据加搜索 / 分类筛选,并想清楚"为什么不加筛选就找不到"' },
+                    { id: 'A3', text: '设计统计视图(本周花了多少 / 完成率),让数字会"讲故事"' },
+                    { id: 'A4', text: '设计一个温和的提醒机制:什么时间提醒、提醒什么、怎么不烦' },
+                    { id: 'A5', text: '设计分享卡片:别人看到会不会想点开用?(写 30 字说明)' }
+                ],
+                prompt: {
+                    template: '做一个《工具名》:首页长什么样 (最核心 1-2 个元素),核心操作流程 (新增 → 完成 → 删除,每步在屏幕上如何呈现)。配色 主色 + 辅助色,组件风格 圆角卡片 / 极简线条 / 拟物 / 其它,只用文字还是要有图标,要不要深色模式,其它特殊要求。',
+                    slots: [
+                        { key: '工具名', hint: '填工具的名字,例:记账小本、TODO 待办、单词本' },
+                        { key: '首页核心元素', hint: '填最重要的一两个东西,例:当日账单列表 / 一行输入框 / 卡片网格' },
+                        { key: '核心操作流程', hint: '按顺序填:触发 → 输入 → 确认 → 完成 → 删除,每步在屏幕上长什么样' },
+                        { key: '配色', hint: '填 2-3 个色,例:米白 + 墨绿 / 雾蓝 + 暖橙' },
+                        { key: '组件风格', hint: '决定按钮 / 卡片 / 列表长什么样' },
+                        { key: '图标 vs 文字', hint: '让 AI 知道风格倾向,例:只用文字不靠图标 / 简单线性图标' },
+                        { key: '要不要深色模式', hint: '写要或不要,给明确指令' },
+                        { key: '其它特殊要求', hint: '可填,可空;例:必须能滑动操作 / 数据要持久化' }
+                    ]
+                }
+            },
+            social: {
+                badge: 'social',
+                story: {
+                    character: '小方',
+                    avatarInitial: '方',
+                    title: '小方要请同学来家里玩',
+                    image: '',
+                    scene: '这周六我想请 3 个好朋友来家里玩,但大家都有补习班,时间老对不上。群里发消息问"周六下午行吗",过了 3 小时才有人回,还有人没看到。我要做一个邀请函——上面有清晰的时间、地址、还要让大家投票决定一起玩什么游戏。',
+                    question: '如果让你做一个"邀请函"小程序,怎么让收到的人 5 秒内看懂、又忍不住回复?',
+                    answer: '<ul><li>顶部大字写"我是小方,邀请你来我家玩",配上时间地点</li><li>3-4 个游戏卡片让大家投票,票高的那个就玩</li><li>倒计时:距离周六还有 X 天 X 小时,制造期待感</li><li>回复 / 拒绝 一键点完,小方能实时看到谁还没回</li></ul>'
+                },
+                learningGoal: '设计"好玩"的反馈机制,做出让人"想再玩一次"的小程序。',
+                questions: [
+                    '谁会玩这个?他们在什么心情、什么时间段玩?',
+                    '核心循环是几步?每一步玩家心里在期待什么?',
+                    '失败 / 卡关时,怎么让玩家不烦躁、想再来一次?'
+                ],
+                basic: [
+                    { id: 'B1', text: '用 3 句话说清楚玩法:谁玩、做什么动作、怎么算赢 / 完成' },
+                    { id: 'B2', text: '想清楚核心循环 ≥3 步(翻牌 → 配对 → 计分 → 结束)' },
+                    { id: 'B3', text: '列出 3 种反馈场景:成功 / 失败 / 鼓励,各对应一句文案 + 一个动效描述' },
+                    { id: 'B4', text: '试玩 3 次,把"卡在哪里、不想继续玩"的瞬间记下来反馈给 AI' },
+                    { id: 'B5', text: '关闭再打开,历史最高分 / 已收集列表依然在' }
+                ],
+                advanced: [
+                    { id: 'A1', text: '给核心动作加动画描述:翻牌 0.4 秒,右侧翻转 180 度,失败变灰 0.2 秒' },
+                    { id: 'A2', text: '设计难度切换:简单 / 普通 / 困难 分别改什么(步数 / 时间 / 提示)' },
+                    { id: 'A3', text: '设计一个可被分享的瞬间(破纪录 / 抽到稀有卡),让别人也想试' },
+                    { id: 'A4', text: '设计历史最高分 / 已收集的展示方式,让用户有"积累感"' },
+                    { id: 'A5', text: '加上震动 / 音效的时机说明:什么时候震、什么声、为什么这里需要' }
+                ],
+                prompt: {
+                    template: '做一个《游戏 / 互动名》:玩法一句话说清,核心循环几步 每步玩家做什么动作,3 种反馈 (成功 / 失败 / 鼓励 各一句文案 + 一个动效描述)。配色 主色 + 辅助色,整体节奏 快 / 中 / 慢,要不要加音效或震动,其它特殊要求。',
+                    slots: [
+                        { key: '游戏名', hint: '填游戏的名字,例:记忆翻牌、抽卡收集、宠物养成' },
+                        { key: '玩法一句话', hint: '用一句话说清:谁玩、做什么、怎么算赢' },
+                        { key: '核心循环几步', hint: '按顺序列每一步,例:翻牌 → 配对 → 计分 → 结束' },
+                        { key: '3 种反馈', hint: '每种各一句文案 + 一个动效描述;例:成功"配对了!"+ 卡片轻微放大' },
+                        { key: '配色', hint: '填 2-3 个色,例:暖米 + 雾蓝 / 糖果粉 + 薄荷绿' },
+                        { key: '整体节奏', hint: '决定动效速度和关卡递进,快节奏容易刺激、慢节奏容易治愈' },
+                        { key: '要不要加音效或震动', hint: '给明确指令,例:失败时轻震 0.1 秒 / 翻牌有清脆音效' },
+                        { key: '其它特殊要求', hint: '可填,可空;例:要有难度切换 / 要能分享给好友' }
+                    ]
+                }
+            }
+        };
+
+        const CHECK_KEY_PREFIX = 'mp-checklist-';
+        let currentCategory = null;
+
+        function loadChecklist(category) {
+            try {
+                const raw = localStorage.getItem(CHECK_KEY_PREFIX + category);
+                if (raw) return JSON.parse(raw);
+            } catch (e) { /* ignore */ }
+            const data = goalData[category];
+            const fresh = { basic: data.basic.map(() => false), advanced: data.advanced.map(() => false) };
+            saveChecklist(category, fresh);
+            return fresh;
+        }
+
+        function saveChecklist(category, state) {
+            try { localStorage.setItem(CHECK_KEY_PREFIX + category, JSON.stringify(state)); } catch (e) { /* ignore */ }
+        }
+
+        function renderGoalSidebar(category) {
+            currentCategory = category;
+            const data = goalData[category];
+            if (!data) return;
+            const state = loadChecklist(category);
+
+            document.getElementById('sidebarBadge').className = 'badge ' + data.badge;
+            document.getElementById('sidebarLearningGoal').textContent = data.learningGoal;
+
+            const body = document.getElementById('goalSidebarBody');
+            let html = '';
+
+            html += '<div class="goal-question-list">';
+            html += '<div class="goal-question-list-title">开始前思考的问题</div>';
+            html += '<ol>';
+            data.questions.forEach(q => { html += '<li>' + escapeHtml(q) + '</li>'; });
+            html += '</ol></div>';
+
+            html += '<div class="goal-section">';
+            html += '<div class="goal-section-title"><span class="icon">✅</span>基本目标 <span style="font-weight:400;color:var(--text-secondary);font-size:0.75rem;">(必做)</span></div>';
+            html += '<ul class="goal-todo-list" data-group="basic">';
+            data.basic.forEach((item, idx) => {
+                const done = state.basic[idx];
+                // 用 label+checkbox 替代 div,避开 Trae 扩展的"选择元素"框
+                html += '<li class="goal-todo-item' + (done ? ' done' : '') + '" data-group="basic" data-idx="' + idx + '">';
+                html += '<label class="goal-todo-label-wrap">';
+                html += '<input type="checkbox" class="goal-todo-check"' + (done ? ' checked' : '') + ' data-todo-input>';
+                html += '<span class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>';
+                html += '<span class="goal-todo-content"><span class="goal-todo-label">' + item.id + '</span><span class="goal-todo-text">' + escapeHtml(item.text) + '</span></span>';
+                html += '</label>';
+                html += '</li>';
+            });
+            html += '</ul></div>';
+
+            html += '<div class="goal-section">';
+            html += '<div class="goal-section-title"><span class="icon">🚀</span>进阶目标 <span style="font-weight:400;color:var(--text-secondary);font-size:0.75rem;">(选做)</span></div>';
+            html += '<ul class="goal-todo-list" data-group="advanced">';
+            data.advanced.forEach((item, idx) => {
+                const done = state.advanced[idx];
+                html += '<li class="goal-todo-item' + (done ? ' done' : '') + '" data-group="advanced" data-idx="' + idx + '">';
+                html += '<label class="goal-todo-label-wrap">';
+                html += '<input type="checkbox" class="goal-todo-check"' + (done ? ' checked' : '') + ' data-todo-input>';
+                html += '<span class="goal-todo-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>';
+                html += '<span class="goal-todo-content"><span class="goal-todo-label">' + item.id + '</span><span class="goal-todo-text">' + escapeHtml(item.text) + '</span></span>';
+                html += '</label>';
+                html += '</li>';
+            });
+            html += '</ul></div>';
+
+            html += renderPromptTemplate(data.prompt);
+
+            body.innerHTML = html;
+            updateProgress();
+            bindTodoClicks();
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+        }
+
+        function renderStoryArea(category) {
+            // 渲染到主内容区顶部:可折叠的故事区,含配图位
+            const container = document.getElementById('storyBlock');
+            const data = goalData[category];
+            if (!container || !data) return;
+            const story = data.story;
+            if (!story) {
+                container.innerHTML = '<div class="story-block ' + data.badge + '"><div class="story-block-empty">(本类故事待定)</div></div>';
+                return;
+            }
+            const answerHtml = story.answer
+                ? '<details class="story-block-answer"><summary>想看参考思路?(点击展开)</summary><div class="story-block-answer-body">' + story.answer + '</div></details>'
+                : '';
+            const imageHtml = story.image
+                ? '<div class="story-block-image"><img src="' + escapeHtml(story.image) + '" alt="' + escapeHtml(story.title) + '配图"></div>'
+                : '<div class="story-block-image"><div class="story-block-image-hint"><div class="icon">🖼️</div><div>配图位</div><div style="font-size:0.75rem;opacity:0.7">(可放置场景插画)</div></div></div>';
+            container.innerHTML = `
+                <div class="story-block ${data.badge}" id="storyBlockInner">
+                    <button class="story-block-toggle" id="storyBlockToggle" aria-label="折叠故事区" title="折叠/展开">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div class="story-block-header" id="storyBlockHeader">
+                        <div class="story-block-avatar">${escapeHtml(story.avatarInitial || story.character.charAt(0))}</div>
+                        <div class="story-block-titles">
+                            <div class="story-block-tag">主角:${escapeHtml(story.character)}</div>
+                            <div class="story-block-title">${escapeHtml(story.title)}</div>
+                        </div>
+                    </div>
+                    <div class="story-block-body">
+                        <div class="story-block-text">
+                            <div class="story-block-scene">${escapeHtml(story.scene)}</div>
+                            <div class="story-block-question">💡 ${escapeHtml(story.question)}</div>
+                            ${answerHtml}
+                        </div>
+                        ${imageHtml}
+                    </div>
+                </div>
+            `;
+            // 绑定折叠交互
+            const block = document.getElementById('storyBlockInner');
+            const toggle = document.getElementById('storyBlockToggle');
+            const header = document.getElementById('storyBlockHeader');
+            const STORAGE_KEY = 'mp-story-collapsed-' + category;
+            // 恢复折叠状态
+            try {
+                if (localStorage.getItem(STORAGE_KEY) === '1') block.classList.add('collapsed');
+            } catch (e) { /* ignore */ }
+            const onToggle = () => {
+                block.classList.toggle('collapsed');
+                try {
+                    if (block.classList.contains('collapsed')) localStorage.setItem(STORAGE_KEY, '1');
+                    else localStorage.removeItem(STORAGE_KEY);
+                } catch (e) { /* ignore */ }
+            };
+            toggle.addEventListener('click', (e) => { e.stopPropagation(); onToggle(); });
+            header.addEventListener('click', onToggle);
+        }
+
+        function renderPromptTemplate(prompt) {
+            // 渲染挖空模板 + 复制按钮
+            // template 里每段 key 文本会被替换为带悬停提示的 span
+            let tpl = escapeHtml(prompt.template);
+            // 按 slot 在 template 中出现的字符串顺序逐个替换
+            prompt.slots.forEach(s => {
+                const placeholder = s.key;
+                const escapedPlaceholder = escapeHtml(placeholder);
+                const spanHtml = `<span class="goal-prompt-slot" data-hint="${escapeHtml(s.hint)}">${escapeHtml(s.key)}</span>`;
+                tpl = tpl.split(escapedPlaceholder).join(spanHtml);
+            });
+            // 复制时:保留原 key 文本(不带 span),方便学生直接粘贴后填
+            const copyText = prompt.template;
+            return `
+                <div class="goal-prompt-tip">
+                    <span class="label">💬 Prompt 建议(挖空模板 · 自己填)</span>
+                    <div class="goal-prompt-template">${tpl}</div>
+                    <div class="goal-prompt-actions">
+                        <button class="goal-prompt-copy" data-copy="${escapeHtml(copyText)}">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                            复制模板(含挖空)
+                        </button>
+                        <span class="goal-prompt-hint-text">悬停淡黄处看填什么</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function copyPromptTemplate(btn) {
+            const text = btn.getAttribute('data-copy');
+            // 把 [xxx] 解码回原文,方便学生直接粘贴后填
+            const decoded = text.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+            const fallback = () => {
+                const ta = document.createElement('textarea');
+                ta.value = decoded;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(ta);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(decoded).catch(fallback);
+            } else {
+                fallback();
+            }
+            btn.classList.add('copied');
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> 已复制';
+            setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 1600);
+        }
+
+        function updateProgress() {
+            if (!currentCategory) return;
+            const state = loadChecklist(currentCategory);
+            const total = state.basic.length + state.advanced.length;
+            const done = state.basic.filter(Boolean).length + state.advanced.filter(Boolean).length;
+            document.getElementById('goalDoneCount').textContent = done;
+            document.getElementById('goalTotalCount').textContent = total;
+            const pct = total === 0 ? 0 : Math.round(done / total * 100);
+            document.getElementById('goalProgressFill').style.width = pct + '%';
+        }
+
+        function bindTodoClicks() {
+            // 用真正的 <input type=checkbox> + change 事件,避开 div click,Trae 扩展不画线框
+            document.querySelectorAll('.goal-todo-item input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                    const item = cb.closest('.goal-todo-item');
+                    const group = item.getAttribute('data-group');
+                    const idx = parseInt(item.getAttribute('data-idx'), 10);
+                    const state = loadChecklist(currentCategory);
+                    state[group][idx] = cb.checked;
+                    saveChecklist(currentCategory, state);
+                    item.classList.toggle('done', cb.checked);
+                    updateProgress();
+                });
+            });
+            // 复制模板按钮
+            document.querySelectorAll('.goal-prompt-copy').forEach(btn => {
+                btn.addEventListener('click', () => copyPromptTemplate(btn));
+            });
+        }
+
+        function resetChecklist() {
+            if (!currentCategory) return;
+            if (!confirm('确定要重置本类所有勾选进度吗?')) return;
+            const data = goalData[currentCategory];
+            const fresh = { basic: data.basic.map(() => false), advanced: data.advanced.map(() => false) };
+            saveChecklist(currentCategory, fresh);
+            renderGoalSidebar(currentCategory);
+        }
+
+        function toggleMobileSidebar(open) {
+            const sb = document.getElementById('goalSidebar');
+            const ov = document.getElementById('goalSidebarOverlay');
+            if (open) { sb.classList.add('mobile-open'); ov.classList.add('active'); }
+            else { sb.classList.remove('mobile-open'); ov.classList.remove('active'); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('goalResetBtn').addEventListener('click', resetChecklist);
+            document.getElementById('sidebarToggle').addEventListener('click', () => toggleMobileSidebar(true));
+            document.getElementById('sidebarClose').addEventListener('click', () => toggleMobileSidebar(false));
+            document.getElementById('goalSidebarOverlay').addEventListener('click', () => toggleMobileSidebar(false));
+            // 初始激活:从 URL 读 ?cat=intro/tool/social,默认 intro
+            const params = new URLSearchParams(window.location.search);
+            const hash = window.location.hash.replace('#cat=', '');
+            const cat = params.get('cat') || hash || 'intro';
+            if (typeof projectData !== 'undefined' && projectData[cat]) {
+                showProjects(cat);
+            } else if (typeof projectData !== 'undefined') {
+                showProjects('intro');
+            }
+        });
+    </script>
+
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.inland-security-footer {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  right: 0;
+  width: fit-content;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tooltip-container {
+  position: relative;
+}
+
+.trigger-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.minimax-link {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  color: #adadad;
+  text-decoration: none;
+}
+
+.minimax-link:visited {
+  color: #adadad;
+}
+
+.minimax-link:hover {
+  color: #666666;
+}
+
+.tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  padding-bottom: 16px; /* 8px 内容间距 + 8px 用于鼠标移动的透明区域 */
+  font-size: 12px;
+  line-height: 17px;
+  background-color: #fafafa;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  color: #171717;
+}
+
+/* 创建透明的连接区域，让鼠标可以平滑移动到 tooltip */
+.tooltip-content::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 16px;
+}
+
+.tooltip-container:hover .tooltip-content {
+  display: flex;
+}
+
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.beian-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #171717;
+}
+
+.beian-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 2px;
+}
+
+.underline-text {
+  color: #171717;
+  text-decoration: underline;
+}
+
+.underline-text:hover {
+  color: #000000;
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .trigger-content {
+    background-color: transparent;
+  }
+
+  .minimax-link,
+  .minimax-link:visited {
+    color: #666666;
+  }
+
+  .minimax-link:hover {
+    color: #adadad;
+  }
+
+  .tooltip-content {
+    background-color: #262626;
+    color: #ededed;
+  }
+
+  .beian-link,
+  .underline-text {
+    color: #ededed;
+  }
+
+  .underline-text:hover {
+    color: #ffffff;
+  }
+}
+
+</style>
+<div class="inland-security-footer">
+  <div class="tooltip-container">
+    <div class="trigger-content">
+      <a href="https://www.minimaxi.com/" target="_blank" rel="noreferrer" class="minimax-link">
+        <span>© 2026 MiniMax</span>
+      </a>
+    </div>
+    <div class="tooltip-content">
+      <section class="info-section">
+        <span>上海稀宇科技有限公司</span>
+      </section>
+
+      <section class="info-section">
+        <a class="beian-link" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010402010179" target="_blank" rel="noreferrer">
+          <img alt="hailuo-beian-icon" src="https://cdn.hailuoai.com/hailuo-video-web/public_assets/223037d3-79fd-4db0-a456-749f38a6a14b.png" class="beian-icon">
+          <span class="underline-text">沪公网安备31010402010179号</span>
+        </a>
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer" class="underline-text">
+          沪ICP备2023003282号-38
+        </a>
+      </section>
+
+      <section class="info-section">
+        <span>模型名称：MiniMax</span>
+        <span>备案号：Shanghai-MiniMax-202505230046</span>
+      </section>
+
+      <section class="info-section">
+        <a href="https://agent.minimaxi.com/doc/zh/terms-of-service.html" target="_blank" rel="noreferrer" class="underline-text">
+          用户协议
+        </a>
+        <a href="https://agent.minimaxi.com/doc/zh/privacy-policy.html" target="_blank" rel="noreferrer" class="underline-text">
+          隐私政策
+        </a>
+      </section>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+
+<script>
+/**
+ * Iframe 元素高亮注入脚本
+ * 需要在目标网站中引入此脚本来支持跨域 iframe 高亮功能
+ *
+ * 使用方法：
+ * 1. 将此脚本添加到目标网站的 HTML 中
+ * 2. 或通过浏览器扩展、用户脚本等方式注入
+ */
+
+(function () {
+  "use strict";
+
+  // 检查是否在 iframe 中
+  if (window.self === window.top) {
+    return; // 不在 iframe 中，不执行
+  }
+
+  // 检查是否已经初始化过
+  if (window.__iframeHighlightInitialized) {
+    return;
+  }
+  window.__iframeHighlightInitialized = true;
+  console.log("Iframe 高亮脚本已加载");
+
+  // 创建高亮覆盖层
+  var overlay = document.createElement("div");
+  overlay.id = "iframe-highlight-overlay";
+  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    pointer-events: none;\n    z-index: 999999;\n    overflow: hidden;\n  ";
+
+  // 创建悬停高亮框（虚线边框）
+  var highlightBox = document.createElement("div");
+  highlightBox.id = "iframe-highlight-box";
+  highlightBox.style.cssText = "\n    position: absolute;\n    border: 2px dashed #007AFF;\n    background: rgba(0, 122, 255, 0.08);\n    pointer-events: none;\n    display: none;\n    transition: all 0.1s ease;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);\n    border-radius: 2px;\n  ";
+
+  // 创建选中节点的常驻高亮框（实线边框）
+  var selectedBox = document.createElement("div");
+  selectedBox.id = "iframe-selected-box";
+  selectedBox.style.cssText = "\n    position: absolute;\n    border: 2px solid #007AFF;\n    pointer-events: none;\n    display: none;\n    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 107, 53, 0.4);\n    border-radius: 2px;\n    z-index: 1000000;\n  ";
+
+  // 创建悬停标签显示
+  var tagLabel = document.createElement("div");
+  tagLabel.id = "iframe-tag-label";
+  tagLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 2px 6px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 2px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000001;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n    font-weight: 500;\n  ";
+
+  // 创建选中节点标签
+  var selectedLabel = document.createElement("div");
+  selectedLabel.id = "iframe-selected-label";
+  selectedLabel.style.cssText = "\n    position: absolute;\n    background: #007AFF;\n    color: white;\n    padding: 3px 8px;\n    font-size: 11px;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;\n    border-radius: 3px;\n    pointer-events: none;\n    display: none;\n    white-space: nowrap;\n    z-index: 1000002;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n    font-weight: 600;\n  ";
+  overlay.appendChild(highlightBox);
+  overlay.appendChild(selectedBox);
+  overlay.appendChild(tagLabel);
+  overlay.appendChild(selectedLabel);
+  document.body.appendChild(overlay);
+
+  // 存储当前选中的元素
+  var selectedElement = null;
+  var highlightEnabled = false;
+
+  // 更新选中元素的高亮显示
+  function updateSelectedHighlight(element) {
+    console.log("updateSelectedHighlight called with:", element);
+    if (!element) {
+      selectedBox.style.display = "none";
+      selectedLabel.style.display = "none";
+      selectedElement = null;
+      console.log("Cleared selected highlight");
+      return;
+    }
+    selectedElement = element;
+    var rect = element.getBoundingClientRect();
+    console.log("Selected element rect:", rect);
+
+    // 更新选中高亮框位置
+    selectedBox.style.display = "block";
+    selectedBox.style.left = "".concat(rect.left - 2, "px");
+    selectedBox.style.top = "".concat(rect.top - 2, "px");
+    selectedBox.style.width = "".concat(rect.width + 4, "px");
+    selectedBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新选中标签位置和内容
+    selectedLabel.style.display = "block";
+    selectedLabel.textContent = "\u2713 <".concat(element.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 28;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 5) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    var labelWidth = selectedLabel.offsetWidth || 100; // 预估宽度
+    if (labelLeft + labelWidth > window.innerWidth - 10) {
+      labelLeft = window.innerWidth - labelWidth - 10;
+    }
+    selectedLabel.style.left = "".concat(Math.max(5, labelLeft), "px");
+    selectedLabel.style.top = "".concat(labelTop, "px");
+    console.log("Selected highlight positioned at:", {
+      left: selectedBox.style.left,
+      top: selectedBox.style.top,
+      width: selectedBox.style.width,
+      height: selectedBox.style.height
+    });
+  }
+  function getElementSelector(element) {
+    if (!(element instanceof Element)) throw new Error('Argument must be a DOM element');
+    var segments = [];
+    var current = element;
+    while (current !== document.documentElement) {
+      var selector = '';
+      // 优先检查唯一ID
+      if (current.id && document.querySelectorAll("#".concat(current.id)).length === 1) {
+        segments.unshift("#".concat(current.id));
+        break; // ID唯一，无需继续向上
+      }
+
+      // 生成类名选择器（取第一个有效类名）
+      var classes = Array.from(current.classList).filter(function (c) {
+        return !c.startsWith('js-');
+      });
+      var className = classes.length > 0 ? ".".concat(classes[0]) : '';
+
+      // 生成位置索引（nth-child）
+      var tag = current.tagName.toLowerCase();
+      if (!className) {
+        var siblings = Array.from(current.parentNode.children);
+        var index = siblings.findIndex(function (el) {
+          return el === current;
+        }) + 1;
+        selector = "".concat(tag, ":nth-child(").concat(index, ")");
+      } else {
+        selector = className;
+      }
+      segments.unshift(selector);
+      current = current.parentElement;
+    }
+
+    // 处理根元素
+    if (current === document.documentElement) {
+      segments.unshift('html');
+    }
+    return segments.join(' > ');
+  }
+
+  // 获取元素文本内容
+  function getElementText(element) {
+    var _element$textContent;
+    if (element.tagName === "INPUT") {
+      return element.value || element.placeholder || "";
+    }
+    if (element.tagName === "TEXTAREA") {
+      return element.value || element.placeholder || "";
+    }
+    var text = ((_element$textContent = element.textContent) === null || _element$textContent === void 0 ? void 0 : _element$textContent.trim()) || "";
+    return text.length > 50 ? text.substring(0, 50) + "..." : text;
+  }
+
+  // 获取元素属性信息
+  function getElementAttributes(element) {
+    var attrs = {};
+    for (var i = 0; i < element.attributes.length; i++) {
+      var attr = element.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    return attrs;
+  }
+
+  // 鼠标悬停事件处理
+  function handleMouseOver(e) {
+    if (!highlightEnabled) return;
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免高亮 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 如果是已选中的元素，不显示悬停高亮
+    if (target === selectedElement) {
+      highlightBox.style.display = "none";
+      tagLabel.style.display = "none";
+      return;
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+
+    // 更新悬停高亮框位置
+    highlightBox.style.display = "block";
+    highlightBox.style.left = "".concat(rect.left - 2, "px");
+    highlightBox.style.top = "".concat(rect.top - 2, "px");
+    highlightBox.style.width = "".concat(rect.width + 4, "px");
+    highlightBox.style.height = "".concat(rect.height + 4, "px");
+
+    // 更新标签位置和内容
+    tagLabel.style.display = "block";
+    tagLabel.textContent = "<".concat(target.tagName.toLowerCase(), ">");
+
+    // 计算标签位置，确保不超出视窗
+    var labelTop = rect.top - 22;
+    var labelLeft = rect.left;
+
+    // 如果标签会超出顶部，显示在元素下方
+    if (labelTop < 0) {
+      labelTop = rect.bottom + 5;
+    }
+
+    // 如果标签会超出右侧，向左调整
+    if (labelLeft + tagLabel.offsetWidth > window.innerWidth) {
+      labelLeft = window.innerWidth - tagLabel.offsetWidth - 5;
+    }
+    tagLabel.style.left = "".concat(Math.max(0, labelLeft), "px");
+    tagLabel.style.top = "".concat(labelTop, "px");
+
+    // 发送消息到父窗口
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 鼠标离开事件处理
+  function handleMouseOut(e) {
+    if (!highlightEnabled) return;
+    var relatedTarget = e.relatedTarget;
+
+    // 如果鼠标移动到高亮相关元素上，不隐藏高亮
+    if (relatedTarget && (relatedTarget === highlightBox || relatedTarget === tagLabel || relatedTarget === overlay || relatedTarget === selectedBox || relatedTarget === selectedLabel)) {
+      return;
+    }
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-hover",
+        data: null,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 点击事件处理
+  function handleClick(e) {
+    var target = e.target;
+    if (!target || target === overlay || target === highlightBox || target === tagLabel || target === selectedBox || target === selectedLabel) {
+      return;
+    }
+
+    // 避免处理 html 和 body 元素
+    if (target === document.documentElement || target === document.body) {
+      return;
+    }
+
+    // 检查是否是交互元素，这些元素需要保留默认行为
+    var isInteractiveElement = ['input', 'textarea', 'select', 'button', 'a'].includes(target.tagName.toLowerCase());
+
+    // 如果高亮功能启用，对于非交互元素阻止默认行为和事件传播
+    if (highlightEnabled) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var rect = target.getBoundingClientRect();
+    var selector = getElementSelector(target);
+    var text = getElementText(target);
+    var attributes = getElementAttributes(target);
+    console.log("Element clicked:", {
+      tagName: target.tagName,
+      selector: selector,
+      rect: rect
+    });
+
+    // 立即更新选中高亮
+    updateSelectedHighlight(target);
+
+    // 隐藏悬停高亮，因为现在是选中状态
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    var elementInfo = {
+      tagName: target.tagName.toLowerCase(),
+      rect: {
+        left: rect.left,
+        top: rect.top,
+        right: rect.right,
+        bottom: rect.bottom,
+        width: rect.width,
+        height: rect.height,
+        x: rect.x,
+        y: rect.y
+      },
+      selector: selector,
+      text: text,
+      attributes: attributes,
+      url: window.location.href,
+      path: window.location.pathname,
+      timestamp: Date.now()
+    };
+    try {
+      window.parent.postMessage({
+        type: "iframe-element-click",
+        data: elementInfo,
+        source: "iframe-highlight-injector"
+      }, "*");
+    } catch (error) {
+      console.warn("无法发送消息到父窗口:", error);
+    }
+  }
+
+  // 监听来自父窗口的消息
+  function handleParentMessage(event) {
+    console.log("Received message from parent:", event.data);
+    if (event.data.type === "iframe-highlight-toggle") {
+      var enabled = event.data.enabled;
+      console.log("Highlight toggle:", enabled);
+      if (enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "enable-iframe-highlight") {
+      console.log("Enable iframe highlight");
+      enableHighlight();
+    } else if (event.data.type === "disable-iframe-highlight") {
+      console.log("Disable iframe highlight");
+      disableHighlight();
+    } else if (event.data.type === "toggle-iframe-highlight") {
+      var _enabled = event.data.enabled !== undefined ? event.data.enabled : !highlightEnabled;
+      console.log("Toggle iframe highlight to:", _enabled);
+      if (_enabled) {
+        enableHighlight();
+      } else {
+        disableHighlight();
+      }
+    } else if (event.data.type === "update-selected-element") {
+      var selector = event.data.selector;
+      console.log("Update selected element with selector:", selector);
+      if (selector) {
+        try {
+          var element = document.querySelector(selector);
+          console.log("Found element by selector:", element);
+          updateSelectedHighlight(element);
+        } catch (error) {
+          console.warn("Failed to select element:", error);
+          updateSelectedHighlight(null);
+        }
+      } else {
+        updateSelectedHighlight(null);
+      }
+    } else if (event.data.type === "clear-selected-element") {
+      console.log("Clear selected element");
+      updateSelectedHighlight(null);
+    }
+  }
+
+  // 启用高亮功能
+  function enableHighlight() {
+    console.log("Enabling highlight");
+    document.addEventListener("mouseover", handleMouseOver, true);
+    document.addEventListener("mouseout", handleMouseOut, true);
+    document.addEventListener("click", handleClick, true);
+    highlightEnabled = true;
+    overlay.style.display = "block";
+  }
+
+  // 禁用高亮功能
+  function disableHighlight() {
+    console.log("Disabling highlight");
+    highlightEnabled = false;
+    // 保持事件监听器，但通过 highlightEnabled 变量控制行为
+    // 这样可以保留选中状态的显示
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    // 不隐藏 selectedBox 和 selectedLabel，保留选中状态
+  }
+
+  // 完全禁用高亮功能（移除所有监听器）
+  function fullyDisableHighlight() {
+    console.log("Fully disabling highlight");
+    highlightEnabled = false;
+    document.removeEventListener("mouseover", handleMouseOver, true);
+    document.removeEventListener("mouseout", handleMouseOut, true);
+    document.removeEventListener("click", handleClick, true);
+    overlay.style.display = "none";
+    highlightBox.style.display = "none";
+    tagLabel.style.display = "none";
+    selectedBox.style.display = "none";
+    selectedLabel.style.display = "none";
+  }
+
+  // 添加事件监听
+  enableHighlight();
+  window.addEventListener("message", handleParentMessage);
+
+  // 暴露全局函数供外部调用
+  window.__iframeHighlightControl = {
+    enable: enableHighlight,
+    disable: disableHighlight,
+    fullyDisable: fullyDisableHighlight,
+    isEnabled: function isEnabled() {
+      return highlightEnabled;
+    },
+    getSelectedElement: function getSelectedElement() {
+      return selectedElement;
+    },
+    updateSelected: updateSelectedHighlight,
+    // 通过消息发送开关控制
+    sendToggleMessage: function sendToggleMessage(enabled) {
+      window.parent.postMessage({
+        type: 'iframe-highlight-status',
+        enabled: enabled || highlightEnabled,
+        source: 'iframe-highlight-injector'
+      }, '*');
+    }
+  };
+
+  // 通知父窗口脚本已加载
+  try {
+    window.parent.postMessage({
+      type: "iframe-highlight-ready",
+      data: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        timestamp: Date.now()
+      },
+      source: "iframe-highlight-injector"
+    }, "*");
+  } catch (error) {
+    console.warn("无法发送就绪消息到父窗口:", error);
+  }
+
+  // 清理函数
+  window.__iframeHighlightCleanup = function () {
+    fullyDisableHighlight();
+    window.removeEventListener("message", handleParentMessage);
+    if (overlay.parentElement) {
+      overlay.parentElement.removeChild(overlay);
+    }
+    delete window.__iframeHighlightInitialized;
+    delete window.__iframeHighlightCleanup;
+  };
+})();
+
+</script>
+</body>
+</html>

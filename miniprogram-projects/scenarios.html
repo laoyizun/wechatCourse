@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>场景分析 - 小程序项目实践</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #6366F1;
+            --intro: #10B981;
+            --tool: #F59E0B;
+            --social: #EC4899;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1E293B;
+            --text-secondary: #64748B;
+        }
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+        .topbar {
+            background: white;
+            border-bottom: 1px solid #E2E8F0;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        .back-btn:hover { background: #F1F5F9; }
+        .topbar-title {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+        .topbar-spacer { flex: 1; }
+        .topbar-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .page-header {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 56px 24px 24px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+        .page-header p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .scenarios {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 24px 24px 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .story-block {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+        .story-block.intro { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 6px 0 0 var(--intro); }
+        .story-block.tool { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 6px 0 0 var(--tool); }
+        .story-block.social { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 6px 0 0 var(--social); }
+        .story-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 24px 28px 18px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .story-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .story-block.intro .story-avatar { background: var(--intro); }
+        .story-block.tool .story-avatar { background: var(--tool); }
+        .story-block.social .story-avatar { background: var(--social); }
+        .story-meta { flex: 1; min-width: 0; }
+        .story-character {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+        .story-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .story-toggle {
+            background: none;
+            border: 1px solid #E2E8F0;
+            border-radius: 999px;
+            padding: 6px 14px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .story-toggle:hover { background: #F8FAFC; color: var(--text); }
+        .story-toggle .arrow {
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .story-block.collapsed .story-toggle .arrow { transform: rotate(-90deg); }
+        .story-body {
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 24px;
+            padding: 24px 28px 28px;
+            transition: all 0.3s;
+        }
+        .story-block.collapsed .story-body {
+            display: none;
+        }
+        .story-text { font-size: 1rem; line-height: 1.8; color: var(--text); }
+        .story-image {
+            aspect-ratio: 4 / 3;
+            background: #F1F5F9;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+        .story-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .story-image .empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100%;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 16px;
+            border: 2px dashed #CBD5E1;
+            border-radius: 16px;
+        }
+        .story-question {
+            margin-top: 16px;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            border-radius: 14px;
+            font-size: 0.95rem;
+            color: #92400E;
+            line-height: 1.6;
+            grid-column: 1 / -1;
+        }
+        .story-answer-wrap {
+            grid-column: 1 / -1;
+            margin-top: 4px;
+        }
+        .story-answer-toggle {
+            background: none;
+            border: 1px dashed #CBD5E1;
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .story-answer-toggle:hover { background: #F8FAFC; }
+        .story-answer-content {
+            display: none;
+            margin-top: 12px;
+            padding: 16px 20px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .story-answer-content.open { display: block; }
+        .story-answer-content ul { padding-left: 20px; }
+        .story-answer-content li { margin-bottom: 6px; }
+        .cta-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+            grid-column: 1 / -1;
+            flex-wrap: wrap;
+        }
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: var(--text);
+            color: white;
+            text-decoration: none;
+            border-radius: 999px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        .cta-link:hover { opacity: 0.85; }
+        .cta-link.secondary {
+            background: white;
+            color: var(--text);
+            border: 1px solid #E2E8F0;
+        }
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        @media (max-width: 720px) {
+            .story-body { grid-template-columns: 1fr; }
+            .story-image { order: -1; }
+            .page-header { padding: 36px 20px 16px; }
+            .page-header h1 { font-size: 1.7rem; }
+            .story-head { padding: 18px 20px 14px; }
+            .story-body { padding: 18px 20px 22px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a class="back-btn" href="index.html">← 返回首页</a>
+        <span class="topbar-title">场景分析</span>
+        <span class="topbar-spacer"></span>
+        <span class="topbar-meta">3 个故事 · 小方的成长线</span>
+    </div>
+
+    <div class="page-header">
+        <h1>从问题到产品:三个真实场景</h1>
+        <p>在动手做之前,先跟着小方看看"为什么要做这个"——把生活中的问题想清楚,产品需求自然就浮现了。</p>
+    </div>
+
+    <div class="scenarios" id="scenarios">
+        <article class="story-block intro" data-story-id="intro">
+            <header class="story-head">
+                <div class="story-avatar">方</div>
+                <div class="story-meta">
+                    <div class="story-character">主角 · 小方</div>
+                    <h2 class="story-title">小方的开学第一天</h2>
+                </div>
+                <button class="story-toggle" type="button" aria-label="折叠">
+                    <span class="arrow">▾</span>
+                </button>
+            </header>
+            <div class="story-body">
+                <p class="story-text">开学第一天,班主任让大家轮流上讲台自我介绍。我站在讲台上,脑子里一片空白,说了句"我叫小方,今年 X 岁"就下来了。下课后,班里同学从我身边走过,没有人叫得出我的名字。我难过了一整天。</p>
+                <div class="story-image">
+                    <img src="https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956194996.png" alt="小方开学第一天">
+                </div>
+                <div class="story-question">💡 如果当时手里有一个"个人名片"小程序,第一眼想让别人记住你什么?</div>
+                <div class="story-answer-wrap">
+                    <button class="story-answer-toggle" type="button">💡 想看参考思路?(点击展开)</button>
+                    <div class="story-answer-content">
+                        <ul>
+                            <li>名字 + 昵称 + 怎么称呼我</li>
+                            <li>3 个关于我的有趣事实(爱好 / 怪癖 / 经历)</li>
+                            <li>我的头像或代表色,让人一眼认出来</li>
+                            <li>联系方式或班级,方便同学找我玩</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cta-row">
+                    <a class="cta-link" href="projects.html?cat=intro">→ 去"介绍类"做项目</a>
+                    <a class="cta-link secondary" href="projects.html#cat=intro">查看 5 个项目</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="story-block tool" data-story-id="tool">
+            <header class="story-head">
+                <div class="story-avatar">方</div>
+                <div class="story-meta">
+                    <div class="story-character">主角 · 小方</div>
+                    <h2 class="story-title">小方要送妈妈生日礼物</h2>
+                </div>
+                <button class="story-toggle" type="button" aria-label="折叠">
+                    <span class="arrow">▾</span>
+                </button>
+            </header>
+            <div class="story-body">
+                <p class="story-text">妈妈下个月生日,我想用自己的零花钱买礼物。但每次零花钱一到手,买了零食就忘了还剩多少。月底打开存钱罐一看——空的。妈妈的礼物一次都没存下来。我把这件事写在了日记里。</p>
+                <div class="story-image">
+                    <img src="https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956086568.png" alt="小方要送妈妈礼物">
+                </div>
+                <div class="story-question">💡 30 天内每天存一点,怎么才能真的存下来,又不会被"忘了还剩多少"打败?</div>
+                <div class="story-answer-wrap">
+                    <button class="story-answer-toggle" type="button">💡 想看参考思路?(点击展开)</button>
+                    <div class="story-answer-content">
+                        <ul>
+                            <li>每天记录收入和支出(买了什么、花了多少)</li>
+                            <li>看到"目标金额"还差多少,越接近越有动力</li>
+                            <li>存钱罐画面随金额"长出来",有视觉反馈</li>
+                            <li>周末自动小结:这周花了多少、距离礼物还差多少</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cta-row">
+                    <a class="cta-link" href="projects.html?cat=tool">→ 去"效率工具"做项目</a>
+                    <a class="cta-link secondary" href="projects.html#cat=tool">查看 6 个项目</a>
+                </div>
+            </div>
+        </article>
+
+        <article class="story-block social" data-story-id="social">
+            <header class="story-head">
+                <div class="story-avatar">方</div>
+                <div class="story-meta">
+                    <div class="story-character">主角 · 小方</div>
+                    <h2 class="story-title">小方要请同学来家里玩</h2>
+                </div>
+                <button class="story-toggle" type="button" aria-label="折叠">
+                    <span class="arrow">▾</span>
+                </button>
+            </header>
+            <div class="story-body">
+                <p class="story-text">这周六我想请 3 个好朋友来家里玩,但大家都有补习班,时间老对不上。群里发消息问"周六下午行吗",过了 3 小时才有人回,还有人没看到。我要做一个邀请函——上面有清晰的时间、地址、还要让大家投票决定一起玩什么游戏。</p>
+                <div class="story-image">
+                    <div class="empty">🖼️ 配图位<br>(待 AI 生图)</div>
+                </div>
+                <div class="story-question">💡 如果让你做一个"邀请函"小程序,怎么让收到的人 5 秒内看懂、又忍不住回复?</div>
+                <div class="story-answer-wrap">
+                    <button class="story-answer-toggle" type="button">💡 想看参考思路?(点击展开)</button>
+                    <div class="story-answer-content">
+                        <ul>
+                            <li>顶部大字写"我是小方,邀请你来我家玩",配上时间地点</li>
+                            <li>3-4 个游戏卡片让大家投票,票高的那个就玩</li>
+                            <li>倒计时:距离周六还有 X 天 X 小时,制造期待感</li>
+                            <li>回复 / 拒绝 一键点完,小方能实时看到谁还没回</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cta-row">
+                    <a class="cta-link" href="projects.html?cat=social">→ 去"社交创意"做项目</a>
+                    <a class="cta-link secondary" href="projects.html#cat=social">查看 6 个项目</a>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="footer">© 2026 小程序项目实践课程 · 场景分析</div>
+
+    <script>
+        // 折叠 / 展开故事卡(整行可点)
+        document.querySelectorAll('.story-block').forEach(block => {
+            const head = block.querySelector('.story-head');
+            head.addEventListener('click', (e) => {
+                if (e.target.closest('.story-toggle') || e.target === head || e.target.closest('.story-meta') || e.target.closest('.story-avatar')) {
+                    block.classList.toggle('collapsed');
+                }
+            });
+        });
+        // "想看参考思路"折叠
+        document.querySelectorAll('.story-answer-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const open = content.classList.toggle('open');
+                btn.textContent = open ? '📖 已展开参考思路' : '💡 想看参考思路?(点击展开)';
+            });
+        });
+        // 记住折叠状态
+        document.querySelectorAll('.story-block').forEach(block => {
+            const id = block.getAttribute('data-story-id');
+            const saved = localStorage.getItem('mp-story-collapsed-' + id);
+            if (saved === '1') block.classList.add('collapsed');
+            const obs = new MutationObserver(() => {
+                localStorage.setItem('mp-story-collapsed-' + id, block.classList.contains('collapsed') ? '1' : '0');
+            });
+            obs.observe(block, { attributes: true, attributeFilter: ['class'] });
+        });
+    </script>
+</body>
+</html>
