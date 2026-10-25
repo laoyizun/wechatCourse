@@ -45,39 +45,57 @@
             transition: background 0.2s;
         }
         .back-btn:hover { background: #F1F5F9; }
-        .topbar-title {
-            font-weight: 600;
-            color: var(--text);
-            font-size: 1.05rem;
-        }
+        .topbar-title { font-weight: 600; color: var(--text); font-size: 1.05rem; }
         .topbar-spacer { flex: 1; }
-        .topbar-meta {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
+        .topbar-meta { font-size: 0.85rem; color: var(--text-secondary); }
         .page-header {
             max-width: 920px;
             margin: 0 auto;
-            padding: 56px 24px 24px;
+            padding: 56px 24px 20px;
             text-align: center;
         }
-        .page-header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 12px;
+        .page-header h1 { font-size: 2.2rem; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+        .page-header p { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.6; max-width: 640px; margin: 0 auto; }
+        .cat-filter {
+            max-width: 920px;
+            margin: 24px auto 0;
+            padding: 0 24px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
-        .page-header p {
-            font-size: 1.05rem;
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 15px;
+            border-radius: 999px;
+            background: white;
+            border: 2px solid transparent;
+            box-shadow: 0 1px 3px rgba(15,23,42,0.06);
             color: var(--text-secondary);
-            line-height: 1.6;
-            max-width: 640px;
-            margin: 0 auto;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
         }
+        .filter-btn:hover { box-shadow: 0 3px 10px rgba(15,23,42,0.1); }
+        .filter-btn.active { color: var(--text); }
+        .filter-btn[data-cat="intro"].active { border-color: var(--intro); color: #047857; }
+        .filter-btn[data-cat="tool"].active { border-color: var(--tool); color: #B45309; }
+        .filter-btn[data-cat="social"].active { border-color: var(--social); color: #BE185D; }
+        .filter-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .filter-btn[data-cat="intro"] .filter-dot { background: var(--intro); }
+        .filter-btn[data-cat="tool"] .filter-dot { background: var(--tool); }
+        .filter-btn[data-cat="social"] .filter-dot { background: var(--social); }
+        .filter-count { background: rgba(0,0,0,0.06); padding: 1px 7px; border-radius: 999px; font-size: 0.75rem; }
+        .filter-btn.active .filter-count { background: currentColor; color: white; }
         .scenarios {
             max-width: 920px;
             margin: 0 auto;
-            padding: 24px 24px 80px;
+            padding: 28px 24px 80px;
             display: flex;
             flex-direction: column;
             gap: 28px;
@@ -89,15 +107,16 @@
             overflow: hidden;
             position: relative;
         }
-        .story-block.intro { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 6px 0 0 var(--intro); }
-        .story-block.tool { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 6px 0 0 var(--tool); }
-        .story-block.social { box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 6px 0 0 var(--social); }
+        .story-block.intro { box-shadow: 0 10px 30px rgba(15,23,42,0.08), inset 6px 0 0 var(--intro); }
+        .story-block.tool { box-shadow: 0 10px 30px rgba(15,23,42,0.08), inset 6px 0 0 var(--tool); }
+        .story-block.social { box-shadow: 0 10px 30px rgba(15,23,42,0.08), inset 6px 0 0 var(--social); }
         .story-head {
             display: flex;
             align-items: center;
             gap: 14px;
-            padding: 24px 28px 18px;
+            padding: 22px 28px 18px;
             border-bottom: 1px solid #F1F5F9;
+            cursor: pointer;
         }
         .story-avatar {
             width: 52px;
@@ -107,24 +126,29 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
             flex-shrink: 0;
+            overflow: hidden;
+            background: var(--text-secondary);
         }
+        .story-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .story-block.intro .story-avatar { background: var(--intro); }
         .story-block.tool .story-avatar { background: var(--tool); }
         .story-block.social .story-avatar { background: var(--social); }
         .story-meta { flex: 1; min-width: 0; }
-        .story-character {
-            font-size: 0.78rem;
-            color: var(--text-secondary);
-            margin-bottom: 2px;
+        .story-character { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 2px; }
+        .story-title { font-size: 1.25rem; font-weight: 700; color: var(--text); }
+        .story-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
         }
-        .story-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text);
-        }
+        .story-tag.intro { background: rgba(16,185,129,0.12); color: #047857; }
+        .story-tag.tool { background: rgba(245,158,11,0.12); color: #B45309; }
+        .story-tag.social { background: rgba(236,72,153,0.12); color: #BE185D; }
         .story-toggle {
             background: none;
             border: 1px solid #E2E8F0;
@@ -139,21 +163,15 @@
             transition: all 0.2s;
         }
         .story-toggle:hover { background: #F8FAFC; color: var(--text); }
-        .story-toggle .arrow {
-            display: inline-block;
-            transition: transform 0.2s;
-        }
+        .story-toggle .arrow { display: inline-block; transition: transform 0.2s; }
         .story-block.collapsed .story-toggle .arrow { transform: rotate(-90deg); }
         .story-body {
             display: grid;
             grid-template-columns: 1fr 240px;
             gap: 24px;
             padding: 24px 28px 28px;
-            transition: all 0.3s;
         }
-        .story-block.collapsed .story-body {
-            display: none;
-        }
+        .story-block.collapsed .story-body { display: none; }
         .story-text { font-size: 1rem; line-height: 1.8; color: var(--text); }
         .story-image {
             aspect-ratio: 4 / 3;
@@ -164,17 +182,9 @@
         }
         .story-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .story-image .empty {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            height: 100%;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            text-align: center;
-            padding: 16px;
-            border: 2px dashed #CBD5E1;
-            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+            height: 100%; color: var(--text-secondary); font-size: 0.85rem; text-align: center;
+            padding: 16px; border: 2px dashed #CBD5E1; border-radius: 16px;
         }
         .story-question {
             margin-top: 16px;
@@ -186,10 +196,7 @@
             line-height: 1.6;
             grid-column: 1 / -1;
         }
-        .story-answer-wrap {
-            grid-column: 1 / -1;
-            margin-top: 4px;
-        }
+        .story-answer-wrap { grid-column: 1 / -1; margin-top: 4px; }
         .story-answer-toggle {
             background: none;
             border: 1px dashed #CBD5E1;
@@ -219,38 +226,16 @@
         .story-answer-content.open { display: block; }
         .story-answer-content ul { padding-left: 20px; }
         .story-answer-content li { margin-bottom: 6px; }
-        .cta-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 18px;
-            grid-column: 1 / -1;
-            flex-wrap: wrap;
-        }
+        .cta-row { display: flex; gap: 12px; margin-top: 18px; grid-column: 1 / -1; flex-wrap: wrap; }
         .cta-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: var(--text);
-            color: white;
-            text-decoration: none;
-            border-radius: 999px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            transition: opacity 0.2s;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 16px; background: var(--text); color: white;
+            text-decoration: none; border-radius: 999px;
+            font-size: 0.88rem; font-weight: 600; transition: opacity 0.2s;
         }
         .cta-link:hover { opacity: 0.85; }
-        .cta-link.secondary {
-            background: white;
-            color: var(--text);
-            border: 1px solid #E2E8F0;
-        }
-        .footer {
-            text-align: center;
-            padding: 32px 24px;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
+        .cta-link.secondary { background: white; color: var(--text); border: 1px solid #E2E8F0; }
+        .footer { text-align: center; padding: 32px 24px; color: var(--text-secondary); font-size: 0.85rem; }
         @media (max-width: 720px) {
             .story-body { grid-template-columns: 1fr; }
             .story-image { order: -1; }
@@ -258,6 +243,7 @@
             .page-header h1 { font-size: 1.7rem; }
             .story-head { padding: 18px 20px 14px; }
             .story-body { padding: 18px 20px 22px; }
+            .cat-filter { padding: 0 16px; }
         }
     </style>
 </head>
@@ -266,151 +252,211 @@
         <a class="back-btn" href="index.html">← 返回首页</a>
         <span class="topbar-title">场景分析</span>
         <span class="topbar-spacer"></span>
-        <span class="topbar-meta">3 个故事 · 小方的成长线</span>
+        <span class="topbar-meta" id="storyCountMeta">6 个故事 · 小方的成长线</span>
     </div>
 
     <div class="page-header">
-        <h1>从问题到产品:三个真实场景</h1>
+        <h1>从问题到产品:六个真实场景</h1>
         <p>在动手做之前,先跟着小方看看"为什么要做这个"——把生活中的问题想清楚,产品需求自然就浮现了。</p>
     </div>
 
-    <div class="scenarios" id="scenarios">
-        <article class="story-block intro" data-story-id="intro">
-            <header class="story-head">
-                <div class="story-avatar">方</div>
-                <div class="story-meta">
-                    <div class="story-character">主角 · 小方</div>
-                    <h2 class="story-title">小方的开学第一天</h2>
-                </div>
-                <button class="story-toggle" type="button" aria-label="折叠">
-                    <span class="arrow">▾</span>
-                </button>
-            </header>
-            <div class="story-body">
-                <p class="story-text">开学第一天,班主任让大家轮流上讲台自我介绍。我站在讲台上,脑子里一片空白,说了句"我叫小方,今年 X 岁"就下来了。下课后,班里同学从我身边走过,没有人叫得出我的名字。我难过了一整天。</p>
-                <div class="story-image">
-                    <img src="https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956194996.png" alt="小方开学第一天">
-                </div>
-                <div class="story-question">💡 如果当时手里有一个"个人名片"小程序,第一眼想让别人记住你什么?</div>
-                <div class="story-answer-wrap">
-                    <button class="story-answer-toggle" type="button">💡 想看参考思路?(点击展开)</button>
-                    <div class="story-answer-content">
-                        <ul>
-                            <li>名字 + 昵称 + 怎么称呼我</li>
-                            <li>3 个关于我的有趣事实(爱好 / 怪癖 / 经历)</li>
-                            <li>我的头像或代表色,让人一眼认出来</li>
-                            <li>联系方式或班级,方便同学找我玩</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cta-row">
-                    <a class="cta-link" href="projects.html?cat=intro">→ 去"介绍类"做项目</a>
-                    <a class="cta-link secondary" href="projects.html#cat=intro">查看 5 个项目</a>
-                </div>
-            </div>
-        </article>
+    <div class="cat-filter" id="catFilter"></div>
 
-        <article class="story-block tool" data-story-id="tool">
-            <header class="story-head">
-                <div class="story-avatar">方</div>
-                <div class="story-meta">
-                    <div class="story-character">主角 · 小方</div>
-                    <h2 class="story-title">小方要送妈妈生日礼物</h2>
-                </div>
-                <button class="story-toggle" type="button" aria-label="折叠">
-                    <span class="arrow">▾</span>
-                </button>
-            </header>
-            <div class="story-body">
-                <p class="story-text">妈妈下个月生日,我想用自己的零花钱买礼物。但每次零花钱一到手,买了零食就忘了还剩多少。月底打开存钱罐一看——空的。妈妈的礼物一次都没存下来。我把这件事写在了日记里。</p>
-                <div class="story-image">
-                    <img src="https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956086568.png" alt="小方要送妈妈礼物">
-                </div>
-                <div class="story-question">💡 30 天内每天存一点,怎么才能真的存下来,又不会被"忘了还剩多少"打败?</div>
-                <div class="story-answer-wrap">
-                    <button class="story-answer-toggle" type="button">💡 想看参考思路?(点击展开)</button>
-                    <div class="story-answer-content">
-                        <ul>
-                            <li>每天记录收入和支出(买了什么、花了多少)</li>
-                            <li>看到"目标金额"还差多少,越接近越有动力</li>
-                            <li>存钱罐画面随金额"长出来",有视觉反馈</li>
-                            <li>周末自动小结:这周花了多少、距离礼物还差多少</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cta-row">
-                    <a class="cta-link" href="projects.html?cat=tool">→ 去"效率工具"做项目</a>
-                    <a class="cta-link secondary" href="projects.html#cat=tool">查看 6 个项目</a>
-                </div>
-            </div>
-        </article>
-
-        <article class="story-block social" data-story-id="social">
-            <header class="story-head">
-                <div class="story-avatar">方</div>
-                <div class="story-meta">
-                    <div class="story-character">主角 · 小方</div>
-                    <h2 class="story-title">小方要请同学来家里玩</h2>
-                </div>
-                <button class="story-toggle" type="button" aria-label="折叠">
-                    <span class="arrow">▾</span>
-                </button>
-            </header>
-            <div class="story-body">
-                <p class="story-text">这周六我想请 3 个好朋友来家里玩,但大家都有补习班,时间老对不上。群里发消息问"周六下午行吗",过了 3 小时才有人回,还有人没看到。我要做一个邀请函——上面有清晰的时间、地址、还要让大家投票决定一起玩什么游戏。</p>
-                <div class="story-image">
-                    <div class="empty">🖼️ 配图位<br>(待 AI 生图)</div>
-                </div>
-                <div class="story-question">💡 如果让你做一个"邀请函"小程序,怎么让收到的人 5 秒内看懂、又忍不住回复?</div>
-                <div class="story-answer-wrap">
-                    <button class="story-answer-toggle" type="button">💡 想看参考思路?(点击展开)</button>
-                    <div class="story-answer-content">
-                        <ul>
-                            <li>顶部大字写"我是小方,邀请你来我家玩",配上时间地点</li>
-                            <li>3-4 个游戏卡片让大家投票,票高的那个就玩</li>
-                            <li>倒计时:距离周六还有 X 天 X 小时,制造期待感</li>
-                            <li>回复 / 拒绝 一键点完,小方能实时看到谁还没回</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="cta-row">
-                    <a class="cta-link" href="projects.html?cat=social">→ 去"社交创意"做项目</a>
-                    <a class="cta-link secondary" href="projects.html#cat=social">查看 6 个项目</a>
-                </div>
-            </div>
-        </article>
-    </div>
+    <div class="scenarios" id="scenarios"></div>
 
     <div class="footer">© 2026 小程序项目实践课程 · 场景分析</div>
 
     <script>
-        // 折叠 / 展开故事卡(整行可点)
-        document.querySelectorAll('.story-block').forEach(block => {
-            const head = block.querySelector('.story-head');
-            head.addEventListener('click', (e) => {
-                if (e.target.closest('.story-toggle') || e.target === head || e.target.closest('.story-meta') || e.target.closest('.story-avatar')) {
+        const CAT_META = {
+            intro:  { label: '介绍类',   cls: 'intro' },
+            tool:   { label: '效率工具', cls: 'tool' },
+            social: { label: '社交创意', cls: 'social' }
+        };
+
+        const STORIES = [
+            {
+                id: 'intro-1',
+                cat: 'intro',
+                title: '小方的开学第一天',
+                scene: '开学第一天,班主任让大家轮流上讲台自我介绍。我站在讲台上,脑子里一片空白,说了句"我叫小方,今年 X 岁"就下来了。下课后,班里同学从我身边走过,没有人叫得出我的名字。我难过了一整天。',
+                question: '如果当时手里有一个"个人名片"小程序,第一眼想让别人记住你什么?',
+                answer: [
+                    '名字 + 昵称 + 怎么称呼我',
+                    '3 个关于我的有趣事实(爱好 / 怪癖 / 经历)',
+                    '我的头像或代表色,让人一眼认出来',
+                    '联系方式或班级,方便同学找我玩'
+                ],
+                image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956194996.png'
+            },
+            {
+                id: 'tool-1',
+                cat: 'tool',
+                title: '小方要送妈妈生日礼物',
+                scene: '妈妈下个月生日,我想用自己的零花钱买礼物。但每次零花钱一到手,买了零食就忘了还剩多少。月底打开存钱罐一看——空的。妈妈的礼物一次都没存下来。我把这件事写在了日记里。',
+                question: '30 天内每天存一点,怎么才能真的存下来,又不会被"忘了还剩多少"打败?',
+                answer: [
+                    '每天记录收入和支出(买了什么、花了多少)',
+                    '看到"目标金额"还差多少,越接近越有动力',
+                    '存钱罐画面随金额"长出来",有视觉反馈',
+                    '周末自动小结:这周花了多少、距离礼物还差多少'
+                ],
+                image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956086568.png'
+            },
+            {
+                id: 'social-1',
+                cat: 'social',
+                title: '小方要请同学来家里玩',
+                scene: '这周六我想请 3 个好朋友来家里玩,但大家都有补习班,时间老对不上。群里发消息问"周六下午行吗",过了 3 小时才有人回,还有人没看到。我要做一个邀请函——上面有清晰的时间、地址、还要让大家投票决定一起玩什么游戏。',
+                question: '如果让你做一个"邀请函"小程序,怎么让收到的人 5 秒内看懂、又忍不住回复?',
+                answer: [
+                    '顶部大字写"我是小方,邀请你来我家玩",配上时间地点',
+                    '3-4 个游戏卡片让大家投票,票高的那个就玩',
+                    '倒计时:距离周六还有 X 天 X 小时,制造期待感',
+                    '回复 / 拒绝 一键点完,小方能实时看到谁还没回'
+                ],
+                image: 'images/scene-playdate.jpg'
+            },
+            {
+                id: 'tool-2',
+                cat: 'tool',
+                title: '小方的周三',
+                scene: '小方最怕周三。语文课、体育课、社团活动挤在一起,一节课间要记"下节要带什么书"。结果周三中午,他发现自己数学书还锁在家里。那天晚上他把三门课的作业本摊在桌上,写了个歪歪扭扭的课表,画了三个框。这事要是能有个东西帮我记就好了。',
+                question: '一周那么多节课,学生真正需要被提醒的是什么?什么时候提醒才不烦人?',
+                answer: [
+                    '只显示"今天要带的东西",别的都不显示',
+                    '每条可打勾,勾完自动消失',
+                    '颜色区分"必须带"和"尽量带"',
+                    '换课 / 调课只改一行,不用重排'
+                ],
+                image: 'images/scene-wednesday.jpg'
+            },
+            {
+                id: 'tool-3',
+                cat: 'tool',
+                title: '小方的"班级冰箱"',
+                scene: '班里有个共享冰箱,是几个热心家长凑钱买的。但它有个致命问题:谁拿了谁写名字,可还是有不少人"忘了"。冰箱上贴的纸条越换越多,有人在牛奶上贴了自己的名字,结果第二天牛奶不见了,那个人被全班笑了半个学期。小方想:能不能让"拿东西"这件事,变得不太容易搞错?',
+                question: '这是一个"要留痕"的设计。留痕做成什么样,既能提醒人,又不会让人觉得被盯着?',
+                answer: [
+                    '拿取时点一下名字,不用手写纸条',
+                    '东西有"剩余份数",快没了自动标红',
+                    '谁拿过一看就知道,但列表只在"我的"视图里展开',
+                    '过期 / 快过期的东西自动置顶提醒'
+                ],
+                image: 'images/scene-fridge.jpg'
+            },
+            {
+                id: 'social-2',
+                cat: 'social',
+                title: '小方的翻牌游戏被同学抄走了',
+                scene: '小方数学课上偷偷玩自己做的翻牌小游戏,被同桌看到了。第二天课间,同桌拿着一模一样的界面问他"这个哪来的"。小方心里咯噔一下——本来想周末给全班玩一次,现在全班都会了,还有个高年级的学长说"这有什么难的,一秒就全记住"。',
+                question: '一个游戏被别人玩熟之后,靠什么还留得住人?',
+                answer: [
+                    '每次开局牌的位置 / 图案不完全一样,每天都是新局',
+                    '加入倒计时,逼出紧张感',
+                    '记分方式独特,不是简单"配对了几对"',
+                    '通关后能生成一张"炫耀素材"发给同学'
+                ],
+                image: 'images/scene-cardgame.jpg'
+            }
+        ];
+
+        const AVATAR = 'images/avatar-xiaofang.jpg';
+        let activeCat = 'all';
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function renderFilter() {
+            const counts = { intro: 0, tool: 0, social: 0 };
+            STORIES.forEach(s => counts[s.cat]++);
+            let html = `<button class="filter-btn${activeCat === 'all' ? ' active' : ''}" data-cat="all">
+                <span class="filter-dot" style="background:var(--text-secondary)"></span>全部 <span class="filter-count">${STORIES.length}</span>
+            </button>`;
+            ['intro', 'tool', 'social'].forEach(c => {
+                html += `<button class="filter-btn${activeCat === c ? ' active' : ''}" data-cat="${c}">
+                    <span class="filter-dot"></span>${CAT_META[c].label} <span class="filter-count">${counts[c]}</span>
+                </button>`;
+            });
+            document.getElementById('catFilter').innerHTML = html;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    activeCat = btn.getAttribute('data-cat');
+                    renderFilter();
+                    renderStories();
+                });
+            });
+        }
+
+        function renderStories() {
+            const list = activeCat === 'all' ? STORIES : STORIES.filter(s => s.cat === activeCat);
+            const html = list.map(s => {
+                const meta = CAT_META[s.cat];
+                const answerHtml = s.answer
+                    ? `<div class="story-answer-wrap">
+                        <button class="story-answer-toggle" type="button" data-toggle>💡 想看参考思路?(点击展开)</button>
+                        <div class="story-answer-content"><ul>${s.answer.map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul></div>
+                    </div>` : '';
+                const imageHtml = s.image
+                    ? `<div class="story-image"><img src="${escapeHtml(s.image)}" alt="${escapeHtml(s.title)}配图" loading="lazy"></div>`
+                    : `<div class="story-image"><div class="empty">🖼️ 配图位<br>(待 AI 生图)</div></div>`;
+                return `<article class="story-block ${meta.cls}" data-story-id="${s.id}">
+                    <header class="story-head">
+                        <div class="story-avatar"><img src="${AVATAR}" alt="小方" onerror="this.parentElement.textContent='方'"></div>
+                        <div class="story-meta">
+                            <div class="story-character">主角 · 小方</div>
+                            <h2 class="story-title">${escapeHtml(s.title)}</h2>
+                        </div>
+                        <span class="story-tag ${meta.cls}">${meta.label}</span>
+                        <button class="story-toggle" type="button" aria-label="折叠"><span class="arrow">▾</span></button>
+                    </header>
+                    <div class="story-body">
+                        <p class="story-text">${escapeHtml(s.scene)}</p>
+                        ${imageHtml}
+                        <div class="story-question">💡 ${escapeHtml(s.question)}</div>
+                        ${answerHtml}
+                        <div class="cta-row">
+                            <a class="cta-link" href="projects.html?cat=${s.cat}">→ 去"${meta.label}"做项目</a>
+                            <a class="cta-link secondary" href="projects.html?cat=${s.cat}">查看项目</a>
+                        </div>
+                    </div>
+                </article>`;
+            }).join('');
+            document.getElementById('scenarios').innerHTML = html;
+            bindStoryEvents();
+        }
+
+        function bindStoryEvents() {
+            // 折叠 / 展开整张故事卡
+            document.querySelectorAll('.story-block').forEach(block => {
+                const head = block.querySelector('.story-head');
+                const id = block.getAttribute('data-story-id');
+                const key = 'mp-story-collapsed-' + id;
+                try { if (localStorage.getItem(key) === '1') block.classList.add('collapsed'); } catch (e) {}
+                const onToggle = () => {
                     block.classList.toggle('collapsed');
-                }
+                    try {
+                        if (block.classList.contains('collapsed')) localStorage.setItem(key, '1');
+                        else localStorage.removeItem(key);
+                    } catch (e) {}
+                };
+                head.addEventListener('click', (e) => {
+                    if (e.target.closest('.story-toggle') || e.target.closest('.story-meta') || e.target.closest('.story-avatar')) onToggle();
+                });
             });
-        });
-        // "想看参考思路"折叠
-        document.querySelectorAll('.story-answer-toggle').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const content = btn.nextElementSibling;
-                const open = content.classList.toggle('open');
-                btn.textContent = open ? '📖 已展开参考思路' : '💡 想看参考思路?(点击展开)';
+            // "想看参考思路"折叠
+            document.querySelectorAll('.story-answer-toggle').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const content = btn.nextElementSibling;
+                    const open = content.classList.toggle('open');
+                    btn.textContent = open ? '📖 已展开参考思路' : '💡 想看参考思路?(点击展开)';
+                });
             });
-        });
-        // 记住折叠状态
-        document.querySelectorAll('.story-block').forEach(block => {
-            const id = block.getAttribute('data-story-id');
-            const saved = localStorage.getItem('mp-story-collapsed-' + id);
-            if (saved === '1') block.classList.add('collapsed');
-            const obs = new MutationObserver(() => {
-                localStorage.setItem('mp-story-collapsed-' + id, block.classList.contains('collapsed') ? '1' : '0');
-            });
-            obs.observe(block, { attributes: true, attributeFilter: ['class'] });
-        });
+        }
+
+        renderFilter();
+        renderStories();
     </script>
 </body>
 </html>
