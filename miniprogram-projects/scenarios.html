@@ -252,11 +252,11 @@
         <a class="back-btn" href="index.html">← 返回首页</a>
         <span class="topbar-title">场景分析</span>
         <span class="topbar-spacer"></span>
-        <span class="topbar-meta" id="storyCountMeta">6 个故事 · 小方的成长线</span>
+        <span class="topbar-meta" id="storyCountMeta"></span>
     </div>
 
     <div class="page-header">
-        <h1>从问题到产品:六个真实场景</h1>
+        <h1>从问题到产品:七个真实场景</h1>
         <p>在动手做之前,先跟着小方看看"为什么要做这个"——把生活中的问题想清楚,产品需求自然就浮现了。</p>
     </div>
 
@@ -357,6 +357,21 @@
                     '通关后能生成一张"炫耀素材"发给同学'
                 ],
                 image: 'images/scene-cardgame.jpg'
+            },
+            {
+                id: 'social-3',
+                cat: 'social',
+                title: '小方想给全班一个"匿名树洞"',
+                scene: '小方读初二,班里总有些话不方便当面说——被起外号、被人孤立、成绩下滑的难受。班主任建了个群让大家匿名留言,结果群里全是"谢谢""加油"这种没营养的话,没人敢说真话。小方想:要是有一个地方,能让人放心说一句真话,又不会被认出来是谁说的,那该多好。',
+                question: '匿名要"真的匿名"到什么程度?匿名到什么程度,才敢让人说真话?',
+                answer: [
+                    '连昵称都能随机生成,认不出是谁',
+                    '发出去前先"预览别人看到的样子"',
+                    '已被回复的折起来,避免刷屏',
+                    '限制每天条数,让每条都有分量',
+                    '**敏感词检测**:发出去前自动检查,拦下人身攻击、脏话和恶意中伤(要拦住的是"骂人",不是"难过")'
+                ],
+                image: 'images/scene-treehole.jpg'
             }
         ];
 
@@ -365,6 +380,11 @@
 
         function escapeHtml(s) {
             return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        // 支持 **加粗** 标记(先转义再替换,避免注入)
+        function renderRich(s) {
+            return escapeHtml(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
         }
 
         function renderFilter() {
@@ -395,7 +415,7 @@
                 const answerHtml = s.answer
                     ? `<div class="story-answer-wrap">
                         <button class="story-answer-toggle" type="button" data-toggle>💡 想看参考思路?(点击展开)</button>
-                        <div class="story-answer-content"><ul>${s.answer.map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul></div>
+                        <div class="story-answer-content"><ul>${s.answer.map(a => `<li>${renderRich(a)}</li>`).join('')}</ul></div>
                     </div>` : '';
                 const imageHtml = s.image
                     ? `<div class="story-image"><img src="${escapeHtml(s.image)}" alt="${escapeHtml(s.title)}配图" loading="lazy"></div>`
@@ -457,6 +477,7 @@
 
         renderFilter();
         renderStories();
+        document.getElementById('storyCountMeta').textContent = STORIES.length + ' 个故事 · 小方的成长线';
     </script>
 </body>
 </html>
