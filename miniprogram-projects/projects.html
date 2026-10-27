@@ -1825,6 +1825,7 @@
         </button>
     </div>
 
+    <script src="images/config.js"></script>
     <script>
         const projectData = {
             intro: {
@@ -2367,6 +2368,9 @@
         });
 
         /* ============ 左侧固定视窗:目标 / 要求 + TodoList ============ */
+        const IMG = (window.IMAGE_CONFIG || { avatar: '', scenes: {} });
+        const sceneImage = id => (IMG.scenes && IMG.scenes[id]) || '';
+
         const goalData = {
             intro: {
                 badge: 'intro',
@@ -2376,7 +2380,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方的开学第一天',
-                        image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956194996.png',
                         scene: '开学第一天,班主任让大家轮流上讲台自我介绍。我站在讲台上,脑子里一片空白,说了句"我叫小方,今年 X 岁"就下来了。下课后,班里同学从我身边走过,没有人叫得出我的名字。我难过了一整天。',
                         question: '如果当时手里有一个"个人名片"小程序,第一眼想让别人记住你什么?',
                         answer: '<ul><li>名字 + 昵称 + 怎么称呼我</li><li>3 个关于我的有趣事实(爱好 / 怪癖 / 经历)</li><li>我的头像或代表色,让人一眼认出来</li><li>联系方式或班级,方便同学找我玩</li></ul>'
@@ -2424,7 +2427,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方要送妈妈生日礼物',
-                        image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956086568.png',
                         scene: '妈妈下个月生日,我想用自己的零花钱买礼物。但每次零花钱一到手,买了零食就忘了还剩多少。月底打开存钱罐一看——空的。妈妈的礼物一次都没存下来。我把这件事写在了日记里。',
                         question: '30 天内每天存一点,怎么才能真的存下来,又不会被"忘了还剩多少"打败?',
                         answer: '<ul><li>每天记录收入和支出(买了什么、花了多少)</li><li>看到"目标金额"还差多少,越接近越有动力</li><li>存钱罐画面随金额"长出来",有视觉反馈</li><li>周末自动小结:这周花了多少、距离礼物还差多少</li></ul>'
@@ -2434,7 +2436,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方的周三',
-                        image: 'images/scene-wednesday.jpg',
                         scene: '小方最怕周三。语文课、体育课、社团活动挤在一起,一节课间要记"下节要带什么书"。结果周三中午,他发现自己数学书还锁在家里。那天晚上他把三门课的作业本摊在桌上,写了个歪歪扭扭的课表,画了三个框。这事要是能有个东西帮我记就好了。',
                         question: '一周那么多节课,学生真正需要被提醒的是什么?什么时候提醒才不烦人?',
                         answer: '<ul><li>只显示"今天要带的东西",别的都不显示</li><li>每条可打勾,勾完自动消失</li><li>颜色区分"必须带"和"尽量带"</li><li>换课 / 调课只改一行,不用重排</li></ul>'
@@ -2444,7 +2445,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方的"班级冰箱"',
-                        image: 'images/scene-fridge.jpg',
                         scene: '班里有个共享冰箱,是几个热心家长凑钱买的。但它有个致命问题:谁拿了谁写名字,可还是有不少人"忘了"。冰箱上贴的纸条越换越多,有人在牛奶上贴了自己的名字,结果第二天牛奶不见了,那个人被全班笑了半个学期。小方想:能不能让"拿东西"这件事,变得不太容易搞错?',
                         question: '这是一个"要留痕"的设计。留痕做成什么样,既能提醒人,又不会让人觉得被盯着?',
                         answer: '<ul><li>拿取时点一下名字,不用手写纸条</li><li>东西有"剩余份数",快没了自动标红</li><li>谁拿过一看就知道,但列表只在"我的"视图里展开</li><li>过期 / 快过期的东西自动置顶提醒</li></ul>'
@@ -2492,7 +2492,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方要请同学来家里玩',
-                        image: 'images/scene-playdate.jpg',
                         scene: '这周六我想请 3 个好朋友来家里玩,但大家都有补习班,时间老对不上。群里发消息问"周六下午行吗",过了 3 小时才有人回,还有人没看到。我要做一个邀请函——上面有清晰的时间、地址、还要让大家投票决定一起玩什么游戏。',
                         question: '如果让你做一个"邀请函"小程序,怎么让收到的人 5 秒内看懂、又忍不住回复?',
                         answer: '<ul><li>顶部大字写"我是小方,邀请你来我家玩",配上时间地点</li><li>3-4 个游戏卡片让大家投票,票高的那个就玩</li><li>倒计时:距离周六还有 X 天 X 小时,制造期待感</li><li>回复 / 拒绝 一键点完,小方能实时看到谁还没回</li></ul>'
@@ -2502,7 +2501,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方的翻牌游戏被同学抄走了',
-                        image: 'images/scene-cardgame.jpg',
                         scene: '小方数学课上偷偷玩自己做的翻牌小游戏,被同桌看到了。第二天课间,同桌拿着一模一样的界面问他"这个哪来的"。小方心里咯噔一下——本来想周末给全班玩一次,现在全班都会了,还有个高年级的学长说"这有什么难的,一秒就全记住"。',
                         question: '一个游戏被别人玩熟之后,靠什么还留得住人?',
                         answer: '<ul><li>每次开局牌的位置 / 图案不完全一样,每天都是新局</li><li>加入倒计时,逼出紧张感</li><li>记分方式独特,不是简单"配对了几对"</li><li>通关后能生成一张"炫耀素材"发给同学</li></ul>'
@@ -2512,7 +2510,6 @@
                         character: '小方',
                         avatarInitial: '方',
                         title: '小方想给全班一个"匿名树洞"',
-                        image: 'images/scene-treehole.jpg',
                         scene: '小方读初二,班里总有些话不方便当面说——被起外号、被人孤立、成绩下滑的难受。班主任建了个群让大家匿名留言,结果群里全是"谢谢""加油"这种没营养的话,没人敢说真话。小方想:要是有一个地方,能让人放心说一句真话,又不会被认出来是谁说的,那该多好。',
                         question: '匿名要"真的匿名"到什么程度?匿名到什么程度,才敢让人说真话?',
                         answer: '<ul><li>连昵称都能随机生成,认不出是谁</li><li>发出去前先"预览别人看到的样子"</li><li>已被回复的折起来,避免刷屏</li><li>限制每天条数,让每条都有分量</li><li><strong>敏感词检测</strong>:发出去前自动检查,拦下人身攻击、脏话和恶意中伤(要拦住的是"骂人",不是"难过")</li></ul>'
@@ -2650,9 +2647,10 @@
                 const answerHtml = story.answer
                     ? '<details class="story-block-answer"><summary>想看参考思路?(点击展开)</summary><div class="story-block-answer-body">' + story.answer + '</div></details>'
                     : '';
-                const imageHtml = story.image
-                    ? '<div class="story-block-image"><img src="' + escapeHtml(story.image) + '" alt="' + escapeHtml(story.title) + '配图"></div>'
-                    : '<div class="story-block-image"><div class="story-block-image-hint"><div class="icon">🖼️</div><div>配图位</div><div style="font-size:0.75rem;opacity:0.7">(可放置场景插画)</div></div></div>';
+                const img = sceneImage(story.id);
+                const imageHtml = img
+                    ? '<div class="story-block-image"><img src="' + escapeHtml(img) + '" alt="' + escapeHtml(story.title) + '配图" onerror="this.parentElement.innerHTML=\'<div class=\\\'story-block-image-hint\\\'><div class=\\\'icon\\\'>🖼️</div><div>配图位</div></div>\'"></div>'
+                    : '<div class="story-block-image"><div class="story-block-image-hint"><div class="icon">🖼️</div><div>配图位</div><div style="font-size:0.75rem;opacity:0.7">待 AI 生图</div></div></div>';
                 const switcher = stories.length > 1
                     ? '<div class="story-block-switcher">' + stories.map((s, i) =>
                         `<button class="story-switch-btn${i === current ? ' active' : ''}" type="button" data-i="${i}">${escapeHtml(s.title)}</button>`
@@ -2667,7 +2665,7 @@
                         </button>
                         ${switcher}
                         <div class="story-block-header" id="storyBlockHeader">
-                            <div class="story-block-avatar"><img src="images/avatar-xiaofang.jpg" alt="小方" onerror="this.parentElement.textContent='${escapeHtml(story.avatarInitial || '方')}'"></div>
+                            <div class="story-block-avatar">${IMG.avatar ? '<img src="' + escapeHtml(IMG.avatar) + '" alt="小方" onerror="this.parentElement.textContent=\'' + escapeHtml(story.avatarInitial || '方') + '\'">' : escapeHtml(story.avatarInitial || '方')}</div>
                             <div class="story-block-titles">
                                 <div class="story-block-tag">主角:${escapeHtml(story.character || '小方')}</div>
                                 <div class="story-block-title">${escapeHtml(story.title)}</div>

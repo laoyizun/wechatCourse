@@ -185,7 +185,10 @@
             display: flex; align-items: center; justify-content: center; flex-direction: column;
             height: 100%; color: var(--text-secondary); font-size: 0.85rem; text-align: center;
             padding: 16px; border: 2px dashed #CBD5E1; border-radius: 16px;
+            background: repeating-linear-gradient(45deg, #F8FAFC, #F8FAFC 10px, #F1F5F9 10px, #F1F5F9 20px);
         }
+        .story-image .empty .ph-ico { font-size: 1.8rem; opacity: 0.55; margin-bottom: 6px; }
+        .story-image .empty .ph-txt { font-size: 0.8rem; letter-spacing: 0.04em; }
         .story-question {
             margin-top: 16px;
             padding: 14px 18px;
@@ -266,6 +269,7 @@
 
     <div class="footer">© 2026 小程序项目实践课程 · 场景分析</div>
 
+    <script src="images/config.js"></script>
     <script>
         const CAT_META = {
             intro:  { label: '介绍类',   cls: 'intro' },
@@ -286,7 +290,6 @@
                     '我的头像或代表色,让人一眼认出来',
                     '联系方式或班级,方便同学找我玩'
                 ],
-                image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956194996.png'
             },
             {
                 id: 'tool-1',
@@ -299,8 +302,7 @@
                     '看到"目标金额"还差多少,越接近越有动力',
                     '存钱罐画面随金额"长出来",有视觉反馈',
                     '周末自动小结:这周花了多少、距离礼物还差多少'
-                ],
-                image: 'https://education-cos-1307366133.cos.ap-shanghai.myqcloud.com/%E6%96%B9%E5%9D%97%E9%B8%9F%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B0%8A/AI%E7%94%9F%E5%9B%BE-4737278068631748611-ai-generated-1791956086568.png'
+                ]
             },
             {
                 id: 'social-1',
@@ -313,8 +315,7 @@
                     '3-4 个游戏卡片让大家投票,票高的那个就玩',
                     '倒计时:距离周六还有 X 天 X 小时,制造期待感',
                     '回复 / 拒绝 一键点完,小方能实时看到谁还没回'
-                ],
-                image: 'images/scene-playdate.jpg'
+                ]
             },
             {
                 id: 'tool-2',
@@ -327,8 +328,7 @@
                     '每条可打勾,勾完自动消失',
                     '颜色区分"必须带"和"尽量带"',
                     '换课 / 调课只改一行,不用重排'
-                ],
-                image: 'images/scene-wednesday.jpg'
+                ]
             },
             {
                 id: 'tool-3',
@@ -341,8 +341,7 @@
                     '东西有"剩余份数",快没了自动标红',
                     '谁拿过一看就知道,但列表只在"我的"视图里展开',
                     '过期 / 快过期的东西自动置顶提醒'
-                ],
-                image: 'images/scene-fridge.jpg'
+                ]
             },
             {
                 id: 'social-2',
@@ -355,8 +354,7 @@
                     '加入倒计时,逼出紧张感',
                     '记分方式独特,不是简单"配对了几对"',
                     '通关后能生成一张"炫耀素材"发给同学'
-                ],
-                image: 'images/scene-cardgame.jpg'
+                ]
             },
             {
                 id: 'social-3',
@@ -370,12 +368,13 @@
                     '已被回复的折起来,避免刷屏',
                     '限制每天条数,让每条都有分量',
                     '**敏感词检测**:发出去前自动检查,拦下人身攻击、脏话和恶意中伤(要拦住的是"骂人",不是"难过")'
-                ],
-                image: 'images/scene-treehole.jpg'
+                ]
             }
         ];
 
-        const AVATAR = 'images/avatar-xiaofang.jpg';
+        const IMG = (window.IMAGE_CONFIG || { avatar: '', scenes: {} });
+        const AVATAR = IMG.avatar || '';
+        const sceneImage = id => (IMG.scenes && IMG.scenes[id]) || '';
         let activeCat = 'all';
 
         function escapeHtml(s) {
@@ -417,12 +416,17 @@
                         <button class="story-answer-toggle" type="button" data-toggle>💡 想看参考思路?(点击展开)</button>
                         <div class="story-answer-content"><ul>${s.answer.map(a => `<li>${renderRich(a)}</li>`).join('')}</ul></div>
                     </div>` : '';
-                const imageHtml = s.image
-                    ? `<div class="story-image"><img src="${escapeHtml(s.image)}" alt="${escapeHtml(s.title)}配图" loading="lazy"></div>`
-                    : `<div class="story-image"><div class="empty">🖼️ 配图位<br>(待 AI 生图)</div></div>`;
+                const img = sceneImage(s.id);
+                const phHtml = `<div class="empty"><span class="ph-ico">🖼️</span><span class="ph-txt">配图位<br>待 AI 生图</span></div>`;
+                const imageHtml = img
+                    ? `<div class="story-image"><img src="${escapeHtml(img)}" alt="${escapeHtml(s.title)}配图" loading="lazy" onerror="this.parentElement.innerHTML=${JSON.stringify(phHtml).replace(/"/g,'&quot;')}"></div>`
+                    : `<div class="story-image">${phHtml}</div>`;
+                const avatarHtml = AVATAR
+                    ? `<div class="story-avatar"><img src="${escapeHtml(AVATAR)}" alt="小方" onerror="this.parentElement.textContent='方'"></div>`
+                    : `<div class="story-avatar">方</div>`;
                 return `<article class="story-block ${meta.cls}" data-story-id="${s.id}">
                     <header class="story-head">
-                        <div class="story-avatar"><img src="${AVATAR}" alt="小方" onerror="this.parentElement.textContent='方'"></div>
+                        ${avatarHtml}
                         <div class="story-meta">
                             <div class="story-character">主角 · 小方</div>
                             <h2 class="story-title">${escapeHtml(s.title)}</h2>
